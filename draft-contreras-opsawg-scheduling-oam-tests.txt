@@ -4,8 +4,9 @@
 
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
-Intended status: Informational                               6 July 2023
-Expires: 7 January 2024
+Intended status: Informational                                  V. Lopez
+Expires: 7 January 2024                                            Nokia
+                                                             6 July 2023
 
 
  A YANG Data Model for Network Diagnosis by scheduling sequences of OAM
@@ -14,7 +15,14 @@ Expires: 7 January 2024
 
 Abstract
 
-   TODO Abstract
+   This document defines a YANG data model for network diagnosis on-
+   demand using Operations, Administration, and Maintenance (OAM) tests.
+   This document defines both 'oam-unitary-test' and 'oam-test-sequence'
+   data models to enable on-demand activation of network diagnosis
+   procedures.
+
+   The YANG data model defined in this document conforms to the Network
+   Management Datastore Architecture (NMDA).
 
 About This Document
 
@@ -76,7 +84,7 @@ Table of Contents
    4.  IANA Considerations
    5.  Normative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -113,8 +121,13 @@ Acknowledgments
 
    TODO acknowledge.
 
-Author's Address
+Authors' Addresses
 
    Luis M. Contreras
    Telefonica
    Email: luismiguel.contrerasmurillo@telefonica.com
+
+
+   Victor Lopez
+   Nokia
+   Email: victor.lopez@nokia.com

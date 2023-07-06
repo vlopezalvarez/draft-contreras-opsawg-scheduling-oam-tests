@@ -6,8 +6,10 @@
 <meta content="initial-scale=1.0" name="viewport">
 <title>A YANG Data Model for Network Diagnosis by scheduling sequences of OAM tests</title>
 <meta content="Luis M. Contreras" name="author">
+<meta content="Victor Lopez" name="author">
 <meta content="
-       TODO Abstract 
+       This document defines a YANG data model for network diagnosis on-demand using Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' data models to enable on-demand activation of network diagnosis procedures. 
+       The YANG data model defined in this document conforms to the Network Management Datastore Architecture (NMDA). 
     " name="description">
 <meta content="xml2rfc 3.17.4" name="generator">
 <meta content="next generation" name="keyword">
@@ -1052,7 +1054,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <td class="right">July 2023</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Contreras</td>
+<td class="left">Contreras &amp; Lopez</td>
 <td class="center">Expires 7 January 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
@@ -1072,11 +1074,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
 <dd class="expires"><time datetime="2024-01-07">7 January 2024</time></dd>
-<dt class="label-authors">Author:</dt>
+<dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
       <div class="author-name">L. M. Contreras</div>
 <div class="org">Telefonica</div>
+</div>
+<div class="author">
+      <div class="author-name">V. Lopez</div>
+<div class="org">Nokia</div>
 </div>
 </dd>
 </dl>
@@ -1084,7 +1090,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">A YANG Data Model for Network Diagnosis by scheduling sequences of OAM tests</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">TODO Abstract<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document defines a YANG data model for network diagnosis on-demand using Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' data models to enable on-demand activation of network diagnosis procedures.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">The YANG data model defined in this document conforms to the Network Management Datastore Architecture (NMDA).<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1169,7 +1176,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.6.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1235,8 +1242,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </div>
 <div id="authors-addresses">
 <section id="appendix-B">
-      <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Luis M. Contreras</span></div>
@@ -1244,6 +1251,14 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <div class="email">
 <span>Email:</span>
 <a href="mailto:luismiguel.contrerasmurillo@telefonica.com" class="email">luismiguel.contrerasmurillo@telefonica.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Victor Lopez</span></div>
+<div dir="auto" class="left"><span class="org">Nokia</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:victor.lopez@nokia.com" class="email">victor.lopez@nokia.com</a>
 </div>
 </address>
 </section>
