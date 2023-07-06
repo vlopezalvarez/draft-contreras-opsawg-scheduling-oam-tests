@@ -88,7 +88,58 @@ Table of Contents
 
 1.  Introduction
 
-   TODO Introduction
+   twork.  The OAM framework defines mechanisms for fault detection and
+   isolation, such as continuity check, link trace, and loopback. +
+   Performance management enables monitoring network performance and
+   diagnosing performance issues (i.e., degradation).  Some of the
+   measurements such as frame delay measurement, frame delay variation
+   measurement, and frame loss measurement. - Security management
+   defines mechanisms to protect OAM communications from unauthorized
+   access and tampering.
+
+   [RFC6428] defines several use cases for OAM tools, including:
+
+   *  Continuity Check: This function verifies that a path exists
+      between two points in a network and that the path is operational.
+
+   *  Loopback: This function allows a device to loop back a received
+      packet back to the sender for diagnostic purposes.
+
+   *  Link Trace: This function allows a network operator to trace a
+      path through a network from one device to another.
+
+   *  Performance Monitoring: This function allows a network operator to
+      monitor the performance of a network and to identify and diagnose
+      performance issues.
+
+   *  Security Management: This function allows a network operator to
+      protect OAM communications from unauthorized access and tampering.
+
+   *  Configuration Management: This function allows a network operator
+      to manage the configuration of network devices.
+
+   On one hand [RFC8531], [RFC8532] and, [RFC8533] defined YANG models
+   for OAM technologies.  On the other hand, [RFC8531] defines a YANG
+   data model for connection-oriented OAM protocols.  The main aim of
+   this document is to define a generic YANG data model that can be used
+   to configure, control and monitor connection-oriented OAM protocols
+   such as MPLS-TP OAM, PBB-TE OAM, and G.7713.1 OAM.  [RFC8532]
+   provides a generic YANG data model that can be used to configure,
+   control and monitor connectionless OAM protocols such as BFD
+   (Bidirectional Forwarding Detection), LBM (Loopback Messaging) and
+   VCCV (Virtual Circuit Connectivity Verification).  [RFC8533] provides
+   a YANG data model that can be used to retrieve information related to
+   OAM protocols such as Bidirectional Forwarding Detection (BFD),
+   Loopback Messaging (LBM) and Virtual Circuit Connectivity
+   Verification (VCCV).
+
+   Previous RFCs defined the parameters required for each of the
+   different tests that are used in network elements today.  This
+   document covers how to use OAM for network-wide use cases.
+   Following, some illustrative examples are presented.
+
+   The YANG data model resulting from this document will conform to the
+   Network Management Datastore Architecture (NMDA) [RFC8342].
 
 2.  Conventions and Definitions
 
@@ -113,9 +164,40 @@ Table of Contents
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
+   [RFC6428]  Allan, D., Ed., Swallow, G., Ed., and J. Drake, Ed.,
+              "Proactive Connectivity Verification, Continuity Check,
+              and Remote Defect Indication for the MPLS Transport
+              Profile", RFC 6428, DOI 10.17487/RFC6428, November 2011,
+              <https://www.rfc-editor.org/rfc/rfc6428>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8342]  Bjorklund, M., Schoenwaelder, J., Shafer, P., Watsen, K.,
+              and R. Wilton, "Network Management Datastore Architecture
+              (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
+              <https://www.rfc-editor.org/rfc/rfc8342>.
+
+   [RFC8531]  Kumar, D., Wu, Q., and Z. Wang, "Generic YANG Data Model
+              for Connection-Oriented Operations, Administration, and
+              Maintenance (OAM) Protocols", RFC 8531,
+              DOI 10.17487/RFC8531, April 2019,
+              <https://www.rfc-editor.org/rfc/rfc8531>.
+
+   [RFC8532]  Kumar, D., Wang, Z., Wu, Q., Ed., Rahman, R., and S.
+              Raghavan, "Generic YANG Data Model for the Management of
+              Operations, Administration, and Maintenance (OAM)
+              Protocols That Use Connectionless Communications",
+              RFC 8532, DOI 10.17487/RFC8532, April 2019,
+              <https://www.rfc-editor.org/rfc/rfc8532>.
+
+   [RFC8533]  Kumar, D., Wang, M., Wu, Q., Ed., Rahman, R., and S.
+              Raghavan, "A YANG Data Model for Retrieval Methods for the
+              Management of Operations, Administration, and Maintenance
+              (OAM) Protocols That Use Connectionless Communications",
+              RFC 8533, DOI 10.17487/RFC8533, April 2019,
+              <https://www.rfc-editor.org/rfc/rfc8533>.
 
 Acknowledgments
 
