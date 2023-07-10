@@ -362,7 +362,7 @@ Table of Contents
 
    *  "planned": The initial state where the test is planned.
 
-   *  "configure": The state where the test is being configured.
+   *  "configured": The state where the test is being configured.
 
    *  "ready": The state where the test is ready to be executed.
 
@@ -457,7 +457,7 @@ Table of Contents
 
    *  "planned": The initial state where the test is planned.
 
-   *  "configure": The state where the test is being configured.
+   *  "configured": The state where the test is being configured.
 
    *  "ready": The state where the test is ready to be executed.
 
