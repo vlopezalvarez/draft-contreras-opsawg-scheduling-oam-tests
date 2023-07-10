@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 7 January 2024                                            Nokia
-                                                             6 July 2023
+Expires: 11 January 2024                                           Nokia
+                                                            10 July 2023
 
 
  A YANG Data Model for Network Diagnosis by scheduling sequences of OAM
@@ -20,9 +20,6 @@ Abstract
    This document defines both 'oam-unitary-test' and 'oam-test-sequence'
    data models to enable on-demand activation of network diagnosis
    procedures.
-
-   The YANG data model defined in this document conforms to the Network
-   Management Datastore Architecture (NMDA).
 
 About This Document
 
@@ -60,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 January 2024.
+   This Internet-Draft will expire on 11 January 2024.
 
 Copyright Notice
 
@@ -87,14 +84,17 @@ Table of Contents
      2.2.  Birth certificate
      2.3.  Proactive supervision
      2.4.  Performance-based Path Routing
-   3.  YANG Data Model for scheduling OAM Tests
-     3.1.  YANG Model Overview
-     3.2.  Tree Diagram for scheduling OAM Tests
-     3.3.  YANG Model for scheduling OAM Tests
-   4.  Security Considerations
-   5.  IANA Considerations
-   6.  Implementation Status
-   7.  Normative References
+   3.  Modelling the scheduling of OAM Tests
+     3.1.  OAM unitary test
+     3.2.  OAM test sequence
+   4.  YANG Data Model for Scheduling OAM Tests
+     4.1.  YANG Model Overview
+     4.2.  YANG Model for Scheduling OAM Unitary Test
+     4.3.  YANG Model for OAM Test Sequence
+   5.  Security Considerations
+   6.  IANA Considerations
+   7.  Implementation Status
+   8.  Normative References
    Acknowledgments
    Authors' Addresses
 
@@ -143,20 +143,22 @@ Table of Contents
    *  Configuration Management: This function allows a network operator
       to manage the configuration of network devices.
 
-   On one hand [RFC8531], [RFC8532] and, [RFC8533] defined YANG models
-   for OAM technologies.  On the other hand, [RFC8531] defines a YANG
-   data model for connection-oriented OAM protocols.  The main aim of
-   this document is to define a generic YANG data model that can be used
-   to configure, control and monitor connection-oriented OAM protocols
-   such as MPLS-TP OAM, PBB-TE OAM, and G.7713.1 OAM.  [RFC8532]
-   provides a generic YANG data model that can be used to configure,
-   control and monitor connectionless OAM protocols such as BFD
-   (Bidirectional Forwarding Detection), LBM (Loopback Messaging) and
-   VCCV (Virtual Circuit Connectivity Verification).  [RFC8533] provides
-   a YANG data model that can be used to retrieve information related to
-   OAM protocols such as Bidirectional Forwarding Detection (BFD),
-   Loopback Messaging (LBM) and Virtual Circuit Connectivity
-   Verification (VCCV).
+   [RFC8531], [RFC8532] and, [RFC8533] defined YANG models for OAM
+   technologies.  On the other hand, [RFC8531] defines a YANG data model
+   for connection-oriented OAM protocols.  The main aim of this document
+   is to define a generic YANG data model that can be used to configure,
+   control and monitor connection-oriented OAM protocols such as MPLS-TP
+   OAM, PBB-TE OAM, and G.7713.1 OAM.  [RFC8532] provides a generic YANG
+   data model that can be used to configure, control and monitor
+   connectionless OAM protocols such as BFD (Bidirectional Forwarding
+   Detection), LBM (Loopback Messaging) and VCCV (Virtual Circuit
+   Connectivity Verification).  [RFC8533] provides a YANG data model
+   that can be used to retrieve information related to OAM protocols
+   such as Bidirectional Forwarding Detection (BFD), Loopback Messaging
+   (LBM) and Virtual Circuit Connectivity Verification (VCCV).
+
+   [RFC8913] specifies a YANG data model for client and server
+   implementations of the Two-Way Active Measurement Protocol (TWAMP).
 
    Previous RFCs defined the parameters required for each of the
    different tests that are used in network elements today.  This
@@ -292,21 +294,370 @@ Table of Contents
    obtaining link metrics like delay and loss which can be used in the
    PCE algorithms.
 
-3.  YANG Data Model for scheduling OAM Tests
+3.  Modelling the scheduling of OAM Tests
 
-3.1.  YANG Model Overview
+   This document proposes two models: OAM unitary test and OAM test
+   sequence models.
 
-   TBC
+3.1.  OAM unitary test
 
-3.2.  Tree Diagram for scheduling OAM Tests
+   The OAM unitary test model encompasses parameters that define a
+   specific type of OAM test to be performed.  The YANG model includes a
+   container named "oam-unitary-tests" that serves as a container for
+   activating OAM unitary tests for network diagnosis procedures.
+   Inside the container, there is a list called "oam-unitary-test"
+   representing a list of specific OAM unitary tests.  The list key is
+   defined as "name", which provides a unique name for each test.  Each
+   OAM test in the list references a test type with its concrete
+   parameters.  The test types are out of the scope of this document.
+   Moreover, each OAM unitary test has two temporal parameters: "period-
+   of-time" and "recurrence".  Both are imported from the "ietf-
+   schedule" module from [I-D.draft-ma-opsawg-ucl-acl]. "period-of-time"
+   identifies the period values that contain a precise period of time,
+   while "recurrence" identifies the properties that contain a
+   recurrence rule specification. "unitary-test-status" enumerates the
+   state of the OAM unitary test.
 
-   TBC
+   {#oam-uni-test-tree-st} contains the tree of the proposed model.
 
-3.3.  YANG Model for scheduling OAM Tests
+        module: ietf-oam-unitary-test
+          +--rw oam-unitary-tests
+             +--rw oam-unitary-test* [name]
+                +--rw name                   string
+                +--rw (test-type)
+                +--rw period-of-time
+                |  +--rw (forms)?
+                |     +--:(period-explicit)
+                |     |  +--rw explicit-start?   yang:date-and-time
+                |     |  +--rw explicit-end?     yang:date-and-time
+                |     +--:(period-start)
+                |        +--rw start?            yang:date-and-time
+                |        +--rw duration?         duration
+                +--rw recurrence
+                |  +--rw freq           enumeration
+                |  +--rw (recurrence-bound)?
+                |  |  +--:(until)
+                |  |  |  +--rw until?   union
+                |  |  +--:(count)
+                |  |     +--rw count?   uint32
+                |  +--rw interval?      uint32
+                |  +--rw bysecond*      uint32
+                |  +--rw byminute*      uint32
+                |  +--rw byhour*        uint32
+                |  +--rw byday* [weekday]
+                |  |  +--rw direction*   int32
+                |  |  +--rw weekday      schedule:weekday
+                |  +--rw bymonthday*    int32
+                |  +--rw byyearday*     int32
+                |  +--rw byyearweek*    int32
+                |  +--rw byyearmonth*   uint32
+                |  +--rw bysetpos*      int32
+                |  +--rw wkst?          schedule:weekday
+                +--rw unitary-test-status?   enumeration
 
-   TBC
+                         Figure 1: OAM unitary test
 
-4.  Security Considerations
+3.2.  OAM test sequence
+
+   The OAM test sequence model consists of a collection of OAM unitary
+   tests that are executed based on specified time constraints,
+   repetitions, ordering, and reporting outputs.  These sequences
+   provide a structured approach to running multiple OAM tests in a
+   coordinated manner.  Each OAM test sequence references a OAM unitary
+   test type with its concrete parameters.  Each OAM test sequence has
+   two temporal parameters: "period-of-time" and "recurrence".  Both are
+   imported from the "ietf-schedule" module from
+   [I-D.draft-ma-opsawg-ucl-acl]. "period-of-time" identifies the period
+   values that contain a precise period of time, while "recurrence"
+   identifies the properties that contain a recurrence rule
+   specification. "unitary-test-status" enumerates the state of the OAM
+   test.  Finally, "test-sequence-status" shows the state of the OAM
+   test sequence.
+
+   An example of the proposed structure Figure 2.
+
+        module: ietf-oam-test-sequence
+          +--rw oam-test-sequence
+             +--rw test-sequence* [name]
+                +--rw name                   string
+                +--rw test-ref* [name]
+                |  +--rw name             string
+                |  +--rw (test-type)
+                |  +--rw numexecutions?   uint32
+                +--rw period-of-time
+                |  +--rw (forms)?
+                |     +--:(period-explicit)
+                |     |  +--rw explicit-start?   yang:date-and-time
+                |     |  +--rw explicit-end?     yang:date-and-time
+                |     +--:(period-start)
+                |        +--rw start?            yang:date-and-time
+                |        +--rw duration?         duration
+                +--rw recurrence
+                |  +--rw freq           enumeration
+                |  +--rw (recurrence-bound)?
+                |  |  +--:(until)
+                |  |  |  +--rw until?   union
+                |  |  +--:(count)
+                |  |     +--rw count?   uint32
+                |  +--rw interval?      uint32
+                |  +--rw bysecond*      uint32
+                |  +--rw byminute*      uint32
+                |  +--rw byhour*        uint32
+                |  +--rw byday* [weekday]
+                |  |  +--rw direction*   int32
+                |  |  +--rw weekday      schedule:weekday
+                |  +--rw bymonthday*    int32
+                |  +--rw byyearday*     int32
+                |  +--rw byyearweek*    int32
+                |  +--rw byyearmonth*   uint32
+                |  +--rw bysetpos*      int32
+                |  +--rw wkst?          schedule:weekday
+                +--ro test-squence-status?   enumeration
+
+                        Figure 2: OAM test sequence
+
+4.  YANG Data Model for Scheduling OAM Tests
+
+4.1.  YANG Model Overview
+
+   This document proposes two models: OAM unitary test and OAM test
+   sequence.  OAM unitary test is a set of parameters that define a type
+   of OAM test to be invoked.  As an example, it includes the type test,
+   configuration parameters, and target results.  The OAM test sequences
+   are a set of OAM unitary tests that are run based on a set of time
+   constraints, number of repetitions, order, and reporting outputs.
+
+4.2.  YANG Model for Scheduling OAM Unitary Test
+
+   <CODE BEGINS>
+   module ietf-oam-unitary-test {
+     yang-version 1.1;
+     namespace "urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test";
+     prefix "oamut";
+
+     // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
+     import ietf-schedule { prefix "schedule"; } // reference draft-ma-opsawg-ucl-acl
+
+     organization
+       "IETF OPSAWG (Operations and Management Area Working Group)";
+
+     contact
+       "WG Web:   <https://datatracker.ietf.org/wg/opsawg/>
+        WG List:  <mailto:opsawg@ietf.org>
+        Author: Luis Miguel Contreras Murillo
+             <luismiguel.contrerasmurillo@telefonica.com>
+        Author: Victor Lopez
+             <victor.lopez@nokia.com>";
+     description
+       "This module defines the 'ietf-oam-unitary-test' YANG model for activation of network diagnosis procedures.
+
+       Copyright (c) 2023 IETF Trust and the persons identified as
+       authors of the code.  All rights reserved.
+
+       Redistribution and use in source and binary forms, with or
+       without modification, is permitted pursuant to, and subject
+       to the license terms contained in, the Revised BSD License
+       set forth in Section 4.c of the IETF Trust's Legal Provisions
+       Relating to IETF Documents
+         (https://trustee.ietf.org/license-info).
+
+        This version of this YANG module is part of RFC XXXX
+        (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+        for full legal notices.";
+
+     // RFC Ed.: update the date below with the date of RFC
+     // publication and remove this note.
+     // RFC Ed.: replace XXXX with actual RFC number and remove
+     // this note.
+
+     revision "2023-07-10" {
+       description
+         "Initial version";
+       reference
+         "RFCXXXX: A YANG Data Model for Network Diagnosis by scheduling sequences of OAM tests"; // Update with the correct RFC number when assigned
+     }
+
+     grouping oam-unitary-test {
+       description
+           "This grouping is defined for OAM unitary test for network diagnosis procedures.";
+
+       leaf name {
+         type string;
+         description
+           "Name for the test.";
+       }
+
+       choice test-type {
+         mandatory true;
+         description
+           "Choose the type of test.";
+           // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
+       }
+     }
+
+     container oam-unitary-tests {
+       description
+         "Container for OAM unitary tests activation for network diagnosis procedures.";
+
+       list oam-unitary-test {
+         key name;
+         description
+           "List of OAM unitary tests activation for network diagnosis procedures.";
+
+         uses oam-unitary-test;
+
+         uses schedule:period;
+
+         uses schedule:recurrence;
+
+         leaf unitary-test-status {
+           type enumeration {
+             enum "planned" {
+               description "The test is planned.";
+             }
+             enum "deployed" {
+               description "The test is deployed.";
+             }
+             enum "ongoing" {
+               description "The test is ongoing.";
+             }
+             enum "stop" {
+               description "The test is stopped.";
+             }
+             enum "unknown" {
+               description "The test status is unknown.";
+             }
+             enum "failed" {
+               description "The test has failed.";
+             }
+             enum "finish" {
+               description "The test is finished.";
+             }
+           }
+           description "Status of the test.";
+         }
+       }
+     }
+   }
+   <CODE ENDS>
+
+4.3.  YANG Model for OAM Test Sequence
+
+   <CODE BEGINS>
+   module ietf-oam-test-sequence {
+     yang-version 1.1;
+     namespace "urn:ietf:params:xml:ns:yang:ietf-oam-test-sequence";
+     prefix "oamts";
+
+     import ietf-oam-unitary-test {
+       prefix "oamut";
+       // Update the reference with the correct RFC number or other reference when assigned
+       //reference "RFCXXXX";
+     }
+
+     import ietf-schedule { prefix "schedule"; } // reference draft-ma-opsawg-ucl-acl
+
+     organization
+       "IETF OPSAWG (Operations and Management Area Working Group)";
+
+     contact
+       "WG Web:   <https://datatracker.ietf.org/wg/opsawg/>
+        WG List:  <mailto:opsawg@ietf.org>
+        Author: Luis Miguel Contreras Murillo
+             <luismiguel.contrerasmurillo@telefonica.com>
+        Author: Victor Lopez
+             <victor.lopez@nokia.com>";
+     description
+       "This module defines the 'oam-unitary-test' YANG model for activation of network diagnosis procedures.
+
+       Copyright (c) 2023 IETF Trust and the persons identified as
+       authors of the code.  All rights reserved.
+
+       Redistribution and use in source and binary forms, with or
+       without modification, is permitted pursuant to, and subject
+       to the license terms contained in, the Revised BSD License
+       set forth in Section 4.c of the IETF Trust's Legal Provisions
+       Relating to IETF Documents
+         (https://trustee.ietf.org/license-info).
+
+        This version of this YANG module is part of RFC XXXX
+        (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+        for full legal notices.";
+
+     // RFC Ed.: update the date below with the date of RFC
+     // publication and remove this note.
+     // RFC Ed.: replace XXXX with actual RFC number and remove
+     // this note.
+
+     revision "2023-07-10" {
+       description "Initial version";
+       reference "RFCXXXX"; // Update with the correct RFC number when assigned
+     }
+
+     // Data model definition
+
+     container oam-test-sequence {
+       description "Container for executing a sequence of ietf-oam-unitary-tests N times.";
+
+       list test-sequence {
+         key "name";
+         description "List of test sequences.";
+
+         leaf name {
+           type string;
+           description "Unique name for the test sequence.";
+         }
+
+         list test-ref {
+           key "name";
+           description "References to the ietf-oam-unitary-tests.";
+
+           uses "oamut:oam-unitary-test";
+
+           leaf numexecutions {
+             type uint32;
+             default 1;
+             description "Number of times the test sequence should be executed.";
+           }
+         }
+
+         uses schedule:period;
+
+         uses schedule:recurrence;
+
+         leaf test-squence-status {
+           type enumeration {
+             enum "planned" {
+               description "The test sequence is planned.";
+             }
+             enum "success" {
+               description "All tests in the sequence were successful.";
+             }
+             enum "failure" {
+               description "One or more tests in the sequence failed.";
+             }
+             enum "ongoing" {
+               description "The test sequence status is ongoing.";
+             }
+             enum "unknown" {
+               description "The test sequence status is unknown.";
+             }
+             enum "stop" {
+               description "The test sequenceis stopped.";
+             }
+             enum "finish" {
+               description "The test sequence is finished.";
+             }
+           }
+           config false;
+           description "Status of the test sequence execution.";
+         }
+       }
+     }
+   }
+   <CODE ENDS>
+
+5.  Security Considerations
 
    The YANG module targeted in this document defines a schema for data
    that is designed to be accessed via network management protocols such
@@ -328,17 +679,24 @@ Table of Contents
    to these data nodes without proper protection can have a negative
    effect on network operations.
 
-5.  IANA Considerations
+6.  IANA Considerations
 
    TBC
 
-6.  Implementation Status
+7.  Implementation Status
 
    This section will be used to track the status of the implementations
    of the model.  It is aimed at being removed if the document becomes
    RFC.
 
-7.  Normative References
+8.  Normative References
+
+   [I-D.draft-ma-opsawg-ucl-acl]
+              Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Policy-
+              based Network Access Control", Work in Progress, Internet-
+              Draft, draft-ma-opsawg-ucl-acl-03, 7 June 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ma-opsawg-
+              ucl-acl-03>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -432,6 +790,11 @@ Table of Contents
               Engineering (TE) Topologies", RFC 8795,
               DOI 10.17487/RFC8795, August 2020,
               <https://www.rfc-editor.org/rfc/rfc8795>.
+
+   [RFC8913]  Civil, R., Morton, A., Rahman, R., Jethanandani, M., and
+              K. Pentikousis, Ed., "Two-Way Active Measurement Protocol
+              (TWAMP) YANG Data Model", RFC 8913, DOI 10.17487/RFC8913,
+              November 2021, <https://www.rfc-editor.org/rfc/rfc8913>.
 
 Acknowledgments
 
