@@ -318,7 +318,7 @@ Table of Contents
    recurrence rule specification. "unitary-test-status" enumerates the
    state of the OAM unitary test.
 
-   {#oam-uni-test-tree-st} contains the tree of the proposed model.
+   Figure 1 contains the tree of the proposed model.
 
         module: ietf-oam-unitary-test
           +--rw oam-unitary-tests
@@ -357,6 +357,42 @@ Table of Contents
 
                          Figure 1: OAM unitary test
 
+   The 'unitary-test-status' state machine is shown in Figure 2.  The
+   state machine includes the following states:
+
+   *  "planned": The initial state where the test is planned.
+
+   *  "configure": The state where the test is being configured.
+
+   *  "ready": The state where the test is ready to be executed.
+
+   *  "on-going": The state where the test is currently running.
+
+   *  "stop": The state where the test is manually stopped.
+
+   *  "error": The state where an error occurs during the test.
+
+   *  "finished": The final state where the test is completed.
+
+                +---------+      +----------+      +---------+
+             +->| planned |----->|configured|----->|  ready  |
+             |  +---------+      +----------+      +---------+
+             |      A                 |                |
+             |      |                 |                V
+             |      |     +-------+   |          +----------+
+             |      ------| error |<--+----------| on-going |
+             |      |     +-------+              +----------+
+             |      |                                  |
+             |      V                                  |
+             |  +---------+      +--------+            |
+             +--| finished|<-----|  stop  |<------------+
+                +---------+      +--------+            |
+                    A                                  |
+                    |                                  |
+                    +----------------------------------+
+
+                  Figure 2: OAM unitary test state machine
+
 3.2.  OAM test sequence
 
    The OAM test sequence model consists of a collection of OAM unitary
@@ -374,7 +410,7 @@ Table of Contents
    test.  Finally, "test-sequence-status" shows the state of the OAM
    test sequence.
 
-   An example of the proposed structure Figure 2.
+   An example of the proposed structure Figure 3.
 
         module: ietf-oam-test-sequence
           +--rw oam-test-sequence
@@ -412,9 +448,50 @@ Table of Contents
                 |  +--rw byyearmonth*   uint32
                 |  +--rw bysetpos*      int32
                 |  +--rw wkst?          schedule:weekday
-                +--ro test-squence-status?   enumeration
+                +--ro sequence?   enumeration
 
-                        Figure 2: OAM test sequence
+                        Figure 3: OAM test sequence
+
+   The 'test-sequence-status' state machine is shown in Figure 4.  The
+   state machine includes the following states:
+
+   *  "planned": The initial state where the test is planned.
+
+   *  "configure": The state where the test is being configured.
+
+   *  "ready": The state where the test is ready to be executed.
+
+   *  "on-going": The state where the test is currently running.
+
+   *  "stop": The state where the test is manually stopped.
+
+   *  "success": The success state when all unitary tests were
+      successful.
+
+   *  "failure": The success state when One or more tests in the
+      sequence got an error.
+
+   *  "error": The state where an error occurs during the test.
+
+                +---------+      +----------+      +---------+
+             +->| planned |----->|configured|----->|  ready  |
+             |  +---------+      +----------+      +---------+
+             |    A   A                 |              |
+             |    |   |                 |              V
+             |    |   |     +-------+   |          +----------+
+             |    |   ------| error |<--+----------| on-going |
+             |    |         +-------+              +----------+
+             |    |                                    |
+             |    |                                    |
+             | +---------+      +--------+             |
+             | | failure |<-----|  stop  |<------------+
+             | +---------+      +--------+             |
+             |                                         |
+             | +---------+                             |
+             +-| success |<----------------------------+
+               +---------+
+
+                  Figure 4: OAM unitary test state machine
 
 4.  YANG Data Model for Scheduling OAM Tests
 
@@ -515,8 +592,11 @@ Table of Contents
              enum "planned" {
                description "The test is planned.";
              }
-             enum "deployed" {
-               description "The test is deployed.";
+             enum "configure" {
+               description "The test is configured.";
+             }
+             enum "ready" {
+               description "The test status is ready.";
              }
              enum "ongoing" {
                description "The test is ongoing.";
@@ -524,14 +604,11 @@ Table of Contents
              enum "stop" {
                description "The test is stopped.";
              }
-             enum "unknown" {
-               description "The test status is unknown.";
-             }
-             enum "failed" {
-               description "The test has failed.";
-             }
              enum "finish" {
                description "The test is finished.";
+             }
+             enum "error" {
+               description "The test has an error.";
              }
            }
            description "Status of the test.";

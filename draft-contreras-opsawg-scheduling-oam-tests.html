@@ -1394,7 +1394,7 @@ Please replace XXXX with the RFC number assigned to this document if the documen
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-oam-unitary-test" class="section-name selfRef">OAM unitary test</a>
         </h3>
 <p id="section-3.1-1">The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures. Inside the container, there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of the scope of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from <span>[<a href="#I-D.draft-ma-opsawg-ucl-acl" class="cite xref">I-D.draft-ma-opsawg-ucl-acl</a>]</span>. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM unitary test.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">{#oam-uni-test-tree-st} contains the tree of the proposed model.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-2"><a href="#oam-uni-test-tree-st" class="auto internal xref">Figure 1</a> contains the tree of the proposed model.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <span id="name-oam-unitary-test-2"></span><div id="oam-uni-test-tree-st">
 <figure id="figure-1">
           <div class="alignCenter art-text artwork" id="section-3.1-3.1">
@@ -1439,6 +1439,50 @@ module: ietf-oam-unitary-test
 <a href="#name-oam-unitary-test-2" class="selfRef">OAM unitary test</a>
           </figcaption></figure>
 </div>
+<p id="section-3.1-4">The 'unitary-test-status' state machine is shown in <a href="#st-unitary-test-status" class="auto internal xref">Figure 2</a>. The state machine includes the following states:<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.1-5.1">"planned": The initial state where the test is planned.<a href="#section-3.1-5.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.1-5.2">"configure": The state where the test is being configured.<a href="#section-3.1-5.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.1-5.3">"ready": The state where the test is ready to be executed.<a href="#section-3.1-5.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.1-5.4">"on-going": The state where the test is currently running.<a href="#section-3.1-5.4" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.1-5.5">"stop": The state where the test is manually stopped.<a href="#section-3.1-5.5" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.1-5.6">"error": The state where an error occurs during the test.<a href="#section-3.1-5.6" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.1-5.7">"finished": The final state where the test is completed.<a href="#section-3.1-5.7" class="pilcrow">¶</a>
+</li>
+        </ul>
+<span id="name-oam-unitary-test-state-mach"></span><div id="st-unitary-test-status">
+<figure id="figure-2">
+          <div class="alignCenter art-text artwork" id="section-3.1-6.1">
+<pre>
+   +---------+      +----------+      +---------+
++-&gt;| planned |-----&gt;|configured|-----&gt;|  ready  |
+|  +---------+      +----------+      +---------+
+|      A                 |                |
+|      |                 |                V
+|      |     +-------+   |          +----------+
+|      ------| error |&lt;--+----------| on-going |
+|      |     +-------+              +----------+
+|      |                                  |
+|      V                                  |
+|  +---------+      +--------+            |
++--| finished|&lt;-----|  stop  |&lt;------------+
+   +---------+      +--------+            |
+       A                                  |
+       |                                  |
+       +----------------------------------+
+
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-oam-unitary-test-state-mach" class="selfRef">OAM unitary test state machine</a>
+          </figcaption></figure>
+</div>
 </section>
 </div>
 <div id="oam-test-sequence">
@@ -1447,9 +1491,9 @@ module: ietf-oam-unitary-test
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-oam-test-sequence" class="section-name selfRef">OAM test sequence</a>
         </h3>
 <p id="section-3.2-1">The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a coordinated manner. Each OAM test sequence references a OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from <span>[<a href="#I-D.draft-ma-opsawg-ucl-acl" class="cite xref">I-D.draft-ma-opsawg-ucl-acl</a>]</span>. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM test. Finally, "test-sequence-status" shows the state of the OAM test sequence.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">An example of the proposed structure <a href="#oam-test-sequence-tree-st" class="auto internal xref">Figure 2</a>.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">An example of the proposed structure <a href="#oam-test-sequence-tree-st" class="auto internal xref">Figure 3</a>.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <span id="name-oam-test-sequence-2"></span><div id="oam-test-sequence-tree-st">
-<figure id="figure-2">
+<figure id="figure-3">
           <div class="alignCenter art-text artwork" id="section-3.2-3.1">
 <pre>
 module: ietf-oam-test-sequence
@@ -1488,12 +1532,59 @@ module: ietf-oam-test-sequence
         |  +--rw byyearmonth*   uint32
         |  +--rw bysetpos*      int32
         |  +--rw wkst?          schedule:weekday
-        +--ro test-squence-status?   enumeration
+        +--ro sequence?   enumeration
 
 </pre>
 </div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-oam-test-sequence-2" class="selfRef">OAM test sequence</a>
+          </figcaption></figure>
+</div>
+<p id="section-3.2-4">The 'test-sequence-status' state machine is shown in <a href="#st-test-sequence-status" class="auto internal xref">Figure 4</a>. The state machine includes the following states:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2-5.1">"planned": The initial state where the test is planned.<a href="#section-3.2-5.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.2-5.2">"configure": The state where the test is being configured.<a href="#section-3.2-5.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.2-5.3">"ready": The state where the test is ready to be executed.<a href="#section-3.2-5.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.2-5.4">"on-going": The state where the test is currently running.<a href="#section-3.2-5.4" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.2-5.5">"stop": The state where the test is manually stopped.<a href="#section-3.2-5.5" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.2-5.6">"success": The success state when all unitary tests were successful.<a href="#section-3.2-5.6" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.2-5.7">"failure": The success state when One or more tests in the sequence got an error.<a href="#section-3.2-5.7" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.2-5.8">"error": The state where an error occurs during the test.<a href="#section-3.2-5.8" class="pilcrow">¶</a>
+</li>
+        </ul>
+<span id="name-oam-unitary-test-state-machi"></span><div id="st-test-sequence-status">
+<figure id="figure-4">
+          <div class="alignCenter art-text artwork" id="section-3.2-6.1">
+<pre>
+    +---------+      +----------+      +---------+
+ +-&gt;| planned |-----&gt;|configured|-----&gt;|  ready  |
+ |  +---------+      +----------+      +---------+
+ |    A   A                 |              |
+ |    |   |                 |              V
+ |    |   |     +-------+   |          +----------+
+ |    |   ------| error |&lt;--+----------| on-going |
+ |    |         +-------+              +----------+
+ |    |                                    |
+ |    |                                    |
+ | +---------+      +--------+             |
+ | | failure |&lt;-----|  stop  |&lt;------------+
+ | +---------+      +--------+             |
+ |                                         |
+ | +---------+                             |
+ +-| success |&lt;----------------------------+
+   +---------+
+
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-oam-unitary-test-state-machi" class="selfRef">OAM unitary test state machine</a>
           </figcaption></figure>
 </div>
 </section>
@@ -1606,8 +1697,11 @@ module ietf-oam-unitary-test {
           enum "planned" {
             description "The test is planned.";
           }
-          enum "deployed" {
-            description "The test is deployed.";
+          enum "configure" {
+            description "The test is configured.";
+          }
+          enum "ready" {
+            description "The test status is ready.";
           }
           enum "ongoing" {
             description "The test is ongoing.";
@@ -1615,14 +1709,11 @@ module ietf-oam-unitary-test {
           enum "stop" {
             description "The test is stopped.";
           }
-          enum "unknown" {
-            description "The test status is unknown.";
-          }
-          enum "failed" {
-            description "The test has failed.";
-          }
           enum "finish" {
             description "The test is finished.";
+          }
+          enum "error" {
+            description "The test has an error.";
           }
         }
         description "Status of the test.";
