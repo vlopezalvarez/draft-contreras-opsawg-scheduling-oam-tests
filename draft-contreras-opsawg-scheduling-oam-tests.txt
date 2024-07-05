@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 12 January 2024                                           Nokia
-                                                            11 July 2023
+Expires: 6 January 2025                                            Nokia
+                                                             5 July 2024
 
 
  A YANG Data Model for Network Diagnosis by Scheduling Sequences of OAM
@@ -56,11 +56,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 January 2024.
+   This Internet-Draft will expire on 6 January 2025.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -85,15 +85,16 @@ Table of Contents
      2.4.  Performance-based Path Routing
    3.  Modelling the Scheduling of OAM Tests
      3.1.  OAM Unitary Test
-     3.2.  OAM test sequence
-   4.  YANG Data Model for Scheduling OAM Tests
-     4.1.  YANG Model Overview
+     3.2.  OAM Test Sequence
+   4.  YANG Data Models for Scheduling OAM Tests
+     4.1.  YANG Models Overview
      4.2.  YANG Model for Scheduling OAM Unitary Test
      4.3.  YANG Model for OAM Test Sequence
-   5.  Security Considerations
-   6.  IANA Considerations
-   7.  Implementation Status
-   8.  Normative References
+   5.  Using Device Mode Within OAM Scheduling Models
+   6.  Security Considerations
+   7.  IANA Considerations
+   8.  Implementation Status
+   9.  Normative References
    Acknowledgments
    Authors' Addresses
 
@@ -317,7 +318,8 @@ Table of Contents
    recurrence rule specification. "unitary-test-status" enumerates the
    state of the OAM unitary test.
 
-   Figure 1 contains the tree of the proposed model.
+   Figure 1 contains the tree of the proposed model.  Tree diagrams used
+   in this document follow the notation defined in [RFC8340].
 
         module: ietf-oam-unitary-test
           +--rw oam-unitary-tests
@@ -392,7 +394,7 @@ Table of Contents
 
                   Figure 2: OAM unitary test state machine
 
-3.2.  OAM test sequence
+3.2.  OAM Test Sequence
 
    The OAM test sequence model consists of a collection of OAM unitary
    tests that are executed based on specified time constraints,
@@ -492,9 +494,9 @@ Table of Contents
 
                   Figure 4: OAM unitary test state machine
 
-4.  YANG Data Model for Scheduling OAM Tests
+4.  YANG Data Models for Scheduling OAM Tests
 
-4.1.  YANG Model Overview
+4.1.  YANG Models Overview
 
    This document proposes two models: OAM unitary test and OAM test
    sequence.  OAM unitary test is a set of parameters that define a type
@@ -580,8 +582,8 @@ Table of Contents
 
      container oam-unitary-tests {
        description
-         "Container for OAM unitary tests activation for network diagnosis
-         procedures.";
+         "Container for OAM unitary tests activation for network
+         diagnosis procedures.";
 
        list oam-unitary-test {
          key name;
@@ -689,7 +691,8 @@ Table of Contents
 
      revision "2023-07-10" {
        description "Initial version";
-       reference "RFCXXXX"; // Update with the correct RFC number when assigned
+       reference "RFCXXXX";
+       // Update with the correct RFC number when assigned
      }
 
      // Data model definition
@@ -771,7 +774,25 @@ Table of Contents
    }
    <CODE ENDS>
 
-5.  Security Considerations
+5.  Using Device Mode Within OAM Scheduling Models
+
+   This section discusses the problematic of reusing device models
+   already defined in IETF within the context of scheduling OAM tests.
+   There are two main approaches to enable OAM scheduling models: *
+   Importing YANG model into the OAM scheduling models.  This approach
+   will copy the device model into the OAM unitary test model to enable
+   the configuration and utilization of the desire OAM test.  This
+   approach requires to recreate new YANG models for each new test type
+   or variation of the device models.  * Schema-mount allows mounting a
+   data model at a specified location of another (parent) schema.  The
+   main difference with importing the YANG modules is that they don't
+   have to be prepared for mounting; any existing modules such as "ietf-
+   twamp" can be mounted without any modifications.
+
+   As an exmaple, we will use [RFC8913], which defines a YANG data model
+   for TWAMP, to illustrate how device models could be used.
+
+6.  Security Considerations
 
    The YANG module targeted in this document defines a schema for data
    that is designed to be accessed via network management protocols such
@@ -793,17 +814,17 @@ Table of Contents
    to these data nodes without proper protection can have a negative
    effect on network operations.
 
-6.  IANA Considerations
+7.  IANA Considerations
 
    TBC
 
-7.  Implementation Status
+8.  Implementation Status
 
    This section will be used to track the status of the implementations
    of the model.  It is aimed at being removed if the document becomes
    RFC.
 
-8.  Normative References
+9.  Normative References
 
    [I-D.draft-ma-opsawg-ucl-acl]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Policy-
@@ -863,6 +884,10 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8340]  Bjorklund, M. and L. Berger, Ed., "YANG Tree Diagrams",
+              BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
+              <https://www.rfc-editor.org/rfc/rfc8340>.
 
    [RFC8342]  Bjorklund, M., Schoenwaelder, J., Shafer, P., Watsen, K.,
               and R. Wilton, "Network Management Datastore Architecture
