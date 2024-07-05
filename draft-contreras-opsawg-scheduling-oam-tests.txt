@@ -143,6 +143,11 @@ Table of Contents
    *  Configuration Management: This function allows a network operator
       to manage the configuration of network devices.
 
+   More recently, Incident Management
+   [I-D.ietf-nmop-network-incident-yang] also considers the possibility
+   of incident diagnosis, which can be favoured by dynamic invocation of
+   OAM tests.
+
    [RFC8531], [RFC8532] and, [RFC8533] defined YANG models for OAM
    technologies.  On the other hand, [RFC8531] defines a YANG data model
    for connection-oriented OAM protocols.  The main aim of this document
@@ -312,9 +317,9 @@ Table of Contents
    parameters.  The test types are out of the scope of this document.
    Moreover, each OAM unitary test has two temporal parameters: "period-
    of-time" and "recurrence".  Both are imported from the "ietf-
-   schedule" module from [I-D.draft-ma-opsawg-ucl-acl]. "period-of-time"
-   identifies the period values that contain a precise period of time,
-   while "recurrence" identifies the properties that contain a
+   schedule" module from [I-D.ietf-netmod-schedule-yang]. "period-of-
+   time" identifies the period values that contain a precise period of
+   time, while "recurrence" identifies the properties that contain a
    recurrence rule specification. "unitary-test-status" enumerates the
    state of the OAM unitary test.
 
@@ -404,9 +409,9 @@ Table of Contents
    test type with its concrete parameters.  Each OAM test sequence has
    two temporal parameters: "period-of-time" and "recurrence".  Both are
    imported from the "ietf-schedule" module from
-   [I-D.draft-ma-opsawg-ucl-acl]. "period-of-time" identifies the period
-   values that contain a precise period of time, while "recurrence"
-   identifies the properties that contain a recurrence rule
+   [I-D.ietf-netmod-schedule-yang]. "period-of-time" identifies the
+   period values that contain a precise period of time, while
+   "recurrence" identifies the properties that contain a recurrence rule
    specification. "unitary-test-status" enumerates the state of the OAM
    test.  Finally, "test-sequence-status" shows the state of the OAM
    test sequence.
@@ -814,6 +819,10 @@ Table of Contents
    to these data nodes without proper protection can have a negative
    effect on network operations.
 
+   In which refers to the scheduling of the tests, security
+   considerations in [I-D.ietf-netmod-schedule-yang] are also applicable
+   here.
+
 7.  IANA Considerations
 
    TBC
@@ -826,12 +835,20 @@ Table of Contents
 
 9.  Normative References
 
-   [I-D.draft-ma-opsawg-ucl-acl]
-              Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Policy-
-              based Network Access Control", Work in Progress, Internet-
-              Draft, draft-ma-opsawg-ucl-acl-03, 7 June 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ma-opsawg-
-              ucl-acl-03>.
+   [I-D.ietf-netmod-schedule-yang]
+              Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Common YANG
+              Data Model for Scheduling", Work in Progress, Internet-
+              Draft, draft-ietf-netmod-schedule-yang-02, 25 June 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
+              schedule-yang-02>.
+
+   [I-D.ietf-nmop-network-incident-yang]
+              Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
+              "A YANG Data Model for Network Incident Management", Work
+              in Progress, Internet-Draft, draft-ietf-nmop-network-
+              incident-yang-01, 28 June 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
+              network-incident-yang-01>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
