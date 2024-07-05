@@ -1394,37 +1394,20 @@ Please replace XXXX with the RFC number assigned to this document if the documen
 module: ietf-oam-unitary-test
   +--rw oam-unitary-tests
      +--rw oam-unitary-test* [name]
-        +--rw name                   string
+        +--rw name                      string
         +--rw (test-type)
-        +--rw period-of-time
-        |  +--rw (forms)?
-        |     +--:(period-explicit)
-        |     |  +--rw explicit-start?   yang:date-and-time
-        |     |  +--rw explicit-end?     yang:date-and-time
-        |     +--:(period-start)
-        |        +--rw start?            yang:date-and-time
-        |        +--rw duration?         duration
-        +--rw recurrence
-        |  +--rw freq           enumeration
-        |  +--rw (recurrence-bound)?
-        |  |  +--:(until)
-        |  |  |  +--rw until?   union
-        |  |  +--:(count)
-        |  |     +--rw count?   uint32
-        |  +--rw interval?      uint32
-        |  +--rw bysecond*      uint32
-        |  +--rw byminute*      uint32
-        |  +--rw byhour*        uint32
-        |  +--rw byday* [weekday]
-        |  |  +--rw direction*   int32
-        |  |  +--rw weekday      schedule:weekday
-        |  +--rw bymonthday*    int32
-        |  +--rw byyearday*     int32
-        |  +--rw byyearweek*    int32
-        |  +--rw byyearmonth*   uint32
-        |  +--rw bysetpos*      int32
-        |  +--rw wkst?          schedule:weekday
-        +--rw unitary-test-status?   enumeration
+        +--rw period-description?       string
+        +--rw period-start              yang:date-and-time
+        +--rw time-zone-identifier?     sys:timezone-name
+        +--rw (period-type)?
+        |  +--:(explicit)
+        |  |  +--rw period-end?         yang:date-and-time
+        |  +--:(duration)
+        |     +--rw duration?           duration
+        +--rw recurrence-description?   string
+        +--rw frequency                 identityref
+        +--rw interval?                 uint32
+        +--rw unitary-test-status?      enumeration
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
@@ -1498,40 +1481,31 @@ module: ietf-oam-unitary-test
 module: ietf-oam-test-sequence
   +--rw oam-test-sequence
      +--rw test-sequence* [name]
-        +--rw name                   string
+        +--rw name                      string
         +--rw test-ref* [name]
         |  +--rw name             string
         |  +--rw (test-type)
         |  +--rw numexecutions?   uint32
-        +--rw period-of-time
-        |  +--rw (forms)?
-        |     +--:(period-explicit)
-        |     |  +--rw explicit-start?   yang:date-and-time
-        |     |  +--rw explicit-end?     yang:date-and-time
-        |     +--:(period-start)
-        |        +--rw start?            yang:date-and-time
-        |        +--rw duration?         duration
-        +--rw recurrence
-        |  +--rw freq           enumeration
-        |  +--rw (recurrence-bound)?
-        |  |  +--:(until)
-        |  |  |  +--rw until?   union
-        |  |  +--:(count)
-        |  |     +--rw count?   uint32
-        |  +--rw interval?      uint32
-        |  +--rw bysecond*      uint32
-        |  +--rw byminute*      uint32
-        |  +--rw byhour*        uint32
-        |  +--rw byday* [weekday]
-        |  |  +--rw direction*   int32
-        |  |  +--rw weekday      schedule:weekday
-        |  +--rw bymonthday*    int32
-        |  +--rw byyearday*     int32
-        |  +--rw byyearweek*    int32
-        |  +--rw byyearmonth*   uint32
-        |  +--rw bysetpos*      int32
-        |  +--rw wkst?          schedule:weekday
-        +--ro sequence?   enumeration
+        +--rw period-description?       string
+        +--rw period-start              yang:date-and-time
+        +--rw time-zone-identifier?     sys:timezone-name
+        +--rw (period-type)?
+        |  +--:(explicit)
+        |  |  +--rw period-end?         yang:date-and-time
+        |  +--:(duration)
+        |     +--rw duration?           duration
+        +--rw recurrence-first
+        |  +--rw utc-start-time?   yang:date-and-time
+        |  +--rw duration?         uint32
+        +--rw (recurrence-bound)?
+        |  +--:(until)
+        |  |  +--rw utc-until?          yang:date-and-time
+        |  +--:(count)
+        |     +--rw count?              uint32
+        +--rw recurrence-description?   string
+        +--rw frequency                 identityref
+        +--rw interval?                 uint32
+        +--rw test-sequence-status?     enumeration
 
 </pre>
 </div>
@@ -1617,7 +1591,7 @@ module: ietf-oam-test-sequence
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-yang-model-for-scheduling-o" class="section-name selfRef">YANG Model for Scheduling OAM Unitary Test</a>
         </h3>
 <div class="breakable sourcecode" id="section-4.2-1">
-<pre>&lt;CODE BEGINS&gt; file ietf-oam-unitary-test@2023-07-10.yang
+<pre>&lt;CODE BEGINS&gt; file ietf-oam-unitary-test@2024-07-05.yang
 module ietf-oam-unitary-test {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test";
@@ -1625,7 +1599,7 @@ module ietf-oam-unitary-test {
 
   // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
 
-  // reference draft-ma-opsawg-ucl-acl
+  // reference ietf-netmod-schedule-yang
   import ietf-schedule { prefix "schedule"; }
 
   organization
@@ -1642,7 +1616,7 @@ module ietf-oam-unitary-test {
     "This module defines the 'ietf-oam-unitary-test' YANG model for
      activation of network diagnosis procedures.
 
-    Copyright (c) 2023 IETF Trust and the persons identified as
+    Copyright (c) 2024 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
 
     Redistribution and use in source and binary forms, with or
@@ -1661,7 +1635,7 @@ module ietf-oam-unitary-test {
   // RFC Ed.: replace XXXX with actual RFC number and remove
   // this note.
 
-  revision "2023-07-10" {
+  revision "2024-07-05" {
     description
       "Initial version";
     reference
@@ -1702,7 +1676,7 @@ module ietf-oam-unitary-test {
 
       uses oam-unitary-test;
 
-      uses schedule:period;
+      uses schedule:period-of-time;
 
       uses schedule:recurrence;
 
@@ -1755,7 +1729,7 @@ module ietf-oam-unitary-test {
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-yang-model-for-oam-test-seq" class="section-name selfRef">YANG Model for OAM Test Sequence</a>
         </h3>
 <div class="breakable sourcecode" id="section-4.3-1">
-<pre>&lt;CODE BEGINS&gt; file ietf-oam-test-sequence@2023-07-10.yang
+<pre>&lt;CODE BEGINS&gt; file ietf-oam-test-sequence@2024-07-05.yang
 
 module ietf-oam-test-sequence {
   yang-version 1.1;
@@ -1769,7 +1743,7 @@ module ietf-oam-test-sequence {
     // reference "RFCXXXX";
   }
 
-  // reference draft-ma-opsawg-ucl-acl
+  // reference ietf-netmod-schedule-yang
   import ietf-schedule { prefix "schedule"; }
 
   organization
@@ -1786,7 +1760,7 @@ module ietf-oam-test-sequence {
     "This module defines the 'oam-unitary-test' YANG model for
     activation of network diagnosis procedures.
 
-    Copyright (c) 2023 IETF Trust and the persons identified as
+    Copyright (c) 2024 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
 
     Redistribution and use in source and binary forms, with or
@@ -1805,7 +1779,7 @@ module ietf-oam-test-sequence {
   // RFC Ed.: replace XXXX with actual RFC number and remove
   // this note.
 
-  revision "2023-07-10" {
+  revision "2024-07-05" {
     description "Initial version";
     reference "RFCXXXX";
     // Update with the correct RFC number when assigned
@@ -1842,9 +1816,9 @@ module ietf-oam-test-sequence {
         }
       }
 
-      uses schedule:period;
+      uses schedule:period-of-time;
 
-      uses schedule:recurrence;
+      uses schedule:recurrence-utc;
 
       leaf test-sequence-status {
         type enumeration {
