@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-04T00:57:59.804524+00:00",
+  "timestamp": "2024-07-07T01:03:01.854052+00:00",
   "repo": "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests",
   "labels": [
     {
@@ -63,7 +63,7 @@
       "labels": [],
       "body": "Different updates",
       "createdAt": "2024-07-01T16:08:19Z",
-      "updatedAt": "2024-07-01T16:08:20Z",
+      "updatedAt": "2024-07-05T11:31:14Z",
       "baseRepository": "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests",
       "baseRefName": "main",
       "baseRefOid": "360ddcf8612b2be7a73d978d4c82c3d0330918b0",
@@ -75,7 +75,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJ4Oz986Axyp_",
+          "commit": {
+            "abbreviatedOid": "de7b97f"
+          },
+          "author": "vlopezalvarez",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Hi Luis, there is an error in the PR. I have addressed your changes in main directly. Please have a look and close the PR if I've covered everything.",
+          "createdAt": "2024-07-05T11:31:14Z",
+          "updatedAt": "2024-07-05T11:31:14Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
