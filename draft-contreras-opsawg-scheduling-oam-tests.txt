@@ -825,14 +825,6 @@ Table of Contents
 
 9.1.  Normative References
 
-   [I-D.draft-davis-nmop-incident-terminology]
-              Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
-              Key Terms for Network Incident and Problem Management",
-              Work in Progress, Internet-Draft, draft-davis-nmop-
-              incident-terminology-01, 13 May 2024,
-              <https://datatracker.ietf.org/doc/html/draft-davis-nmop-
-              incident-terminology-01>.
-
    [I-D.ietf-netmod-schedule-yang]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Common YANG
               Data Model for Scheduling", Work in Progress, Internet-
@@ -844,17 +836,6 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
-
-   [RFC4176]  El Mghazli, Y., Ed., Nadeau, T., Boucadair, M., Chan, K.,
-              and A. Gonguet, "Framework for Layer 3 Virtual Private
-              Networks (L3VPN) Operations and Management", RFC 4176,
-              DOI 10.17487/RFC4176, October 2005,
-              <https://www.rfc-editor.org/rfc/rfc4176>.
-
-   [RFC4655]  Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
-              Computation Element (PCE)-Based Architecture", RFC 4655,
-              DOI 10.17487/RFC4655, August 2006,
-              <https://www.rfc-editor.org/rfc/rfc4655>.
 
    [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
               (TLS) Protocol Version 1.2", RFC 5246,
@@ -886,25 +867,9 @@ Table of Contents
               DOI 10.17487/RFC6536, March 2012,
               <https://www.rfc-editor.org/rfc/rfc6536>.
 
-   [RFC6632]  Ersue, M., Ed. and B. Claise, "An Overview of the IETF
-              Network Management Standards", RFC 6632,
-              DOI 10.17487/RFC6632, June 2012,
-              <https://www.rfc-editor.org/rfc/rfc6632>.
-
    [RFC6991]  Schoenwaelder, J., Ed., "Common YANG Data Types",
               RFC 6991, DOI 10.17487/RFC6991, July 2013,
               <https://www.rfc-editor.org/rfc/rfc6991>.
-
-   [RFC7276]  Mizrahi, T., Sprecher, N., Bellagamba, E., and Y.
-              Weingarten, "An Overview of Operations, Administration,
-              and Maintenance (OAM) Tools", RFC 7276,
-              DOI 10.17487/RFC7276, June 2014,
-              <https://www.rfc-editor.org/rfc/rfc7276>.
-
-   [RFC7297]  Boucadair, M., Jacquenet, C., and N. Wang, "IP
-              Connectivity Provisioning Profile (CPP)", RFC 7297,
-              DOI 10.17487/RFC7297, July 2014,
-              <https://www.rfc-editor.org/rfc/rfc7297>.
 
    [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
               RFC 7950, DOI 10.17487/RFC7950, August 2016,
@@ -968,6 +933,51 @@ Table of Contents
               (TWAMP) YANG Data Model", RFC 8913, DOI 10.17487/RFC8913,
               November 2021, <https://www.rfc-editor.org/rfc/rfc8913>.
 
+9.2.  Informative References
+
+   [I-D.draft-davis-nmop-incident-terminology]
+              Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
+              Key Terms for Network Incident and Problem Management",
+              Work in Progress, Internet-Draft, draft-davis-nmop-
+              incident-terminology-01, 13 May 2024,
+              <https://datatracker.ietf.org/doc/html/draft-davis-nmop-
+              incident-terminology-01>.
+
+   [I-D.ietf-nmop-network-incident-yang]
+              Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
+              "A YANG Data Model for Network Incident Management", Work
+              in Progress, Internet-Draft, draft-ietf-nmop-network-
+              incident-yang-01, 28 June 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
+              network-incident-yang-01>.
+
+   [RFC4176]  El Mghazli, Y., Ed., Nadeau, T., Boucadair, M., Chan, K.,
+              and A. Gonguet, "Framework for Layer 3 Virtual Private
+              Networks (L3VPN) Operations and Management", RFC 4176,
+              DOI 10.17487/RFC4176, October 2005,
+              <https://www.rfc-editor.org/rfc/rfc4176>.
+
+   [RFC4655]  Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
+              Computation Element (PCE)-Based Architecture", RFC 4655,
+              DOI 10.17487/RFC4655, August 2006,
+              <https://www.rfc-editor.org/rfc/rfc4655>.
+
+   [RFC6632]  Ersue, M., Ed. and B. Claise, "An Overview of the IETF
+              Network Management Standards", RFC 6632,
+              DOI 10.17487/RFC6632, June 2012,
+              <https://www.rfc-editor.org/rfc/rfc6632>.
+
+   [RFC7276]  Mizrahi, T., Sprecher, N., Bellagamba, E., and Y.
+              Weingarten, "An Overview of Operations, Administration,
+              and Maintenance (OAM) Tools", RFC 7276,
+              DOI 10.17487/RFC7276, June 2014,
+              <https://www.rfc-editor.org/rfc/rfc7276>.
+
+   [RFC7297]  Boucadair, M., Jacquenet, C., and N. Wang, "IP
+              Connectivity Provisioning Profile (CPP)", RFC 7297,
+              DOI 10.17487/RFC7297, July 2014,
+              <https://www.rfc-editor.org/rfc/rfc7297>.
+
    [RFC8969]  Wu, Q., Ed., Boucadair, M., Ed., Lopez, D., Xie, C., and
               L. Geng, "A Framework for Automating Service and Network
               Management with YANG", RFC 8969, DOI 10.17487/RFC8969,
@@ -978,16 +988,6 @@ Table of Contents
               Framework for Network Slices in Networks Built from IETF
               Technologies", RFC 9543, DOI 10.17487/RFC9543, March 2024,
               <https://www.rfc-editor.org/rfc/rfc9543>.
-
-9.2.  Informative References
-
-   [I-D.ietf-nmop-network-incident-yang]
-              Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
-              "A YANG Data Model for Network Incident Management", Work
-              in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-01, 28 June 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-01>.
 
 Acknowledgments
 
