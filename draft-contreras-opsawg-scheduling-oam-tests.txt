@@ -141,13 +141,13 @@ Table of Contents
 
    *  Link Trace: This function allows a network operator to trace a
       path through a network from one device to another.  Some
-      technologies following this approach are Y.1731 Linktrace or IP
-      traceroute.
+      technologies following this approach are Y.1731 Linktrace
+      [ITU-T-Y1731] or IP traceroute.
 
    *  Performance Monitoring: This function allows a network operator to
       monitor the performance of a network and to identify and diagnose
-      performance issues.  Protocols like TWAMP, or Y.1731 DMM/SLM can
-      obtain performance measurements.
+      performance issues.  Protocols like TWAMP, or Y.1731 DMM/SLM
+      [ITU-T-Y1731] can obtain performance measurements.
 
    More recently, Incident Management
    [I-D.ietf-nmop-network-incident-yang] focuses on of incident
@@ -273,8 +273,8 @@ Table of Contents
    depends on the network service that is tested.  For example, if the
    service is a Virtual Private Network (VPN).  Two-Way Active
    Measurement Protocol (TWAMP) Light [RFC5357] will be used, while if
-   the service is an E-LINE, ITU-T Y.1731 Ethernet CFM tests will be
-   executed.
+   the service is an E-LINE, ITU-T Y.1731 Ethernet CFM tests
+   [ITU-T-Y1731] will be executed.
 
    Typically, once the birth certificate process has been completed and
    the OAM tests have been executed, the test results are stored as part
@@ -950,6 +950,11 @@ Table of Contents
               incident-yang-01, 28 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               network-incident-yang-01>.
+
+   [ITU-T-Y1731]
+              "OAM Functions and Mechanisms for Ethernet-based
+              Networks", 13 June 2023,
+              <https://www.itu.int/rec/T-REC-Y.1731/en>.
 
    [RFC4176]  El Mghazli, Y., Ed., Nadeau, T., Boucadair, M., Chan, K.,
               and A. Gonguet, "Framework for Layer 3 Virtual Private
