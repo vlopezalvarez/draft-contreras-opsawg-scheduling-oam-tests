@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>A YANG Data Model for Network Diagnosis by Scheduling Sequences of OAM Tests</title>
+<title>A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM Tests</title>
 <meta content="Luis M. Contreras" name="author">
 <meta content="Victor Lopez" name="author">
 <meta content="
-       This document defines a YANG data model for network diagnosis on-demand using Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' data models to enable activation of network diagnosis procedures. 
+       This document defines a YANG data model for network diagnosis on-demand relying upon Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures. 
     " name="description">
 <meta content="xml2rfc 3.22.0" name="generator">
 <meta content="OAM" name="keyword">
@@ -1031,7 +1031,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Contreras &amp; Lopez</td>
-<td class="center">Expires 6 January 2025</td>
+<td class="center">Expires 23 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1044,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-contreras-opsawg-scheduling-oam-tests-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07-05" class="published">5 July 2024</time>
+<time datetime="2024-07-22" class="published">22 July 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-01-06">6 January 2025</time></dd>
+<dd class="expires"><time datetime="2025-01-23">23 January 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1063,10 +1063,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="title">A YANG Data Model for Network Diagnosis by Scheduling Sequences of OAM Tests</h1>
+<h1 id="title">A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM Tests</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines a YANG data model for network diagnosis on-demand using Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' data models to enable activation of network diagnosis procedures.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document defines a YANG data model for network diagnosis on-demand relying upon Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1103,7 +1103,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1178,13 +1178,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-yang-data-models-for-schedu" class="internal xref">YANG Data Models for Scheduling OAM Tests</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-yang-models-overview" class="internal xref">YANG Models Overview</a></p>
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-yang-model-for-scheduling-o" class="internal xref">YANG Model for Scheduling OAM Unitary Test</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-yang-model-for-scheduling-o" class="internal xref">YANG Model for Scheduling OAM Unitary Test</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-yang-model-for-oam-test-seq" class="internal xref">YANG Model for OAM Test Sequence</a></p>
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-yang-model-for-oam-test-seq" class="internal xref">YANG Model for OAM Test Sequence</a></p>
 </li>
             </ul>
 </li>
@@ -1201,7 +1198,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-implementation-status" class="internal xref">Implementation Status</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
             <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
@@ -1218,43 +1223,42 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Operations, Administration, and Maintenance (OAM) tasks are fundamental functionalities of the network management. Given the emerging of data models and their utilization in Service Provider's management, the management of OAM tests represent also an area of interest for operators, which requires to be defined as a data model. OAM functionalities provide the means to identify and isolate faults, measure and report of performance. <span>[<a href="#RFC5860" class="cite xref">RFC5860</a>]</span> defines the three main areas involved in OAM:<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Operations, Administration, and Maintenance (OAM) tasks are fundamental functions of the network management (see, e.g., <span>[<a href="#RFC7276" class="cite xref">RFC7276</a>]</span>). Given the emerging of data models and their utilization in Service Provider's network management and the need to automate the overall service management lifecycle <span>[<a href="#RFC8969" class="cite xref">RFC8969</a>]</span>, the management of OAM operations is key. Relevant data models are still missing to cover specific needs.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">Specifically, OAM functions provide the means to identify and isolate faults, measure and report of performance (see section 4.2, <span>[<a href="#RFC6632" class="cite xref">RFC6632</a>]</span>. For example, <span>[<a href="#RFC5860" class="cite xref">RFC5860</a>]</span> defines the three main areas involved in OAM:<a href="#section-1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1-2.1">
-          <p id="section-1-2.1.1">Fault management, which allows network operators to quickly identify and isolate faults in the network. The OAM framework defines mechanisms for fault detection and isolation, such as continuity check, link trace, and loopback.<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-1-3.1">
+          <p id="section-1-3.1.1">Fault management, which allows network operators to quickly identify and isolate faults in the network. Examples of these mechanisms for fault detection and isolation are: continuity check, link trace, and loopback.<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-2.2">
-          <p id="section-1-2.2.1">Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as frame delay measurement, frame delay variation measurement, and frame loss measurement.<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-3.2">
+          <p id="section-1-3.2.1">Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as frame delay measurement, frame delay variation measurement, and frame loss measurement.<a href="#section-1-3.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-2.3">
-          <p id="section-1-2.3.1">Security management defines mechanisms to protect OAM communications from unauthorized access and tampering.<a href="#section-1-2.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-3.3">
+          <p id="section-1-3.3.1">Security management defines mechanisms to protect OAM communications from unauthorized access and tampering.<a href="#section-1-3.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-3"><span>[<a href="#RFC6428" class="cite xref">RFC6428</a>]</span> defines several use cases for OAM tools, including:<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4"><span>[<a href="#RFC7276" class="cite xref">RFC7276</a>]</span> presents OAM tools for detecting and isolating failures in networks and for performance monitoring, some examples are:<a href="#section-1-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1-4.1">
-          <p id="section-1-4.1.1">Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational.<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-1-5.1">
+          <p id="section-1-5.1.1">Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational.<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-4.2">
-          <p id="section-1-4.2.1">Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes.<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-5.2">
+          <p id="section-1-5.2.1">Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple tecnologies for this function, like IP Ping, VCCV Ping, LSP Ping or Ethernet Loopback.<a href="#section-1-5.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-4.3">
-          <p id="section-1-4.3.1">Link Trace: This function allows a network operator to trace a path through a network from one device to another.<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-5.3">
+          <p id="section-1-5.3.1">Link Trace: This function allows a network operator to trace a path through a network from one device to another. Some technologies following this approach are Y.1731 Linktrace or IP traceroute.<a href="#section-1-5.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-1-4.4">
-          <p id="section-1-4.4.1">Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues.<a href="#section-1-4.4.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-4.5">
-          <p id="section-1-4.5.1">Security Management: This function allows a network operator to protect OAM communications from unauthorized access and tampering.<a href="#section-1-4.5.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-4.6">
-          <p id="section-1-4.6.1">Configuration Management: This function allows a network operator to manage the configuration of network devices.<a href="#section-1-4.6.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-1-5.4">
+          <p id="section-1-5.4.1">Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues. Protocols like TWAMP, or Y.1731 DMM/SLM can obtain performance measurements.<a href="#section-1-5.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-5">More recently, Incident Management <span>[<a href="#I-D.ietf-nmop-network-incident-yang" class="cite xref">I-D.ietf-nmop-network-incident-yang</a>]</span> also considers the possibility of incident diagnosis, which can be favoured by dynamic invocation of OAM tests.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6"><span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span> and, <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span> defined YANG models for OAM technologies. On the other hand, <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span> defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control and monitor connection-oriented OAM protocols such as MPLS-TP OAM, PBB-TE OAM, and G.7713.1 OAM. <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span> provides a generic YANG data model that can be used to configure, control and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection), LBM (Loopback Messaging) and VCCV (Virtual Circuit Connectivity Verification). <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span> provides a YANG data model that can be used to retrieve information related to OAM protocols such as Bidirectional Forwarding Detection (BFD), Loopback Messaging (LBM) and Virtual Circuit Connectivity Verification (VCCV).<a href="#section-1-6" class="pilcrow">¶</a></p>
-<p id="section-1-7"><span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).<a href="#section-1-7" class="pilcrow">¶</a></p>
-<p id="section-1-8">Previous RFCs defined the parameters required for each of the different tests that are used in network elements today. This document covers how to use OAM for network-wide use cases. Following, some illustrative examples are presented.<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-6">More recently, Incident Management <span>[<a href="#I-D.ietf-nmop-network-incident-yang" class="cite xref">I-D.ietf-nmop-network-incident-yang</a>]</span> focuses on
+   of incident diagnosis, which can be favored by dynamic invocation of OAM tests.<a href="#section-1-6" class="pilcrow">¶</a></p>
+<p id="section-1-7"><span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span> and <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>  defined YANG models for OAM technologies:
++ <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span> defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control and monitor connection-oriented OAM protocols such as MPLS-TP OAM, PBB-TE OAM, and G.7713.1 OAM.
++ <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span> provides a generic YANG data model that can be used to configure, control and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection), LBM (Loopback Messaging) and VCCV (Virtual Circuit Connectivity Verification).
++ <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span> provides a YANG data model that can be used to retrieve information related to OAM protocols such as Bidirectional Forwarding Detection (BFD), Loopback Messaging (LBM) and Virtual Circuit Connectivity Verification (VCCV).
+- <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).<a href="#section-1-7" class="pilcrow">¶</a></p>
+<p id="section-1-8">These RFCs defined the parameters required for each of the different tests that are used in network elements today. This document covers how to use OAM for network-wide use cases. Following, some illustrative examples are presented.<a href="#section-1-8" class="pilcrow">¶</a></p>
 <p id="section-1-9">The YANG data model resulting from this document will conform to the Network Management Datastore Architecture (NMDA) <span>[<a href="#RFC8342" class="cite xref">RFC8342</a>]</span>.<a href="#section-1-9" class="pilcrow">¶</a></p>
 <div id="terminology-and-notations">
 <section id="section-1.1">
@@ -1265,12 +1269,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-1.1-2">Following terms are used for the representation of this data model.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1.1-3.1">
-            <p id="section-1.1-3.1.1">OAM unitary test: it is a set of parameters that define a type of OAM test to be invoked. As an example, it includes the type test, configuration parameters, and target results.<a href="#section-1.1-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-3.1.1">OAM unitary test: A set of parameters that define a type of OAM test to be invoked. As an example, it includes the type test, configuration parameters, and target results.<a href="#section-1.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-3.2">
-            <p id="section-1.1-3.2.1">OAM test sequence: it is a set of OAM unitary tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.<a href="#section-1.1-3.2.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-3.2.1">OAM test sequence: A set of OAM unitary tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.<a href="#section-1.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
+<p id="section-1.1-4">Tree diagrams used in this document follow the notation defined in <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span>.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="requirements-language">
@@ -1291,7 +1296,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <table class="center" id="table-1">
           <caption>
 <a href="#table-1" class="selfRef">Table 1</a>:
-<a href="#name-prefixes-and-corresponding-" class="selfRef">Prefixes and corresponding YANG modules</a>
+<a href="#name-prefixes-and-corresponding-" class="selfRef">Prefixes and Corresponding YANG Modules</a>
           </caption>
 <thead>
             <tr>
@@ -1304,12 +1309,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <tr>
               <td class="text-left" rowspan="1" colspan="1">oamut</td>
               <td class="text-left" rowspan="1" colspan="1">ietf-oam-unitary-tests</td>
-              <td class="text-left" rowspan="1" colspan="1">RFCXXX</td>
+              <td class="text-left" rowspan="1" colspan="1">RFCXXXX</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">oamts</td>
               <td class="text-left" rowspan="1" colspan="1">ietf-oam-test-sequence</td>
-              <td class="text-left" rowspan="1" colspan="1">RFCXXX</td>
+              <td class="text-left" rowspan="1" colspan="1">RFCXXXX</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">yang</td>
@@ -1337,9 +1342,10 @@ Please replace XXXX with the RFC number assigned to this document if the documen
         <h3 id="name-troubleshooting">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-troubleshooting" class="section-name selfRef">Troubleshooting</a>
         </h3>
-<p id="section-2.1-1">After the detection of a problem in the network, OAM tests are performed to find the root cause for the detected issue. However, a problem detected can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help to find the root cause by testing specific components of the network and looking for anomalies or issues.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1-2">There are a variety of different OAM tests that can be executed depending on the nature of the scenario. For example, if the issue is related to a L2 capability, tests can be run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. If these tests are correct, the operator may want to check the availability of the service or its performance.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
-<p id="section-2.1-3">Even though the troubleshooting process may be different depending on the problem detected, there are certain common procedures or logic that can be executed in order to narrow down the cause of the problem.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-1">After the detection of a problem <span>[<a href="#I-D.draft-davis-nmop-incident-terminology" class="cite xref">I-D.draft-davis-nmop-incident-terminology</a>]</span> in the network, OAM tests are performed to find the root cause for the detected problem. However, a detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help to find the root cause by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests, depends on the nature of the test itself.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">There are a variety of OAM tests that can be executed as a function of the target scenario. For example, if the issue is related to a Layer 2 capability, specific tests can be designed and run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. These tests can be coupled with others to test if any filtering is in place by varying, e.g., some Layer 2 fields or checking the configuration of relevant nodes.  If these tests are correct, the operator may want to check the availability of the service (or its
+   delivered performance).<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1-3">Even though the troubleshooting process may be different depending on the problem detected, there are certain common procedures or logics that can be executed in order to narrow down the cause of the problem and thus help isolating candidate root cause.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="birth-certificate">
@@ -1347,10 +1353,11 @@ Please replace XXXX with the RFC number assigned to this document if the documen
         <h3 id="name-birth-certificate">
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-birth-certificate" class="section-name selfRef">Birth Certificate</a>
         </h3>
-<p id="section-2.2-1">The aim of a birth certificate process is to validate that all relevant parameters are correct for a specific network service. The birth certificate process is done once the configuration of the network elements is completed and they are ready for service.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">If the birth certificate is successful, it means that the network service is functioning correctly and meets the requirements defined by the operator. The process requires running a set of OAM tests to verify that the service is performing as expected.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.2-3">The set of OAM tests done as part of a birth certificate process depends on the network service that is tested. For example, if the service is a virtual private network (VPN) Two-Way Active Measurement Protocol (TWAMP) Light will be used, while if the service is an E-LINE, Ethernet CFM tests will be executed.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
-<p id="section-2.2-4">Once the birth certificate process has been completed and the OAM tests have been run, the test results are stored as part of the documentation process performed by the operator.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.2-1">The aim of a birth certificate process is to validate that all
+   relevant parameters are set appropriately in accordance with the target network service. The birth certificate process is done once the configuration of the network elements is completed and they are ready for service.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">If the birth certificate is successful, it means that the network service is functioning correctly (that is, measured service is matching the expected service) and meets the requirements defined by the operator. The process requires running a set of OAM tasks (e.g., tests) to verify that the service is performing as expected.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-3">The set of OAM tests conducted as part of a birth certificate process depends on the network service that is tested.  For example, if the service is a Virtual Private Network (VPN). Two-Way Active Measurement Protocol (TWAMP) Light <span>[<a href="#RFC5357" class="cite xref">RFC5357</a>]</span> will be used, while if the service is an E-LINE, ITU-T Y.1731 Ethernet CFM tests will be executed.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.2-4">Typically, once the birth certificate process has been completed and the OAM tests have been executed, the test results are stored as part of the documentation process performed by the operator. Many of these tasks take place during pre-deployment phases.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="proactive-supervision">
@@ -1358,9 +1365,9 @@ Please replace XXXX with the RFC number assigned to this document if the documen
         <h3 id="name-proactive-supervision">
 <a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-proactive-supervision" class="section-name selfRef">Proactive Supervision</a>
         </h3>
-<p id="section-2.3-1">There are communication services that require to fulfill Service Level Agreements (SLAs). SLAs define performance parameters that the service must fulfill in order to meet the requirements of the customer or end user.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.3-2">Proactive testing ensures the SLAs are met. Proactive supervision requires running tests on service components to identify and resolve issues before they impact the customer or end user, or to minimize the impact of the end user.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
-<p id="section-2.3-3">Proactive testing can be done via OAM tests. These tests can be run periodically at regular intervals depending on the specific SLA requirements and the network operator procedures. These procedures may require documenting the test results for future auditing processes with the customers.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
+<p id="section-2.3-1">Some network services require to fulfill strict Service Level Agreements (SLAs).  An SLA defines the performance parameters that the service must fulfill in order to meet the requirements of the customer or end user (e.g., IP Connectivity Provisioning Profile (CPP) <span>[<a href="#RFC7297" class="cite xref">RFC7297</a>]</span> and Network Slice Service <span>[<a href="#RFC9543" class="cite xref">RFC9543</a>]</span>).<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-2">As part of service fulfillment and assurance (e.g., Section 2.3.3 of <span>[<a href="#RFC4176" class="cite xref">RFC4176</a>]</span>), proactive verification is undertaken to assess whether SLAs are met and implement appropriate adjustment measures when service distortion is observed. Proactive supervision requires running tests both end-to-end, but also on service components to identify early symptoms and resolve issues before they impact the customer or end user, or to prevent or minimize the impact of the end user. Mitigation action may be enforced to soften the impact of networks incidents and soften/nullify the impact on services that are delivered via that network.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
+<p id="section-2.3-3">Proactive testing might be done via OAM tests. These tests can be run periodically at regular intervals depending on the specific SLA requirements and the network operator procedures. These procedures may require documenting the test results for future auditing processes with the customers (eventually, negotiated and agreed with a customer as part of service assurance).<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="performance-based-path-routing">
@@ -1368,7 +1375,7 @@ Please replace XXXX with the RFC number assigned to this document if the documen
         <h3 id="name-performance-based-path-rout">
 <a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-performance-based-path-rout" class="section-name selfRef">Performance-based Path Routing</a>
         </h3>
-<p id="section-2.4-1">Path Computation Elements (PCEs) allow computing end-to-end paths in a network. PCEs are used to facilitate traffic engineering and can be used to optimize network performance, reduce congestion, and improve the overall user experience.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.4-1">Path Computation Elements (PCEs) are used to compute end-to-end paths in a network <span>[<a href="#RFC4655" class="cite xref">RFC4655</a>]</span>. PCEs are used for Traffic Engineering (TE) purposes (e.g., optimize network performance, reduce congestion, and improve the overall user experience).<a href="#section-2.4-1" class="pilcrow">¶</a></p>
 <p id="section-2.4-2">There are different algorithms to calculate a path in the network for some of them the PCE requires traffic engineering information. TE information includes data such as link metrics, bandwidth availability, and routing constraints. By using this information, the PCE can compute the optimal path for a particular service, taking into account its constraints and requirements. OAM techniques allow obtaining link metrics like delay and loss which can be used in the PCE algorithms.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1379,15 +1386,15 @@ Please replace XXXX with the RFC number assigned to this document if the documen
       <h2 id="name-modelling-the-scheduling-of">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-modelling-the-scheduling-of" class="section-name selfRef">Modelling the Scheduling of OAM Tests</a>
       </h2>
-<p id="section-3-1">This document proposes two models: OAM unitary test and OAM test sequence models.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">This document specifies two models: OAM unitary test and OAM test sequence models.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="oam-unitary-test">
 <section id="section-3.1">
         <h3 id="name-oam-unitary-test">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-oam-unitary-test" class="section-name selfRef">OAM Unitary Test</a>
         </h3>
 <p id="section-3.1-1">The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures. Inside the container, there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of the scope of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM unitary test.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2"><a href="#oam-uni-test-tree-st" class="auto internal xref">Figure 1</a> contains the tree of the proposed model. Tree diagrams used in this document follow the notation defined in <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span>.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
-<span id="name-oam-unitary-test-2"></span><div id="oam-uni-test-tree-st">
+<p id="section-3.1-2"><a href="#oam-uni-test-tree-st" class="auto internal xref">Figure 1</a> shows the structure of OAM unitary test module:<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<span id="name-tree-structure-of-oam-unita"></span><div id="oam-uni-test-tree-st">
 <figure id="figure-1">
           <div class="alignCenter art-text artwork" id="section-3.1-3.1">
 <pre>
@@ -1411,7 +1418,7 @@ module: ietf-oam-unitary-test
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-oam-unitary-test-2" class="selfRef">OAM unitary test</a>
+<a href="#name-tree-structure-of-oam-unita" class="selfRef">Tree Structure of OAM Unitary Test</a>
           </figcaption></figure>
 </div>
 <p id="section-3.1-4">The 'unitary-test-status' state machine is shown in <a href="#st-unitary-test-status" class="auto internal xref">Figure 2</a>. The state machine includes the following states:<a href="#section-3.1-4" class="pilcrow">¶</a></p>
@@ -1462,7 +1469,7 @@ module: ietf-oam-unitary-test
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-oam-unitary-test-state-mach" class="selfRef">OAM unitary test state machine</a>
+<a href="#name-oam-unitary-test-state-mach" class="selfRef">OAM Unitary Test State Machine</a>
           </figcaption></figure>
 </div>
 </section>
@@ -1472,11 +1479,12 @@ module: ietf-oam-unitary-test
         <h3 id="name-oam-test-sequence">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-oam-test-sequence" class="section-name selfRef">OAM Test Sequence</a>
         </h3>
-<p id="section-3.2-1">The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a coordinated manner. Each OAM test sequence references a OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM test. Finally, "test-sequence-status" shows the state of the OAM test sequence.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">An example of the proposed structure <a href="#oam-test-sequence-tree-st" class="auto internal xref">Figure 3</a>.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a coordinated manner.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies theproperties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM test. Finally, "test-sequence-status" shows the state of the OAM test sequence.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3"><a href="#oam-test-sequence-tree-st" class="auto internal xref">Figure 3</a> shows the structure of OAM test sequence module:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <span id="name-oam-test-sequence-2"></span><div id="oam-test-sequence-tree-st">
 <figure id="figure-3">
-          <div class="alignCenter art-text artwork" id="section-3.2-3.1">
+          <div class="alignCenter art-text artwork" id="section-3.2-4.1">
 <pre>
 module: ietf-oam-test-sequence
   +--rw oam-test-sequence
@@ -1513,36 +1521,36 @@ module: ietf-oam-test-sequence
 <a href="#name-oam-test-sequence-2" class="selfRef">OAM test sequence</a>
           </figcaption></figure>
 </div>
-<p id="section-3.2-4">The 'test-sequence-status' state machine is shown in <a href="#st-test-sequence-status" class="auto internal xref">Figure 4</a>. The state machine includes the following states:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-5">The 'test-sequence-status' state machine is shown in <a href="#st-test-sequence-status" class="auto internal xref">Figure 4</a>. The state machine includes the following states:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.2-5.1">
-            <p id="section-3.2-5.1.1">"planned": The initial state where the test is planned.<a href="#section-3.2-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.2-6.1">
+            <p id="section-3.2-6.1.1">"planned": The initial state where the test is planned.<a href="#section-3.2-6.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-5.2">
-            <p id="section-3.2-5.2.1">"configured": The state where the test is being configured.<a href="#section-3.2-5.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.2-6.2">
+            <p id="section-3.2-6.2.1">"configured": The state where the test is being configured.<a href="#section-3.2-6.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-5.3">
-            <p id="section-3.2-5.3.1">"ready": The state where the test is ready to be executed.<a href="#section-3.2-5.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.2-6.3">
+            <p id="section-3.2-6.3.1">"ready": The state where the test is ready to be executed.<a href="#section-3.2-6.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-5.4">
-            <p id="section-3.2-5.4.1">"on-going": The state where the test is currently running.<a href="#section-3.2-5.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.2-6.4">
+            <p id="section-3.2-6.4.1">"on-going": The state where the test is currently running.<a href="#section-3.2-6.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-5.5">
-            <p id="section-3.2-5.5.1">"stop": The state where the test is manually stopped.<a href="#section-3.2-5.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.2-6.5">
+            <p id="section-3.2-6.5.1">"stop": The state where the test is manually stopped.<a href="#section-3.2-6.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-5.6">
-            <p id="section-3.2-5.6.1">"success": The success state when all unitary tests were successful.<a href="#section-3.2-5.6.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.2-6.6">
+            <p id="section-3.2-6.6.1">"success": The state when all unitary tests were successful.<a href="#section-3.2-6.6.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-5.7">
-            <p id="section-3.2-5.7.1">"failure": The success state when One or more tests in the sequence got an error.<a href="#section-3.2-5.7.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.2-6.7">
+            <p id="section-3.2-6.7.1">"failure": The state when one or more tests in the sequence got an error.<a href="#section-3.2-6.7.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-5.8">
-            <p id="section-3.2-5.8.1">"error": The state where an error occurs during the test.<a href="#section-3.2-5.8.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.2-6.8">
+            <p id="section-3.2-6.8.1">"error": The state where an error occurs during the test.<a href="#section-3.2-6.8.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<span id="name-oam-unitary-test-state-machi"></span><div id="st-test-sequence-status">
+<span id="name-oam-test-sequence-state-mac"></span><div id="st-test-sequence-status">
 <figure id="figure-4">
-          <div class="alignCenter art-text artwork" id="section-3.2-6.1">
+          <div class="alignCenter art-text artwork" id="section-3.2-7.1">
 <pre>
     +---------+      +----------+      +---------+
  +-&gt;| planned |-----&gt;|configured|-----&gt;|  ready  |
@@ -1565,7 +1573,7 @@ module: ietf-oam-test-sequence
 </pre>
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-oam-unitary-test-state-machi" class="selfRef">OAM unitary test state machine</a>
+<a href="#name-oam-test-sequence-state-mac" class="selfRef">OAM test sequence state machine</a>
           </figcaption></figure>
 </div>
 </section>
@@ -1577,20 +1585,12 @@ module: ietf-oam-test-sequence
       <h2 id="name-yang-data-models-for-schedu">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-yang-data-models-for-schedu" class="section-name selfRef">YANG Data Models for Scheduling OAM Tests</a>
       </h2>
-<div id="yang-models-overview">
-<section id="section-4.1">
-        <h3 id="name-yang-models-overview">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-yang-models-overview" class="section-name selfRef">YANG Models Overview</a>
-        </h3>
-<p id="section-4.1-1">This document proposes two models: OAM unitary test and OAM test sequence. OAM unitary test is a set of parameters that define a type of OAM test to be invoked. As an example, it includes the type test, configuration parameters, and target results. The OAM test sequences are a set of OAM unitary tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
 <div id="yang-model-for-scheduling-oam-unitary-test">
-<section id="section-4.2">
+<section id="section-4.1">
         <h3 id="name-yang-model-for-scheduling-o">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-yang-model-for-scheduling-o" class="section-name selfRef">YANG Model for Scheduling OAM Unitary Test</a>
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-yang-model-for-scheduling-o" class="section-name selfRef">YANG Model for Scheduling OAM Unitary Test</a>
         </h3>
-<div class="breakable sourcecode" id="section-4.2-1">
+<div class="breakable sourcecode" id="section-4.1-1">
 <pre>&lt;CODE BEGINS&gt; file ietf-oam-unitary-test@2024-07-05.yang
 module ietf-oam-unitary-test {
   yang-version 1.1;
@@ -1646,13 +1646,13 @@ module ietf-oam-unitary-test {
 
   grouping oam-unitary-test {
     description
-        "This grouping is defined for OAM unitary test for network
+        "Specifies a grouping for OAM unitary test for network
         diagnosis procedures.";
 
     leaf name {
       type string;
       description
-        "Name for the test.";
+        "Defines the name of the test.";
     }
 
     choice test-type {
@@ -1719,16 +1719,16 @@ module ietf-oam-unitary-test {
 }
 
 
-&lt;CODE ENDS&gt;</pre><a href="#section-4.2-1" class="pilcrow">¶</a>
+&lt;CODE ENDS&gt;</pre><a href="#section-4.1-1" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="yang-model-for-oam-test-sequence">
-<section id="section-4.3">
+<section id="section-4.2">
         <h3 id="name-yang-model-for-oam-test-seq">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-yang-model-for-oam-test-seq" class="section-name selfRef">YANG Model for OAM Test Sequence</a>
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-yang-model-for-oam-test-seq" class="section-name selfRef">YANG Model for OAM Test Sequence</a>
         </h3>
-<div class="breakable sourcecode" id="section-4.3-1">
+<div class="breakable sourcecode" id="section-4.2-1">
 <pre>&lt;CODE BEGINS&gt; file ietf-oam-test-sequence@2024-07-05.yang
 
 module ietf-oam-test-sequence {
@@ -1758,7 +1758,7 @@ module ietf-oam-test-sequence {
           &lt;victor.lopez@nokia.com&gt;";
   description
     "This module defines the 'oam-unitary-test' YANG model for
-    activation of network diagnosis procedures.
+    management of network diagnosis procedures.
 
     Copyright (c) 2024 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
@@ -1864,7 +1864,7 @@ module ietf-oam-test-sequence {
 }
 
 
-&lt;CODE ENDS&gt;</pre><a href="#section-4.3-1" class="pilcrow">¶</a>
+&lt;CODE ENDS&gt;</pre><a href="#section-4.2-1" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1875,7 +1875,7 @@ module ietf-oam-test-sequence {
       <h2 id="name-using-device-mode-within-oa">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-using-device-mode-within-oa" class="section-name selfRef">Using Device Mode Within OAM Scheduling Models</a>
       </h2>
-<p id="section-5-1">This section discusses the problematic of reusing device models already defined in IETF within the context of scheduling OAM tests. There are two main approaches to enable OAM scheduling models:
+<p id="section-5-1">This section discusses the issues related to reusing device models already defined in IETF within the context of scheduling OAM tests. There are two main approaches to enable OAM scheduling models:
   * Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desire OAM test. This approach requires to recreate new YANG models for each new test type or variation of the device models.
   * Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">As an exmaple, we will use <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, which defines a YANG data model for TWAMP, to illustrate how device models could be used.<a href="#section-5-2" class="pilcrow">¶</a></p>
@@ -1908,101 +1908,149 @@ module ietf-oam-test-sequence {
 <p id="section-8-1">This section will be used to track the status of the implementations of the model. It is aimed at being removed if the document becomes RFC.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="sec-normative-references">
+<div id="sec-combined-references">
 <section id="section-9">
-      <h2 id="name-normative-references">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+      <h2 id="name-references">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<div id="sec-normative-references">
+<section id="section-9.1">
+        <h3 id="name-normative-references">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
 <dl class="references">
+<dt id="I-D.draft-davis-nmop-incident-terminology">[I-D.draft-davis-nmop-incident-terminology]</dt>
+        <dd>
+<span class="refAuthor">Davis, N.</span>, <span class="refAuthor">Farrel, A.</span>, <span class="refAuthor">Graf, T.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">C. Yu</span>, <span class="refTitle">"Some Key Terms for Network Incident and Problem Management"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-davis-nmop-incident-terminology-01</span>, <time datetime="2024-05-13" class="refDate">13 May 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-davis-nmop-incident-terminology-01">https://datatracker.ietf.org/doc/html/draft-davis-nmop-incident-terminology-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.ietf-netmod-schedule-yang">[I-D.ietf-netmod-schedule-yang]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Ma, Q.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">D. King</span>, <span class="refTitle">"A Common YANG Data Model for Scheduling"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-schedule-yang-02</span>, <time datetime="2024-06-25" class="refDate">25 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-schedule-yang-02">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-schedule-yang-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC4176">[RFC4176]</dt>
+        <dd>
+<span class="refAuthor">El Mghazli, Y., Ed.</span>, <span class="refAuthor">Nadeau, T.</span>, <span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Chan, K.</span>, and <span class="refAuthor">A. Gonguet</span>, <span class="refTitle">"Framework for Layer 3 Virtual Private Networks (L3VPN) Operations and Management"</span>, <span class="seriesInfo">RFC 4176</span>, <span class="seriesInfo">DOI 10.17487/RFC4176</span>, <time datetime="2005-10" class="refDate">October 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4176">https://www.rfc-editor.org/rfc/rfc4176</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC4655">[RFC4655]</dt>
+        <dd>
+<span class="refAuthor">Farrel, A.</span>, <span class="refAuthor">Vasseur, J.-P.</span>, and <span class="refAuthor">J. Ash</span>, <span class="refTitle">"A Path Computation Element (PCE)-Based Architecture"</span>, <span class="seriesInfo">RFC 4655</span>, <span class="seriesInfo">DOI 10.17487/RFC4655</span>, <time datetime="2006-08" class="refDate">August 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4655">https://www.rfc-editor.org/rfc/rfc4655</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5246">[RFC5246]</dt>
+        <dd>
+<span class="refAuthor">Dierks, T.</span> and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.2"</span>, <span class="seriesInfo">RFC 5246</span>, <span class="seriesInfo">DOI 10.17487/RFC5246</span>, <time datetime="2008-08" class="refDate">August 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5246">https://www.rfc-editor.org/rfc/rfc5246</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5357">[RFC5357]</dt>
+        <dd>
+<span class="refAuthor">Hedayat, K.</span>, <span class="refAuthor">Krzanowski, R.</span>, <span class="refAuthor">Morton, A.</span>, <span class="refAuthor">Yum, K.</span>, and <span class="refAuthor">J. Babiarz</span>, <span class="refTitle">"A Two-Way Active Measurement Protocol (TWAMP)"</span>, <span class="seriesInfo">RFC 5357</span>, <span class="seriesInfo">DOI 10.17487/RFC5357</span>, <time datetime="2008-10" class="refDate">October 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5357">https://www.rfc-editor.org/rfc/rfc5357</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5860">[RFC5860]</dt>
+        <dd>
+<span class="refAuthor">Vigoureux, M., Ed.</span>, <span class="refAuthor">Ward, D., Ed.</span>, and <span class="refAuthor">M. Betts, Ed.</span>, <span class="refTitle">"Requirements for Operations, Administration, and Maintenance (OAM) in MPLS Transport Networks"</span>, <span class="seriesInfo">RFC 5860</span>, <span class="seriesInfo">DOI 10.17487/RFC5860</span>, <time datetime="2010-05" class="refDate">May 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5860">https://www.rfc-editor.org/rfc/rfc5860</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6241">[RFC6241]</dt>
+        <dd>
+<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6242">[RFC6242]</dt>
+        <dd>
+<span class="refAuthor">Wasserman, M.</span>, <span class="refTitle">"Using the NETCONF Protocol over Secure Shell (SSH)"</span>, <span class="seriesInfo">RFC 6242</span>, <span class="seriesInfo">DOI 10.17487/RFC6242</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6242">https://www.rfc-editor.org/rfc/rfc6242</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6536">[RFC6536]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF) Access Control Model"</span>, <span class="seriesInfo">RFC 6536</span>, <span class="seriesInfo">DOI 10.17487/RFC6536</span>, <time datetime="2012-03" class="refDate">March 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6536">https://www.rfc-editor.org/rfc/rfc6536</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6632">[RFC6632]</dt>
+        <dd>
+<span class="refAuthor">Ersue, M., Ed.</span> and <span class="refAuthor">B. Claise</span>, <span class="refTitle">"An Overview of the IETF Network Management Standards"</span>, <span class="seriesInfo">RFC 6632</span>, <span class="seriesInfo">DOI 10.17487/RFC6632</span>, <time datetime="2012-06" class="refDate">June 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6632">https://www.rfc-editor.org/rfc/rfc6632</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6991">[RFC6991]</dt>
+        <dd>
+<span class="refAuthor">Schoenwaelder, J., Ed.</span>, <span class="refTitle">"Common YANG Data Types"</span>, <span class="seriesInfo">RFC 6991</span>, <span class="seriesInfo">DOI 10.17487/RFC6991</span>, <time datetime="2013-07" class="refDate">July 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6991">https://www.rfc-editor.org/rfc/rfc6991</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7276">[RFC7276]</dt>
+        <dd>
+<span class="refAuthor">Mizrahi, T.</span>, <span class="refAuthor">Sprecher, N.</span>, <span class="refAuthor">Bellagamba, E.</span>, and <span class="refAuthor">Y. Weingarten</span>, <span class="refTitle">"An Overview of Operations, Administration, and Maintenance (OAM) Tools"</span>, <span class="seriesInfo">RFC 7276</span>, <span class="seriesInfo">DOI 10.17487/RFC7276</span>, <time datetime="2014-06" class="refDate">June 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7276">https://www.rfc-editor.org/rfc/rfc7276</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7297">[RFC7297]</dt>
+        <dd>
+<span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Jacquenet, C.</span>, and <span class="refAuthor">N. Wang</span>, <span class="refTitle">"IP Connectivity Provisioning Profile (CPP)"</span>, <span class="seriesInfo">RFC 7297</span>, <span class="seriesInfo">DOI 10.17487/RFC7297</span>, <time datetime="2014-07" class="refDate">July 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7297">https://www.rfc-editor.org/rfc/rfc7297</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7950">[RFC7950]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"The YANG 1.1 Data Modeling Language"</span>, <span class="seriesInfo">RFC 7950</span>, <span class="seriesInfo">DOI 10.17487/RFC7950</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7950">https://www.rfc-editor.org/rfc/rfc7950</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8040">[RFC8040]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8340">[RFC8340]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M.</span> and <span class="refAuthor">L. Berger, Ed.</span>, <span class="refTitle">"YANG Tree Diagrams"</span>, <span class="seriesInfo">BCP 215</span>, <span class="seriesInfo">RFC 8340</span>, <span class="seriesInfo">DOI 10.17487/RFC8340</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8340">https://www.rfc-editor.org/rfc/rfc8340</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8342">[RFC8342]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M.</span>, <span class="refAuthor">Schoenwaelder, J.</span>, <span class="refAuthor">Shafer, P.</span>, <span class="refAuthor">Watsen, K.</span>, and <span class="refAuthor">R. Wilton</span>, <span class="refTitle">"Network Management Datastore Architecture (NMDA)"</span>, <span class="seriesInfo">RFC 8342</span>, <span class="seriesInfo">DOI 10.17487/RFC8342</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8342">https://www.rfc-editor.org/rfc/rfc8342</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8345">[RFC8345]</dt>
+        <dd>
+<span class="refAuthor">Clemm, A.</span>, <span class="refAuthor">Medved, J.</span>, <span class="refAuthor">Varga, R.</span>, <span class="refAuthor">Bahadur, N.</span>, <span class="refAuthor">Ananthakrishnan, H.</span>, and <span class="refAuthor">X. Liu</span>, <span class="refTitle">"A YANG Data Model for Network Topologies"</span>, <span class="seriesInfo">RFC 8345</span>, <span class="seriesInfo">DOI 10.17487/RFC8345</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8345">https://www.rfc-editor.org/rfc/rfc8345</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8346">[RFC8346]</dt>
+        <dd>
+<span class="refAuthor">Clemm, A.</span>, <span class="refAuthor">Medved, J.</span>, <span class="refAuthor">Varga, R.</span>, <span class="refAuthor">Liu, X.</span>, <span class="refAuthor">Ananthakrishnan, H.</span>, and <span class="refAuthor">N. Bahadur</span>, <span class="refTitle">"A YANG Data Model for Layer 3 Topologies"</span>, <span class="seriesInfo">RFC 8346</span>, <span class="seriesInfo">DOI 10.17487/RFC8346</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8346">https://www.rfc-editor.org/rfc/rfc8346</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8531">[RFC8531]</dt>
+        <dd>
+<span class="refAuthor">Kumar, D.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">Z. Wang</span>, <span class="refTitle">"Generic YANG Data Model for Connection-Oriented Operations, Administration, and Maintenance (OAM) Protocols"</span>, <span class="seriesInfo">RFC 8531</span>, <span class="seriesInfo">DOI 10.17487/RFC8531</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8531">https://www.rfc-editor.org/rfc/rfc8531</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8532">[RFC8532]</dt>
+        <dd>
+<span class="refAuthor">Kumar, D.</span>, <span class="refAuthor">Wang, Z.</span>, <span class="refAuthor">Wu, Q., Ed.</span>, <span class="refAuthor">Rahman, R.</span>, and <span class="refAuthor">S. Raghavan</span>, <span class="refTitle">"Generic YANG Data Model for the Management of Operations, Administration, and Maintenance (OAM) Protocols That Use Connectionless Communications"</span>, <span class="seriesInfo">RFC 8532</span>, <span class="seriesInfo">DOI 10.17487/RFC8532</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8532">https://www.rfc-editor.org/rfc/rfc8532</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8533">[RFC8533]</dt>
+        <dd>
+<span class="refAuthor">Kumar, D.</span>, <span class="refAuthor">Wang, M.</span>, <span class="refAuthor">Wu, Q., Ed.</span>, <span class="refAuthor">Rahman, R.</span>, and <span class="refAuthor">S. Raghavan</span>, <span class="refTitle">"A YANG Data Model for Retrieval Methods for the Management of Operations, Administration, and Maintenance (OAM) Protocols That Use Connectionless Communications"</span>, <span class="seriesInfo">RFC 8533</span>, <span class="seriesInfo">DOI 10.17487/RFC8533</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8533">https://www.rfc-editor.org/rfc/rfc8533</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8795">[RFC8795]</dt>
+        <dd>
+<span class="refAuthor">Liu, X.</span>, <span class="refAuthor">Bryskin, I.</span>, <span class="refAuthor">Beeram, V.</span>, <span class="refAuthor">Saad, T.</span>, <span class="refAuthor">Shah, H.</span>, and <span class="refAuthor">O. Gonzalez de Dios</span>, <span class="refTitle">"YANG Data Model for Traffic Engineering (TE) Topologies"</span>, <span class="seriesInfo">RFC 8795</span>, <span class="seriesInfo">DOI 10.17487/RFC8795</span>, <time datetime="2020-08" class="refDate">August 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8795">https://www.rfc-editor.org/rfc/rfc8795</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8913">[RFC8913]</dt>
+        <dd>
+<span class="refAuthor">Civil, R.</span>, <span class="refAuthor">Morton, A.</span>, <span class="refAuthor">Rahman, R.</span>, <span class="refAuthor">Jethanandani, M.</span>, and <span class="refAuthor">K. Pentikousis, Ed.</span>, <span class="refTitle">"Two-Way Active Measurement Protocol (TWAMP) YANG Data Model"</span>, <span class="seriesInfo">RFC 8913</span>, <span class="seriesInfo">DOI 10.17487/RFC8913</span>, <time datetime="2021-11" class="refDate">November 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8913">https://www.rfc-editor.org/rfc/rfc8913</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8969">[RFC8969]</dt>
+        <dd>
+<span class="refAuthor">Wu, Q., Ed.</span>, <span class="refAuthor">Boucadair, M., Ed.</span>, <span class="refAuthor">Lopez, D.</span>, <span class="refAuthor">Xie, C.</span>, and <span class="refAuthor">L. Geng</span>, <span class="refTitle">"A Framework for Automating Service and Network Management with YANG"</span>, <span class="seriesInfo">RFC 8969</span>, <span class="seriesInfo">DOI 10.17487/RFC8969</span>, <time datetime="2021-01" class="refDate">January 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8969">https://www.rfc-editor.org/rfc/rfc8969</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9543">[RFC9543]</dt>
+      <dd>
+<span class="refAuthor">Farrel, A., Ed.</span>, <span class="refAuthor">Drake, J., Ed.</span>, <span class="refAuthor">Rokui, R.</span>, <span class="refAuthor">Homma, S.</span>, <span class="refAuthor">Makhijani, K.</span>, <span class="refAuthor">Contreras, L.</span>, and <span class="refAuthor">J. Tantsura</span>, <span class="refTitle">"A Framework for Network Slices in Networks Built from IETF Technologies"</span>, <span class="seriesInfo">RFC 9543</span>, <span class="seriesInfo">DOI 10.17487/RFC9543</span>, <time datetime="2024-03" class="refDate">March 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9543">https://www.rfc-editor.org/rfc/rfc9543</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-9.2">
+        <h3 id="name-informative-references">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
 <dt id="I-D.ietf-nmop-network-incident-yang">[I-D.ietf-nmop-network-incident-yang]</dt>
       <dd>
 <span class="refAuthor">Hu, T.</span>, <span class="refAuthor">Contreras, L. M.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Davis, N.</span>, and <span class="refAuthor">C. Feng</span>, <span class="refTitle">"A YANG Data Model for Network Incident Management"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-nmop-network-incident-yang-01</span>, <time datetime="2024-06-28" class="refDate">28 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-nmop-network-incident-yang-01">https://datatracker.ietf.org/doc/html/draft-ietf-nmop-network-incident-yang-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC2119">[RFC2119]</dt>
-      <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC5246">[RFC5246]</dt>
-      <dd>
-<span class="refAuthor">Dierks, T.</span> and <span class="refAuthor">E. Rescorla</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.2"</span>, <span class="seriesInfo">RFC 5246</span>, <span class="seriesInfo">DOI 10.17487/RFC5246</span>, <time datetime="2008-08" class="refDate">August 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5246">https://www.rfc-editor.org/rfc/rfc5246</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC5860">[RFC5860]</dt>
-      <dd>
-<span class="refAuthor">Vigoureux, M., Ed.</span>, <span class="refAuthor">Ward, D., Ed.</span>, and <span class="refAuthor">M. Betts, Ed.</span>, <span class="refTitle">"Requirements for Operations, Administration, and Maintenance (OAM) in MPLS Transport Networks"</span>, <span class="seriesInfo">RFC 5860</span>, <span class="seriesInfo">DOI 10.17487/RFC5860</span>, <time datetime="2010-05" class="refDate">May 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5860">https://www.rfc-editor.org/rfc/rfc5860</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6241">[RFC6241]</dt>
-      <dd>
-<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6242">[RFC6242]</dt>
-      <dd>
-<span class="refAuthor">Wasserman, M.</span>, <span class="refTitle">"Using the NETCONF Protocol over Secure Shell (SSH)"</span>, <span class="seriesInfo">RFC 6242</span>, <span class="seriesInfo">DOI 10.17487/RFC6242</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6242">https://www.rfc-editor.org/rfc/rfc6242</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6428">[RFC6428]</dt>
-      <dd>
-<span class="refAuthor">Allan, D., Ed.</span>, <span class="refAuthor">Swallow, G., Ed.</span>, and <span class="refAuthor">J. Drake, Ed.</span>, <span class="refTitle">"Proactive Connectivity Verification, Continuity Check, and Remote Defect Indication for the MPLS Transport Profile"</span>, <span class="seriesInfo">RFC 6428</span>, <span class="seriesInfo">DOI 10.17487/RFC6428</span>, <time datetime="2011-11" class="refDate">November 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6428">https://www.rfc-editor.org/rfc/rfc6428</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6536">[RFC6536]</dt>
-      <dd>
-<span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF) Access Control Model"</span>, <span class="seriesInfo">RFC 6536</span>, <span class="seriesInfo">DOI 10.17487/RFC6536</span>, <time datetime="2012-03" class="refDate">March 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6536">https://www.rfc-editor.org/rfc/rfc6536</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6991">[RFC6991]</dt>
-      <dd>
-<span class="refAuthor">Schoenwaelder, J., Ed.</span>, <span class="refTitle">"Common YANG Data Types"</span>, <span class="seriesInfo">RFC 6991</span>, <span class="seriesInfo">DOI 10.17487/RFC6991</span>, <time datetime="2013-07" class="refDate">July 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6991">https://www.rfc-editor.org/rfc/rfc6991</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC7950">[RFC7950]</dt>
-      <dd>
-<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"The YANG 1.1 Data Modeling Language"</span>, <span class="seriesInfo">RFC 7950</span>, <span class="seriesInfo">DOI 10.17487/RFC7950</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7950">https://www.rfc-editor.org/rfc/rfc7950</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8040">[RFC8040]</dt>
-      <dd>
-<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8174">[RFC8174]</dt>
-      <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8340">[RFC8340]</dt>
-      <dd>
-<span class="refAuthor">Bjorklund, M.</span> and <span class="refAuthor">L. Berger, Ed.</span>, <span class="refTitle">"YANG Tree Diagrams"</span>, <span class="seriesInfo">BCP 215</span>, <span class="seriesInfo">RFC 8340</span>, <span class="seriesInfo">DOI 10.17487/RFC8340</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8340">https://www.rfc-editor.org/rfc/rfc8340</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8342">[RFC8342]</dt>
-      <dd>
-<span class="refAuthor">Bjorklund, M.</span>, <span class="refAuthor">Schoenwaelder, J.</span>, <span class="refAuthor">Shafer, P.</span>, <span class="refAuthor">Watsen, K.</span>, and <span class="refAuthor">R. Wilton</span>, <span class="refTitle">"Network Management Datastore Architecture (NMDA)"</span>, <span class="seriesInfo">RFC 8342</span>, <span class="seriesInfo">DOI 10.17487/RFC8342</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8342">https://www.rfc-editor.org/rfc/rfc8342</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8345">[RFC8345]</dt>
-      <dd>
-<span class="refAuthor">Clemm, A.</span>, <span class="refAuthor">Medved, J.</span>, <span class="refAuthor">Varga, R.</span>, <span class="refAuthor">Bahadur, N.</span>, <span class="refAuthor">Ananthakrishnan, H.</span>, and <span class="refAuthor">X. Liu</span>, <span class="refTitle">"A YANG Data Model for Network Topologies"</span>, <span class="seriesInfo">RFC 8345</span>, <span class="seriesInfo">DOI 10.17487/RFC8345</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8345">https://www.rfc-editor.org/rfc/rfc8345</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8346">[RFC8346]</dt>
-      <dd>
-<span class="refAuthor">Clemm, A.</span>, <span class="refAuthor">Medved, J.</span>, <span class="refAuthor">Varga, R.</span>, <span class="refAuthor">Liu, X.</span>, <span class="refAuthor">Ananthakrishnan, H.</span>, and <span class="refAuthor">N. Bahadur</span>, <span class="refTitle">"A YANG Data Model for Layer 3 Topologies"</span>, <span class="seriesInfo">RFC 8346</span>, <span class="seriesInfo">DOI 10.17487/RFC8346</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8346">https://www.rfc-editor.org/rfc/rfc8346</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8531">[RFC8531]</dt>
-      <dd>
-<span class="refAuthor">Kumar, D.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">Z. Wang</span>, <span class="refTitle">"Generic YANG Data Model for Connection-Oriented Operations, Administration, and Maintenance (OAM) Protocols"</span>, <span class="seriesInfo">RFC 8531</span>, <span class="seriesInfo">DOI 10.17487/RFC8531</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8531">https://www.rfc-editor.org/rfc/rfc8531</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8532">[RFC8532]</dt>
-      <dd>
-<span class="refAuthor">Kumar, D.</span>, <span class="refAuthor">Wang, Z.</span>, <span class="refAuthor">Wu, Q., Ed.</span>, <span class="refAuthor">Rahman, R.</span>, and <span class="refAuthor">S. Raghavan</span>, <span class="refTitle">"Generic YANG Data Model for the Management of Operations, Administration, and Maintenance (OAM) Protocols That Use Connectionless Communications"</span>, <span class="seriesInfo">RFC 8532</span>, <span class="seriesInfo">DOI 10.17487/RFC8532</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8532">https://www.rfc-editor.org/rfc/rfc8532</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8533">[RFC8533]</dt>
-      <dd>
-<span class="refAuthor">Kumar, D.</span>, <span class="refAuthor">Wang, M.</span>, <span class="refAuthor">Wu, Q., Ed.</span>, <span class="refAuthor">Rahman, R.</span>, and <span class="refAuthor">S. Raghavan</span>, <span class="refTitle">"A YANG Data Model for Retrieval Methods for the Management of Operations, Administration, and Maintenance (OAM) Protocols That Use Connectionless Communications"</span>, <span class="seriesInfo">RFC 8533</span>, <span class="seriesInfo">DOI 10.17487/RFC8533</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8533">https://www.rfc-editor.org/rfc/rfc8533</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8795">[RFC8795]</dt>
-      <dd>
-<span class="refAuthor">Liu, X.</span>, <span class="refAuthor">Bryskin, I.</span>, <span class="refAuthor">Beeram, V.</span>, <span class="refAuthor">Saad, T.</span>, <span class="refAuthor">Shah, H.</span>, and <span class="refAuthor">O. Gonzalez de Dios</span>, <span class="refTitle">"YANG Data Model for Traffic Engineering (TE) Topologies"</span>, <span class="seriesInfo">RFC 8795</span>, <span class="seriesInfo">DOI 10.17487/RFC8795</span>, <time datetime="2020-08" class="refDate">August 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8795">https://www.rfc-editor.org/rfc/rfc8795</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8913">[RFC8913]</dt>
-    <dd>
-<span class="refAuthor">Civil, R.</span>, <span class="refAuthor">Morton, A.</span>, <span class="refAuthor">Rahman, R.</span>, <span class="refAuthor">Jethanandani, M.</span>, and <span class="refAuthor">K. Pentikousis, Ed.</span>, <span class="refTitle">"Two-Way Active Measurement Protocol (TWAMP) YANG Data Model"</span>, <span class="seriesInfo">RFC 8913</span>, <span class="seriesInfo">DOI 10.17487/RFC8913</span>, <time datetime="2021-11" class="refDate">November 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8913">https://www.rfc-editor.org/rfc/rfc8913</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 </dl>
+</section>
+</div>
 </section>
 </div>
 <div id="acknowledgments">

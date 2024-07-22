@@ -5,20 +5,21 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 6 January 2025                                            Nokia
-                                                             5 July 2024
+Expires: 23 January 2025                                           Nokia
+                                                            22 July 2024
 
 
- A YANG Data Model for Network Diagnosis by Scheduling Sequences of OAM
+A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
                                  Tests
            draft-contreras-opsawg-scheduling-oam-tests-latest
 
 Abstract
 
    This document defines a YANG data model for network diagnosis on-
-   demand using Operations, Administration, and Maintenance (OAM) tests.
-   This document defines both 'oam-unitary-test' and 'oam-test-sequence'
-   data models to enable activation of network diagnosis procedures.
+   demand relying upon Operations, Administration, and Maintenance (OAM)
+   tests.  This document defines both 'oam-unitary-test' and 'oam-test-
+   sequence' YANG modules to manage the lifecycle of network diagnosis
+   procedures.
 
 About This Document
 
@@ -56,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 January 2025.
+   This Internet-Draft will expire on 23 January 2025.
 
 Copyright Notice
 
@@ -87,32 +88,37 @@ Table of Contents
      3.1.  OAM Unitary Test
      3.2.  OAM Test Sequence
    4.  YANG Data Models for Scheduling OAM Tests
-     4.1.  YANG Models Overview
-     4.2.  YANG Model for Scheduling OAM Unitary Test
-     4.3.  YANG Model for OAM Test Sequence
+     4.1.  YANG Model for Scheduling OAM Unitary Test
+     4.2.  YANG Model for OAM Test Sequence
    5.  Using Device Mode Within OAM Scheduling Models
    6.  Security Considerations
    7.  IANA Considerations
    8.  Implementation Status
-   9.  Normative References
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
 1.  Introduction
 
    Operations, Administration, and Maintenance (OAM) tasks are
-   fundamental functionalities of the network management.  Given the
-   emerging of data models and their utilization in Service Provider's
-   management, the management of OAM tests represent also an area of
-   interest for operators, which requires to be defined as a data model.
-   OAM functionalities provide the means to identify and isolate faults,
-   measure and report of performance.  [RFC5860] defines the three main
-   areas involved in OAM:
+   fundamental functions of the network management (see, e.g.,
+   [RFC7276]).  Given the emerging of data models and their utilization
+   in Service Provider's network management and the need to automate the
+   overall service management lifecycle [RFC8969], the management of OAM
+   operations is key.  Relevant data models are still missing to cover
+   specific needs.
+
+   Specifically, OAM functions provide the means to identify and isolate
+   faults, measure and report of performance (see section 4.2,
+   [RFC6632].  For example, [RFC5860] defines the three main areas
+   involved in OAM:
 
    *  Fault management, which allows network operators to quickly
-      identify and isolate faults in the network.  The OAM framework
-      defines mechanisms for fault detection and isolation, such as
-      continuity check, link trace, and loopback.
+      identify and isolate faults in the network.  Examples of these
+      mechanisms for fault detection and isolation are: continuity
+      check, link trace, and loopback.
 
    *  Performance management enables monitoring network performance and
       diagnosing performance issues (i.e., degradation).  Some of the
@@ -122,53 +128,51 @@ Table of Contents
    *  Security management defines mechanisms to protect OAM
       communications from unauthorized access and tampering.
 
-   [RFC6428] defines several use cases for OAM tools, including:
+   [RFC7276] presents OAM tools for detecting and isolating failures in
+   networks and for performance monitoring, some examples are:
 
    *  Continuity Check: This function verifies that a path exists
       between two points in a network and that the path is operational.
 
    *  Loopback: This function allows a device to loop back a received
-      packet back to the sender for diagnostic purposes.
+      packet back to the sender for diagnostic purposes.  There are
+      multiple tecnologies for this function, like IP Ping, VCCV Ping,
+      LSP Ping or Ethernet Loopback.
 
    *  Link Trace: This function allows a network operator to trace a
-      path through a network from one device to another.
+      path through a network from one device to another.  Some
+      technologies following this approach are Y.1731 Linktrace or IP
+      traceroute.
 
    *  Performance Monitoring: This function allows a network operator to
       monitor the performance of a network and to identify and diagnose
-      performance issues.
-
-   *  Security Management: This function allows a network operator to
-      protect OAM communications from unauthorized access and tampering.
-
-   *  Configuration Management: This function allows a network operator
-      to manage the configuration of network devices.
+      performance issues.  Protocols like TWAMP, or Y.1731 DMM/SLM can
+      obtain performance measurements.
 
    More recently, Incident Management
-   [I-D.ietf-nmop-network-incident-yang] also considers the possibility
-   of incident diagnosis, which can be favoured by dynamic invocation of
-   OAM tests.
+   [I-D.ietf-nmop-network-incident-yang] focuses on of incident
+   diagnosis, which can be favored by dynamic invocation of OAM tests.
 
-   [RFC8531], [RFC8532] and, [RFC8533] defined YANG models for OAM
-   technologies.  On the other hand, [RFC8531] defines a YANG data model
-   for connection-oriented OAM protocols.  The main aim of this document
-   is to define a generic YANG data model that can be used to configure,
+   [RFC8531], [RFC8532], [RFC8533] and [RFC8913] defined YANG models for
+   OAM technologies: + [RFC8531] defines a YANG data model for
+   connection-oriented OAM protocols.  The main aim of this document is
+   to define a generic YANG data model that can be used to configure,
    control and monitor connection-oriented OAM protocols such as MPLS-TP
-   OAM, PBB-TE OAM, and G.7713.1 OAM.  [RFC8532] provides a generic YANG
-   data model that can be used to configure, control and monitor
+   OAM, PBB-TE OAM, and G.7713.1 OAM. + [RFC8532] provides a generic
+   YANG data model that can be used to configure, control and monitor
    connectionless OAM protocols such as BFD (Bidirectional Forwarding
    Detection), LBM (Loopback Messaging) and VCCV (Virtual Circuit
-   Connectivity Verification).  [RFC8533] provides a YANG data model
+   Connectivity Verification). + [RFC8533] provides a YANG data model
    that can be used to retrieve information related to OAM protocols
    such as Bidirectional Forwarding Detection (BFD), Loopback Messaging
-   (LBM) and Virtual Circuit Connectivity Verification (VCCV).
-
+   (LBM) and Virtual Circuit Connectivity Verification (VCCV). -
    [RFC8913] specifies a YANG data model for client and server
    implementations of the Two-Way Active Measurement Protocol (TWAMP).
 
-   Previous RFCs defined the parameters required for each of the
-   different tests that are used in network elements today.  This
-   document covers how to use OAM for network-wide use cases.
-   Following, some illustrative examples are presented.
+   These RFCs defined the parameters required for each of the different
+   tests that are used in network elements today.  This document covers
+   how to use OAM for network-wide use cases.  Following, some
+   illustrative examples are presented.
 
    The YANG data model resulting from this document will conform to the
    Network Management Datastore Architecture (NMDA) [RFC8342].
@@ -180,13 +184,16 @@ Table of Contents
 
    Following terms are used for the representation of this data model.
 
-   *  OAM unitary test: it is a set of parameters that define a type of
-      OAM test to be invoked.  As an example, it includes the type test,
+   *  OAM unitary test: A set of parameters that define a type of OAM
+      test to be invoked.  As an example, it includes the type test,
       configuration parameters, and target results.
 
-   *  OAM test sequence: it is a set of OAM unitary tests that are run
-      based on a set of time constraints, number of repetitions, order,
-      and reporting outputs.
+   *  OAM test sequence: A set of OAM unitary tests that are run based
+      on a set of time constraints, number of repetitions, order, and
+      reporting outputs.
+
+   Tree diagrams used in this document follow the notation defined in
+   [RFC8340].
 
 1.2.  Requirements Language
 
@@ -205,15 +212,15 @@ Table of Contents
               +========+========================+===========+
               | Prefix | Yang Module            | Reference |
               +========+========================+===========+
-              | oamut  | ietf-oam-unitary-tests | RFCXXX    |
+              | oamut  | ietf-oam-unitary-tests | RFCXXXX   |
               +--------+------------------------+-----------+
-              | oamts  | ietf-oam-test-sequence | RFCXXX    |
+              | oamts  | ietf-oam-test-sequence | RFCXXXX   |
               +--------+------------------------+-----------+
               | yang   | ietf-yang-types        | [RFC6991] |
               +--------+------------------------+-----------+
 
-                  Table 1: Prefixes and corresponding YANG
-                                  modules
+                  Table 1: Prefixes and Corresponding YANG
+                                  Modules
 
    RFC Editor Note: Please replace XXXX with the RFC number assigned to
    this document if the document becomes a RFC.  Please remove this note
@@ -223,72 +230,89 @@ Table of Contents
 
 2.1.  Troubleshooting
 
-   After the detection of a problem in the network, OAM tests are
-   performed to find the root cause for the detected issue.  However, a
-   problem detected can be caused by a variety of factors, such as a
-   misconfiguration, hardware failure, or a software bug.  OAM tests can
-   help to find the root cause by testing specific components of the
-   network and looking for anomalies or issues.
+   After the detection of a problem
+   [I-D.draft-davis-nmop-incident-terminology] in the network, OAM tests
+   are performed to find the root cause for the detected problem.
+   However, a detected problem can be caused by a variety of factors,
+   such as a misconfiguration, hardware failure, or a software bug.  OAM
+   tests can help to find the root cause by testing specific components
+   of the network and looking for anomalies or issues.  Also, the
+   reliability and efficiency of the tests, depends on the nature of the
+   test itself.
 
-   There are a variety of different OAM tests that can be executed
-   depending on the nature of the scenario.  For example, if the issue
-   is related to a L2 capability, tests can be run to check the status
-   of the path via Ethernet Linktrace and later run an Ethernet Loopback
-   to a concrete network element.  If these tests are correct, the
-   operator may want to check the availability of the service or its
-   performance.
+   There are a variety of OAM tests that can be executed as a function
+   of the target scenario.  For example, if the issue is related to a
+   Layer 2 capability, specific tests can be designed and run to check
+   the status of the path via Ethernet Linktrace and later run an
+   Ethernet Loopback to a concrete network element.  These tests can be
+   coupled with others to test if any filtering is in place by varying,
+   e.g., some Layer 2 fields or checking the configuration of relevant
+   nodes.  If these tests are correct, the operator may want to check
+   the availability of the service (or its delivered performance).
 
    Even though the troubleshooting process may be different depending on
-   the problem detected, there are certain common procedures or logic
-   that can be executed in order to narrow down the cause of the
-   problem.
+   the problem detected, there are certain common procedures or logics
+   that can be executed in order to narrow down the cause of the problem
+   and thus help isolating candidate root cause.
 
 2.2.  Birth Certificate
 
    The aim of a birth certificate process is to validate that all
-   relevant parameters are correct for a specific network service.  The
-   birth certificate process is done once the configuration of the
-   network elements is completed and they are ready for service.
+   relevant parameters are set appropriately in accordance with the
+   target network service.  The birth certificate process is done once
+   the configuration of the network elements is completed and they are
+   ready for service.
 
    If the birth certificate is successful, it means that the network
-   service is functioning correctly and meets the requirements defined
-   by the operator.  The process requires running a set of OAM tests to
-   verify that the service is performing as expected.
+   service is functioning correctly (that is, measured service is
+   matching the expected service) and meets the requirements defined by
+   the operator.  The process requires running a set of OAM tasks (e.g.,
+   tests) to verify that the service is performing as expected.
 
-   The set of OAM tests done as part of a birth certificate process
+   The set of OAM tests conducted as part of a birth certificate process
    depends on the network service that is tested.  For example, if the
-   service is a virtual private network (VPN) Two-Way Active Measurement
-   Protocol (TWAMP) Light will be used, while if the service is an
-   E-LINE, Ethernet CFM tests will be executed.
+   service is a Virtual Private Network (VPN).  Two-Way Active
+   Measurement Protocol (TWAMP) Light [RFC5357] will be used, while if
+   the service is an E-LINE, ITU-T Y.1731 Ethernet CFM tests will be
+   executed.
 
-   Once the birth certificate process has been completed and the OAM
-   tests have been run, the test results are stored as part of the
-   documentation process performed by the operator.
+   Typically, once the birth certificate process has been completed and
+   the OAM tests have been executed, the test results are stored as part
+   of the documentation process performed by the operator.  Many of
+   these tasks take place during pre-deployment phases.
 
 2.3.  Proactive Supervision
 
-   There are communication services that require to fulfill Service
-   Level Agreements (SLAs).  SLAs define performance parameters that the
-   service must fulfill in order to meet the requirements of the
-   customer or end user.
+   Some network services require to fulfill strict Service Level
+   Agreements (SLAs).  An SLA defines the performance parameters that
+   the service must fulfill in order to meet the requirements of the
+   customer or end user (e.g., IP Connectivity Provisioning Profile
+   (CPP) [RFC7297] and Network Slice Service [RFC9543]).
 
-   Proactive testing ensures the SLAs are met.  Proactive supervision
-   requires running tests on service components to identify and resolve
-   issues before they impact the customer or end user, or to minimize
-   the impact of the end user.
+   As part of service fulfillment and assurance (e.g., Section 2.3.3 of
+   [RFC4176]), proactive verification is undertaken to assess whether
+   SLAs are met and implement appropriate adjustment measures when
+   service distortion is observed.  Proactive supervision requires
+   running tests both end-to-end, but also on service components to
+   identify early symptoms and resolve issues before they impact the
+   customer or end user, or to prevent or minimize the impact of the end
+   user.  Mitigation action may be enforced to soften the impact of
+   networks incidents and soften/nullify the impact on services that are
+   delivered via that network.
 
-   Proactive testing can be done via OAM tests.  These tests can be run
-   periodically at regular intervals depending on the specific SLA
+   Proactive testing might be done via OAM tests.  These tests can be
+   run periodically at regular intervals depending on the specific SLA
    requirements and the network operator procedures.  These procedures
    may require documenting the test results for future auditing
-   processes with the customers.
+   processes with the customers (eventually, negotiated and agreed with
+   a customer as part of service assurance).
 
 2.4.  Performance-based Path Routing
 
-   Path Computation Elements (PCEs) allow computing end-to-end paths in
-   a network.  PCEs are used to facilitate traffic engineering and can
-   be used to optimize network performance, reduce congestion, and
-   improve the overall user experience.
+   Path Computation Elements (PCEs) are used to compute end-to-end paths
+   in a network [RFC4655].  PCEs are used for Traffic Engineering (TE)
+   purposes (e.g., optimize network performance, reduce congestion, and
+   improve the overall user experience).
 
    There are different algorithms to calculate a path in the network for
    some of them the PCE requires traffic engineering information.  TE
@@ -301,7 +325,7 @@ Table of Contents
 
 3.  Modelling the Scheduling of OAM Tests
 
-   This document proposes two models: OAM unitary test and OAM test
+   This document specifies two models: OAM unitary test and OAM test
    sequence models.
 
 3.1.  OAM Unitary Test
@@ -323,8 +347,7 @@ Table of Contents
    recurrence rule specification. "unitary-test-status" enumerates the
    state of the OAM unitary test.
 
-   Figure 1 contains the tree of the proposed model.  Tree diagrams used
-   in this document follow the notation defined in [RFC8340].
+   Figure 1 shows the structure of OAM unitary test module:
 
         module: ietf-oam-unitary-test
           +--rw oam-unitary-tests
@@ -344,7 +367,7 @@ Table of Contents
                 +--rw interval?                 uint32
                 +--rw unitary-test-status?      enumeration
 
-                         Figure 1: OAM unitary test
+                Figure 1: Tree Structure of OAM Unitary Test
 
    The 'unitary-test-status' state machine is shown in Figure 2.  The
    state machine includes the following states:
@@ -380,7 +403,7 @@ Table of Contents
                     |                                  |
                     +----------------------------------+
 
-                  Figure 2: OAM unitary test state machine
+                  Figure 2: OAM Unitary Test State Machine
 
 3.2.  OAM Test Sequence
 
@@ -388,18 +411,19 @@ Table of Contents
    tests that are executed based on specified time constraints,
    repetitions, ordering, and reporting outputs.  These sequences
    provide a structured approach to running multiple OAM tests in a
-   coordinated manner.  Each OAM test sequence references a OAM unitary
-   test type with its concrete parameters.  Each OAM test sequence has
-   two temporal parameters: "period-of-time" and "recurrence".  Both are
-   imported from the "ietf-schedule" module from
-   [I-D.ietf-netmod-schedule-yang]. "period-of-time" identifies the
-   period values that contain a precise period of time, while
-   "recurrence" identifies the properties that contain a recurrence rule
-   specification. "unitary-test-status" enumerates the state of the OAM
-   test.  Finally, "test-sequence-status" shows the state of the OAM
-   test sequence.
+   coordinated manner.
 
-   An example of the proposed structure Figure 3.
+   Each OAM test sequence references an OAM unitary test type with its
+   concrete parameters.  Each OAM test sequence has two temporal
+   parameters: "period-of-time" and "recurrence".  Both are imported
+   from the "ietf-schedule" module from [I-D.ietf-netmod-schedule-yang].
+   "period-of-time" identifies the period values that contain a precise
+   period of time, while "recurrence" identifies theproperties that
+   contain a recurrence rule specification. "unitary-test-status"
+   enumerates the state of the OAM test.  Finally, "test-sequence-
+   status" shows the state of the OAM test sequence.
+
+   Figure 3 shows the structure of OAM test sequence module:
 
         module: ietf-oam-test-sequence
           +--rw oam-test-sequence
@@ -445,11 +469,10 @@ Table of Contents
 
    *  "stop": The state where the test is manually stopped.
 
-   *  "success": The success state when all unitary tests were
-      successful.
+   *  "success": The state when all unitary tests were successful.
 
-   *  "failure": The success state when One or more tests in the
-      sequence got an error.
+   *  "failure": The state when one or more tests in the sequence got an
+      error.
 
    *  "error": The state where an error occurs during the test.
 
@@ -471,20 +494,11 @@ Table of Contents
              +-| success |<----------------------------+
                +---------+
 
-                  Figure 4: OAM unitary test state machine
+                 Figure 4: OAM test sequence state machine
 
 4.  YANG Data Models for Scheduling OAM Tests
 
-4.1.  YANG Models Overview
-
-   This document proposes two models: OAM unitary test and OAM test
-   sequence.  OAM unitary test is a set of parameters that define a type
-   of OAM test to be invoked.  As an example, it includes the type test,
-   configuration parameters, and target results.  The OAM test sequences
-   are a set of OAM unitary tests that are run based on a set of time
-   constraints, number of repetitions, order, and reporting outputs.
-
-4.2.  YANG Model for Scheduling OAM Unitary Test
+4.1.  YANG Model for Scheduling OAM Unitary Test
 
    <CODE BEGINS>
     file ietf-oam-unitary-test@2024-07-05.yang
@@ -542,13 +556,13 @@ Table of Contents
 
      grouping oam-unitary-test {
        description
-           "This grouping is defined for OAM unitary test for network
+           "Specifies a grouping for OAM unitary test for network
            diagnosis procedures.";
 
        leaf name {
          type string;
          description
-           "Name for the test.";
+           "Defines the name of the test.";
        }
 
        choice test-type {
@@ -615,7 +629,7 @@ Table of Contents
    }
    <CODE ENDS>
 
-4.3.  YANG Model for OAM Test Sequence
+4.2.  YANG Model for OAM Test Sequence
 
    <CODE BEGINS>
     file ietf-oam-test-sequence@2024-07-05.yang
@@ -647,7 +661,7 @@ Table of Contents
              <victor.lopez@nokia.com>";
      description
        "This module defines the 'oam-unitary-test' YANG model for
-       activation of network diagnosis procedures.
+       management of network diagnosis procedures.
 
        Copyright (c) 2024 IETF Trust and the persons identified as
        authors of the code.  All rights reserved.
@@ -755,7 +769,7 @@ Table of Contents
 
 5.  Using Device Mode Within OAM Scheduling Models
 
-   This section discusses the problematic of reusing device models
+   This section discusses the issues related to reusing device models
    already defined in IETF within the context of scheduling OAM tests.
    There are two main approaches to enable OAM scheduling models: *
    Importing YANG model into the OAM scheduling models.  This approach
@@ -807,7 +821,17 @@ Table of Contents
    of the model.  It is aimed at being removed if the document becomes
    RFC.
 
-9.  Normative References
+9.  References
+
+9.1.  Normative References
+
+   [I-D.draft-davis-nmop-incident-terminology]
+              Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
+              Key Terms for Network Incident and Problem Management",
+              Work in Progress, Internet-Draft, draft-davis-nmop-
+              incident-terminology-01, 13 May 2024,
+              <https://datatracker.ietf.org/doc/html/draft-davis-nmop-
+              incident-terminology-01>.
 
    [I-D.ietf-netmod-schedule-yang]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Common YANG
@@ -816,23 +840,31 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
               schedule-yang-02>.
 
-   [I-D.ietf-nmop-network-incident-yang]
-              Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
-              "A YANG Data Model for Network Incident Management", Work
-              in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-01, 28 June 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-01>.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
+   [RFC4176]  El Mghazli, Y., Ed., Nadeau, T., Boucadair, M., Chan, K.,
+              and A. Gonguet, "Framework for Layer 3 Virtual Private
+              Networks (L3VPN) Operations and Management", RFC 4176,
+              DOI 10.17487/RFC4176, October 2005,
+              <https://www.rfc-editor.org/rfc/rfc4176>.
+
+   [RFC4655]  Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
+              Computation Element (PCE)-Based Architecture", RFC 4655,
+              DOI 10.17487/RFC4655, August 2006,
+              <https://www.rfc-editor.org/rfc/rfc4655>.
+
    [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
               (TLS) Protocol Version 1.2", RFC 5246,
               DOI 10.17487/RFC5246, August 2008,
               <https://www.rfc-editor.org/rfc/rfc5246>.
+
+   [RFC5357]  Hedayat, K., Krzanowski, R., Morton, A., Yum, K., and J.
+              Babiarz, "A Two-Way Active Measurement Protocol (TWAMP)",
+              RFC 5357, DOI 10.17487/RFC5357, October 2008,
+              <https://www.rfc-editor.org/rfc/rfc5357>.
 
    [RFC5860]  Vigoureux, M., Ed., Ward, D., Ed., and M. Betts, Ed.,
               "Requirements for Operations, Administration, and
@@ -849,20 +881,30 @@ Table of Contents
               Shell (SSH)", RFC 6242, DOI 10.17487/RFC6242, June 2011,
               <https://www.rfc-editor.org/rfc/rfc6242>.
 
-   [RFC6428]  Allan, D., Ed., Swallow, G., Ed., and J. Drake, Ed.,
-              "Proactive Connectivity Verification, Continuity Check,
-              and Remote Defect Indication for the MPLS Transport
-              Profile", RFC 6428, DOI 10.17487/RFC6428, November 2011,
-              <https://www.rfc-editor.org/rfc/rfc6428>.
-
    [RFC6536]  Bierman, A. and M. Bjorklund, "Network Configuration
               Protocol (NETCONF) Access Control Model", RFC 6536,
               DOI 10.17487/RFC6536, March 2012,
               <https://www.rfc-editor.org/rfc/rfc6536>.
 
+   [RFC6632]  Ersue, M., Ed. and B. Claise, "An Overview of the IETF
+              Network Management Standards", RFC 6632,
+              DOI 10.17487/RFC6632, June 2012,
+              <https://www.rfc-editor.org/rfc/rfc6632>.
+
    [RFC6991]  Schoenwaelder, J., Ed., "Common YANG Data Types",
               RFC 6991, DOI 10.17487/RFC6991, July 2013,
               <https://www.rfc-editor.org/rfc/rfc6991>.
+
+   [RFC7276]  Mizrahi, T., Sprecher, N., Bellagamba, E., and Y.
+              Weingarten, "An Overview of Operations, Administration,
+              and Maintenance (OAM) Tools", RFC 7276,
+              DOI 10.17487/RFC7276, June 2014,
+              <https://www.rfc-editor.org/rfc/rfc7276>.
+
+   [RFC7297]  Boucadair, M., Jacquenet, C., and N. Wang, "IP
+              Connectivity Provisioning Profile (CPP)", RFC 7297,
+              DOI 10.17487/RFC7297, July 2014,
+              <https://www.rfc-editor.org/rfc/rfc7297>.
 
    [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
               RFC 7950, DOI 10.17487/RFC7950, August 2016,
@@ -925,6 +967,27 @@ Table of Contents
               K. Pentikousis, Ed., "Two-Way Active Measurement Protocol
               (TWAMP) YANG Data Model", RFC 8913, DOI 10.17487/RFC8913,
               November 2021, <https://www.rfc-editor.org/rfc/rfc8913>.
+
+   [RFC8969]  Wu, Q., Ed., Boucadair, M., Ed., Lopez, D., Xie, C., and
+              L. Geng, "A Framework for Automating Service and Network
+              Management with YANG", RFC 8969, DOI 10.17487/RFC8969,
+              January 2021, <https://www.rfc-editor.org/rfc/rfc8969>.
+
+   [RFC9543]  Farrel, A., Ed., Drake, J., Ed., Rokui, R., Homma, S.,
+              Makhijani, K., Contreras, L., and J. Tantsura, "A
+              Framework for Network Slices in Networks Built from IETF
+              Technologies", RFC 9543, DOI 10.17487/RFC9543, March 2024,
+              <https://www.rfc-editor.org/rfc/rfc9543>.
+
+9.2.  Informative References
+
+   [I-D.ietf-nmop-network-incident-yang]
+              Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
+              "A YANG Data Model for Network Incident Management", Work
+              in Progress, Internet-Draft, draft-ietf-nmop-network-
+              incident-yang-01, 28 June 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
+              network-incident-yang-01>.
 
 Acknowledgments
 
