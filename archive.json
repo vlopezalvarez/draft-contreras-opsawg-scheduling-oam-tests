@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-21T01:03:39.471901+00:00",
+  "timestamp": "2024-07-23T00:59:36.601118+00:00",
   "repo": "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests",
   "labels": [
     {
@@ -49,7 +49,26 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOJ4Oz986QcsSK",
+      "title": "Missing feedback from Med",
+      "url": "https://github.com/vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests/issues/2",
+      "state": "OPEN",
+      "author": "vlopezalvarez",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "vlopezalvarez"
+      ],
+      "labels": [],
+      "body": "There are some areas to work before delivering:\r\n+ States for the oam unitary test and sequence.\r\n+ ITU-T references\r\n+ Imports or schema mount for OAM modules injection",
+      "createdAt": "2024-07-22T17:57:17Z",
+      "updatedAt": "2024-07-22T17:57:17Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": [
     {
       "number": 1,
