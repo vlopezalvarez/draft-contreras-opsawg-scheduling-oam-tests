@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-23T00:59:36.601118+00:00",
+  "timestamp": "2024-07-25T00:59:27.922838+00:00",
   "repo": "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests",
   "labels": [
     {
@@ -67,6 +67,38 @@
       "updatedAt": "2024-07-22T17:57:17Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOJ4Oz986Qmt1o",
+      "title": "IETF 120 - Session feedback",
+      "url": "https://github.com/vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests/issues/4",
+      "state": "OPEN",
+      "author": "vlopezalvarez",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "These are the points received during the IETF 120 presentation:\r\n\r\n- Review STAMP device model scheduling\r\n- State machine usage for start/stop versus read-only\r\n- Proposal to redo the model with schema-mount",
+      "createdAt": "2024-07-23T20:26:39Z",
+      "updatedAt": "2024-07-23T20:26:39Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOJ4Oz986Qv53J",
+      "title": "Alignment with draft \"Guidelines for Charactering OAM\"",
+      "url": "https://github.com/vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests/issues/5",
+      "state": "OPEN",
+      "author": "vlopezalvarez",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Align text with https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-oam-characterization",
+      "createdAt": "2024-07-24T21:09:48Z",
+      "updatedAt": "2024-07-24T21:09:48Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -106,6 +138,46 @@
           "body": "Hi Luis, there is an error in the PR. I have addressed your changes in main directly. Please have a look and close the PR if I've covered everything.",
           "createdAt": "2024-07-05T11:31:14Z",
           "updatedAt": "2024-07-05T11:31:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOJ4Oz9852L8uB",
+      "title": "minor reference fix",
+      "url": "https://github.com/vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests/pull/3",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-23T09:00:01Z",
+      "updatedAt": "2024-07-23T20:23:16Z",
+      "baseRepository": "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests",
+      "baseRefName": "main",
+      "baseRefOid": "cbfeeda7c532790695482d81c6cd6cf68a8b2ac2",
+      "headRepository": "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests",
+      "headRefName": "boucadair-patch-1",
+      "headRefOid": "8dfd438064d12bbfe1ad7e4e3782046cc13e47bf",
+      "closedAt": "2024-07-23T20:23:16Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJ4Oz986C1Scf",
+          "commit": {
+            "abbreviatedOid": "8dfd438"
+          },
+          "author": "vlopezalvarez",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-23T20:23:05Z",
+          "updatedAt": "2024-07-23T20:23:05Z",
           "comments": []
         }
       ]
