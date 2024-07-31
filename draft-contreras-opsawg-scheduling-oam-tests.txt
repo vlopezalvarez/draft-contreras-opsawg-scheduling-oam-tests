@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 23 January 2025                                           Nokia
-                                                            22 July 2024
+Expires: 1 February 2025                                           Nokia
+                                                            31 July 2024
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 January 2025.
+   This Internet-Draft will expire on 1 February 2025.
 
 Copyright Notice
 
@@ -222,23 +222,22 @@ Table of Contents
                   Table 1: Prefixes and Corresponding YANG
                                   Modules
 
-   RFC Editor Note: Please replace XXXX with the RFC number assigned to
-   this document if the document becomes a RFC.  Please remove this note
-   in that case.
+      RFC Editor Note: Please replace XXXX with the RFC number assigned
+      to this document if the document becomes a RFC.  Please remove
+      this note in that case.
 
 2.  Network-wide OAM Use Cases
 
 2.1.  Troubleshooting
 
-   After the detection of a problem
-   [I-D.draft-davis-nmop-incident-terminology] in the network, OAM tests
-   are performed to find the root cause for the detected problem.
-   However, a detected problem can be caused by a variety of factors,
-   such as a misconfiguration, hardware failure, or a software bug.  OAM
-   tests can help to find the root cause by testing specific components
-   of the network and looking for anomalies or issues.  Also, the
-   reliability and efficiency of the tests, depends on the nature of the
-   test itself.
+   After the detection of a problem [I-D.ietf-nmop-terminology] in the
+   network, OAM tests are performed to find the root cause for the
+   detected problem.  However, a detected problem can be caused by a
+   variety of factors, such as a misconfiguration, hardware failure, or
+   a software bug.  OAM tests can help to find the root cause by testing
+   specific components of the network and looking for anomalies or
+   issues.  Also, the reliability and efficiency of the tests, depends
+   on the nature of the test itself.
 
    There are a variety of OAM tests that can be executed as a function
    of the target scenario.  For example, if the issue is related to a
@@ -935,14 +934,6 @@ Table of Contents
 
 9.2.  Informative References
 
-   [I-D.draft-davis-nmop-incident-terminology]
-              Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
-              Key Terms for Network Incident and Problem Management",
-              Work in Progress, Internet-Draft, draft-davis-nmop-
-              incident-terminology-01, 13 May 2024,
-              <https://datatracker.ietf.org/doc/html/draft-davis-nmop-
-              incident-terminology-01>.
-
    [I-D.ietf-nmop-network-incident-yang]
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
@@ -950,6 +941,14 @@ Table of Contents
               incident-yang-01, 28 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               network-incident-yang-01>.
+
+   [I-D.ietf-nmop-terminology]
+              Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
+              Key Terms for Network Incident and Problem Management",
+              Work in Progress, Internet-Draft, draft-ietf-nmop-
+              terminology-01, 10 June 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
+              terminology-01>.
 
    [ITU-T-Y1731]
               "OAM Functions and Mechanisms for Ethernet-based
