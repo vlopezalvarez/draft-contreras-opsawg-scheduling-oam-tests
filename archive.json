@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-30T00:59:32.633071+00:00",
+  "timestamp": "2024-08-01T01:04:44.566392+00:00",
   "repo": "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests",
   "labels": [
     {
@@ -147,24 +147,26 @@
       "id": "PR_kwDOJ4Oz9852L8uB",
       "title": "minor reference fix",
       "url": "https://github.com/vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests/pull/3",
-      "state": "CLOSED",
+      "state": "MERGED",
       "author": "boucadair",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-07-23T09:00:01Z",
-      "updatedAt": "2024-07-23T20:23:16Z",
+      "updatedAt": "2024-07-31T07:07:35Z",
       "baseRepository": "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests",
       "baseRefName": "main",
       "baseRefOid": "cbfeeda7c532790695482d81c6cd6cf68a8b2ac2",
       "headRepository": "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests",
       "headRefName": "boucadair-patch-1",
       "headRefOid": "8dfd438064d12bbfe1ad7e4e3782046cc13e47bf",
-      "closedAt": "2024-07-23T20:23:16Z",
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-07-31T07:07:35Z",
+      "mergedAt": "2024-07-31T07:07:35Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "61a77bbd5d99a92abe1e3b42400926a69d4faed7"
+      },
       "comments": [],
       "reviews": [
         {
