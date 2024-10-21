@@ -51,7 +51,7 @@ This document defines a YANG data model for network diagnosis on-demand relying 
 
 # Introduction
 
-Operations, Administration, and Maintenance (OAM) tasks are fundamental functions of the network management (see, e.g., {{?RFC7276}}). Given the emerging of data models and their utilization in Service Provider's network management and the need to automate the overall service management lifecycle {{?RFC8969}}, the management of OAM operations is key. Relevant data models are still missing to cover specific needs.
+Operations, Administration, and Maintenance (OAM) tasks are fundamental functions of the network management (see, e.g., {{?RFC7276}}). Given the emergence of data models and their utilization in Service Provider's network management and the need to automate the overall service management lifecycle {{?RFC8969}}, the management of OAM operations becomes also key. Relevant data models are still missing to cover specific needs.
 
 Specifically, OAM functions provide the means to identify and isolate faults, measure and report of performance (see section 4.2, {{?RFC6632}}. For example, {{!RFC5860}} defines the three main areas involved in OAM:
 
@@ -62,7 +62,7 @@ Specifically, OAM functions provide the means to identify and isolate faults, me
 {{?RFC7276}} presents OAM tools for detecting and isolating failures in networks and for performance monitoring, some examples are:
 
 * Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational.
-+ Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple tecnologies for this function, like IP Ping, VCCV Ping, LSP Ping or Ethernet Loopback.
++ Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple technologies for this function, like IP Ping, VCCV Ping, LSP Ping or Ethernet Loopback.
 + Link Trace: This function allows a network operator to trace a path through a network from one device to another. Some technologies following this approach are Y.1731 Linktrace {{ITU-T-Y1731}} or IP traceroute.
 - Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues. Protocols like TWAMP, or Y.1731 DMM/SLM {{ITU-T-Y1731}} can obtain performance measurements.
 
@@ -70,10 +70,14 @@ More recently, Incident Management {{?I-D.ietf-nmop-network-incident-yang}} focu
    of incident diagnosis, which can be favored by dynamic invocation of OAM tests.
 
 {{!RFC8531}}, {{!RFC8532}}, {{!RFC8533}} and {{!RFC8913}}  defined YANG models for OAM technologies:
+
 + {{!RFC8531}} defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control and monitor connection-oriented OAM protocols such as MPLS-TP OAM, PBB-TE OAM, and G.7713.1 OAM.
+
 + {{!RFC8532}} provides a generic YANG data model that can be used to configure, control and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection), LBM (Loopback Messaging) and VCCV (Virtual Circuit Connectivity Verification).
+
 + {{!RFC8533}} provides a YANG data model that can be used to retrieve information related to OAM protocols such as Bidirectional Forwarding Detection (BFD), Loopback Messaging (LBM) and Virtual Circuit Connectivity Verification (VCCV).
-- {{!RFC8913}} specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).
+
++ {{!RFC8913}} specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).
 
 These RFCs defined the parameters required for each of the different tests that are used in network elements today. This document covers how to use OAM for network-wide use cases. Following, some illustrative examples are presented.
 
@@ -113,17 +117,15 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ## Troubleshooting
 
-After the detection of a problem {{?I-D.ietf-nmop-terminology}} in the network, OAM tests are performed to find the root cause for the detected problem. However, a detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help to find the root cause by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests, depends on the nature of the test itself.
+After the detection of a problem {{?I-D.ietf-nmop-terminology}} in the network, OAM tests are performed to find the root cause for the detected problem. However, a detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help to find the root cause by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests depend on the nature of the test itself.
 
-There are a variety of OAM tests that can be executed as a function of the target scenario. For example, if the issue is related to a Layer 2 capability, specific tests can be designed and run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. These tests can be coupled with others to test if any filtering is in place by varying, e.g., some Layer 2 fields or checking the configuration of relevant nodes.  If these tests are correct, the operator may want to check the availability of the service (or its
-   delivered performance).
+There are a variety of OAM tests that can be executed as a function of the target scenario. For example, if the issue is related to a Layer 2 capability, specific tests can be designed and run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. These tests can be coupled with others to test if any filtering is in place by varying, e.g., some Layer 2 fields or checking the configuration of relevant nodes.  If these tests are correct, the operator may want to check the availability of the service (or its delivered performance).
 
 Even though the troubleshooting process may be different depending on the problem detected, there are certain common procedures or logics that can be executed in order to narrow down the cause of the problem and thus help isolating candidate root cause.
 
 ## Birth Certificate
 
-The aim of a birth certificate process is to validate that all
-   relevant parameters are set appropriately in accordance with the target network service. The birth certificate process is done once the configuration of the network elements is completed and they are ready for service.
+The aim of a birth certificate process is to validate that all relevant parameters are set appropriately in accordance with the target network service. The birth certificate process is done once the configuration of the network elements is completed, and they are ready for service.
 
 If the birth certificate is successful, it means that the network service is functioning correctly (that is, measured service is matching the expected service) and meets the requirements defined by the operator. The process requires running a set of OAM tasks (e.g., tests) to verify that the service is performing as expected.
 
@@ -176,6 +178,8 @@ module: ietf-oam-unitary-test
 ~~~~
 {: #oam-uni-test-tree-st title="Tree Structure of OAM Unitary Test" artwork-align="center"}
 
+(Note: alignment with {{!I-D.ietf-netmod-schedule-yang}} will be done with the progress of that document).
+
 The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. The state machine includes the following states:
 
 * "planned": The initial state where the test is planned.
@@ -191,15 +195,15 @@ The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. 
    +---------+      +----------+      +---------+
 +->| planned |----->|configured|----->|  ready  |
 |  +---------+      +----------+      +---------+
-|      A                 |                |
-|      |                 |                V
-|      |     +-------+   |          +----------+
-|      ------| error |<--+----------| on-going |
+|                        |                |
+|                        |                V
+|            +-------+   |          +----------+
+|      +-----| error |<--+----------| on-going |
 |      |     +-------+              +----------+
 |      |                                  |
 |      V                                  |
 |  +---------+      +--------+            |
-+--| finished|<-----|  stop  |<------------+
++--| finished|<-----|  stop  |<-----------+
    +---------+      +--------+            |
        A                                  |
        |                                  |
@@ -310,7 +314,9 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 # Using Device Mode Within OAM Scheduling Models
 
 This section discusses the issues related to reusing device models already defined in IETF within the context of scheduling OAM tests. There are two main approaches to enable OAM scheduling models:
-  * Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desire OAM test. This approach requires to recreate new YANG models for each new test type or variation of the device models.
+  
+  * Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desired OAM test. This approach requires to recreate new YANG models for each new test type or variation of the device models.
+  
   * Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.
 
 As an exmaple, we will use {{!RFC8913}}, which defines a YANG data model for TWAMP, to illustrate how device models could be used.
@@ -322,7 +328,7 @@ The YANG module targeted in this document defines a schema for data that is desi
 
 The NETCONF access control model {{!RFC6536}} provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.
 
-There are a number of data nodes defined in this YANG module that are writable/creatable/deletable (i.e., config true, which is the default).  These data nodes may be considered sensitive or vulnerable   in some network environments.  Write operations (e.g., edit-config) to these data nodes without proper protection can have a negative effect on network operations.
+There are a number of data nodes defined in this YANG module that are writable/creatable/deletable (i.e., config true, which is the default).  These data nodes may be considered sensitive or vulnerable in some network environments.  Write operations (e.g., edit-config) to these data nodes without proper protection can have a negative effect on network operations.
 
 In which refers to the scheduling of the tests, security considerations in {{!I-D.ietf-netmod-schedule-yang}} are also applicable here.
 
