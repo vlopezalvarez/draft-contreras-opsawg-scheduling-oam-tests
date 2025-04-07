@@ -5,13 +5,13 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 31 July 2025                                              Nokia
-                                                         27 January 2025
+Expires: 9 October 2025                                            Nokia
+                                                            7 April 2025
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
                                  Tests
-           draft-contreras-opsawg-scheduling-oam-tests-latest
+             draft-ietf-opsawg-scheduling-oam-tests-latest
 
 Abstract
 
@@ -26,11 +26,11 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://vlopezalvarez.github.io/draft-contreras-opsawg-scheduling-
-   oam-tests/draft-contreras-opsawg-scheduling-oam-tests.html.  Status
+   https://vlopezalvarez.github.io/draft-ietf-opsawg-scheduling-oam-
+   tests/draft-ietf-opsawg-scheduling-oam-tests.html.  Status
    information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-contreras-opsawg-scheduling-
-   oam-tests/.
+   https://datatracker.ietf.org/doc/draft-ietf-opsawg-scheduling-oam-
+   tests/.
 
    Discussion of this document takes place on the Operations and
    Management Area Working Group Working Group mailing list
@@ -39,8 +39,8 @@ About This Document
    https://www.ietf.org/mailman/listinfo/opsawg/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/vlopezalvarez/draft-contreras-opsawg-scheduling-
-   oam-tests.
+   https://github.com/vlopezalvarez/draft-ietf-opsawg-scheduling-oam-
+   tests.
 
 Status of This Memo
 
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 July 2025.
+   This Internet-Draft will expire on 9 October 2025.
 
 Copyright Notice
 
@@ -856,9 +856,9 @@ Table of Contents
    [I-D.ietf-netmod-schedule-yang]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Common YANG
               Data Model for Scheduling", Work in Progress, Internet-
-              Draft, draft-ietf-netmod-schedule-yang-03, 10 October
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              netmod-schedule-yang-03>.
+              Draft, draft-ietf-netmod-schedule-yang-05, 16 March 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
+              schedule-yang-05>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -967,17 +967,16 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-02, 10 October 2024,
+              incident-yang-03, 19 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-02>.
+              network-incident-yang-03>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
               Key Terms for Network Fault and Problem Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-terminology-
-              10, 21 January 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              terminology-10>.
+              15, 30 March 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-nmop-terminology-15>.
 
    [ITU-T-Y1731]
               "OAM Functions and Mechanisms for Ethernet-based
