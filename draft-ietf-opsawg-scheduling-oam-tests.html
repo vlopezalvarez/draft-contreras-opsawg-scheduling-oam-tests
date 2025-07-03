@@ -1954,10 +1954,16 @@ module ietf-oam-test-sequence {
       <h2 id="name-using-device-mode-within-oa">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-using-device-mode-within-oa" class="section-name selfRef">Using Device Mode Within OAM Scheduling Models</a>
       </h2>
-<p id="section-5-1">This section discusses the issues related to reusing device models already defined in IETF within the context of scheduling OAM tests. There are two main approaches to enable OAM scheduling models:
-  * Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desired OAM test. This approach requires to recreate new YANG models for each new test type or variation of the device models.
-  * Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">As an exmaple, we will use <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, which defines a YANG data model for TWAMP, to illustrate how device models could be used.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-1">This section discusses the issues related to reusing device models already defined in IETF within the context of scheduling OAM tests. There are two main approaches to enable OAM scheduling models:<a href="#section-5-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5-2.1">
+          <p id="section-5-2.1.1">Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desired OAM test. This approach requires to recreate new YANG models for each new test type or variation of the device models.<a href="#section-5-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-2.2">
+          <p id="section-5-2.2.1">Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-5-3">As an exmaple, we will use <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, which defines a YANG data model for TWAMP, to illustrate how device models could be used.<a href="#section-5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="considerations">
