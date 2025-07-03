@@ -325,7 +325,7 @@ When multiple OAM tasks are scheduled to run concurrently or overlap in time, co
 
 The YANG models defined in this document (both for unitary and sequence tests) uses the `unitary-test-status` and `test-sequence-status` grouping to indicate the current scheduling state of each OAM task. If a conflict is detected (e.g., two tests require exclusive access to the same resource at the same time), the `unitary-test-status` and `test-sequence-status` leaf will reflect this by reporting a value such as `error`, reporting the conflict.
 
-Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts (e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but MUST be clearly reported via the YANG model status leaves. 
+Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts (e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but MUST be clearly reported via the YANG model status leaves.
 
 When a new `unitary-test` or `test-sequence` are scheduled, he request MAY be rejected depending on the server's capability to evaluate the scheduling impact and detect conflicts prior to execution.
 
