@@ -1,7 +1,7 @@
 ---
 title: "A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM Tests"
 abbrev: "Scheduling OAM YANG"
-category: info
+category: std
 
 docname: draft-ietf-opsawg-scheduling-oam-tests-latest
 submissiontype: IETF  # also: "independent", "IAB", or "IRTF"
@@ -45,7 +45,7 @@ informative:
 
 --- abstract
 
-This document defines a YANG data model for network diagnosis on-demand relying upon Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures.
+This document defines a YANG data model for network diagnosis on-demand relying upon Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures, primarily intended for use by an SDN controller or network orchestrator, rather than by individual network nodes.
 
 --- middle
 
@@ -69,19 +69,21 @@ Specifically, OAM functions provide the means to identify and isolate faults, me
 More recently, Incident Management {{?I-D.ietf-nmop-network-incident-yang}} focuses on
    of incident diagnosis, which can be favored by dynamic invocation of OAM tests.
 
-{{!RFC8531}}, {{!RFC8532}}, {{!RFC8533}} and {{!RFC8913}}  defined YANG models for OAM technologies:
-+ {{!RFC8531}} defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control and monitor connection-oriented OAM protocols such as MPLS-TP OAM, PBB-TE OAM, and G.7713.1 OAM.
-+ {{!RFC8532}} provides a generic YANG data model that can be used to configure, control and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection), LBM (Loopback Messaging) and VCCV (Virtual Circuit Connectivity Verification).
-+ {{!RFC8533}} provides a YANG data model that can be used to retrieve information related to OAM protocols such as Bidirectional Forwarding Detection (BFD), Loopback Messaging (LBM) and Virtual Circuit Connectivity Verification (VCCV).
-- {{!RFC8913}} specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).
+{{!RFC8531}}, {{!RFC8532}}, {{!RFC8533}} and {{!RFC8913}} defined YANG models for OAM technologies:
+* {{!RFC8531}} ("A YANG Data Model for MPLS-TP OAM"): defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control and monitor connection-oriented OAM protocols such as MPLS-TP OAM, PBB-TE OAM, and G.7713.1 OAM.
+* {{!RFC8532}} ("A YANG Data Model for Connectionless OAM Protocols"): provides a generic YANG data model that can be used to configure, control and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection), LBM (Loopback Messaging) and VCCV (Virtual Circuit Connectivity Verification).
+* {{!RFC8533}} ("A YANG Data Model for BFD, LBM, and VCCV OAM Protocols"): provides a YANG data model that can be used to retrieve information related to OAM protocols such as Bidirectional Forwarding Detection (BFD), Loopback Messaging (LBM) and Virtual Circuit Connectivity Verification (VCCV).
+* {{!RFC8913}} ("A YANG Data Model for Two-Way Active Measurement Protocol (TWAMP)"): specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).
 
-These RFCs defined the parameters required for each of the different tests that are used in network elements today. This document covers how to use OAM for network-wide use cases. Following, some illustrative examples are presented.
+These RFCs defined the parameters required for each of the different tests that are used in network elements today. This work aims to reuse and build upon existing YANG models for OAM technologies, such as those defined in {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}. By leveraging these foundational models, this document specifies a YANG data model for scheduling and coordinating sequences of OAM tests, enabling more advanced and automated network diagnosis procedures. In addition to reusing the device-level OAM YANG models from {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}, this document builds upon the generic scheduling framework defined in {{!I-D.ietf-netmod-schedule-yang}}. The `ietf-schedule` module provides reusable groupings and mechanisms for specifying periods of time, recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM unitary test and OAM test sequence models defined in this document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a network-wide context.
+
+This document covers how to use OAM for network-wide use cases. Following, some illustrative examples are presented.
 
 The YANG data model resulting from this document will conform to the Network Management Datastore Architecture (NMDA) {{!RFC8342}}.
 
 ## Terminology and Notations
 
-This document assumes that the reader is familiar with the contents of {{!RFC7950}}, {{!RFC8345}}, {{!RFC8346}} and {{!RFC8795}}.
+This document assumes that the reader is familiar with the contents of {{!RFC7950}} "The YANG 1.1 Data Modeling Language".
 
 Following terms are used for the representation of this data model.
 
@@ -286,7 +288,6 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 ~~~~
 {: #st-test-sequence-status title="OAM test sequence state machine" artwork-align="center"}
 
-
 # YANG Data Models for Scheduling OAM Tests
 
 ## YANG Model for Scheduling OAM Unitary Test
@@ -315,6 +316,26 @@ This section discusses the issues related to reusing device models already defin
   * Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.
 
 As an exmaple, we will use {{!RFC8913}}, which defines a YANG data model for TWAMP, to illustrate how device models could be used.
+
+# Considerations
+
+## Conflict Resolution and Reporting Among Scheduled OAM Tasks
+
+When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints. This document leverages the scheduling status groupings defined in the common schedule YANG module (see [RFC XXXX: A Common YANG Data Model for Scheduling]) to detect and report such conflicts.
+
+The YANG models defined in this document (both for unitary and sequence tests) uses the `unitary-test-status` and `test-sequence-status` grouping to indicate the current scheduling state of each OAM task. If a conflict is detected (e.g., two tests require exclusive access to the same resource at the same time), the `unitary-test-status` and `test-sequence-status` leaf will reflect this by reporting a value such as `error`, reporting the conflict.
+
+Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts (e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but MUST be clearly reported via the YANG model status leaves. 
+
+When a new `unitary-test` or `test-sequence` are scheduled, he request MAY be rejected depending on the server's capability to evaluate the scheduling impact and detect conflicts prior to execution.
+
+## Coverage of Input Parameters and Output Results
+
+The YANG models defined in this document are designed to schedule OAM tests at a network-wide level. The input parameters required to configure and execute specific OAM functions (such as test type, target, and configuration options) are referenced or reused from the existing device-level OAM YANG models (e.g., {{!RFC8531}}, {{!RFC8532}}, {{!RFC8533}}, {{!RFC8913}}). This approach avoids duplication and ensures consistency with established models.
+
+Similarly, the output results of OAM tests—such as test status, performance metrics, and diagnostic information—are expected to be reported using the mechanisms and data nodes defined in those foundational YANG modules. The scheduling models in this document provide references to these results and enable their collection and correlation across multiple tests and devices, but do not redefine the detailed input/output parameters of each OAM function.
+
+In summary, this document focuses on the scheduling, coordination, and status tracking of OAM tests, while relying on existing YANG models for the detailed specification of test parameters and results.
 
 
 # Security Considerations

@@ -24,7 +24,7 @@ module ietf-oam-test-sequence {
      Author: Victor Lopez
           <victor.lopez@nokia.com>";
   description
-    "This module defines the 'oam-unitary-test' YANG model for
+    "This module defines the 'oam-test-sequence-test' YANG model for
     management of network diagnosis procedures.
 
     Copyright (c) 2024 IETF Trust and the persons identified as
@@ -88,6 +88,7 @@ module ietf-oam-test-sequence {
       uses schedule:recurrence-utc;
 
       leaf test-sequence-status {
+        config false;
         type enumeration {
           enum "planned" {
             description
