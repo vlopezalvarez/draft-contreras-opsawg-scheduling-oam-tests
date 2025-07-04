@@ -2,10 +2,10 @@
 
 This is the working area for the individual Internet-Draft, "A YANG Data Model for Network Diagnosis by scheduling sequences of OAM tests".
 
-* [Editor's Copy](https://vlopezalvarez.github.io/draft-contreras-opsawg-scheduling-oam-tests/#go.draft-contreras-opsawg-scheduling-oam-tests.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-contreras-opsawg-scheduling-oam-tests)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-contreras-opsawg-scheduling-oam-tests)
-* [Compare Editor's Copy to Individual Draft](https://vlopezalvarez.github.io/draft-contreras-opsawg-scheduling-oam-tests/#go.draft-contreras-opsawg-scheduling-oam-tests.diff)
+* [Editor's Copy](https://vlopezalvarez.github.io/draft-ietf-opsawg-scheduling-oam-tests/#go.draft-ietf-opsawg-scheduling-oam-tests.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-opsawg-scheduling-oam-tests)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-scheduling-oam-tests)
+* [Compare Editor's Copy to Individual Draft](https://vlopezalvarez.github.io/draft-ietf-opsawg-scheduling-oam-tests/#go.draft-ietf-opsawg-scheduling-oam-tests.diff)
 
 
 ## Contributing
