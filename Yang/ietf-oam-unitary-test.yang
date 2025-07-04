@@ -110,6 +110,7 @@ module ietf-oam-unitary-test {
       uses schedule:recurrence;
 
       leaf unitary-test-status {
+        config false;
         type enumeration {
           enum "planned" {
             description
