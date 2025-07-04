@@ -858,9 +858,9 @@ Table of Contents
    [I-D.ietf-netmod-schedule-yang]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Common YANG
               Data Model for Scheduling", Work in Progress, Internet-
-              Draft, draft-ietf-netmod-schedule-yang-07, 12 June 2025,
+              Draft, draft-ietf-netmod-schedule-yang-08, 4 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              schedule-yang-07>.
+              schedule-yang-08>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,

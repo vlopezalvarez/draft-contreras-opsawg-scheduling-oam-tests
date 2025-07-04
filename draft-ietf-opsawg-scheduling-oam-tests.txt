@@ -113,8 +113,8 @@ Table of Contents
    [RFC7276]).  Given the emergence of data models and their utilization
    in Service Provider's network management and the need to automate the
    overall service management lifecycle [RFC8969], the management of OAM
-   operations becomes also key.  Relevant data models are still missing
-   to cover specific needs.
+   operations becomes also essential.  Relevant data models are still
+   missing to cover specific needs.
 
    Specifically, OAM functions provide the means to identify and isolate
    faults, measure and report of performance (see section 4.2,
@@ -185,16 +185,16 @@ Table of Contents
       server implementations of the Two-Way Active Measurement Protocol
       (TWAMP).
 
-   These RFCs defined the parameters required for each of the different
-   tests that are used in network elements today.  This work aims to
-   reuse and build upon existing YANG models for OAM technologies, such
-   as those defined in [RFC8531], [RFC8532], and [RFC8533].  By
-   leveraging these foundational models, this document specifies a YANG
-   data model for scheduling and coordinating sequences of OAM tests,
-   enabling more advanced and automated network diagnosis procedures.
-   In addition to reusing the device-level OAM YANG models from
-   [RFC8531], [RFC8532], and [RFC8533], this document builds upon the
-   generic scheduling framework defined in
+   These OAM related YANG data models defined the parameters required
+   for each of the different tests that are used in network elements
+   today.  This work aims to reuse and build upon existing YANG models
+   for OAM technologies, such as those defined in [RFC8531], [RFC8532],
+   and [RFC8533].  By leveraging these foundational models, this
+   document specifies a YANG data model for scheduling and coordinating
+   sequences of OAM tests, enabling more advanced and automated network
+   diagnosis procedures.  In addition to reusing the device-level OAM
+   YANG models from [RFC8531], [RFC8532], and [RFC8533], this document
+   builds upon the generic scheduling framework defined in
    [I-D.ietf-netmod-schedule-yang].  The ietf-schedule module provides
    reusable groupings and mechanisms for specifying periods of time,
    recurrence rules, and scheduling status.  These constructs are
@@ -202,9 +202,6 @@ Table of Contents
    sequence models defined in this document, enabling precise
    scheduling, repetition, and conflict reporting for OAM tasks in a
    network-wide context.
-
-   This document covers how to use OAM for network-wide use cases.
-   Following, some illustrative examples are presented.
 
    The YANG data model resulting from this document will conform to the
    Network Management Datastore Architecture (NMDA) [RFC8342].
@@ -260,6 +257,9 @@ Table of Contents
 
 2.  Network-wide OAM Use Cases
 
+   This document covers how to use OAM for network-wide use cases.
+   Following, some illustrative examples are presented.
+
 2.1.  Troubleshooting
 
    After the detection of a problem [I-D.ietf-nmop-terminology] in the
@@ -284,7 +284,7 @@ Table of Contents
    Even though the troubleshooting process may be different depending on
    the problem detected, there are certain common procedures or logics
    that can be executed in order to narrow down the cause of the problem
-   and thus help isolating candidate root cause.
+   and thus help locating candidate root cause.
 
 2.2.  Birth Certificate
 
@@ -327,8 +327,8 @@ Table of Contents
    running tests both end-to-end, but also on service components to
    identify early symptoms and resolve issues before they impact the
    customer or end user, or to prevent or minimize the impact of the end
-   user.  Mitigation action may be enforced to soften the impact of
-   networks incidents and soften/nullify the impact on services that are
+   user.  Mitigation action may be enforced to alliviate the impact of
+   networks incidents and nullify the impact on services that are
    delivered via that network.
 
    Proactive testing might be done via OAM tests.  These tests can be
@@ -349,10 +349,11 @@ Table of Contents
    some of them the PCE requires traffic engineering information.  TE
    information includes data such as link metrics, bandwidth
    availability, and routing constraints.  By using this information,
-   the PCE can compute the optimal path for a particular service, taking
-   into account its constraints and requirements.  OAM techniques allow
-   obtaining link metrics like delay and loss which can be used in the
-   PCE algorithms.
+   the PCE can compute the optimal path for a particular service
+   [RFC8233], taking into account its constraints and requirements.  In
+   addition to TE Metric Extensions in OSPF [RFC7471] or IS-IS
+   [RFC7810], OAM techniques also allow obtaining link metrics like
+   delay and loss which can be used in the PCE algorithms.
 
 3.  Modelling the Scheduling of OAM Tests
 
@@ -942,9 +943,9 @@ Table of Contents
    [I-D.ietf-netmod-schedule-yang]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Common YANG
               Data Model for Scheduling", Work in Progress, Internet-
-              Draft, draft-ietf-netmod-schedule-yang-07, 12 June 2025,
+              Draft, draft-ietf-netmod-schedule-yang-08, 4 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              schedule-yang-07>.
+              schedule-yang-08>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -985,6 +986,16 @@ Table of Contents
               RFC 6991, DOI 10.17487/RFC6991, July 2013,
               <https://www.rfc-editor.org/rfc/rfc6991>.
 
+   [RFC7471]  Giacalone, S., Ward, D., Drake, J., Atlas, A., and S.
+              Previdi, "OSPF Traffic Engineering (TE) Metric
+              Extensions", RFC 7471, DOI 10.17487/RFC7471, March 2015,
+              <https://www.rfc-editor.org/rfc/rfc7471>.
+
+   [RFC7810]  Previdi, S., Ed., Giacalone, S., Ward, D., Drake, J., and
+              Q. Wu, "IS-IS Traffic Engineering (TE) Metric Extensions",
+              RFC 7810, DOI 10.17487/RFC7810, May 2016,
+              <https://www.rfc-editor.org/rfc/rfc7810>.
+
    [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
               RFC 7950, DOI 10.17487/RFC7950, August 2016,
               <https://www.rfc-editor.org/rfc/rfc7950>.
@@ -996,6 +1007,12 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8233]  Dhody, D., Wu, Q., Manral, V., Ali, Z., and K. Kumaki,
+              "Extensions to the Path Computation Element Communication
+              Protocol (PCEP) to Compute Service-Aware Label Switched
+              Paths (LSPs)", RFC 8233, DOI 10.17487/RFC8233, September
+              2017, <https://www.rfc-editor.org/rfc/rfc8233>.
 
    [RFC8340]  Bjorklund, M. and L. Berger, Ed., "YANG Tree Diagrams",
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
