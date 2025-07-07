@@ -319,7 +319,7 @@ This section discusses the issues related to reusing device models already defin
 
 As an exmaple, we will use {{!RFC8913}}, which defines a YANG data model for TWAMP, to illustrate how device models could be used.
 
-# Considerations
+# Operational Considerations
 
 ## Conflict Resolution and Reporting Among Scheduled OAM Tasks
 
