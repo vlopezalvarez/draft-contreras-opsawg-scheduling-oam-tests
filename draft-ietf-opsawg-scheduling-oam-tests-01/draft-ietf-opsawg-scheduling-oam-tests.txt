@@ -92,7 +92,7 @@ Table of Contents
      4.1.  YANG Model for Scheduling OAM Unitary Test
      4.2.  YANG Model for OAM Test Sequence
    5.  Using Device Mode Within OAM Scheduling Models
-   6.  Considerations
+   6.  Operational Considerations
      6.1.  Conflict Resolution and Reporting Among Scheduled OAM Tasks
      6.2.  Coverage of Input Parameters and Output Results
    7.  Security Considerations
@@ -849,7 +849,7 @@ Table of Contents
    As an exmaple, we will use [RFC8913], which defines a YANG data model
    for TWAMP, to illustrate how device models could be used.
 
-6.  Considerations
+6.  Operational Considerations
 
 6.1.  Conflict Resolution and Reporting Among Scheduled OAM Tasks
 
