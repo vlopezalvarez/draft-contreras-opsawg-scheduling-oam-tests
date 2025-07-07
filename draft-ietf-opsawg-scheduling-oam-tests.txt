@@ -399,7 +399,7 @@ Table of Contents
                 +--rw recurrence-description?   string
                 +--rw frequency                 identityref
                 +--rw interval?                 uint32
-                +--rw unitary-test-status?      enumeration
+                +--ro unitary-test-status?      enumeration
 
                 Figure 1: Tree Structure of OAM Unitary Test
 
@@ -488,7 +488,7 @@ Table of Contents
                 +--rw recurrence-description?   string
                 +--rw frequency                 identityref
                 +--rw interval?                 uint32
-                +--rw test-sequence-status?     enumeration
+                +--ro test-sequence-status?     enumeration
 
                         Figure 3: OAM test sequence
 
