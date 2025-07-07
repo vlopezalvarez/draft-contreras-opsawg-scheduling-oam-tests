@@ -175,7 +175,7 @@ module: ietf-oam-unitary-test
         +--rw recurrence-description?   string
         +--rw frequency                 identityref
         +--rw interval?                 uint32
-        +--rw unitary-test-status?      enumeration
+        +--ro unitary-test-status?      enumeration
 ~~~~
 {: #oam-uni-test-tree-st title="Tree Structure of OAM Unitary Test" artwork-align="center"}
 
@@ -249,7 +249,7 @@ module: ietf-oam-test-sequence
         +--rw recurrence-description?   string
         +--rw frequency                 identityref
         +--rw interval?                 uint32
-        +--rw test-sequence-status?     enumeration
+        +--ro test-sequence-status?     enumeration
 
 ~~~~
 {: #oam-test-sequence-tree-st title="OAM test sequence" artwork-align="center"}
