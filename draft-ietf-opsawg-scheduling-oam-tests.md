@@ -167,9 +167,7 @@ module: ietf-oam-unitary-test
         +--rw name                      string
         +--rw ne-config* [ne-id]
         |  +--rw ne-id    rt-types:router-id
-        |  +--rw managed                boolean
-        |  +--rw test-type              identityref
-        |  +--mp root
+        |  +--rw (test-type)
         +--rw period-description?       string
         +--rw period-start              yang:date-and-time
         +--rw time-zone-identifier?     sys:timezone-name
