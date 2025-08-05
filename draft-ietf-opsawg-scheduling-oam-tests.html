@@ -7,16 +7,17 @@
 <title>A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM Tests</title>
 <meta content="Luis M. Contreras" name="author">
 <meta content="Victor Lopez" name="author">
+<meta content="Qin Wu" name="author">
 <meta content="
        This document defines a YANG data model for network diagnosis on-demand relying upon Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures, primarily intended for use by an SDN controller or network orchestrator, rather than by individual network nodes. 
     " name="description">
-<meta content="xml2rfc 3.29.0" name="generator">
+<meta content="xml2rfc 3.30.0" name="generator">
 <meta content="OAM" name="keyword">
 <meta content="Scheduling" name="keyword">
 <meta content="Test sequences" name="keyword">
 <meta content="draft-ietf-opsawg-scheduling-oam-tests-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.29.0
+  xml2rfc 3.30.0
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -1047,11 +1048,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Scheduling OAM YANG</td>
-<td class="right">July 2025</td>
+<td class="right">August 2025</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Contreras &amp; Lopez</td>
-<td class="center">Expires 8 January 2026</td>
+<td class="left">Contreras, et al.</td>
+<td class="center">Expires 6 February 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-opsawg-scheduling-oam-tests-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-07-07" class="published">7 July 2025</time>
+<time datetime="2025-08-05" class="published">5 August 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-01-08">8 January 2026</time></dd>
+<dd class="expires"><time datetime="2026-02-06">6 February 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1079,6 +1080,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <div class="author">
       <div class="author-name">V. Lopez</div>
 <div class="org">Nokia</div>
+</div>
+<div class="author">
+      <div class="author-name">Q. Wu</div>
+<div class="org">Huawei</div>
 </div>
 </dd>
 </dl>
@@ -1123,7 +1128,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1266,7 +1271,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-1-2">Specifically, OAM functions provide the means to identify and isolate faults, measure and report of performance (see section 4.2, <span>[<a href="#RFC6632" class="cite xref">RFC6632</a>]</span>. For example, <span>[<a href="#RFC5860" class="cite xref">RFC5860</a>]</span> defines the three main areas involved in OAM:<a href="#section-1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-3.1">
-          <p id="section-1-3.1.1">Fault management, which allows network operators to quickly identify and isolate faults in the network. Examples of these mechanisms for fault detection and isolation are: continuity check, link trace, and loopback.<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-3.1.1">Fault management, which allows network operators quickly identify and isolate faults in the network. Examples of these mechanisms for fault detection and isolation are: continuity check, link trace, and loopback.<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-3.2">
           <p id="section-1-3.2.1">Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as frame delay measurement, frame delay variation measurement, and frame loss measurement.<a href="#section-1-3.2.1" class="pilcrow">¶</a></p>
@@ -1293,20 +1298,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-1-6">More recently, Incident Management <span>[<a href="#I-D.ietf-nmop-network-incident-yang" class="cite xref">I-D.ietf-nmop-network-incident-yang</a>]</span> focuses on
    of incident diagnosis, which can be favored by dynamic invocation of OAM tests.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7"><span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>, and <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> defined YANG models for OAM technologies:<a href="#section-1-7" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-1-8.1">
-          <p id="section-1-8.1.1"><span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span> "A YANG Data Model for MPLS-TP OAM": defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control, and monitor connection-oriented OAM protocols such as MPLS-TP OAM, PBB-TE OAM, and G.7713.1 OAM.<a href="#section-1-8.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-8.2">
-          <p id="section-1-8.2.1"><span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span> "A YANG Data Model for Connectionless OAM Protocols": provides a generic YANG data model that can be used to configure, control, and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection), LBM (Loopback Messaging), and VCCV (Virtual Circuit Connectivity Verification).<a href="#section-1-8.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-8.3">
-          <p id="section-1-8.3.1"><span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span> "A YANG Data Model for BFD, LBM, and VCCV OAM Protocols": provides a YANG data model that can be used to retrieve information related to OAM protocols such as Bidirectional Forwarding Detection (BFD), Loopback Messaging (LBM), and Virtual Circuit Connectivity Verification (VCCV).<a href="#section-1-8.3.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-1-8.4">
-          <p id="section-1-8.4.1"><span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> "A YANG Data Model for Two-Way Active Measurement Protocol (TWAMP)": specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).<a href="#section-1-8.4.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
+<p id="section-1-8">o <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span> "A YANG Data Model for MPLS-TP OAM": defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control, and monitor connection-oriented OAM protocols such as MPLS-TP OAM, PBB-TE OAM, and G.7713.1 OAM.
+o <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span> "A YANG Data Model for Connectionless OAM Protocols": provides a generic YANG data model that can be used to configure, control, and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection), LBM (Loopback Messaging), and VCCV (Virtual Circuit Connectivity Verification).
+o <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span> "A YANG Data Model for BFD, LBM, and VCCV OAM Protocols": provides a YANG data model that can be used to retrieve information related to OAM protocols such as Bidirectional Forwarding Detection (BFD), Loopback Messaging (LBM), and Virtual Circuit Connectivity Verification (VCCV).
+o <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> "A YANG Data Model for Two-Way Active Measurement Protocol (TWAMP)": specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).<a href="#section-1-8" class="pilcrow">¶</a></p>
 <p id="section-1-9">These OAM related YANG data models defined the parameters required for each of the different tests that are used in network elements today. This work aims to reuse and build upon existing YANG models for OAM technologies, such as those defined in <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, and <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>. By leveraging these foundational models, this document specifies a YANG data model for scheduling and coordinating sequences of OAM tests, enabling more advanced and automated network diagnosis procedures. In addition to reusing the device-level OAM YANG models from <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, and <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>, this document builds upon the generic scheduling framework defined in <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. The <code>ietf-schedule</code> module provides reusable groupings and mechanisms for specifying periods of time, recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM unitary test and OAM test sequence models defined in this document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a network-wide context.<a href="#section-1-9" class="pilcrow">¶</a></p>
 <p id="section-1-10">The YANG data model resulting from this document will conform to the Network Management Datastore Architecture (NMDA) <span>[<a href="#RFC8342" class="cite xref">RFC8342</a>]</span>.<a href="#section-1-10" class="pilcrow">¶</a></p>
 <div id="terminology-and-notations">
@@ -1316,15 +1311,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
         </h3>
 <p id="section-1.1-1">This document assumes that the reader is familiar with the contents of <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span> "The YANG 1.1 Data Modeling Language".<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">Following terms are used for the representation of this data model.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-1.1-3.1">
-            <p id="section-1.1-3.1.1">OAM unitary test: A set of parameters that define a type of OAM test to be invoked. As an example, it includes the type test, configuration parameters, and target results.<a href="#section-1.1-3.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-1.1-3.2">
-            <p id="section-1.1-3.2.1">OAM test sequence: A set of OAM unitary tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.<a href="#section-1.1-3.2.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-1.1-4">Tree diagrams used in this document follow the notation defined in <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span>.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">o OAM unitary test: A set of parameters that define a type of OAM test to be invoked. As an example, it includes the type test, configuration parameters, and target results.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<p id="section-1.1-4">o OAM test sequence: A set of OAM unitary tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">Tree diagrams used in this document follow the notation defined in <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span>.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="requirements-language">
@@ -1396,9 +1385,9 @@ Please replace XXXX with the RFC number assigned to this document if the documen
         <h3 id="name-troubleshooting">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-troubleshooting" class="section-name selfRef">Troubleshooting</a>
         </h3>
-<p id="section-2.1-1">After the detection of a problem <span>[<a href="#I-D.ietf-nmop-terminology" class="cite xref">I-D.ietf-nmop-terminology</a>]</span> in the network, OAM tests are performed to find the root cause for the detected problem. However, a detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help to find the root cause by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests depend on the nature of the test itself.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-1">After the detection of a problem <span>[<a href="#I-D.ietf-nmop-terminology" class="cite xref">I-D.ietf-nmop-terminology</a>]</span> in the network, OAM tests are performed to find the root cause for the detected problem. However, a detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help find the candidate root cause by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests depend on the nature of the test itself.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2">There are a variety of OAM tests that can be executed as a function of the target scenario. For example, if the issue is related to a Layer 2 capability, specific tests can be designed and run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. These tests can be coupled with others to test if any filtering is in place by varying, e.g., some Layer 2 fields or checking the configuration of relevant nodes.  If these tests are correct, the operator may want to check the availability of the service (or its delivered performance).<a href="#section-2.1-2" class="pilcrow">¶</a></p>
-<p id="section-2.1-3">Even though the troubleshooting process may be different depending on the problem detected, there are certain common procedures or logics that can be executed in order to narrow down the cause of the problem and thus help locating candidate root cause.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-3">Even though the troubleshooting process may be different depending on the problem detected, there are certain common procedures or logics that can be executed in order to narrow down the cause of the problem and thus help locate candidate root cause.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="birth-certificate">
@@ -1547,7 +1536,9 @@ module: ietf-oam-test-sequence
         +--rw name                      string
         +--rw test-ref* [name]
         |  +--rw name             string
-        |  +--rw (test-type)
+        |  +--rw managed                boolean
+        |  +--rw test-type              identityref
+        |  +--mp root
         |  +--rw numexecutions?   uint32
         +--rw period-description?       string
         +--rw period-start              yang:date-and-time
@@ -2035,7 +2026,7 @@ module ietf-oam-test-sequence {
 <dl class="references">
 <dt id="I-D.ietf-netmod-schedule-yang">[I-D.ietf-netmod-schedule-yang]</dt>
         <dd>
-<span class="refAuthor">Ma, Q.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">D. King</span>, <span class="refTitle">"A Common YANG Data Model for Scheduling"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-schedule-yang-08</span>, <time datetime="2025-07-04" class="refDate">4 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-schedule-yang-08">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-schedule-yang-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Ma, Q.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">D. King</span>, <span class="refTitle">"A Common YANG Data Model for Scheduling"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-schedule-yang-09</span>, <time datetime="2025-08-04" class="refDate">4 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-schedule-yang-09">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-schedule-yang-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -2324,6 +2315,14 @@ module ietf-oam-test-sequence {
 <div class="email">
 <span>Email:</span>
 <a href="mailto:victor.lopez@nokia.com" class="email">victor.lopez@nokia.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Qin Wu</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:bill.wu@huawei.com" class="email">bill.wu@huawei.com</a>
 </div>
 </address>
 </section>
