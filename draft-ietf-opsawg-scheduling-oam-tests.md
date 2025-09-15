@@ -358,7 +358,41 @@ In which refers to the scheduling of the tests, security considerations in {{!I-
 
 # IANA Considerations
 
-TBC
+##  Updates to the IETF XML Registry for New YANG Module
+
+   IANA is requested to register the following URI in the "ns" registry
+   within the "IETF XML Registry" group {{!RFC3688}}.
+
+   ---------------------------------------------------------------------
+      URI: urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test
+      Registrant Contact: The IESG.
+      XML: N/A, the requested URI is an XML namespace.
+
+      URI: urn:ietf:params:xml:ns:yang:ietf-oam-test-sequence
+      Registrant Contact: The IESG.
+      XML: N/A, the requested URI is an XML namespace.
+   ---------------------------------------------------------------------
+   
+
+##  Updates to the YANG Module Names Registry for New YANG Module
+
+   IANA is requested to register the following YANG module in the "YANG
+   Module Names" registry {{!RFC6020}} within the "YANG Parameters"
+   registry group.
+
+   ---------------------------------------------------------------------
+      Name:       ietf-oam-unitary-test
+      Maintained by IANA? N
+      Namespace:  urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test
+      Prefix:     as
+      Reference:  RFC XXXX
+	  
+      Name:       ietf-oam-test-sequence
+      Maintained by IANA? N
+      Namespace:  urn:ietf:params:xml:ns:yang:ietf-oam-test-sequence
+      Prefix:     as
+      Reference:  RFC XXXX
+   ---------------------------------------------------------------------
 
 # Implementation Status
 
