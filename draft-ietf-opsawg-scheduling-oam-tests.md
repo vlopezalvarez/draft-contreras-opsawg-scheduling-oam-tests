@@ -372,7 +372,7 @@ In which refers to the scheduling of the tests, security considerations in {{!I-
       Registrant Contact: The IESG.
       XML: N/A, the requested URI is an XML namespace.
    ---------------------------------------------------------------------
-   
+
 
 ##  Updates to the YANG Module Names Registry for New YANG Module
 
@@ -386,7 +386,7 @@ In which refers to the scheduling of the tests, security considerations in {{!I-
       Namespace:  urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test
       Prefix:     as
       Reference:  RFC XXXX
-	  
+
       Name:       ietf-oam-test-sequence
       Maintained by IANA? N
       Namespace:  urn:ietf:params:xml:ns:yang:ietf-oam-test-sequence
