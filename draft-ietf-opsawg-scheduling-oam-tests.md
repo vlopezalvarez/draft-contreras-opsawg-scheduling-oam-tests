@@ -50,7 +50,14 @@ informative:
              title: "Operation and maintenance mechanism for T-MPLS layer networks"
              date: 2007-04
              target: https://www.itu.int/rec/T-REC-G.8113.1-201611-I!Cor1
-
+   IEEE-8021Q:
+            title: "IEEE Standard for Local and metropolitan area networks - Media Access Control (MAC) Bridges and Virtual Bridged Local Area Networks"
+            date: 2012-10
+            target: https://standards.ieee.org/ieee/802.1Q/6844/
+   IEEE-8021ag:
+           title: "IEEE Standard for Local and Metropolitan Area Networks – Bridges and Bridged Networks – Connectivity Fault Management"
+           date: 2007
+           target:https://standards.ieee.org/ieee/802.1ag/3597/
 --- abstract
 
 This document defines a YANG data model for network diagnosis on-demand relying upon Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures, primarily intended for use by an SDN controller or network orchestrator, rather than by individual network nodes.
