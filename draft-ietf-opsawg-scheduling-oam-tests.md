@@ -46,6 +46,10 @@ informative:
                  Networks"
               date: 2023-06-13
               target: https://www.itu.int/rec/T-REC-Y.1731/en
+   ITU-T-G81131:
+             title: "Operation and maintenance mechanism for T-MPLS layer networks"
+             date: 2007-04
+             target: https://www.itu.int/rec/T-REC-G.8113.1-201611-I!Cor1
 
 --- abstract
 
@@ -80,7 +84,7 @@ the network incident diagnosis, which can be favored by dynamic invocation of OA
 
 {{!RFC8531}}, {{!RFC8532}}, {{!RFC8533}}, and {{!RFC8913}} defined YANG models for OAM technologies:
 
-o {{!RFC8531}} "A YANG Data Model for Connection Oriented OAM": defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control, and monitor connection-oriented OAM protocols such as MPLS-TP OAM {{?RFC6371}}, TRILL OAM{{?RFC7174}}, PBB-TE OAM {{IEEE-8021ag}}, and T-MPLS {{ITU-T-G8114}} OAM.
+o {{!RFC8531}} "A YANG Data Model for Connection Oriented OAM": defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control, and monitor connection-oriented OAM protocols such as MPLS-TP OAM {{?RFC6371}}, TRILL OAM{{?RFC7174}}, PBB-TE OAM {{IEEE-8021ag}}, and T-MPLS {{ITU-T-G81131}} OAM.
 
 o {{!RFC8532}} "A YANG Data Model for Connectionless OAM Protocols": provides a generic YANG data model that can be used to configure, control, and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection){{?RFC5880}}, LBM (Loopback Messaging){{IEEE-8021ag}}, and VCCV (Virtual Circuit Connectivity Verification){{?RFC5085}}.
 
