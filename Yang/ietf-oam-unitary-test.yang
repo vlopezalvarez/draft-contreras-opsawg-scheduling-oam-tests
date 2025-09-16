@@ -30,10 +30,10 @@ module ietf-oam-unitary-test {
   contact
     "WG Web:   <https://datatracker.ietf.org/wg/opsawg/>
      WG List:  <mailto:opsawg@ietf.org>
-     Author: Luis Miguel Contreras Murillo
-          <luismiguel.contrerasmurillo@telefonica.com>
-     Author: Victor Lopez
-          <victor.lopez@nokia.com>";
+     Author:   Luis Miguel Contreras Murillo
+               <luismiguel.contrerasmurillo@telefonica.com>
+     Author:   Victor Lopez
+               <victor.lopez@nokia.com>";
   description
     "This module defines the 'ietf-oam-unitary-test' YANG model for
      activation of network diagnosis procedures.
@@ -50,12 +50,20 @@ module ietf-oam-unitary-test {
 
      This version of this YANG module is part of RFC XXXX
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-     for full legal notices.";
+     for full legal notices.
+	 
+	 The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
+     NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
+     'MAY', and 'OPTIONAL' in this document are to be interpreted as
+     described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
+     they appear in all capitals, as shown here.";
 
   // RFC Ed.: update the date below with the date of RFC
   // publication and remove this note.
   // RFC Ed.: replace XXXX with actual RFC number and remove
   // this note.
+
+
 
   revision "2024-11-08" {
     description
@@ -121,7 +129,7 @@ module ietf-oam-unitary-test {
          yangmnt:mount-point "root" {
            description
              "Root for models supported per oam unitary test.  
-		This mount point may or may not
+		      This mount point may or may not
               be inline based on the server implementation.  
 
               When the associated 'managed' leaf is 'false', any
@@ -149,10 +157,9 @@ module ietf-oam-unitary-test {
 
       uses schedule:period-of-time;
 
-      uses schedule:recurrence;
+      uses schedule:recurrence-basic;
 
       leaf unitary-test-status {
-        config false;
         type enumeration {
           enum "planned" {
             description
@@ -183,6 +190,7 @@ module ietf-oam-unitary-test {
               "The test has an error.";
           }
         }
+		config false;
         description
           "Status of the test.";
       }
