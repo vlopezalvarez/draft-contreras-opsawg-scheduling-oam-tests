@@ -69,22 +69,22 @@ Specifically, OAM functions provide the means to identify and isolate faults, me
 
 * Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational.
 
-* Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple technologies for this function, like IP Ping, VCCV Ping, LSP Ping or Ethernet Loopback.
+* Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple technologies for this function, like IP Ping{{?RFC0792}}{{?RFC4443}}, VCCV Ping{{?RFC5085}}, LSP Ping {{?RFC4379}} or Ethernet Loopback {{IEEE802.1Q}}
 
-* Link Trace: This function allows a network operator to trace a path through a network from one device to another. Some technologies following this approach are Y.1731 Linktrace {{ITU-T-Y1731}} or IP traceroute.
+* Link Trace: This function allows a network operator to trace a path through a network from one device to another. Some technologies following this approach are Y.1731 Linktrace {{ITU-T-Y1731}} or IP traceroute{{?RFC0792}}{{?RFC4443}}.
 
-* Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues. Protocols like TWAMP, STAMP, Alternative Marking, IOAM, or Y.1731 DMM/SLM {{ITU-T-Y1731}} can obtain performance measurements.
+* Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues. Protocols like TWAMP{{?RFC5357}}, STAMP{{?RFC8762}}, Alternative Marking{{?RFC9341}}, IOAM (In Situ OAM) {{?RFC9197}}, or Y.1731 DMM/SLM {{ITU-T-Y1731}} can obtain performance measurements.
 
 More recently, Incident Management {{?I-D.ietf-nmop-network-incident-yang}} focuses on
 the network incident diagnosis, which can be favored by dynamic invocation of OAM tests.
 
 {{!RFC8531}}, {{!RFC8532}}, {{!RFC8533}}, and {{!RFC8913}} defined YANG models for OAM technologies:
 
-o {{!RFC8531}} "A YANG Data Model for Connection Oriented OAM": defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control, and monitor connection-oriented OAM protocols such as MPLS-TP OAM, TRILL OAM, PBB-TE OAM, and G.7713.1 OAM.
+o {{!RFC8531}} "A YANG Data Model for Connection Oriented OAM": defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control, and monitor connection-oriented OAM protocols such as MPLS-TP OAM {{?RFC6371}}, TRILL OAM{{?RFC7174}}, PBB-TE OAM {{IEEE 802.1ag}}, and T-MPLS {{ITU-T G.8114}} OAM.
 
-o {{!RFC8532}} "A YANG Data Model for Connectionless OAM Protocols": provides a generic YANG data model that can be used to configure, control, and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection), LBM (Loopback Messaging), and VCCV (Virtual Circuit Connectivity Verification).
+o {{!RFC8532}} "A YANG Data Model for Connectionless OAM Protocols": provides a generic YANG data model that can be used to configure, control, and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection){{?RFC5880}}, LBM (Loopback Messaging){{IEEE 802.1ag}}, and VCCV (Virtual Circuit Connectivity Verification){{?RFC5085}}.
 
-o {{!RFC8533}} "A YANG Data Model for BFD, LBM, and VCCV OAM Protocols": provides a YANG data model that can be used to retrieve information related to OAM protocols such as Bidirectional Forwarding Detection (BFD), Loopback Messaging (LBM), and Virtual Circuit Connectivity Verification (VCCV).
+o {{!RFC8533}} "A YANG Data Model for Retrieval Methods for the Management of OAM Protocols that Use Connectionless Communications": provides a YANG data model that can be used to retrieve information related to OAM protocols such as BFD (Bidirectional Forwarding Detection){{?RFC5880}}, LBM (Loopback Messaging){{IEEE 802.1ag}}, and VCCV (Virtual Circuit Connectivity Verification){{?RFC5085}}.
 
 o {{!RFC8913}} "A YANG Data Model for Two-Way Active Measurement Protocol (TWAMP)": specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).
 
