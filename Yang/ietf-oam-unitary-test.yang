@@ -6,7 +6,17 @@ module ietf-oam-unitary-test {
   // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
 
   // reference ietf-netmod-schedule-yang
-  import ietf-schedule { prefix "schedule"; }
+  import ietf-schedule {
+    prefix schedule;
+    reference
+      "RFC XXXX: A Common YANG Data Model for Scheduling";
+  }
+
+  import ietf-routing-types {
+    prefix rt-types;
+    reference
+      "RFC 8294: Common YANG Data Types for the Routing Area";
+  }
 
   organization
     "IETF OPSAWG (Operations and Management Area Working Group)";
@@ -41,7 +51,7 @@ module ietf-oam-unitary-test {
   // RFC Ed.: replace XXXX with actual RFC number and remove
   // this note.
 
-  revision "2024-07-05" {
+  revision "2024-11-08" {
     description
       "Initial version";
     reference
@@ -61,11 +71,24 @@ module ietf-oam-unitary-test {
         "Defines the name of the test.";
     }
 
-    choice test-type {
-      mandatory true;
-      description
-        "Choose the type of test.";
-        // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
+    list ne-config {
+      key ne-id;
+      description "List of node configurations required to enable the
+        unitary tests.";
+
+      leaf ne-id {
+        type rt-types:router-id;
+        description
+          "A 32-bit number in the dotted-quad format that is used
+            to uniquely identify a node within an autonomous system
+            the ne-id. This identifier is used for both IPv4 and IPv6.";
+      }
+      choice test-type {
+        mandatory true;
+        description
+          "Choose the type of test. Pending to add the schema-mount solution";
+          // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
+      }
     }
   }
 
@@ -87,6 +110,7 @@ module ietf-oam-unitary-test {
       uses schedule:recurrence;
 
       leaf unitary-test-status {
+        config false;
         type enumeration {
           enum "planned" {
             description
