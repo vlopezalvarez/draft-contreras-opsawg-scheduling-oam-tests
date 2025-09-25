@@ -727,10 +727,12 @@ Table of Contents
      contact
        "WG Web:   <https://datatracker.ietf.org/wg/opsawg/>
         WG List:  <mailto:opsawg@ietf.org>
-        Author: Luis Miguel Contreras Murillo
-             <luismiguel.contrerasmurillo@telefonica.com>
-        Author: Victor Lopez
-             <victor.lopez@nokia.com>";
+        Author:   Luis Miguel Contreras Murillo
+                  <luismiguel.contrerasmurillo@telefonica.com>
+        Author:   Victor Lopez
+                 <victor.lopez@nokia.com>
+            Author:   Qin Wu
+                     <bill.wu@huawei.com>";
      description
        "This module defines the 'oam-test-sequence-test' YANG model for
        management of network diagnosis procedures.
@@ -796,7 +798,6 @@ Table of Contents
          uses schedule:recurrence-utc;
 
          leaf test-sequence-status {
-           config false;
            type enumeration {
              enum "planned" {
                description
@@ -831,7 +832,7 @@ Table of Contents
                  "The test sequence status has an error.";
              }
            }
-
+           config false;
            description
              "Status of the test sequence execution.";
          }

@@ -1830,10 +1830,12 @@ module ietf-oam-test-sequence {
   contact
     "WG Web:   &lt;https://datatracker.ietf.org/wg/opsawg/&gt;
      WG List:  &lt;mailto:opsawg@ietf.org&gt;
-     Author: Luis Miguel Contreras Murillo
-          &lt;luismiguel.contrerasmurillo@telefonica.com&gt;
-     Author: Victor Lopez
-          &lt;victor.lopez@nokia.com&gt;";
+     Author:   Luis Miguel Contreras Murillo
+               &lt;luismiguel.contrerasmurillo@telefonica.com&gt;
+     Author:   Victor Lopez
+              &lt;victor.lopez@nokia.com&gt;
+         Author:   Qin Wu
+                  &lt;bill.wu@huawei.com&gt;";
   description
     "This module defines the 'oam-test-sequence-test' YANG model for
     management of network diagnosis procedures.
@@ -1899,7 +1901,6 @@ module ietf-oam-test-sequence {
       uses schedule:recurrence-utc;
 
       leaf test-sequence-status {
-        config false;
         type enumeration {
           enum "planned" {
             description
@@ -1934,7 +1935,7 @@ module ietf-oam-test-sequence {
               "The test sequence status has an error.";
           }
         }
-
+        config false;
         description
           "Status of the test sequence execution.";
       }
