@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 6 February 2026                                           Nokia
+Expires: 29 March 2026                                             Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                           5 August 2025
+                                                       25 September 2025
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 February 2026.
+   This Internet-Draft will expire on 29 March 2026.
 
 Copyright Notice
 
@@ -119,7 +119,7 @@ Table of Contents
    missing to cover specific needs.
 
    Specifically, OAM functions provide the means to identify and isolate
-   faults, measure and report of performance (see section 4.2,
+   faults, measure and report the network performance (see section 4.2,
    [RFC6632].  For example, [RFC5860] defines the three main areas
    involved in OAM:
 
@@ -144,54 +144,64 @@ Table of Contents
 
    *  Loopback: This function allows a device to loop back a received
       packet back to the sender for diagnostic purposes.  There are
-      multiple technologies for this function, like IP Ping, VCCV Ping,
-      LSP Ping or Ethernet Loopback.
+      multiple technologies for this function, like IP
+      Ping[RFC0792][RFC4443], VCCV Ping[RFC5085], LSP Ping [RFC4379] or
+      Ethernet Loopback [IEEE-8021Q]
 
    *  Link Trace: This function allows a network operator to trace a
       path through a network from one device to another.  Some
       technologies following this approach are Y.1731 Linktrace
-      [ITU-T-Y1731] or IP traceroute.
+      [ITU-T-Y1731] or IP traceroute[RFC0792][RFC4443].
 
    *  Performance Monitoring: This function allows a network operator to
       monitor the performance of a network and to identify and diagnose
-      performance issues.  Protocols like TWAMP, or Y.1731 DMM/SLM
-      [ITU-T-Y1731] can obtain performance measurements.
+      performance issues.  Protocols like TWAMP[RFC5357],
+      STAMP[RFC8762], Alternative Marking[RFC9341], IOAM (In Situ OAM)
+      [RFC9197], or Y.1731 DMM/SLM [ITU-T-Y1731] can obtain performance
+      measurements.
 
    More recently, Incident Management
-   [I-D.ietf-nmop-network-incident-yang] focuses on of incident
+   [I-D.ietf-nmop-network-incident-yang] focuses on the network incident
    diagnosis, which can be favored by dynamic invocation of OAM tests.
 
    [RFC8531], [RFC8532], [RFC8533], and [RFC8913] defined YANG models
    for OAM technologies:
 
-   o [RFC8531] "A YANG Data Model for MPLS-TP OAM": defines a YANG data
-   model for connection-oriented OAM protocols.  The main aim of this
-   document is to define a generic YANG data model that can be used to
-   configure, control, and monitor connection-oriented OAM protocols
-   such as MPLS-TP OAM, PBB-TE OAM, and G.7713.1 OAM. o [RFC8532] "A
-   YANG Data Model for Connectionless OAM Protocols": provides a generic
-   YANG data model that can be used to configure, control, and monitor
-   connectionless OAM protocols such as BFD (Bidirectional Forwarding
-   Detection), LBM (Loopback Messaging), and VCCV (Virtual Circuit
-   Connectivity Verification). o [RFC8533] "A YANG Data Model for BFD,
-   LBM, and VCCV OAM Protocols": provides a YANG data model that can be
-   used to retrieve information related to OAM protocols such as
-   Bidirectional Forwarding Detection (BFD), Loopback Messaging (LBM),
-   and Virtual Circuit Connectivity Verification (VCCV). o [RFC8913] "A
-   YANG Data Model for Two-Way Active Measurement Protocol (TWAMP)":
-   specifies a YANG data model for client and server implementations of
-   the Two-Way Active Measurement Protocol (TWAMP).
+   o [RFC8531] "A YANG Data Model for Connection Oriented OAM": defines
+   a YANG data model for connection-oriented OAM protocols.  The main
+   aim of this document is to define a generic YANG data model that can
+   be used to configure, control, and monitor connection-oriented OAM
+   protocols such as MPLS-TP OAM [RFC6371], TRILL OAM[RFC7174], PBB-TE
+   OAM [IEEE-8021ag], and T-MPLS [ITU-T-G81131] OAM.
 
-   These OAM related YANG data models defined the parameters required
-   for each of the different tests that are used in network elements
-   today.  This work aims to reuse and build upon existing YANG models
-   for OAM technologies, such as those defined in [RFC8531], [RFC8532],
-   and [RFC8533].  By leveraging these foundational models, this
-   document specifies a YANG data model for scheduling and coordinating
-   sequences of OAM tests, enabling more advanced and automated network
-   diagnosis procedures.  In addition to reusing the device-level OAM
-   YANG models from [RFC8531], [RFC8532], and [RFC8533], this document
-   builds upon the generic scheduling framework defined in
+   o [RFC8532] "A YANG Data Model for Connectionless OAM Protocols":
+   provides a generic YANG data model that can be used to configure,
+   control, and monitor connectionless OAM protocols such as BFD
+   (Bidirectional Forwarding Detection)[RFC5880], LBM (Loopback
+   Messaging)[IEEE-8021ag], and VCCV (Virtual Circuit Connectivity
+   Verification)[RFC5085].
+
+   o [RFC8533] "A YANG Data Model for Retrieval Methods for the
+   Management of OAM Protocols that Use Connectionless Communications":
+   provides a YANG data model that can be used to retrieve information
+   related to OAM protocols such as BFD (Bidirectional Forwarding
+   Detection)[RFC5880], LBM (Loopback Messaging)[IEEE-8021ag], and VCCV
+   (Virtual Circuit Connectivity Verification)[RFC5085].
+
+   o [RFC8913] "A YANG Data Model for Two-Way Active Measurement
+   Protocol (TWAMP)": specifies a YANG data model for client and server
+   implementations of the Two-Way Active Measurement Protocol (TWAMP).
+
+   These OAM related YANG data models defined parameters required for
+   each of the different tests that are used in network elements today.
+   This work aims to reuse and build upon existing YANG models for OAM
+   technologies, such as those defined in [RFC8531], [RFC8532], and
+   [RFC8533].  By leveraging these foundational models, this document
+   specifies a YANG data model for scheduling and coordinating sequences
+   of OAM tests, enabling more advanced and automated network diagnosis
+   procedures.  In addition to reusing the device-level OAM YANG models
+   from [RFC8531], [RFC8532], and [RFC8533], this document builds upon
+   the generic scheduling framework defined in
    [I-D.ietf-netmod-schedule-yang].  The ietf-schedule module provides
    reusable groupings and mechanisms for specifying periods of time,
    recurrence rules, and scheduling status.  These constructs are
@@ -942,9 +952,9 @@ Table of Contents
    [I-D.ietf-netmod-schedule-yang]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Common YANG
               Data Model for Scheduling", Work in Progress, Internet-
-              Draft, draft-ietf-netmod-schedule-yang-09, 4 August 2025,
+              Draft, draft-ietf-netmod-schedule-yang-10, 7 August 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              schedule-yang-09>.
+              schedule-yang-10>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1061,13 +1071,35 @@ Table of Contents
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
               Key Terms for Network Fault and Problem Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-terminology-
-              19, 18 June 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-nmop-terminology-19>.
+              23, 18 August 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
+              terminology-23>.
+
+   [IEEE-8021ag]
+              "IEEE Standard for Local and Metropolitan Area Networks –
+              Bridges and Bridged Networks – Connectivity Fault
+              Management", 2007,
+              <https://standards.ieee.org/ieee/802.1ag/3597/>.
+
+   [IEEE-8021Q]
+              "IEEE Standard for Local and metropolitan area networks -
+              Media Access Control (MAC) Bridges and Virtual Bridged
+              Local Area Networks", October 2012,
+              <https://standards.ieee.org/ieee/802.1Q/6844/>.
+
+   [ITU-T-G81131]
+              "Operation and maintenance mechanism for T-MPLS layer
+              networks", April 2007,
+              <https://www.itu.int/rec/T-REC-G.8113.1-201611-I!Cor1>.
 
    [ITU-T-Y1731]
               "OAM Functions and Mechanisms for Ethernet-based
               Networks", 13 June 2023,
               <https://www.itu.int/rec/T-REC-Y.1731/en>.
+
+   [RFC0792]  Postel, J., "Internet Control Message Protocol", STD 5,
+              RFC 792, DOI 10.17487/RFC0792, September 1981,
+              <https://www.rfc-editor.org/rfc/rfc792>.
 
    [RFC4176]  El Mghazli, Y., Ed., Nadeau, T., Boucadair, M., Chan, K.,
               and A. Gonguet, "Framework for Layer 3 Virtual Private
@@ -1075,15 +1107,46 @@ Table of Contents
               DOI 10.17487/RFC4176, October 2005,
               <https://www.rfc-editor.org/rfc/rfc4176>.
 
+   [RFC4379]  Kompella, K. and G. Swallow, "Detecting Multi-Protocol
+              Label Switched (MPLS) Data Plane Failures", RFC 4379,
+              DOI 10.17487/RFC4379, February 2006,
+              <https://www.rfc-editor.org/rfc/rfc4379>.
+
+   [RFC4443]  Conta, A., Deering, S., and M. Gupta, Ed., "Internet
+              Control Message Protocol (ICMPv6) for the Internet
+              Protocol Version 6 (IPv6) Specification", STD 89,
+              RFC 4443, DOI 10.17487/RFC4443, March 2006,
+              <https://www.rfc-editor.org/rfc/rfc4443>.
+
    [RFC4655]  Farrel, A., Vasseur, J.-P., and J. Ash, "A Path
               Computation Element (PCE)-Based Architecture", RFC 4655,
               DOI 10.17487/RFC4655, August 2006,
               <https://www.rfc-editor.org/rfc/rfc4655>.
 
+   [RFC5085]  Nadeau, T., Ed. and C. Pignataro, Ed., "Pseudowire Virtual
+              Circuit Connectivity Verification (VCCV): A Control
+              Channel for Pseudowires", RFC 5085, DOI 10.17487/RFC5085,
+              December 2007, <https://www.rfc-editor.org/rfc/rfc5085>.
+
+   [RFC5880]  Katz, D. and D. Ward, "Bidirectional Forwarding Detection
+              (BFD)", RFC 5880, DOI 10.17487/RFC5880, June 2010,
+              <https://www.rfc-editor.org/rfc/rfc5880>.
+
+   [RFC6371]  Busi, I., Ed. and D. Allan, Ed., "Operations,
+              Administration, and Maintenance Framework for MPLS-Based
+              Transport Networks", RFC 6371, DOI 10.17487/RFC6371,
+              September 2011, <https://www.rfc-editor.org/rfc/rfc6371>.
+
    [RFC6632]  Ersue, M., Ed. and B. Claise, "An Overview of the IETF
               Network Management Standards", RFC 6632,
               DOI 10.17487/RFC6632, June 2012,
               <https://www.rfc-editor.org/rfc/rfc6632>.
+
+   [RFC7174]  Salam, S., Senevirathne, T., Aldrin, S., and D. Eastlake
+              3rd, "Transparent Interconnection of Lots of Links (TRILL)
+              Operations, Administration, and Maintenance (OAM)
+              Framework", RFC 7174, DOI 10.17487/RFC7174, May 2014,
+              <https://www.rfc-editor.org/rfc/rfc7174>.
 
    [RFC7276]  Mizrahi, T., Sprecher, N., Bellagamba, E., and Y.
               Weingarten, "An Overview of Operations, Administration,
@@ -1096,10 +1159,25 @@ Table of Contents
               DOI 10.17487/RFC7297, July 2014,
               <https://www.rfc-editor.org/rfc/rfc7297>.
 
+   [RFC8762]  Mirsky, G., Jun, G., Nydell, H., and R. Foote, "Simple
+              Two-Way Active Measurement Protocol", RFC 8762,
+              DOI 10.17487/RFC8762, March 2020,
+              <https://www.rfc-editor.org/rfc/rfc8762>.
+
    [RFC8969]  Wu, Q., Ed., Boucadair, M., Ed., Lopez, D., Xie, C., and
               L. Geng, "A Framework for Automating Service and Network
               Management with YANG", RFC 8969, DOI 10.17487/RFC8969,
               January 2021, <https://www.rfc-editor.org/rfc/rfc8969>.
+
+   [RFC9197]  Brockners, F., Ed., Bhandari, S., Ed., and T. Mizrahi,
+              Ed., "Data Fields for In Situ Operations, Administration,
+              and Maintenance (IOAM)", RFC 9197, DOI 10.17487/RFC9197,
+              May 2022, <https://www.rfc-editor.org/rfc/rfc9197>.
+
+   [RFC9341]  Fioccola, G., Ed., Cociglio, M., Mirsky, G., Mizrahi, T.,
+              and T. Zhou, "Alternate-Marking Method", RFC 9341,
+              DOI 10.17487/RFC9341, December 2022,
+              <https://www.rfc-editor.org/rfc/rfc9341>.
 
    [RFC9543]  Farrel, A., Ed., Drake, J., Ed., Rokui, R., Homma, S.,
               Makhijani, K., Contreras, L., and J. Tantsura, "A
