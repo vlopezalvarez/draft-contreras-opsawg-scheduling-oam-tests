@@ -886,7 +886,7 @@ Table of Contents
    cancellation) is implementation-dependent, but MUST be clearly
    reported via the YANG model status leaves.
 
-   When a new unitary-test or test-sequence are scheduled, he request
+   When a new unitary-test or test-sequence are scheduled, the request
    MAY be rejected depending on the server's capability to evaluate the
    scheduling impact and detect conflicts prior to execution.
 
