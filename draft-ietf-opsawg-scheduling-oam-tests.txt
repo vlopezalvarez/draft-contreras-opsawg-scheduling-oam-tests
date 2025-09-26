@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 29 March 2026                                             Nokia
+Expires: 30 March 2026                                             Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                       25 September 2025
+                                                       26 September 2025
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 March 2026.
+   This Internet-Draft will expire on 30 March 2026.
 
 Copyright Notice
 
@@ -397,7 +397,9 @@ Table of Contents
                 +--rw name                      string
                 +--rw ne-config* [ne-id]
                 |  +--rw ne-id    rt-types:router-id
-                |  +--rw (test-type)
+                |  +--rw managed?     boolean
+                |  +--rw test-type?   identityref
+                |  +--rw root
                 +--rw period-description?       string
                 +--rw period-start              yang:date-and-time
                 +--rw time-zone-identifier?     sys:timezone-name
@@ -477,9 +479,11 @@ Table of Contents
                 +--rw name                      string
                 +--rw test-ref* [name]
                 |  +--rw name             string
-                |  +--rw managed                boolean
-                |  +--rw test-type              identityref
-                |  +--mp root
+                |  +--rw ne-config* [ne-id]
+                |  |  +--rw ne-id        rt-types:router-id
+                |  |  +--rw managed?     boolean
+                |  |  +--rw test-type?   identityref
+                |  |  +--rw root
                 |  +--rw numexecutions?   uint32
                 +--rw period-description?       string
                 +--rw period-start              yang:date-and-time
