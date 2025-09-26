@@ -533,10 +533,12 @@ Table of Contents
      contact
        "WG Web:   <https://datatracker.ietf.org/wg/opsawg/>
         WG List:  <mailto:opsawg@ietf.org>
-        Author: Luis Miguel Contreras Murillo
-             <luismiguel.contrerasmurillo@telefonica.com>
-        Author: Victor Lopez
-             <victor.lopez@nokia.com>";
+        Author:   Luis Miguel Contreras Murillo
+                  <luismiguel.contrerasmurillo@telefonica.com>
+        Author:   Victor Lopez
+                  <victor.lopez@nokia.com>
+        Author:   Qin Wu
+                  <bill.wu@huawei.com>";
      description
        "This module defines the 'ietf-oam-unitary-test' YANG model for
         activation of network diagnosis procedures.
@@ -560,7 +562,7 @@ Table of Contents
      // RFC Ed.: replace XXXX with actual RFC number and remove
      // this note.
 
-     revision "2024-11-08" {
+     revision "2025-09-15" {
        description
          "Initial version";
        reference
@@ -568,6 +570,18 @@ Table of Contents
           Sequences of OAM Tests";
           // Update with the correct RFC number when assigned
      }
+
+     identity basic-test-type {
+          description
+            "Base identity of basic test type.";
+     }
+
+     identity twamp {
+          base basic-test-type;
+          description
+            "Identity for twamp protocol.";
+     }
+
 
      grouping oam-unitary-test {
        description
@@ -592,12 +606,38 @@ Table of Contents
                to uniquely identify a node within an autonomous system
                the ne-id. This identifier is used for both IPv4 and IPv6.";
          }
-         choice test-type {
-           mandatory true;
-           description
-             "Choose the type of test. Pending to add the schema-mount solution";
-             // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
-         }
+
+          leaf managed {
+            type boolean;
+            default "true";
+            description
+              "True if the host can access oam unitary test
+               using the root mount point.  This value
+               may not be modifiable in all implementations.";
+          }
+         leaf test-type {
+              type identityref {
+                base basic-test-type;
+              }
+              description
+                "Choose the type of test.";
+            }
+          container root {
+            description
+              "Container for mount point.";
+            yangmnt:mount-point "root" {
+              description
+                "Root for models supported per oam unitary test.
+                             This mount point may or may not be inline based on
+                 the server implementation.
+
+                 When the associated 'managed' leaf is 'false', any
+                 operation that attempts to access information below
+                 the root SHALL fail with an error-tag of
+                 'access-denied' and an error-app-tag of
+                 'oamut-not-managed'.";
+            }
+          }
        }
      }
 
@@ -616,7 +656,7 @@ Table of Contents
 
          uses schedule:period-of-time;
 
-         uses schedule:recurrence;
+         uses schedule:recurrence-basic;
 
          leaf unitary-test-status {
            config false;
