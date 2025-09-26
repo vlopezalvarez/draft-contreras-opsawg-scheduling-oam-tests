@@ -187,7 +187,9 @@ module: ietf-oam-unitary-test
         +--rw name                      string
         +--rw ne-config* [ne-id]
         |  +--rw ne-id    rt-types:router-id
-        |  +--rw (test-type)
+        |  +--rw managed?     boolean
+        |  +--rw test-type?   identityref
+        |  +--rw root
         +--rw period-description?       string
         +--rw period-start              yang:date-and-time
         +--rw time-zone-identifier?     sys:timezone-name
@@ -252,9 +254,11 @@ module: ietf-oam-test-sequence
         +--rw name                      string
         +--rw test-ref* [name]
         |  +--rw name             string
-        |  +--rw managed                boolean
-        |  +--rw test-type              identityref
-        |  +--mp root
+        |  +--rw ne-config* [ne-id]
+        |  |  +--rw ne-id        rt-types:router-id
+        |  |  +--rw managed?     boolean
+        |  |  +--rw test-type?   identityref
+        |  |  +--rw root
         |  +--rw numexecutions?   uint32
         +--rw period-description?       string
         +--rw period-start              yang:date-and-time
