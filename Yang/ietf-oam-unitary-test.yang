@@ -3,8 +3,6 @@ module ietf-oam-unitary-test {
   namespace "urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test";
   prefix "oamut";
 
-  // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
-
   // reference ietf-netmod-schedule-yang
   import ietf-schedule {
     prefix schedule;
