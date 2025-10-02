@@ -1413,6 +1413,11 @@ A.2.  Ping OAM Test Template
    template specified in [I-D.tt-netmod-yang-config-templates] as
    follows:
 
+   Template application is indicated using the "apply-templates"
+   metadata.  For example, the following OAM unitary tests configuration
+   may be provided with the container node "oam-unitary-tests" applying
+   the template defined in
+
 Acknowledgments
 
    TODO acknowledge.
