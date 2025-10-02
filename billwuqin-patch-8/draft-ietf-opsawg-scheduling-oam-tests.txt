@@ -108,6 +108,7 @@ Table of Contents
      10.2.  Informative References
    Appendix A.  Examples
      A.1.  Create a TWAMP OAM test
+     A.2.  Ping OAM Test Template
    Acknowledgments
    Authors' Addresses
 
@@ -1163,6 +1164,13 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               terminology-23>.
 
+   [I-D.tt-netmod-yang-config-templates]
+              Wills, R., Ma, Q., and D. Rajaram, "YANG Configuration
+              Templates", Work in Progress, Internet-Draft, draft-tt-
+              netmod-yang-config-templates-00, 3 July 2025,
+              <https://datatracker.ietf.org/doc/html/draft-tt-netmod-
+              yang-config-templates-00>.
+
    [IEEE-8021ag]
               "IEEE Standard for Local and Metropolitan Area Networks –
               Bridges and Bridged Networks – Connectivity Fault
@@ -1398,6 +1406,12 @@ A.1.  Create a TWAMP OAM test
    }
 
        Figure 5: Example of a Message Body to Create a TWAMP OAM test
+
+A.2.  Ping OAM Test Template
+
+   Ping OAM Test Template can be defined using YANG-based configuration
+   template specified in [I-D.tt-netmod-yang-config-templates] as
+   follows:
 
 Acknowledgments
 
