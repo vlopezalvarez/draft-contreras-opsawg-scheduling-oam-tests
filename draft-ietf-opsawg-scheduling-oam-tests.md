@@ -443,10 +443,6 @@ An example of a request message body to create a TWAMP OAM test is shown in {{cr
 
 Ping OAM Test Template can be defined using YANG-based configuration template specified in {{?I-D.tt-netmod-yang-config-templates}} as follows:
 
-~~~~
-
-~~~~
-{: #oam-test-template title="Example of OAM Test Template Definition"}
 
 Template application is indicated using the "apply-templates" metadata. For example, the following OAM unitary tests configuration may be
 provided with the container node "oam-unitary-tests" applying the template defined in
