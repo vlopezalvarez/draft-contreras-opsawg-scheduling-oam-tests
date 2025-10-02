@@ -451,6 +451,10 @@ Ping OAM Test Template can be defined using YANG-based configuration template sp
 Template application is indicated using the "apply-templates" metadata. For example, the following OAM unitary tests configuration may be
 provided with the container node "oam-unitary-tests" applying the template defined in
 
+~~~~
+{::include ./json-examples/create-twp-oam.json}
+~~~~
+{: #apply-oam-test-template title="Example of Applying OAM Test Template"}
 
 # Acknowledgments
 {:numbered="false"}
