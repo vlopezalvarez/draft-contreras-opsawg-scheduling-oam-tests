@@ -439,6 +439,21 @@ An example of a request message body to create a TWAMP OAM test is shown in {{cr
 ~~~~
 {: #create-twp-oam title="Example of a Message Body to Create a TWAMP OAM test"}
 
+## Ping OAM Test Template
+
+Ping OAM Test Templated can be defined using YANG-based configuration template specified in {{?I-D.tt-netmod-yang-config-templates} as follows:
+
+~~~~ xml
+
+~~~~
+
+Template application is indicated using the "apply-templates" metadata. For example, the following OAM unitary tests configuration may be provided
+with the container node "oam-unitary-tests" applying the template defined in
+
+~~~~ xml
+
+~~~~
+
 # Acknowledgments
 {:numbered="false"}
 
