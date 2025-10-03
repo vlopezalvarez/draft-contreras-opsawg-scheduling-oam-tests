@@ -3,7 +3,6 @@
     "oam-unitary-test": [
       {
         "name": "TWAMP-Test-scheduled-daily",
-        "test-type": "twamp-test",
         "period-description": "TWAMP Test Period",
         "period-start": "2023-10-17T09:00:00Z",
         "time-zone-identifier": "UTC",
@@ -19,6 +18,8 @@
         "ne-config": [
           {
             "ne-id": "203.0.113.3",
+			"managed": "true",
+			"test-type": "twamp-test",
             "twamp": {
               "session-sender": {
                 "admin-state": true,
@@ -52,6 +53,8 @@
           },
           {
             "ne-id": "203.0.113.4",
+			"managed": "true",
+			"test-type": "twamp-test",
             "twamp": {
               "session-reflector": {
                 "admin-state": true,
