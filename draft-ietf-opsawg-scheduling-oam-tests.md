@@ -444,7 +444,7 @@ An example of a request message body to create a TWAMP OAM test is shown in {{cr
 Ping OAM Test Template can be defined using YANG-based configuration template specified in {{?I-D.tt-netmod-yang-config-templates}} as follows:
 
 ~~~~
-{::include ./Yang/ietf-oam-unitary-test.yang}
+{::include ./xml-examples/oam-test-template.xml}
 ~~~~
 {: #oam-test-template title="Example of OAM Test Template Definition"}
 
@@ -452,7 +452,7 @@ Template application is indicated using the "apply-templates" metadata. For exam
 provided with the container node "oam-unitary-tests" applying the template defined in
 
 ~~~~
-{::include ./Yang/ietf-oam-unitary-test.yang}
+{::include ./xml-examples/apply-oam-test-template.xml}
 ~~~~
 {: #apply-oam-test-template title="Example of Applying OAM Test Template"}
 
