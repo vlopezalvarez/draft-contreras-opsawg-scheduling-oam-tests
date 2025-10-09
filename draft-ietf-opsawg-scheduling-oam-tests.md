@@ -444,7 +444,7 @@ An example of a request message body to create a TWAMP OAM test is shown in {{cr
 Ping OAM Test Template can be defined using YANG-based configuration template specified in {{?I-D.tt-netmod-yang-config-templates}} as follows:
 
 ~~~~
-{::include-fold ./xml-examples/test1.json}
+{::include-fold ./json-examples/create-twp-oam.json}
 ~~~~
 {: #ex-oam-test-template title="Example of OAM Test Template Definition"}
 
