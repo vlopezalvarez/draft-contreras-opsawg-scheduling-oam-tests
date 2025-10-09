@@ -469,7 +469,20 @@ Template application is indicated using the "apply-templates" metadata. For exam
 provided with the container node "oam-unitary-tests" applying the template defined in {{ex-apply-oam-test-template}}
 
 ~~~~
-{::include-fold ./json-examples/create-twp-oam.json}
+<?xml version="1.0" encoding="utf-8"?>
+<oam-unitary-tests xmlns="urn:example:interface"
+         xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-config-template"
+         ct:apply-templates="oam-unitary-test-schedule">
+         <oam-unitary-test>
+           <name>lsp-ping</name>
+         </oam-unitary-test>
+         <oam-unitary-test>
+           <name>ip-ping</name>
+         </oam-unitary-test>
+         <oam-unitary-test>
+           <name>srmpls-ping</name>
+         </oam-unitary-test>
+</oam-unitary-tests>
 ~~~~
 {: #ex-apply-oam-test-template title="Example of Applying OAM Test Template"}
 
