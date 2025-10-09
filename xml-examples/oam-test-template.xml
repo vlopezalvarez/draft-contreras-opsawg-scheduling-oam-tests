@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <templates xmlns="urn:ietf:params:xml:ns:yang:ietf-config-template">
      <template>
        <id>oam-unitary-test-schedule</id>
@@ -15,3 +16,4 @@
        </content>
      </template>
 </templates>
+
