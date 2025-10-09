@@ -2492,105 +2492,20 @@ provided with the container node "oam-unitary-tests" applying the template defin
 <figure id="figure-7">
           <div class="alignLeft art-text artwork" id="appendix-A.2-4.1">
 <pre>
-{
-  "ietf-oam-unitary-test:oam-unitary-tests": {
-    "oam-unitary-test": [
-      {
-        "name": "TWAMP-Test-scheduled-daily",
-        "test-type": "twamp-test",
-        "period-description": "TWAMP Test Period",
-        "period-start": "2023-10-17T09:00:00Z",
-        "time-zone-identifier": "UTC",
-        "period-type": {
-          "duration": {
-            "duration": "PT1H"
-          }
-        },
-        "recurrence-description": "Daily at 9 AM UTC",
-        "frequency": "oam-types:daily",
-        "interval": 1,
-        "unitary-test-status": "scheduled",
-        "ne-config": [
-          {
-            "ne-id": "203.0.113.3",
-            "twamp": {
-              "session-sender": {
-                "admin-state": true,
-                "test-session": [
-                  {
-                    "name": "Test1",
-                    "ctrl-connection-name": "RouterA",
-                    "fill-mode": "zero",
-                    "number-of-packets": 900,
-                    "periodic-interval": 1,
-                    "sent-packets": 2,
-                    "rcv-packets": 2,
-                    "last-sent-seq": 1,
-                    "last-rcv-seq": 1
-                  },
-                  {
-                    "name": "Test2",
-                    "ctrl-connection-name": "RouterA",
-                    "fill-mode": "random",
-                    "number-of-packets": 900,
-                    "lambda": 1,
-                    "max-interval": 2,
-                    "sent-packets": 21,
-                    "rcv-packets": 21,
-                    "last-sent-seq": 20,
-                    "last-rcv-seq": 20
-                  }
-                ]
-              }
-            }
-          },
-          {
-            "ne-id": "203.0.113.4",
-            "twamp": {
-              "session-reflector": {
-                "admin-state": true,
-                "test-session": [
-                  {
-                    "sid": 1232,
-                    "sender-ip": "203.0.113.3",
-                    "sender-udp-port": 54000,
-                    "reflector-ip": "203.0.113.4",
-                    "reflector-udp-port": 55000,
-                    "parent-connection-client-ip": "203.0.113.1",
-                    "parent-connection-client-tcp-port": 16341,
-                    "parent-connection-server-ip": "203.0.113.2",
-                    "parent-connection-server-tcp-port": 862,
-                    "test-packet-dscp": 32,
-                    "sent-packets": 2,
-                    "rcv-packets": 2,
-                    "last-sent-seq": 1,
-                    "last-rcv-seq": 1
-                  },
-                  {
-                    "sid": 178943,
-                    "sender-ip": "203.0.113.1",
-                    "sender-udp-port": 54001,
-                    "reflector-ip": "192.0.2.2",
-                    "reflector-udp-port": 55001,
-                    "parent-connection-client-ip": "203.0.113.1",
-                    "parent-connection-client-tcp-port": 16341,
-                    "parent-connection-server-ip": "203.0.113.2",
-                    "parent-connection-server-tcp-port": 862,
-                    "test-packet-dscp": 32,
-                    "sent-packets": 21,
-                    "rcv-packets": 21,
-                    "last-sent-seq": 20,
-                    "last-rcv-seq": 20
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      }
-    ]
-  }
-}
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;oam-unitary-tests xmlns="urn:example:interface"
+         xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-config-template"
+         ct:apply-templates="oam-unitary-test-schedule"&gt;
+         &lt;oam-unitary-test&gt;
+           &lt;name&gt;lsp-ping&lt;/name&gt;
+         &lt;/oam-unitary-test&gt;
+         &lt;oam-unitary-test&gt;
+           &lt;name&gt;ip-ping&lt;/name&gt;
+         &lt;/oam-unitary-test&gt;
+         &lt;oam-unitary-test&gt;
+           &lt;name&gt;srmpls-ping&lt;/name&gt;
+         &lt;/oam-unitary-test&gt;
+&lt;/oam-unitary-tests&gt;
 </pre>
 </div>
 <figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
