@@ -1,4 +1,5 @@
- <oam-unitary-tests xmlns="urn:example:interface"
+<?xml version="1.0" encoding="utf-8"?>
+<oam-unitary-tests xmlns="urn:example:interface"
          xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-config-template"
          ct:apply-templates="oam-unitary-test-schedule">
          <oam-unitary-test>
