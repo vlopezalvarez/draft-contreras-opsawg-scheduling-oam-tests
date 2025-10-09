@@ -452,7 +452,7 @@ Template application is indicated using the "apply-templates" metadata. For exam
 provided with the container node "oam-unitary-tests" applying the template defined in
 
 ~~~~
-{::include ./xml-examples/oam-test-template.xml}
+{::include ./Yang/ietf-oam-unitary-test.yang}
 ~~~~
 {: #apply-oam-test-template title="Example of Applying OAM Test Template"}
 
