@@ -444,7 +444,24 @@ An example of a request message body to create a TWAMP OAM test is shown in {{cr
 Ping OAM Test Template can be defined using YANG-based configuration template specified in {{?I-D.tt-netmod-yang-config-templates}} as follows:
 
 ~~~~
-{::include-fold ./json-examples/create-twp-oam.json}
+<?xml version="1.0" encoding="utf-8"?>
+<templates xmlns="urn:ietf:params:xml:ns:yang:ietf-config-template">
+     <template>
+       <id>oam-unitary-test-schedule</id>
+       <content>
+         <oam-unitary-tests xmlns="urn:example:oam-unitary-tests">
+           <oam-unitary-test>
+             <name>*ping</name>
+             <ne-config>
+	           <ne-id>eth*</ne-id>
+             </ne-config>
+             <period-start>2025-10-01T08:00:00Z</period-start>
+              <frequency>hourly</frequency>
+           </oam-unitary-test>
+         </oam-unitary-tests>
+       </content>
+     </template>
+</templates>
 ~~~~
 {: #ex-oam-test-template title="Example of OAM Test Template Definition"}
 
