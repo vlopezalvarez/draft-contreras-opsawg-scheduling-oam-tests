@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 12 April 2026                                             Nokia
+Expires: 13 April 2026                                             Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                          9 October 2025
+                                                         10 October 2025
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 April 2026.
+   This Internet-Draft will expire on 13 April 2026.
 
 Copyright Notice
 
@@ -108,6 +108,7 @@ Table of Contents
      10.2.  Informative References
    Appendix A.  Examples
      A.1.  Create a TWAMP OAM test
+     A.2.  Ping OAM Test Template
    Acknowledgments
    Authors' Addresses
 
@@ -1163,6 +1164,13 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               terminology-23>.
 
+   [I-D.tt-netmod-yang-config-templates]
+              Wills, R., Ma, Q., and D. Rajaram, "YANG Configuration
+              Templates", Work in Progress, Internet-Draft, draft-tt-
+              netmod-yang-config-templates-00, 3 July 2025,
+              <https://datatracker.ietf.org/doc/html/draft-tt-netmod-
+              yang-config-templates-00>.
+
    [IEEE-8021ag]
               "IEEE Standard for Local and Metropolitan Area Networks –
               Bridges and Bridged Networks – Connectivity Fault
@@ -1398,6 +1406,55 @@ A.1.  Create a TWAMP OAM test
    }
 
        Figure 5: Example of a Message Body to Create a TWAMP OAM test
+
+A.2.  Ping OAM Test Template
+
+   Ping OAM Test Template can be defined using YANG-based configuration
+   template specified in [I-D.tt-netmod-yang-config-templates] as
+   follows:
+
+   <?xml version="1.0" encoding="utf-8"?>
+   <templates xmlns="urn:ietf:params:xml:ns:yang:ietf-config-template">
+        <template>
+          <id>oam-unitary-test-schedule</id>
+          <content>
+            <oam-unitary-tests xmlns="urn:example:oam-unitary-tests">
+              <oam-unitary-test>
+                <name>*ping</name>
+                <ne-config>
+                      <ne-id>eth*</ne-id>
+                </ne-config>
+                <period-start>2025-10-01T08:00:00Z</period-start>
+                 <frequency>hourly</frequency>
+              </oam-unitary-test>
+            </oam-unitary-tests>
+          </content>
+        </template>
+   </templates>
+
+             Figure 6: Example of OAM Test Template Definition
+
+   Template application is indicated using the "apply-templates"
+   metadata.  For example, the following OAM unitary tests configuration
+   may be provided with the container node "oam-unitary-tests" applying
+   the template defined in Figure 6
+
+   <?xml version="1.0" encoding="utf-8"?>
+   <oam-unitary-tests xmlns="urn:example:interface"
+            xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-config-template"
+            ct:apply-templates="oam-unitary-test-schedule">
+            <oam-unitary-test>
+              <name>lsp-ping</name>
+            </oam-unitary-test>
+            <oam-unitary-test>
+              <name>ip-ping</name>
+            </oam-unitary-test>
+            <oam-unitary-test>
+              <name>srmpls-ping</name>
+            </oam-unitary-test>
+   </oam-unitary-tests>
+
+              Figure 7: Example of Applying OAM Test Template
 
 Acknowledgments
 

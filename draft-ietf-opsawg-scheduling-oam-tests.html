@@ -1052,7 +1052,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Contreras, et al.</td>
-<td class="center">Expires 12 April 2026</td>
+<td class="center">Expires 13 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-opsawg-scheduling-oam-tests-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-09" class="published">9 October 2025</time>
+<time datetime="2025-10-10" class="published">10 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-12">12 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-13">13 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1128,7 +1128,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1257,6 +1257,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
                 <p id="section-toc.1-1.11.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-create-a-twamp-oam-test" class="internal xref">Create a TWAMP OAM test</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-ping-oam-test-template" class="internal xref">Ping OAM Test Template</a></p>
 </li>
             </ul>
 </li>
@@ -2232,6 +2235,10 @@ module ietf-oam-test-sequence {
         <dd>
 <span class="refAuthor">Davis, N.</span>, <span class="refAuthor">Farrel, A.</span>, <span class="refAuthor">Graf, T.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">C. Yu</span>, <span class="refTitle">"Some Key Terms for Network Fault and Problem Management"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-nmop-terminology-23</span>, <time datetime="2025-08-18" class="refDate">18 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-nmop-terminology-23">https://datatracker.ietf.org/doc/html/draft-ietf-nmop-terminology-23</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.tt-netmod-yang-config-templates">[I-D.tt-netmod-yang-config-templates]</dt>
+        <dd>
+<span class="refAuthor">Wills, R.</span>, <span class="refAuthor">Ma, Q.</span>, and <span class="refAuthor">D. Rajaram</span>, <span class="refTitle">"YANG Configuration Templates"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-tt-netmod-yang-config-templates-00</span>, <time datetime="2025-07-03" class="refDate">3 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-00">https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="IEEE-8021ag">[IEEE-8021ag]</dt>
         <dd>
 <span class="refTitle">"IEEE Standard for Local and Metropolitan Area Networks – Bridges and Bridged Networks – Connectivity Fault Management"</span>, <time datetime="2007" class="refDate">2007</time>, <span>&lt;<a href="https://standards.ieee.org/ieee/802.1ag/3597/">https://standards.ieee.org/ieee/802.1ag/3597/</a>&gt;</span>. </dd>
@@ -2441,6 +2448,68 @@ module ietf-oam-test-sequence {
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
 <a href="#name-example-of-a-message-body-t" class="selfRef">Example of a Message Body to Create a TWAMP OAM test</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="ping-oam-test-template">
+<section id="appendix-A.2">
+        <h3 id="name-ping-oam-test-template">
+<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-ping-oam-test-template" class="section-name selfRef">Ping OAM Test Template</a>
+        </h3>
+<p id="appendix-A.2-1">Ping OAM Test Template can be defined using YANG-based configuration template specified in <span>[<a href="#I-D.tt-netmod-yang-config-templates" class="cite xref">I-D.tt-netmod-yang-config-templates</a>]</span> as follows:<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
+<span id="name-example-of-oam-test-templat"></span><div id="ex-oam-test-template">
+<figure id="figure-6">
+          <div class="alignLeft art-text artwork" id="appendix-A.2-2.1">
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;templates xmlns="urn:ietf:params:xml:ns:yang:ietf-config-template"&gt;
+     &lt;template&gt;
+       &lt;id&gt;oam-unitary-test-schedule&lt;/id&gt;
+       &lt;content&gt;
+         &lt;oam-unitary-tests xmlns="urn:example:oam-unitary-tests"&gt;
+           &lt;oam-unitary-test&gt;
+             &lt;name&gt;*ping&lt;/name&gt;
+             &lt;ne-config&gt;
+                   &lt;ne-id&gt;eth*&lt;/ne-id&gt;
+             &lt;/ne-config&gt;
+             &lt;period-start&gt;2025-10-01T08:00:00Z&lt;/period-start&gt;
+              &lt;frequency&gt;hourly&lt;/frequency&gt;
+           &lt;/oam-unitary-test&gt;
+         &lt;/oam-unitary-tests&gt;
+       &lt;/content&gt;
+     &lt;/template&gt;
+&lt;/templates&gt;
+</pre>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<a href="#name-example-of-oam-test-templat" class="selfRef">Example of OAM Test Template Definition</a>
+          </figcaption></figure>
+</div>
+<p id="appendix-A.2-3">Template application is indicated using the "apply-templates" metadata. For example, the following OAM unitary tests configuration may be
+provided with the container node "oam-unitary-tests" applying the template defined in <a href="#ex-oam-test-template" class="auto internal xref">Figure 6</a><a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
+<span id="name-example-of-applying-oam-tes"></span><div id="ex-apply-oam-test-template">
+<figure id="figure-7">
+          <div class="alignLeft art-text artwork" id="appendix-A.2-4.1">
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;oam-unitary-tests xmlns="urn:example:interface"
+         xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-config-template"
+         ct:apply-templates="oam-unitary-test-schedule"&gt;
+         &lt;oam-unitary-test&gt;
+           &lt;name&gt;lsp-ping&lt;/name&gt;
+         &lt;/oam-unitary-test&gt;
+         &lt;oam-unitary-test&gt;
+           &lt;name&gt;ip-ping&lt;/name&gt;
+         &lt;/oam-unitary-test&gt;
+         &lt;oam-unitary-test&gt;
+           &lt;name&gt;srmpls-ping&lt;/name&gt;
+         &lt;/oam-unitary-test&gt;
+&lt;/oam-unitary-tests&gt;
+</pre>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<a href="#name-example-of-applying-oam-tes" class="selfRef">Example of Applying OAM Test Template</a>
           </figcaption></figure>
 </div>
 </section>
