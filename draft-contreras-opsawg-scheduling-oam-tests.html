@@ -1630,8 +1630,6 @@ module ietf-oam-unitary-test {
   namespace "urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test";
   prefix "oamut";
 
-  // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
-
   // reference ietf-netmod-schedule-yang
   import ietf-schedule {
     prefix schedule;
@@ -1643,6 +1641,12 @@ module ietf-oam-unitary-test {
     prefix rt-types;
     reference
       "RFC 8294: Common YANG Data Types for the Routing Area";
+  }
+
+  import ietf-yang-schema-mount {
+     prefix yangmnt;
+     reference
+       "RFC 8528: YANG Schema Mount";
   }
 
   organization
@@ -1673,7 +1677,13 @@ module ietf-oam-unitary-test {
 
      This version of this YANG module is part of RFC XXXX
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-     for full legal notices.";
+     for full legal notices.
+
+         The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
+     NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
+     'MAY', and 'OPTIONAL' in this document are to be interpreted as
+     described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
+     they appear in all capitals, as shown here.";
 
   // RFC Ed.: update the date below with the date of RFC
   // publication and remove this note.
@@ -1699,7 +1709,6 @@ module ietf-oam-unitary-test {
        description
          "Identity for twamp protocol.";
   }
-
 
   grouping oam-unitary-test {
     description
@@ -1777,7 +1786,6 @@ module ietf-oam-unitary-test {
       uses schedule:recurrence-basic;
 
       leaf unitary-test-status {
-        config false;
         type enumeration {
           enum "planned" {
             description
@@ -1808,6 +1816,7 @@ module ietf-oam-unitary-test {
               "The test has an error.";
           }
         }
+                config false;
         description
           "Status of the test.";
       }
