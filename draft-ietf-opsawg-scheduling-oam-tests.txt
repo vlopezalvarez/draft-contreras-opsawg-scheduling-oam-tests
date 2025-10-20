@@ -416,7 +416,7 @@ Table of Contents
    state of the OAM unitary test.
 
    Each oam-unitary-test instance defined by this model is conceptually
-   an instance of an Active or Hybrid OAM operation, since it triggers
+   an instance of an active or hybrid OAM operation, since it triggers
    the generation or coordination of OAM packets.  The YANG model allows
    such differentiation by referencing the underlying test type
    identity.
