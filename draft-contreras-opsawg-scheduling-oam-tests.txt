@@ -1118,8 +1118,8 @@ A.1.  Create a TWAMP OAM test
            "ne-config": [
              {
                "ne-id": "203.0.113.3",
-                           "managed": "true",
-                           "test-type": "twamp-test",
+               "managed": "true",
+               "test-type": "twamp-test",
                "twamp": {
                  "session-sender": {
                    "admin-state": true,
@@ -1153,8 +1153,8 @@ A.1.  Create a TWAMP OAM test
              },
              {
                "ne-id": "203.0.113.4",
-                           "managed": "true",
-                           "test-type": "twamp-test",
+               "managed": "true",
+               "test-type": "twamp-test",
                "twamp": {
                  "session-reflector": {
                    "admin-state": true,
