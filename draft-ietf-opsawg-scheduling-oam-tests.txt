@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 13 April 2026                                             Nokia
+Expires: 23 April 2026                                             Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                         10 October 2025
+                                                         20 October 2025
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 April 2026.
+   This Internet-Draft will expire on 23 April 2026.
 
 Copyright Notice
 
@@ -121,6 +121,13 @@ Table of Contents
    overall service management lifecycle [RFC8969], the management of OAM
    operations becomes also essential.  Relevant data models are still
    missing to cover specific needs.
+
+   The term OAM is used in this document as defined in [RFC6291] and
+   further characterized according to the classification guidelines in
+   [I-D.ietf-opsawg-oam-characterization].  The scope of this document
+   applies primarily to active and hybrid OAM mechanisms, as the
+   scheduling of test generally implies the generation of additional OAM
+   traffic.  Passive OAM mechanisms are not the focus of this work.
 
    Specifically, OAM functions provide the means to identify and isolate
    faults, measure and report the network performance (see section 4.2,
@@ -235,6 +242,20 @@ Table of Contents
    Tree diagrams used in this document follow the notation defined in
    [RFC8340].
 
+   This document adopts the OAM characterization defined in
+   [I-D.ietf-opsawg-oam-characterization]:
+
+   o Active OAM – uses dedicated OAM packets to assess network
+   performance or verify continuity.
+
+   o Passive OAM – observes existing data traffic without injecting OAM
+   packets.
+
+   o Hybrid OAM – combines active and passive methods.
+
+   The use of the terms in-band and out-of-band is avoided in this
+   document, consistent with [I-D.ietf-opsawg-oam-characterization].
+
 1.2.  Requirements Language
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -269,6 +290,10 @@ Table of Contents
 2.  Network-wide OAM Use Cases
 
    This document covers how to use OAM for network-wide use cases.
+   These use cases rely primarily on active or hybrid OAM methods,
+   depending on whether dedicated test packets or augmented data packets
+   are used, following [I-D.ietf-opsawg-oam-characterization].
+
    Following, some illustrative examples are presented.
 
 2.1.  Troubleshooting
@@ -389,6 +414,12 @@ Table of Contents
    time, while "recurrence" identifies the properties that contain a
    recurrence rule specification. "unitary-test-status" enumerates the
    state of the OAM unitary test.
+
+   Each oam-unitary-test instance defined by this model is conceptually
+   an instance of an Active or Hybrid OAM operation, since it triggers
+   the generation or coordination of OAM packets.  The YANG model allows
+   such differentiation by referencing the underlying test type
+   identity.
 
    Figure 1 shows the structure of OAM unitary test module:
 
@@ -1161,9 +1192,9 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-05, 6 July 2025,
+              incident-yang-06, 12 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-05>.
+              network-incident-yang-06>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
@@ -1172,6 +1203,13 @@ Table of Contents
               23, 18 August 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               terminology-23>.
+
+   [I-D.ietf-opsawg-oam-characterization]
+              Pignataro, C., Farrel, A., and T. Mizrahi, "Guidelines for
+              Characterizing "OAM"", Work in Progress, Internet-Draft,
+              draft-ietf-opsawg-oam-characterization-13, 20 October
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              opsawg-oam-characterization-13>.
 
    [I-D.tt-netmod-yang-config-templates]
               Wills, R., Ma, Q., and D. Rajaram, "YANG Configuration
@@ -1236,6 +1274,12 @@ Table of Contents
    [RFC5880]  Katz, D. and D. Ward, "Bidirectional Forwarding Detection
               (BFD)", RFC 5880, DOI 10.17487/RFC5880, June 2010,
               <https://www.rfc-editor.org/rfc/rfc5880>.
+
+   [RFC6291]  Andersson, L., van Helvoort, H., Bonica, R., Romascanu,
+              D., and S. Mansfield, "Guidelines for the Use of the "OAM"
+              Acronym in the IETF", BCP 161, RFC 6291,
+              DOI 10.17487/RFC6291, June 2011,
+              <https://www.rfc-editor.org/rfc/rfc6291>.
 
    [RFC6371]  Busi, I., Ed. and D. Allan, Ed., "Operations,
               Administration, and Maintenance Framework for MPLS-Based
