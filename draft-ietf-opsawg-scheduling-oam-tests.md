@@ -69,6 +69,8 @@ This document defines a YANG data model for network diagnosis on-demand relying 
 
 Operations, Administration, and Maintenance (OAM) tasks are fundamental functions of the network management (see, e.g., {{?RFC7276}}). Given the emergence of data models and their utilization in Service Provider's network management and the need to automate the overall service management lifecycle {{?RFC8969}}, the management of OAM operations becomes also essential. Relevant data models are still missing to cover specific needs.
 
+The term OAM is used in this document as defined in {{?RFC6291}} and further characterized according to the classification guidelines in {{?I-D.ietf-opsawg-oam-characterization}}. The scope of this document applies primarily to active and hybrid OAM mechanisms, as the scheduling of test generally implies the generation of additional OAM traffic. Passive OAM mechanisms are not the focus of this work.
+
 Specifically, OAM functions provide the means to identify and isolate faults, measure and report the network performance (see section 4.2, {{?RFC6632}}. For example, {{!RFC5860}} defines the three main areas involved in OAM:
 
 * Fault management, which allows network operators quickly identify and isolate faults in the network. Examples of these mechanisms for fault detection and isolation are: continuity check, link trace, and loopback.
@@ -116,6 +118,16 @@ o OAM test sequence: A set of OAM unitary tests that are run based on a set of t
 
 Tree diagrams used in this document follow the notation defined in {{!RFC8340}}.
 
+This document adopts the OAM characterization defined in {{?I-D.ietf-opsawg-oam-characterization}}:
+
+o Active OAM – uses dedicated OAM packets to assess network performance or verify continuity.
+
+o Passive OAM – observes existing data traffic without injecting OAM packets.
+
+o Hybrid OAM – combines active and passive methods.
+
+The use of the terms in-band and out-of-band is avoided in this document, consistent with {{?I-D.ietf-opsawg-oam-characterization}}.
+
 ## Requirements Language
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in  {{!RFC2119}}, {{!RFC8174}} when, and only when, they appear in all capitals, as shown here.
@@ -136,7 +148,9 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 # Network-wide OAM Use Cases
 
-This document covers how to use OAM for network-wide use cases. Following, some illustrative examples are presented.
+This document covers how to use OAM for network-wide use cases. These use cases rely primarily on active or hybrid OAM methods, depending on whether dedicated test packets or augmented data packets are used, following {{?I-D.ietf-opsawg-oam-characterization}}.
+
+Following, some illustrative examples are presented. 
 
 ## Troubleshooting
 
@@ -177,6 +191,8 @@ This document specifies two models: OAM unitary test and OAM test sequence model
 ## OAM Unitary Test
 
 The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures. Inside the container, there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of the scope of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM unitary test.
+
+Each oam-unitary-test instance defined by this model is conceptually an instance of an Active or Hybrid OAM operation, since it triggers the generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying test type identity.
 
 {{oam-uni-test-tree-st}} shows the structure of OAM unitary test module:
 
