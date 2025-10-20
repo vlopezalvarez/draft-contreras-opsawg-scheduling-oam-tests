@@ -150,7 +150,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 This document covers how to use OAM for network-wide use cases. These use cases rely primarily on active or hybrid OAM methods, depending on whether dedicated test packets or augmented data packets are used, following {{?I-D.ietf-opsawg-oam-characterization}}.
 
-Following, some illustrative examples are presented. 
+Following, some illustrative examples are presented.
 
 ## Troubleshooting
 
