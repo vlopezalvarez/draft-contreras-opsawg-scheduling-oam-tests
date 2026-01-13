@@ -71,9 +71,9 @@ Operations, Administration, and Maintenance (OAM) tasks are fundamental function
 models and their utilization in Service Provider's network management and the need to automate the overall service management lifecycle {{?RFC8969}}, managing OAM
 operations is also essential. Relevant data models are still missing to cover specific needs.
 
-The term OAM is used in this document as defined in {{?RFC6291}} and further characterized according to the classification guidelines in {{!I-D.ietf-opsawg-oam-
-characterization}}. The scope of this document applies primarily to active and hybrid OAM mechanisms, as scheduling tests generally implies the generation of
-additional OAM traffic. Passive OAM mechanisms are not the focus of this work.
+The term OAM is used in this document as defined in {{?RFC6291}} and further characterized according to the classification guidelines in
+{{!I-D.ietf-opsawg-oam-characterization}}. The scope of this document applies primarily to active and hybrid OAM mechanisms, as scheduling tests generally implies
+the generation of additional OAM traffic. Passive OAM mechanisms are not the focus of this work.
 
 Specifically, OAM functions provide the means to identify and isolate faults, measure and report the network performance (see section 4.2, {{?RFC6632}}. For
 example, {{!RFC5860}} defines the three main areas involved in OAM:
