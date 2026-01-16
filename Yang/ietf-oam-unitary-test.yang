@@ -38,7 +38,7 @@ module ietf-oam-unitary-test {
     "This module defines the 'ietf-oam-unitary-test' YANG model for
      activation of network diagnosis procedures.
 
-    Copyright (c) 2024 IETF Trust and the persons identified as
+    Copyright (c) 2026 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
 
     Redistribution and use in source and binary forms, with or
@@ -63,7 +63,7 @@ module ietf-oam-unitary-test {
   // RFC Ed.: replace XXXX with actual RFC number and remove
   // this note.
 
-  revision "2025-09-15" {
+  revision "2026-01-13" {
     description
       "Initial version";
     reference
@@ -172,15 +172,15 @@ module ietf-oam-unitary-test {
             description
               "The test status is ready.";
           }
-          enum "ongoing" {
+          enum "on-going" {
             description
-              "The test is ongoing.";
+              "The test is on-going.";
           }
           enum "stop" {
             description
               "The test is stopped.";
           }
-          enum "finish" {
+          enum "finished" {
             description
               "The test is finished.";
           }
