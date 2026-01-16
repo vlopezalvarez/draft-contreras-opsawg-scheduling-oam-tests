@@ -29,7 +29,7 @@ module ietf-oam-test-sequence {
     "This module defines the 'oam-test-sequence-test' YANG model for
     management of network diagnosis procedures.
 
-    Copyright (c) 2024 IETF Trust and the persons identified as
+    Copyright (c) 2026 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
 
     Redistribution and use in source and binary forms, with or
@@ -48,7 +48,7 @@ module ietf-oam-test-sequence {
   // RFC Ed.: replace XXXX with actual RFC number and remove
   // this note.
 
-  revision "2024-11-08" {
+  revision "2026-01-13" {
     description "Initial version";
     reference "RFCXXXX";
     // Update with the correct RFC number when assigned
@@ -103,9 +103,9 @@ module ietf-oam-test-sequence {
             description
               "The test sequence is ready.";
           }
-          enum "ongoing" {
+          enum "on-going" {
             description
-              "The test sequence status is ongoing.";
+              "The test sequence status is on-going.";
           }
           enum "stop" {
             description
