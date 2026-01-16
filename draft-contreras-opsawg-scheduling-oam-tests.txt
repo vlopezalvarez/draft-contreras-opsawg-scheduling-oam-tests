@@ -805,6 +805,8 @@ Table of Contents
 
          uses schedule:recurrence-utc;
 
+         uses schedule:schedule-status;
+
          leaf test-sequence-status {
            type enumeration {
              enum "planned" {

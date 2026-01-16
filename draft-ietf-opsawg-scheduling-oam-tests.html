@@ -1965,6 +1965,8 @@ module ietf-oam-test-sequence {
 
       uses schedule:recurrence-utc;
 
+      uses schedule:schedule-status;
+
       leaf test-sequence-status {
         type enumeration {
           enum "planned" {
