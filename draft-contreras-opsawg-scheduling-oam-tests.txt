@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 23 April 2026                                             Nokia
-                                                         20 October 2025
+Expires: 20 July 2026                                              Nokia
+                                                         16 January 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,11 +57,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 April 2026.
+   This Internet-Draft will expire on 20 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -547,7 +547,7 @@ Table of Contents
        "This module defines the 'ietf-oam-unitary-test' YANG model for
         activation of network diagnosis procedures.
 
-       Copyright (c) 2024 IETF Trust and the persons identified as
+       Copyright (c) 2026 IETF Trust and the persons identified as
        authors of the code.  All rights reserved.
 
        Redistribution and use in source and binary forms, with or
@@ -572,7 +572,7 @@ Table of Contents
      // RFC Ed.: replace XXXX with actual RFC number and remove
      // this note.
 
-     revision "2025-09-15" {
+     revision "2026-01-13" {
        description
          "Initial version";
        reference
@@ -681,15 +681,15 @@ Table of Contents
                description
                  "The test status is ready.";
              }
-             enum "ongoing" {
+             enum "on-going" {
                description
-                 "The test is ongoing.";
+                 "The test is on-going.";
              }
              enum "stop" {
                description
                  "The test is stopped.";
              }
-             enum "finish" {
+             enum "finished" {
                description
                  "The test is finished.";
              }
@@ -1019,9 +1019,9 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-06, 12 October 2025,
+              incident-yang-07, 3 January 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-06>.
+              network-incident-yang-07>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
