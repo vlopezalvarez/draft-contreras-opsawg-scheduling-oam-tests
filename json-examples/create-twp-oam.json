@@ -19,7 +19,7 @@
           {
             "ne-id": "203.0.113.3",
             "managed": "true",
-            "test-type": "twamp-test",
+            "test-type": "twamp",
             "twamp": {
               "session-sender": {
                 "admin-state": true,
@@ -54,7 +54,7 @@
           {
             "ne-id": "203.0.113.4",
             "managed": "true",
-            "test-type": "twamp-test",
+            "test-type": "twamp",
             "twamp": {
               "session-reflector": {
                 "admin-state": true,
