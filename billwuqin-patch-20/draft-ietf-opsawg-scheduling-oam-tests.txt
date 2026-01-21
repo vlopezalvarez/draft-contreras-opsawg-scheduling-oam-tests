@@ -690,10 +690,10 @@ Table of Contents
              description
              "Identity for stop.";
             }
-            identity finished {
+            identity sucesss {
              base unitary-test-status;
              description
-             "Identity for finished.";
+             "Identity for success.";
             }
 
             identity error {
