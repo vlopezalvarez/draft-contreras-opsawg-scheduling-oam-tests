@@ -474,7 +474,7 @@ Table of Contents
       state is triggere when one or tests haven't been conducted
       successfully.
 
-   *  "finished": The final state where the test is completed.  This
+   *  "success": The final state where the test is completed.  This
       state is triggered when the test has been conducted sucessfully.
 
                 +---------+      +----------+      +---------+
@@ -488,7 +488,7 @@ Table of Contents
              |      |                                  |
              |      V                                  |
              |  +---------+      +--------+            |
-             +--| finished|<-----|  stop  |<------------+
+             +--| success |<-----|  stop  |<------------+
                 +---------+      +--------+            |
                     A                                  |
                     |                                  |
@@ -572,9 +572,9 @@ Table of Contents
    *  "stop": The state where the test is manually stopped.  This state
       is triggered when the test is manually interrupted.
 
-   *  "success": The state when all unitary tests were successful.The
-      final state where all unitary tests are completed.  This state is
-      triggered when all tests have been conducted sucessfully.
+   *  "success": The final state where all unitary tests are completed.
+      This state is triggered when all tests have been conducted
+      sucessfully.
 
    *  "failure": The state when one or more tests in the sequence got an
       error.

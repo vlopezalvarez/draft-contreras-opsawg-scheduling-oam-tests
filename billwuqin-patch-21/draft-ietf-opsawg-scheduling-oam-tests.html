@@ -1507,7 +1507,7 @@ The 'unitary-test-status' state machine is shown in <a href="#st-unitary-test-st
             <p id="section-3.1-6.6.1">"error": The state where an error occurs during the test. This state is triggere when one or tests haven't been conducted successfully.<a href="#section-3.1-6.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-6.7">
-            <p id="section-3.1-6.7.1">"finished": The final state where the test is completed. This state is triggered when the test has been conducted sucessfully.<a href="#section-3.1-6.7.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-6.7.1">"success": The final state where the test is completed. This state is triggered when the test has been conducted sucessfully.<a href="#section-3.1-6.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <span id="name-oam-unitary-test-state-mach"></span><div id="st-unitary-test-status">
@@ -1525,7 +1525,7 @@ The 'unitary-test-status' state machine is shown in <a href="#st-unitary-test-st
 |      |                                  |
 |      V                                  |
 |  +---------+      +--------+            |
-+--| finished|&lt;-----|  stop  |&lt;------------+
++--| success |&lt;-----|  stop  |&lt;------------+
    +---------+      +--------+            |
        A                                  |
        |                                  |
@@ -1609,8 +1609,7 @@ module: ietf-oam-test-sequence
             <p id="section-3.2-6.5.1">"stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.<a href="#section-3.2-6.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-6.6">
-            <p id="section-3.2-6.6.1">"success": The state when all unitary tests were successful.The final state where all unitary tests are completed. This state is triggered when all tests have
-           been conducted sucessfully.<a href="#section-3.2-6.6.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-6.6.1">"success": The final state where all unitary tests are completed. This state is triggered when all tests have been conducted sucessfully.<a href="#section-3.2-6.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-6.7">
             <p id="section-3.2-6.7.1">"failure": The state when one or more tests in the sequence got an error.<a href="#section-3.2-6.7.1" class="pilcrow">¶</a></p>
