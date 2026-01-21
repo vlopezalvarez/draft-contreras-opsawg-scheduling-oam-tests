@@ -266,13 +266,14 @@ module: ietf-oam-unitary-test
 (Note: alignment with {{!I-D.ietf-netmod-schedule-yang}} will continue with the progress of that document).
 The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. The state machine includes the following states:
 
-* "planned": The initial state where the test is planned.
-* "configured": The state where the test is being configured.
-* "ready": The state where the test is ready to be executed.
-* "on-going": The state where the test is currently running.
-* "stop": The state where the test is manually stopped.
-* "error": The state where an error occurs during the test.
-* "finished": The final state where the test is completed.
+* "planned": The initial state where the test is planned by the management and hasn't been applied to the network element.
+* "configured": The state where the test is being configured. This state is triggered when the planned test configuration is applied to the network element.
+* "ready": The state where the test is ready to be executed. This is state is triggered after the planned test configuration is applied and before the test
+           is executed.
+* "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
+* "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
+* "error": The state where an error occurs during the test. This state is triggere when one or tests haven't been conducted successfully.
+* "success": The final state where the test is completed. This state is triggered when the test has been conducted sucessfully.
 
 ~~~~
 
@@ -287,7 +288,7 @@ The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. 
 |      |                                  |
 |      V                                  |
 |  +---------+      +--------+            |
-+--| finished|<-----|  stop  |<------------+
++--| success |<-----|  stop  |<------------+
    +---------+      +--------+            |
        A                                  |
        |                                  |
@@ -349,14 +350,15 @@ module: ietf-oam-test-sequence
 
 The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}. The state machine includes the following states:
 
-* "planned": The initial state where the test is planned.
-* "configured": The state where the test is being configured.
-* "ready": The state where the test is ready to be executed.
-* "on-going": The state where the test is currently running.
-* "stop": The state where the test is manually stopped.
-* "success": The state when all unitary tests were successful.
+* "planned": The initial state where the test is planned by the management and hasn't been applied to the network element.
+* "configured": The state where the test is being configured. This state is triggered when the planned test configuration is applied to the network element.
+* "ready": The state where the test is ready to be executed. This is state is triggered after the planned test configuration is applied and before the test
+           is executed.
+* "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
+* "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
+* "success": The final state where all unitary tests are completed. This state is triggered when all tests have been conducted sucessfully.
 * "failure": The state when one or more tests in the sequence got an error.
-* "error": The state where an error occurs during the test.
+* "error":  The state where an error occurs during the test. This state is triggere when one or tests haven't been conducted successfully.
 
 ~~~~
 
