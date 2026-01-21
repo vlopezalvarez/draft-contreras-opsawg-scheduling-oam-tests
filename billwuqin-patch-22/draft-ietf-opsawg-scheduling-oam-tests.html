@@ -9,7 +9,7 @@
 <meta content="Victor Lopez" name="author">
 <meta content="Qin Wu" name="author">
 <meta content="
-       This document defines a YANG data model for network diagnosis on-demand relying upon Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures, primarily intended for use by an SDN controller or network orchestrator, rather than by individual network nodes. 
+       This document defines a YANG data model to support on-demand network diagnosis using Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures, intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by individual network nodes. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="OAM" name="keyword">
@@ -1090,7 +1090,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM Tests</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines a YANG data model for network diagnosis on-demand relying upon Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures, primarily intended for use by an SDN controller or network orchestrator, rather than by individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document defines a YANG data model to support on-demand network diagnosis using Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures, intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1210,7 +1210,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-using-device-mode-within-oa" class="internal xref">Using Device Mode Within OAM Scheduling Models</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-using-device-model-within-o" class="internal xref">Using Device Model Within OAM Scheduling Models</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-operational-considerations" class="internal xref">Operational Considerations</a></p>
@@ -1277,15 +1277,22 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Operations, Administration, and Maintenance (OAM) tasks are fundamental functions of the network management (see, e.g., <span>[<a href="#RFC7276" class="cite xref">RFC7276</a>]</span>). Given the emergence of data models and their utilization in Service Provider's network management and the need to automate the overall service management lifecycle <span>[<a href="#RFC8969" class="cite xref">RFC8969</a>]</span>, the management of OAM operations becomes also essential. Relevant data models are still missing to cover specific needs.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">The term OAM is used in this document as defined in <span>[<a href="#RFC6291" class="cite xref">RFC6291</a>]</span> and further characterized according to the classification guidelines in <span>[<a href="#I-D.ietf-opsawg-oam-characterization" class="cite xref">I-D.ietf-opsawg-oam-characterization</a>]</span>. The scope of this document applies primarily to active and hybrid OAM mechanisms, as the scheduling of test generally implies the generation of additional OAM traffic. Passive OAM mechanisms are not the focus of this work.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">Specifically, OAM functions provide the means to identify and isolate faults, measure and report the network performance (see section 4.2, <span>[<a href="#RFC6632" class="cite xref">RFC6632</a>]</span>. For example, <span>[<a href="#RFC5860" class="cite xref">RFC5860</a>]</span> defines the three main areas involved in OAM:<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-1">Operations, Administration, and Maintenance (OAM) tasks are fundamental functions of the network management (see, e.g., <span>[<a href="#RFC7276" class="cite xref">RFC7276</a>]</span>). Given the emergence of data
+models and their utilization in Service Provider's network management and the need to automate the overall service management lifecycle <span>[<a href="#RFC8969" class="cite xref">RFC8969</a>]</span>, managing OAM
+operations is also essential. Relevant data models are still missing to cover specific needs.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">The term OAM is used in this document as defined in <span>[<a href="#RFC6291" class="cite xref">RFC6291</a>]</span> and further characterized according to the classification guidelines in
+<span>[<a href="#I-D.ietf-opsawg-oam-characterization" class="cite xref">I-D.ietf-opsawg-oam-characterization</a>]</span>. The scope of this document applies primarily to active and hybrid OAM mechanisms, as scheduling tests generally implies
+the generation of additional OAM traffic. Passive OAM mechanisms are not the focus of this work.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Specifically, OAM functions provide the means to identify and isolate faults, measure and report the network performance (see section 4.2, <span>[<a href="#RFC6632" class="cite xref">RFC6632</a>]</span>. For
+example, <span>[<a href="#RFC5860" class="cite xref">RFC5860</a>]</span> defines the three main areas involved in OAM:<a href="#section-1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-4.1">
-          <p id="section-1-4.1.1">Fault management, which allows network operators quickly identify and isolate faults in the network. Examples of these mechanisms for fault detection and isolation are: continuity check, link trace, and loopback.<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.1.1">Fault management, which allows network operators quickly identify and isolate faults in the network. Examples of these mechanisms for fault detection and
+isolation are: continuity check, link trace, and loopback.<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-4.2">
-          <p id="section-1-4.2.1">Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as frame delay measurement, frame delay variation measurement, and frame loss measurement.<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.2.1">Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as frame
+delay measurement, frame delay variation measurement, and frame loss measurement.<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-4.3">
           <p id="section-1-4.3.1">Security management defines mechanisms to protect OAM communications from unauthorized access and tampering.<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
@@ -1297,13 +1304,17 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <p id="section-1-6.1.1">Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational.<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-6.2">
-          <p id="section-1-6.2.1">Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple technologies for this function, like IP Ping<span>[<a href="#RFC0792" class="cite xref">RFC0792</a>]</span><span>[<a href="#RFC4443" class="cite xref">RFC4443</a>]</span>, VCCV Ping<span>[<a href="#RFC5085" class="cite xref">RFC5085</a>]</span>, LSP Ping <span>[<a href="#RFC4379" class="cite xref">RFC4379</a>]</span> or Ethernet Loopback <span>[<a href="#IEEE-8021Q" class="cite xref">IEEE-8021Q</a>]</span><a href="#section-1-6.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-6.2.1">Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple technologies for this
+function, like IP Ping<span>[<a href="#RFC0792" class="cite xref">RFC0792</a>]</span><span>[<a href="#RFC4443" class="cite xref">RFC4443</a>]</span>, VCCV Ping<span>[<a href="#RFC5085" class="cite xref">RFC5085</a>]</span>, LSP Ping <span>[<a href="#RFC4379" class="cite xref">RFC4379</a>]</span> or Ethernet Loopback <span>[<a href="#IEEE-8021Q" class="cite xref">IEEE-8021Q</a>]</span>.<a href="#section-1-6.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-6.3">
-          <p id="section-1-6.3.1">Link Trace: This function allows a network operator to trace a path through a network from one device to another. Some technologies following this approach are Y.1731 Linktrace <span>[<a href="#ITU-T-Y1731" class="cite xref">ITU-T-Y1731</a>]</span> or IP traceroute<span>[<a href="#RFC0792" class="cite xref">RFC0792</a>]</span><span>[<a href="#RFC4443" class="cite xref">RFC4443</a>]</span>.<a href="#section-1-6.3.1" class="pilcrow">¶</a></p>
+          <p id="section-1-6.3.1">Link Trace: This function allows a network operator to trace a path through a network from one device to another. Some technologies following this approach
+are Y.1731 Linktrace <span>[<a href="#ITU-T-Y1731" class="cite xref">ITU-T-Y1731</a>]</span> or IP traceroute<span>[<a href="#RFC0792" class="cite xref">RFC0792</a>]</span><span>[<a href="#RFC4443" class="cite xref">RFC4443</a>]</span>.<a href="#section-1-6.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-6.4">
-          <p id="section-1-6.4.1">Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues. Protocols like TWAMP<span>[<a href="#RFC5357" class="cite xref">RFC5357</a>]</span>, STAMP<span>[<a href="#RFC8762" class="cite xref">RFC8762</a>]</span>, Alternative Marking<span>[<a href="#RFC9341" class="cite xref">RFC9341</a>]</span>, IOAM (In Situ OAM) <span>[<a href="#RFC9197" class="cite xref">RFC9197</a>]</span>, or Y.1731 DMM/SLM <span>[<a href="#ITU-T-Y1731" class="cite xref">ITU-T-Y1731</a>]</span> can obtain performance measurements.<a href="#section-1-6.4.1" class="pilcrow">¶</a></p>
+          <p id="section-1-6.4.1">Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues.
+Protocols like TWAMP<span>[<a href="#RFC5357" class="cite xref">RFC5357</a>]</span>, STAMP<span>[<a href="#RFC8762" class="cite xref">RFC8762</a>]</span>, Alternative Marking<span>[<a href="#RFC9341" class="cite xref">RFC9341</a>]</span>, IOAM (In Situ OAM) <span>[<a href="#RFC9197" class="cite xref">RFC9197</a>]</span>, or Y.1731 DMM/SLM <span>[<a href="#ITU-T-Y1731" class="cite xref">ITU-T-Y1731</a>]</span> can
+obtain performance measurements.<a href="#section-1-6.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-1-7">More recently, Incident Management <span>[<a href="#I-D.ietf-nmop-network-incident-yang" class="cite xref">I-D.ietf-nmop-network-incident-yang</a>]</span> focuses on
@@ -1322,7 +1333,7 @@ the network incident diagnosis, which can be favored by dynamic invocation of OA
         </h3>
 <p id="section-1.1-1">This document assumes that the reader is familiar with the contents of <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span> "The YANG 1.1 Data Modeling Language".<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">Following terms are used for the representation of this data model.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
-<p id="section-1.1-3">o OAM unitary test: A set of parameters that define a type of OAM test to be invoked. As an example, it includes the type test, configuration parameters, and target results.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">o OAM unitary test: A set of parameters that define a type of OAM test to be invoked. As an example, it includes the test type, configuration parameters, and target results.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 <p id="section-1.1-4">o OAM test sequence: A set of OAM unitary tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
 <p id="section-1.1-5">Tree diagrams used in this document follow the notation defined in <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span>.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
 <p id="section-1.1-6">This document adopts the OAM characterization defined in <span>[<a href="#I-D.ietf-opsawg-oam-characterization" class="cite xref">I-D.ietf-opsawg-oam-characterization</a>]</span>:<a href="#section-1.1-6" class="pilcrow">¶</a></p>
@@ -1362,7 +1373,7 @@ the network incident diagnosis, which can be favored by dynamic invocation of OA
           <tbody>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">oamut</td>
-              <td class="text-left" rowspan="1" colspan="1">ietf-oam-unitary-tests</td>
+              <td class="text-left" rowspan="1" colspan="1">ietf-oam-unitary-test</td>
               <td class="text-left" rowspan="1" colspan="1">RFCXXXX</td>
             </tr>
             <tr>
@@ -1396,15 +1407,22 @@ Please replace XXXX with the RFC number assigned to this document if the documen
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-network-wide-oam-use-cases" class="section-name selfRef">Network-wide OAM Use Cases</a>
       </h2>
 <p id="section-2-1">This document covers how to use OAM for network-wide use cases. These use cases rely primarily on active or hybrid OAM methods, depending on whether dedicated test packets or augmented data packets are used, following <span>[<a href="#I-D.ietf-opsawg-oam-characterization" class="cite xref">I-D.ietf-opsawg-oam-characterization</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">Following, some illustrative examples are presented.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-2">The following illustrative examples are provided.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <div id="troubleshooting">
 <section id="section-2.1">
         <h3 id="name-troubleshooting">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-troubleshooting" class="section-name selfRef">Troubleshooting</a>
         </h3>
-<p id="section-2.1-1">After the detection of a problem <span>[<a href="#I-D.ietf-nmop-terminology" class="cite xref">I-D.ietf-nmop-terminology</a>]</span> in the network, OAM tests are performed to find the root cause for the detected problem. However, a detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help find the candidate root cause by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests depend on the nature of the test itself.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1-2">There are a variety of OAM tests that can be executed as a function of the target scenario. For example, if the issue is related to a Layer 2 capability, specific tests can be designed and run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. These tests can be coupled with others to test if any filtering is in place by varying, e.g., some Layer 2 fields or checking the configuration of relevant nodes.  If these tests are correct, the operator may want to check the availability of the service (or its delivered performance).<a href="#section-2.1-2" class="pilcrow">¶</a></p>
-<p id="section-2.1-3">Even though the troubleshooting process may be different depending on the problem detected, there are certain common procedures or logics that can be executed in order to narrow down the cause of the problem and thus help locate candidate root cause.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-1">After the detection of a problem <span>[<a href="#I-D.ietf-nmop-terminology" class="cite xref">I-D.ietf-nmop-terminology</a>]</span> in the network, OAM tests are performed to find the root cause for the detected problem. However, a
+detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help identify likely root
+causes by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests depend on the nature of
+the test itself.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">There are a variety of OAM tests that can be executed as a function of the target scenario. For example, if the issue is related to a Layer 2 capability, specific
+tests can be designed and run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. These tests
+can be coupled with others to test if any filtering is in place by varying, e.g., some Layer 2 fields or checking the configuration of relevant nodes.  If these
+tests are correct, the operator may want to check the availability of the service (or its delivered performance).<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1-3">Even though the troubleshooting process may be different depending on the problem detected, there are certain common procedures or logics that can be executed in
+order to narrow down the cause of the problem and thus help locate candidate root cause.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="birth-certificate">
@@ -1412,10 +1430,15 @@ Please replace XXXX with the RFC number assigned to this document if the documen
         <h3 id="name-birth-certificate">
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-birth-certificate" class="section-name selfRef">Birth Certificate</a>
         </h3>
-<p id="section-2.2-1">The aim of a birth certificate process is to validate that all relevant parameters are set appropriately in accordance with the target network service. The birth certificate process is done once the configuration of the network elements is completed, and they are ready for service.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">If the birth certificate is successful, it means that the network service is functioning correctly (that is, measured service is matching the expected service) and meets the requirements defined by the operator. The process requires running a set of OAM tasks (e.g., tests) to verify that the service is performing as expected.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.2-3">The set of OAM tests conducted as part of a birth certificate process depends on the network service that is tested.  For example, if the service is a Virtual Private Network (VPN). Two-Way Active Measurement Protocol (TWAMP) Light <span>[<a href="#RFC5357" class="cite xref">RFC5357</a>]</span> will be used, while if the service is an E-LINE, ITU-T Y.1731 Ethernet CFM tests <span>[<a href="#ITU-T-Y1731" class="cite xref">ITU-T-Y1731</a>]</span> will be executed.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
-<p id="section-2.2-4">Typically, once the birth certificate process has been completed and the OAM tests have been executed, the test results are stored as part of the documentation process performed by the operator. Many of these tasks take place during pre-deployment phases.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.2-1">The aim of a birth certificate process is to validate that all relevant parameters are set appropriately in accordance with the target network service. The birth
+certificate process is done once the configuration of the network elements is completed, and they are ready for service.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">If the birth certificate is successful, it means that the network service is functioning correctly (that is, measured service is matching the expected service) and
+meets the requirements defined by the operator. The process requires running a set of OAM tasks (e.g., tests) to verify that the service is performing as expected.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-3">The set of OAM tests conducted as part of a birth certificate process depends on the network service that is tested.  For example, if the service is a Virtual
+Private Network (VPN), Two-Way Active Measurement Protocol (TWAMP) Light <span>[<a href="#RFC5357" class="cite xref">RFC5357</a>]</span> will be used, while if the service is an E-LINE, ITU-T Y.1731 Ethernet CFM
+tests <span>[<a href="#ITU-T-Y1731" class="cite xref">ITU-T-Y1731</a>]</span> will be executed.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.2-4">Typically, once the birth certificate process has been completed and the OAM tests have been executed, the test results are stored as part of the documentation
+process performed by the operator. Many of these tasks take place during pre-deployment phases.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="proactive-supervision">
@@ -1423,9 +1446,16 @@ Please replace XXXX with the RFC number assigned to this document if the documen
         <h3 id="name-proactive-supervision">
 <a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-proactive-supervision" class="section-name selfRef">Proactive Supervision</a>
         </h3>
-<p id="section-2.3-1">Some network services require to fulfill strict Service Level Agreements (SLAs).  An SLA defines the performance parameters that the service must fulfill in order to meet the requirements of the customer or end user (e.g., IP Connectivity Provisioning Profile (CPP) <span>[<a href="#RFC7297" class="cite xref">RFC7297</a>]</span> and Network Slice Service <span>[<a href="#RFC9543" class="cite xref">RFC9543</a>]</span>).<a href="#section-2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.3-2">As part of service fulfillment and assurance (e.g., Section 2.3.3 of <span>[<a href="#RFC4176" class="cite xref">RFC4176</a>]</span>), proactive verification is undertaken to assess whether SLAs are met and implement appropriate adjustment measures when service distortion is observed. Proactive supervision requires running tests both end-to-end, but also on service components to identify early symptoms and resolve issues before they impact the customer or end user, or to prevent or minimize the impact of the end user. Mitigation action may be enforced to alliviate the impact of networks incidents and nullify the impact on services that are delivered via that network.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
-<p id="section-2.3-3">Proactive testing might be done via OAM tests. These tests can be run periodically at regular intervals depending on the specific SLA requirements and the network operator procedures. These procedures may require documenting the test results for future auditing processes with the customers (eventually, negotiated and agreed with a customer as part of service assurance).<a href="#section-2.3-3" class="pilcrow">¶</a></p>
+<p id="section-2.3-1">Some network services require fulfillment of strict Service Level Agreements (SLAs).  An SLA defines the performance parameters that the service must fulfill
+in order to meet the requirements of the customer or end user (e.g., IP Connectivity Provisioning Profile (CPP) <span>[<a href="#RFC7297" class="cite xref">RFC7297</a>]</span> and Network Slice Service
+<span>[<a href="#RFC9543" class="cite xref">RFC9543</a>]</span>).<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-2">As part of service fulfillment and assurance (e.g., Section 2.3.3 of <span>[<a href="#RFC4176" class="cite xref">RFC4176</a>]</span>), proactive verification is undertaken to assess whether SLAs are met and
+implement appropriate adjustment measures when service distortion is observed. Proactive supervision requires running tests both end-to-end, but also on
+service components to identify early symptoms and resolve issues before they impact the customer or end user. This help prevent or minimize the impact of the
+end user. Mitigation action may be enforced to alliviate the impact of networks incidents and nullify the impact on services that are delivered via that network.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
+<p id="section-2.3-3">Proactive testing might be done via OAM tests. These tests can be run periodically at regular intervals depending on the specific SLA requirements and
+the network operator procedures. These procedures may require documenting the test results for future auditing processes with the customers (eventually,
+negotiated and agreed with a customer as part of service assurance).<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="performance-based-path-routing">
@@ -1433,8 +1463,12 @@ Please replace XXXX with the RFC number assigned to this document if the documen
         <h3 id="name-performance-based-path-rout">
 <a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-performance-based-path-rout" class="section-name selfRef">Performance-based Path Routing</a>
         </h3>
-<p id="section-2.4-1">Path Computation Elements (PCEs) are used to compute end-to-end paths in a network <span>[<a href="#RFC4655" class="cite xref">RFC4655</a>]</span>. PCEs are used for Traffic Engineering (TE) purposes (e.g., optimize network performance, reduce congestion, and improve the overall user experience).<a href="#section-2.4-1" class="pilcrow">¶</a></p>
-<p id="section-2.4-2">There are different algorithms to calculate a path in the network for some of them the PCE requires traffic engineering information. TE information includes data such as link metrics, bandwidth availability, and routing constraints. By using this information, the PCE can compute the optimal path for a particular service <span>[<a href="#RFC8233" class="cite xref">RFC8233</a>]</span>, taking into account its constraints and requirements. In addition to TE Metric Extensions in OSPF <span>[<a href="#RFC7471" class="cite xref">RFC7471</a>]</span> or IS-IS <span>[<a href="#RFC7810" class="cite xref">RFC7810</a>]</span>, OAM techniques also allow obtaining link metrics like delay and loss which can be used in the PCE algorithms.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
+<p id="section-2.4-1">Path Computation Elements (PCEs) are used to compute end-to-end paths in a network <span>[<a href="#RFC4655" class="cite xref">RFC4655</a>]</span>. PCEs are used for Traffic Engineering (TE) purposes
+(e.g., optimize network performance, reduce congestion, and improve the overall user experience).<a href="#section-2.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.4-2">There are different algorithms to calculate a path in the network for some of them the PCE requires traffic engineering information. TE information
+includes data such as link metrics, bandwidth availability, and routing constraints. By using this information, the PCE can compute the optimal path
+for a particular service <span>[<a href="#RFC8233" class="cite xref">RFC8233</a>]</span>, taking into account its constraints and requirements. In addition to TE Metric Extensions in OSPF <span>[<a href="#RFC7471" class="cite xref">RFC7471</a>]</span>
+or IS-IS <span>[<a href="#RFC7810" class="cite xref">RFC7810</a>]</span>, OAM techniques also allow obtaining link metrics like delay and loss which can be used in the PCE algorithms.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1450,8 +1484,16 @@ Please replace XXXX with the RFC number assigned to this document if the documen
         <h3 id="name-oam-unitary-test">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-oam-unitary-test" class="section-name selfRef">OAM Unitary Test</a>
         </h3>
-<p id="section-3.1-1">The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures. Inside the container, there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of the scope of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM unitary test.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it triggers the generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying test type identity.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container
+named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures. Inside the container,
+there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides
+a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of scope
+of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the
+"ietf-schedule" module from <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. "period-of-time" identifies the period values that contain a precise period
+of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state
+of the OAM unitary test.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it triggers the
+generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying test type identity.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3"><a href="#oam-uni-test-tree-st" class="auto internal xref">Figure 1</a> shows the structure of OAM unitary test module:<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <span id="name-tree-structure-of-oam-unita"></span><div id="oam-uni-test-tree-st">
 <figure id="figure-1">
@@ -1543,8 +1585,12 @@ The 'unitary-test-status' state machine is shown in <a href="#st-unitary-test-st
         <h3 id="name-oam-test-sequence">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-oam-test-sequence" class="section-name selfRef">OAM Test Sequence</a>
         </h3>
-<p id="section-3.2-1">The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a coordinated manner.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies theproperties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM test. Finally, "test-sequence-status" shows the state of the OAM test sequence.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints, repetitions,
+ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a coordinated manner.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters:
+"period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. "period-of-time"
+identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule
+specification. "unitary-test-status" enumerates the state of the OAM test. Finally, "test-sequence-status" shows the state of the OAM test sequence.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3"><a href="#oam-test-sequence-tree-st" class="auto internal xref">Figure 3</a> shows the structure of OAM test sequence module:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <span id="name-oam-test-sequence-2"></span><div id="oam-test-sequence-tree-st">
 <figure id="figure-3">
@@ -1659,7 +1705,7 @@ module: ietf-oam-test-sequence
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-yang-model-for-scheduling-o" class="section-name selfRef">YANG Model for Scheduling OAM Unitary Test</a>
         </h3>
 <div class="breakable sourcecode" id="section-4.1-1">
-<pre>&lt;CODE BEGINS&gt; file ietf-oam-unitary-test@2024-11-08.yang
+<pre>&lt;CODE BEGINS&gt; file ietf-oam-unitary-test@2026-01-13.yang
 module ietf-oam-unitary-test {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test";
@@ -1872,7 +1918,7 @@ module ietf-oam-unitary-test {
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-yang-model-for-oam-test-seq" class="section-name selfRef">YANG Model for OAM Test Sequence</a>
         </h3>
 <div class="breakable sourcecode" id="section-4.2-1">
-<pre>&lt;CODE BEGINS&gt; file ietf-oam-test-sequence@2024-11-08.yang
+<pre>&lt;CODE BEGINS&gt; file ietf-oam-test-sequence@2026-01-13.yang
 
 module ietf-oam-test-sequence {
   yang-version 1.1;
@@ -2017,21 +2063,21 @@ module ietf-oam-test-sequence {
 </div>
 </section>
 </div>
-<div id="using-device-mode-within-oam-scheduling-models">
+<div id="using-device-model-within-oam-scheduling-models">
 <section id="section-5">
-      <h2 id="name-using-device-mode-within-oa">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-using-device-mode-within-oa" class="section-name selfRef">Using Device Mode Within OAM Scheduling Models</a>
+      <h2 id="name-using-device-model-within-o">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-using-device-model-within-o" class="section-name selfRef">Using Device Model Within OAM Scheduling Models</a>
       </h2>
 <p id="section-5-1">This section discusses the issues related to reusing device models already defined in IETF within the context of scheduling OAM tests. There are two main approaches to enable OAM scheduling models:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5-2.1">
-          <p id="section-5-2.1.1">Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desired OAM test. This approach requires to recreate new YANG models for each new test type or variation of the device models.<a href="#section-5-2.1.1" class="pilcrow">¶</a></p>
+          <p id="section-5-2.1.1">Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desired OAM test. This approach requires recreating new YANG models for each new test type or variation of the device models.<a href="#section-5-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-5-2.2">
           <p id="section-5-2.2.1">Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-5-3">As an exmaple, we will use <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, which defines a YANG data model for TWAMP, to illustrate how device models could be used.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3">As an example, we will use <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, which defines a YANG data model for TWAMP, to illustrate how device models could be used.<a href="#section-5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="operational-considerations">
@@ -2070,7 +2116,7 @@ module ietf-oam-test-sequence {
 <p id="section-7-1">The YANG module targeted in this document defines a schema for data that is designed to be accessed via network management protocols such as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.  The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) <span>[<a href="#RFC6242" class="cite xref">RFC6242</a>]</span>. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS <span>[<a href="#RFC5246" class="cite xref">RFC5246</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">The NETCONF access control model <span>[<a href="#RFC6536" class="cite xref">RFC6536</a>]</span> provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7-3">There are a number of data nodes defined in this YANG module that are writable/creatable/deletable (i.e., config true, which is the default).  These data nodes may be considered sensitive or vulnerable in some network environments.  Write operations (e.g., edit-config) to these data nodes without proper protection can have a negative effect on network operations.<a href="#section-7-3" class="pilcrow">¶</a></p>
-<p id="section-7-4">In which refers to the scheduling of the tests, security considerations in <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span> are also applicable here.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-4">With respect to scheduling, the security considerations in <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span> also apply.<a href="#section-7-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
