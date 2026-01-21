@@ -61,21 +61,28 @@ informative:
 
 --- abstract
 
-This document defines a YANG data model for network diagnosis on-demand relying upon Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures, primarily intended for use by an SDN controller or network orchestrator, rather than by individual network nodes.
+This document defines a YANG data model to support on-demand network diagnosis using Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures, intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by individual network nodes.
 
 --- middle
 
 # Introduction
 
-Operations, Administration, and Maintenance (OAM) tasks are fundamental functions of the network management (see, e.g., {{?RFC7276}}). Given the emergence of data models and their utilization in Service Provider's network management and the need to automate the overall service management lifecycle {{?RFC8969}}, the management of OAM operations becomes also essential. Relevant data models are still missing to cover specific needs.
+Operations, Administration, and Maintenance (OAM) tasks are fundamental functions of the network management (see, e.g., {{?RFC7276}}). Given the emergence of data
+models and their utilization in Service Provider's network management and the need to automate the overall service management lifecycle {{?RFC8969}}, managing OAM
+operations is also essential. Relevant data models are still missing to cover specific needs.
 
-The term OAM is used in this document as defined in {{?RFC6291}} and further characterized according to the classification guidelines in {{!I-D.ietf-opsawg-oam-characterization}}. The scope of this document applies primarily to active and hybrid OAM mechanisms, as the scheduling of test generally implies the generation of additional OAM traffic. Passive OAM mechanisms are not the focus of this work.
+The term OAM is used in this document as defined in {{?RFC6291}} and further characterized according to the classification guidelines in
+{{!I-D.ietf-opsawg-oam-characterization}}. The scope of this document applies primarily to active and hybrid OAM mechanisms, as scheduling tests generally implies
+the generation of additional OAM traffic. Passive OAM mechanisms are not the focus of this work.
 
-Specifically, OAM functions provide the means to identify and isolate faults, measure and report the network performance (see section 4.2, {{?RFC6632}}. For example, {{!RFC5860}} defines the three main areas involved in OAM:
+Specifically, OAM functions provide the means to identify and isolate faults, measure and report the network performance (see section 4.2, {{?RFC6632}}. For
+example, {{!RFC5860}} defines the three main areas involved in OAM:
 
-* Fault management, which allows network operators quickly identify and isolate faults in the network. Examples of these mechanisms for fault detection and isolation are: continuity check, link trace, and loopback.
+* Fault management, which allows network operators quickly identify and isolate faults in the network. Examples of these mechanisms for fault detection and
+  isolation are: continuity check, link trace, and loopback.
 
-* Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as frame delay measurement, frame delay variation measurement, and frame loss measurement.
+* Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as frame
+  delay measurement, frame delay variation measurement, and frame loss measurement.
 
 * Security management defines mechanisms to protect OAM communications from unauthorized access and tampering.
 
@@ -83,11 +90,15 @@ Specifically, OAM functions provide the means to identify and isolate faults, me
 
 * Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational.
 
-* Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple technologies for this function, like IP Ping{{?RFC0792}}{{?RFC4443}}, VCCV Ping{{?RFC5085}}, LSP Ping {{?RFC4379}} or Ethernet Loopback {{IEEE-8021Q}}
+* Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple technologies for this
+  function, like IP Ping{{?RFC0792}}{{?RFC4443}}, VCCV Ping{{?RFC5085}}, LSP Ping {{?RFC4379}} or Ethernet Loopback {{IEEE-8021Q}}.
 
-* Link Trace: This function allows a network operator to trace a path through a network from one device to another. Some technologies following this approach are Y.1731 Linktrace {{ITU-T-Y1731}} or IP traceroute{{?RFC0792}}{{?RFC4443}}.
+* Link Trace: This function allows a network operator to trace a path through a network from one device to another. Some technologies following this approach
+  are Y.1731 Linktrace {{ITU-T-Y1731}} or IP traceroute{{?RFC0792}}{{?RFC4443}}.
 
-* Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues. Protocols like TWAMP{{?RFC5357}}, STAMP{{?RFC8762}}, Alternative Marking{{?RFC9341}}, IOAM (In Situ OAM) {{?RFC9197}}, or Y.1731 DMM/SLM {{ITU-T-Y1731}} can obtain performance measurements.
+* Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues.
+  Protocols like TWAMP{{?RFC5357}}, STAMP{{?RFC8762}}, Alternative Marking{{?RFC9341}}, IOAM (In Situ OAM) {{?RFC9197}}, or Y.1731 DMM/SLM {{ITU-T-Y1731}} can
+  obtain performance measurements.
 
 More recently, Incident Management {{?I-D.ietf-nmop-network-incident-yang}} focuses on
 the network incident diagnosis, which can be favored by dynamic invocation of OAM tests.
@@ -112,7 +123,7 @@ This document assumes that the reader is familiar with the contents of {{!RFC795
 
 Following terms are used for the representation of this data model.
 
-o OAM unitary test: A set of parameters that define a type of OAM test to be invoked. As an example, it includes the type test, configuration parameters, and target results.
+o OAM unitary test: A set of parameters that define a type of OAM test to be invoked. As an example, it includes the test type, configuration parameters, and target results.
 
 o OAM test sequence: A set of OAM unitary tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.
 
@@ -138,7 +149,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 | Prefix | Yang Module            | Reference    |
 | ------ | ---------------------- | ------------ |
-| oamut  | ietf-oam-unitary-tests | RFCXXXX      |
+| oamut  | ietf-oam-unitary-test  | RFCXXXX      |
 | oamts  | ietf-oam-test-sequence | RFCXXXX      |
 | yang   | ietf-yang-types        | {{!RFC6991}} |
 {: #tab-prefixes title="Prefixes and Corresponding YANG Modules"}
@@ -150,39 +161,62 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 This document covers how to use OAM for network-wide use cases. These use cases rely primarily on active or hybrid OAM methods, depending on whether dedicated test packets or augmented data packets are used, following {{!I-D.ietf-opsawg-oam-characterization}}.
 
-Following, some illustrative examples are presented.
+The following illustrative examples are provided.
 
 ## Troubleshooting
 
-After the detection of a problem {{?I-D.ietf-nmop-terminology}} in the network, OAM tests are performed to find the root cause for the detected problem. However, a detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help find the candidate root cause by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests depend on the nature of the test itself.
+After the detection of a problem {{?I-D.ietf-nmop-terminology}} in the network, OAM tests are performed to find the root cause for the detected problem. However, a
+detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help identify likely root
+causes by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests depend on the nature of
+the test itself.
 
-There are a variety of OAM tests that can be executed as a function of the target scenario. For example, if the issue is related to a Layer 2 capability, specific tests can be designed and run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. These tests can be coupled with others to test if any filtering is in place by varying, e.g., some Layer 2 fields or checking the configuration of relevant nodes.  If these tests are correct, the operator may want to check the availability of the service (or its delivered performance).
+There are a variety of OAM tests that can be executed as a function of the target scenario. For example, if the issue is related to a Layer 2 capability, specific
+tests can be designed and run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. These tests
+can be coupled with others to test if any filtering is in place by varying, e.g., some Layer 2 fields or checking the configuration of relevant nodes.  If these
+tests are correct, the operator may want to check the availability of the service (or its delivered performance).
 
-Even though the troubleshooting process may be different depending on the problem detected, there are certain common procedures or logics that can be executed in order to narrow down the cause of the problem and thus help locate candidate root cause.
+Even though the troubleshooting process may be different depending on the problem detected, there are certain common procedures or logics that can be executed in
+order to narrow down the cause of the problem and thus help locate candidate root cause.
 
 ## Birth Certificate
 
-The aim of a birth certificate process is to validate that all relevant parameters are set appropriately in accordance with the target network service. The birth certificate process is done once the configuration of the network elements is completed, and they are ready for service.
+The aim of a birth certificate process is to validate that all relevant parameters are set appropriately in accordance with the target network service. The birth
+certificate process is done once the configuration of the network elements is completed, and they are ready for service.
 
-If the birth certificate is successful, it means that the network service is functioning correctly (that is, measured service is matching the expected service) and meets the requirements defined by the operator. The process requires running a set of OAM tasks (e.g., tests) to verify that the service is performing as expected.
+If the birth certificate is successful, it means that the network service is functioning correctly (that is, measured service is matching the expected service) and
+meets the requirements defined by the operator. The process requires running a set of OAM tasks (e.g., tests) to verify that the service is performing as expected.
 
-The set of OAM tests conducted as part of a birth certificate process depends on the network service that is tested.  For example, if the service is a Virtual Private Network (VPN). Two-Way Active Measurement Protocol (TWAMP) Light {{!RFC5357}} will be used, while if the service is an E-LINE, ITU-T Y.1731 Ethernet CFM tests {{ITU-T-Y1731}} will be executed.
+The set of OAM tests conducted as part of a birth certificate process depends on the network service that is tested.  For example, if the service is a Virtual
+Private Network (VPN), Two-Way Active Measurement Protocol (TWAMP) Light {{!RFC5357}} will be used, while if the service is an E-LINE, ITU-T Y.1731 Ethernet CFM
+tests {{ITU-T-Y1731}} will be executed.
 
-Typically, once the birth certificate process has been completed and the OAM tests have been executed, the test results are stored as part of the documentation process performed by the operator. Many of these tasks take place during pre-deployment phases.
+Typically, once the birth certificate process has been completed and the OAM tests have been executed, the test results are stored as part of the documentation
+process performed by the operator. Many of these tasks take place during pre-deployment phases.
 
 ## Proactive Supervision
 
-Some network services require to fulfill strict Service Level Agreements (SLAs).  An SLA defines the performance parameters that the service must fulfill in order to meet the requirements of the customer or end user (e.g., IP Connectivity Provisioning Profile (CPP) {{?RFC7297}} and Network Slice Service {{?RFC9543}}).
+Some network services require fulfillment of strict Service Level Agreements (SLAs).  An SLA defines the performance parameters that the service must fulfill
+in order to meet the requirements of the customer or end user (e.g., IP Connectivity Provisioning Profile (CPP) {{?RFC7297}} and Network Slice Service
+{{?RFC9543}}).
 
-As part of service fulfillment and assurance (e.g., Section 2.3.3 of {{?RFC4176}}), proactive verification is undertaken to assess whether SLAs are met and implement appropriate adjustment measures when service distortion is observed. Proactive supervision requires running tests both end-to-end, but also on service components to identify early symptoms and resolve issues before they impact the customer or end user, or to prevent or minimize the impact of the end user. Mitigation action may be enforced to alliviate the impact of networks incidents and nullify the impact on services that are delivered via that network.
+As part of service fulfillment and assurance (e.g., Section 2.3.3 of {{?RFC4176}}), proactive verification is undertaken to assess whether SLAs are met and
+implement appropriate adjustment measures when service distortion is observed. Proactive supervision requires running tests both end-to-end, but also on
+service components to identify early symptoms and resolve issues before they impact the customer or end user. This help prevent or minimize the impact of the
+end user. Mitigation action may be enforced to alliviate the impact of networks incidents and nullify the impact on services that are delivered via that network.
 
-Proactive testing might be done via OAM tests. These tests can be run periodically at regular intervals depending on the specific SLA requirements and the network operator procedures. These procedures may require documenting the test results for future auditing processes with the customers (eventually, negotiated and agreed with a customer as part of service assurance).
+Proactive testing might be done via OAM tests. These tests can be run periodically at regular intervals depending on the specific SLA requirements and
+the network operator procedures. These procedures may require documenting the test results for future auditing processes with the customers (eventually,
+negotiated and agreed with a customer as part of service assurance).
 
 ## Performance-based Path Routing
 
-Path Computation Elements (PCEs) are used to compute end-to-end paths in a network {{?RFC4655}}. PCEs are used for Traffic Engineering (TE) purposes (e.g., optimize network performance, reduce congestion, and improve the overall user experience).
+Path Computation Elements (PCEs) are used to compute end-to-end paths in a network {{?RFC4655}}. PCEs are used for Traffic Engineering (TE) purposes
+(e.g., optimize network performance, reduce congestion, and improve the overall user experience).
 
-There are different algorithms to calculate a path in the network for some of them the PCE requires traffic engineering information. TE information includes data such as link metrics, bandwidth availability, and routing constraints. By using this information, the PCE can compute the optimal path for a particular service {{!RFC8233}}, taking into account its constraints and requirements. In addition to TE Metric Extensions in OSPF {{!RFC7471}} or IS-IS {{!RFC7810}}, OAM techniques also allow obtaining link metrics like delay and loss which can be used in the PCE algorithms.
+There are different algorithms to calculate a path in the network for some of them the PCE requires traffic engineering information. TE information
+includes data such as link metrics, bandwidth availability, and routing constraints. By using this information, the PCE can compute the optimal path
+for a particular service {{!RFC8233}}, taking into account its constraints and requirements. In addition to TE Metric Extensions in OSPF {{!RFC7471}}
+or IS-IS {{!RFC7810}}, OAM techniques also allow obtaining link metrics like delay and loss which can be used in the PCE algorithms.
 
 # Modelling the Scheduling of OAM Tests
 
@@ -190,9 +224,17 @@ This document specifies two models: OAM unitary test and OAM test sequence model
 
 ## OAM Unitary Test
 
-The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures. Inside the container, there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of the scope of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM unitary test.
+The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container
+named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures. Inside the container,
+there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides
+a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of scope
+of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the
+"ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time" identifies the period values that contain a precise period
+of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state
+of the OAM unitary test.
 
-Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it triggers the generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying test type identity.
+Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it triggers the
+generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying test type identity.
 
 {{oam-uni-test-tree-st}} shows the structure of OAM unitary test module:
 
@@ -256,9 +298,13 @@ The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. 
 
 ## OAM Test Sequence
 
-The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a coordinated manner.
+The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints, repetitions,
+ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a coordinated manner.
 
-Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies theproperties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM test. Finally, "test-sequence-status" shows the state of the OAM test sequence.
+Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters:
+"period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time"
+identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule
+specification. "unitary-test-status" enumerates the state of the OAM test. Finally, "test-sequence-status" shows the state of the OAM test sequence.
 
 {{oam-test-sequence-tree-st}} shows the structure of OAM test sequence module:
 
@@ -340,7 +386,7 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 ## YANG Model for Scheduling OAM Unitary Test
 
 ~~~~~~~~~~
-<CODE BEGINS> file ietf-oam-unitary-test@2024-11-08.yang
+<CODE BEGINS> file ietf-oam-unitary-test@2026-01-13.yang
 {::include ./Yang/ietf-oam-unitary-test.yang}
 
 <CODE ENDS>
@@ -349,21 +395,21 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 ## YANG Model for OAM Test Sequence
 
 ~~~~~~~~~~
-<CODE BEGINS> file ietf-oam-test-sequence@2024-11-08.yang
+<CODE BEGINS> file ietf-oam-test-sequence@2026-01-13.yang
 
 {::include ./Yang/ietf-oam-test-sequence.yang}
 
 <CODE ENDS>
 ~~~~~~~~~~
 
-# Using Device Mode Within OAM Scheduling Models
+# Using Device Model Within OAM Scheduling Models
 
 This section discusses the issues related to reusing device models already defined in IETF within the context of scheduling OAM tests. There are two main approaches to enable OAM scheduling models:
 
-* Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desired OAM test. This approach requires to recreate new YANG models for each new test type or variation of the device models.
+* Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desired OAM test. This approach requires recreating new YANG models for each new test type or variation of the device models.
 * Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.
 
-As an exmaple, we will use {{!RFC8913}}, which defines a YANG data model for TWAMP, to illustrate how device models could be used.
+As an example, we will use {{!RFC8913}}, which defines a YANG data model for TWAMP, to illustrate how device models could be used.
 
 # Operational Considerations
 
@@ -376,6 +422,7 @@ The YANG models defined in this document (both for unitary and sequence tests) u
 Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts (e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but the conflict MUST be clearly reported via the YANG model status leaves.
 
 When a new `unitary-test` or `test-sequence` are scheduled, the request for OAM tasks schedule MAY be rejected by the server depending on the server's capability to evaluate the scheduling impact and detect conflicts prior to execution, e.g., the number of schedule conflict exceeds the specific threshold.
+
 
 ## Coverage of Input Parameters and Output Results
 
@@ -394,7 +441,7 @@ The NETCONF access control model {{!RFC6536}} provides the means to restrict acc
 
 There are a number of data nodes defined in this YANG module that are writable/creatable/deletable (i.e., config true, which is the default).  These data nodes may be considered sensitive or vulnerable in some network environments.  Write operations (e.g., edit-config) to these data nodes without proper protection can have a negative effect on network operations.
 
-In which refers to the scheduling of the tests, security considerations in {{!I-D.ietf-netmod-schedule-yang}} are also applicable here.
+With respect to scheduling, the security considerations in {{!I-D.ietf-netmod-schedule-yang}} also apply.
 
 # IANA Considerations
 
