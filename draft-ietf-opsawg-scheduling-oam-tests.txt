@@ -98,6 +98,7 @@ Table of Contents
    6.  Operational Considerations
      6.1.  Conflict Resolution and Reporting Among Scheduled OAM Tasks
      6.2.  Coverage of Input Parameters and Output Results
+     6.3.  Performance impact of concurrent OAM task scheduling
    7.  Security Considerations
    8.  IANA Considerations
      8.1.  Updates to the IETF XML Registry for New YANG Module
@@ -1098,6 +1099,14 @@ Table of Contents
    In summary, this document focuses on the scheduling, coordination,
    and status tracking of OAM tests, while relying on existing YANG
    models for the detailed specification of test parameters and results.
+
+6.3.  Performance impact of concurrent OAM task scheduling
+
+   Concurrent OAM tasks scheduling may cause performance strain on oam
+   test devices due to intensive processing on both the server and the
+   client.  Management and orchestration systems need to make sure to
+   have sufficient resource before conducting those multiple concurrent
+   OAM tasks.
 
 7.  Security Considerations
 

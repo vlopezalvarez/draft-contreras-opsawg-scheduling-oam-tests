@@ -1223,6 +1223,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-coverage-of-input-parameter" class="internal xref">Coverage of Input Parameters and Output Results</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-performance-impact-of-concu" class="internal xref">Performance impact of concurrent OAM task scheduling</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
@@ -2179,6 +2182,15 @@ module ietf-oam-test-sequence {
 <p id="section-6.2-1">The YANG models defined in this document are designed to schedule OAM tests at a network-wide level. The input parameters required to configure and execute specific OAM functions (such as test type, target, and configuration options) are referenced or reused from the existing device-level OAM YANG models (e.g., <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>, <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>). This approach avoids duplication and ensures consistency with established models.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">Similarly, the output results of OAM tests—such as test status, performance metrics, and diagnostic information—are expected to be reported using the mechanisms and data nodes defined in those foundational YANG modules. The scheduling models in this document provide references to these results and enable their collection and correlation across multiple tests and devices, but do not redefine the detailed input/output parameters of each OAM function.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3">In summary, this document focuses on the scheduling, coordination, and status tracking of OAM tests, while relying on existing YANG models for the detailed specification of test parameters and results.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="performance-impact-of-concurrent-oam-task-scheduling">
+<section id="section-6.3">
+        <h3 id="name-performance-impact-of-concu">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-performance-impact-of-concu" class="section-name selfRef">Performance impact of concurrent OAM task scheduling</a>
+        </h3>
+<p id="section-6.3-1">Concurrent OAM tasks scheduling may cause performance strain on oam test devices due to intensive processing on both the server and the client.
+Management and orchestration systems need to make sure to have sufficient resource before conducting those multiple concurrent OAM tasks.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
