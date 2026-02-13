@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 25 July 2026                                              Nokia
+Expires: 17 August 2026                                            Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                         21 January 2026
+                                                        13 February 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 July 2026.
+   This Internet-Draft will expire on 17 August 2026.
 
 Copyright Notice
 
@@ -1082,10 +1082,10 @@ Table of Contents
 
    [I-D.ietf-opsawg-oam-characterization]
               Pignataro, C., Farrel, A., and T. Mizrahi, "Guidelines for
-              Characterizing "OAM"", Work in Progress, Internet-Draft,
-              draft-ietf-opsawg-oam-characterization-15, 6 January 2026,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              oam-characterization-15>.
+              Characterizing the Term "OAM"", Work in Progress,
+              Internet-Draft, draft-ietf-opsawg-oam-characterization-17,
+              28 January 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-opsawg-oam-characterization-17>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1383,7 +1383,7 @@ A.1.  Create a TWAMP OAM test
              {
                "ne-id": "203.0.113.3",
                "managed": "true",
-               "test-type": "twamp-test",
+               "test-type": "twamp",
                "twamp": {
                  "session-sender": {
                    "admin-state": true,
@@ -1418,7 +1418,7 @@ A.1.  Create a TWAMP OAM test
              {
                "ne-id": "203.0.113.4",
                "managed": "true",
-               "test-type": "twamp-test",
+               "test-type": "twamp",
                "twamp": {
                  "session-reflector": {
                    "admin-state": true,
