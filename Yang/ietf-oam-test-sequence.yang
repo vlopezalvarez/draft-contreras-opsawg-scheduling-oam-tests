@@ -126,6 +126,7 @@ module ietf-oam-test-sequence {
       }
 
       list test-ref {
+        ordered-by user;
         key "name";
         description "References to the ietf-oam-unitary-tests.";
 
