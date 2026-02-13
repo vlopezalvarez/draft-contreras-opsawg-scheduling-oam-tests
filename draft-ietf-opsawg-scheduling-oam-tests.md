@@ -434,6 +434,10 @@ Similarly, the output results of OAM tests—such as test status, performance me
 
 In summary, this document focuses on the scheduling, coordination, and status tracking of OAM tests, while relying on existing YANG models for the detailed specification of test parameters and results.
 
+## Performance impact of concurrent OAM task scheduling
+
+Concurrent OAM tasks scheduling may cause performance strain on oam test devices due to intensive processing on both the server and the client.
+Management and orchestration systems need to make sure to have sufficient resource before conducting those multiple concurrent OAM tasks.
 
 # Security Considerations
 
