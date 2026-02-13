@@ -1623,7 +1623,8 @@ A.2.  Ping OAM Test Template
 
 Acknowledgments
 
-   TODO acknowledge.
+   Thanks Joe Clark, Daniel King, Qiufang Ma for valuable review and
+   comments.
 
 Authors' Addresses
 
