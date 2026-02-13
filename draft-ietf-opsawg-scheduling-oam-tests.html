@@ -1532,25 +1532,26 @@ module: ietf-oam-unitary-test
 The 'unitary-test-status' state machine is shown in <a href="#st-unitary-test-status" class="auto internal xref">Figure 2</a>. The state machine includes the following states:<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1-6.1">
-            <p id="section-3.1-6.1.1">"planned": The initial state where the test is planned.<a href="#section-3.1-6.1.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-6.1.1">"planned": The initial state where the test is planned by the management and hasn't been applied to the network element.<a href="#section-3.1-6.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-6.2">
-            <p id="section-3.1-6.2.1">"configured": The state where the test is being configured.<a href="#section-3.1-6.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-6.2.1">"configured": The state where the test is being configured. This state is triggered when the planned test configuration is applied to the network element.<a href="#section-3.1-6.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-6.3">
-            <p id="section-3.1-6.3.1">"ready": The state where the test is ready to be executed.<a href="#section-3.1-6.3.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-6.3.1">"ready": The state where the test is ready to be executed. This is state is triggered after the planned test configuration is applied and before the test
+         is executed.<a href="#section-3.1-6.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-6.4">
-            <p id="section-3.1-6.4.1">"on-going": The state where the test is currently running.<a href="#section-3.1-6.4.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-6.4.1">"on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.<a href="#section-3.1-6.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-6.5">
-            <p id="section-3.1-6.5.1">"stop": The state where the test is manually stopped.<a href="#section-3.1-6.5.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-6.5.1">"stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.<a href="#section-3.1-6.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-6.6">
-            <p id="section-3.1-6.6.1">"error": The state where an error occurs during the test.<a href="#section-3.1-6.6.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-6.6.1">"error": The state where an error occurs during the test. This state is triggere when one or tests haven't been conducted successfully.<a href="#section-3.1-6.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-6.7">
-            <p id="section-3.1-6.7.1">"finished": The final state where the test is completed.<a href="#section-3.1-6.7.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-6.7.1">"success": The final state where the test is completed. This state is triggered when the test has been conducted sucessfully.<a href="#section-3.1-6.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <span id="name-oam-unitary-test-state-mach"></span><div id="st-unitary-test-status">
@@ -1568,7 +1569,7 @@ The 'unitary-test-status' state machine is shown in <a href="#st-unitary-test-st
 |      |                                  |
 |      V                                  |
 |  +---------+      +--------+            |
-+--| finished|&lt;-----|  stop  |&lt;------------+
++--| success |&lt;-----|  stop  |&lt;------------+
    +---------+      +--------+            |
        A                                  |
        |                                  |
@@ -1640,28 +1641,29 @@ module: ietf-oam-test-sequence
 <p id="section-3.2-5">The 'test-sequence-status' state machine is shown in <a href="#st-test-sequence-status" class="auto internal xref">Figure 4</a>. The state machine includes the following states:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2-6.1">
-            <p id="section-3.2-6.1.1">"planned": The initial state where the test is planned.<a href="#section-3.2-6.1.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-6.1.1">"planned": The initial state where the test is planned by the management and hasn't been applied to the network element.<a href="#section-3.2-6.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-6.2">
-            <p id="section-3.2-6.2.1">"configured": The state where the test is being configured.<a href="#section-3.2-6.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-6.2.1">"configured": The state where the test is being configured. This state is triggered when the planned test configuration is applied to the network element.<a href="#section-3.2-6.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-6.3">
-            <p id="section-3.2-6.3.1">"ready": The state where the test is ready to be executed.<a href="#section-3.2-6.3.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-6.3.1">"ready": The state where the test is ready to be executed. This is state is triggered after the planned test configuration is applied and before the test
+         is executed.<a href="#section-3.2-6.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-6.4">
-            <p id="section-3.2-6.4.1">"on-going": The state where the test is currently running.<a href="#section-3.2-6.4.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-6.4.1">"on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.<a href="#section-3.2-6.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-6.5">
-            <p id="section-3.2-6.5.1">"stop": The state where the test is manually stopped.<a href="#section-3.2-6.5.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-6.5.1">"stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.<a href="#section-3.2-6.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-6.6">
-            <p id="section-3.2-6.6.1">"success": The state when all unitary tests were successful.<a href="#section-3.2-6.6.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-6.6.1">"success": The final state where all unitary tests are completed. This state is triggered when all tests have been conducted sucessfully.<a href="#section-3.2-6.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-6.7">
             <p id="section-3.2-6.7.1">"failure": The state when one or more tests in the sequence got an error.<a href="#section-3.2-6.7.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-6.8">
-            <p id="section-3.2-6.8.1">"error": The state where an error occurs during the test.<a href="#section-3.2-6.8.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-6.8.1">"error":  The state where an error occurs during the test. This state is triggere when one or tests haven't been conducted successfully.<a href="#section-3.2-6.8.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <span id="name-oam-test-sequence-state-mac"></span><div id="st-test-sequence-status">
