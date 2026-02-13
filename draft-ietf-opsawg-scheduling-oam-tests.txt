@@ -661,6 +661,58 @@ Table of Contents
           // Update with the correct RFC number when assigned
      }
 
+     /* Identities */
+            identity unitary-test-status {
+             description
+             "Base identity for unitary-test-status.";
+            }
+            identity planned {
+             base unitary-test-status;
+             description
+             "Identity for planned.";
+            }
+            identity configured {
+             base unitary-test-status;
+             description
+             "Identity for configured.";
+            }
+            identity ready {
+             base unitary-test-status;
+             description
+             "Identity for ready.";
+            }
+            identity on-going {
+             base unitary-test-status;
+             description
+             "Identity for on-going.";
+            }
+            identity stop {
+             base unitary-test-status;
+             description
+             "Identity for stop.";
+            }
+            identity sucesss {
+             base unitary-test-status;
+             description
+             "Identity for success.";
+            }
+
+            identity error {
+             base unitary-test-status;
+             description
+             "Identity for error.";
+            }
+            identity resource contention {
+             base error;
+             description
+             "Identity for resource contention.";
+            }
+            identity priority {
+             base error;
+             description
+             "Identity for priority.";
+            }
+
      identity basic-test-type {
           description
             "Base identity of basic test type.";
@@ -761,36 +813,9 @@ Table of Contents
          uses schedule:schedule-status;
 
          leaf unitary-test-status {
-           type enumeration {
-             enum "planned" {
-               description
-                 "The test is planned.";
-             }
-             enum "configure" {
-               description
-                 "The test is configured.";
-             }
-             enum "ready" {
-               description
-                 "The test status is ready.";
-             }
-             enum "on-going" {
-               description
-                 "The test is on-going.";
-             }
-             enum "stop" {
-               description
-                 "The test is stopped.";
-             }
-             enum "finished" {
-               description
-                 "The test is finished.";
-             }
-             enum "error" {
-               description
-                 "The test has an error.";
-             }
-           }
+               type identityref {
+                     base unitary-test-status;
+               }
                    config false;
            description
              "Status of the test.";
