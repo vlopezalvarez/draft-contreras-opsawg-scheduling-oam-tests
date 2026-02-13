@@ -244,22 +244,37 @@ module: ietf-oam-unitary-test
      +--rw oam-unitary-test* [name]
         +--rw name                      string
         +--rw ne-config* [ne-id]
-        |  +--rw ne-id    rt-types:router-id
+        |  +--rw ne-id        rt-types:router-id
         |  +--rw managed?     boolean
         |  +--rw test-type?   identityref
         |  +--rw root
-        +--rw period-description?       string
-        +--rw period-start              yang:date-and-time
-        +--rw time-zone-identifier?     sys:timezone-name
-        +--rw (period-type)?
-        |  +--:(explicit)
-        |  |  +--rw period-end?         yang:date-and-time
-        |  +--:(duration)
-        |     +--rw duration?           duration
-        +--rw recurrence-description?   string
-        +--rw frequency                 identityref
-        +--rw interval?                 uint32
-        +--ro unitary-test-status?      enumeration
+        +--rw (schedule-type)?
+        |  +--:(period)
+        |  |  +--rw period
+        |  |     +--rw period-description?     string
+        |  |     +--rw period-start?           yang:date-and-time
+        |  |     +--rw time-zone-identifier?   sys:timezone-name
+        |  |     +--rw (period-type)?
+        |  |        +--:(explicit)
+        |  |        |  +--rw period-end?       yang:date-and-time
+        |  |        +--:(duration)
+        |  |           +--rw duration?         duration
+        |  +--:(recurrence)
+        |     +--rw recurrence
+        |        +--rw recurrence-description?   string
+        |        +--rw frequency?                identityref
+        |        +--rw interval?                 uint32
+        +--rw state?                    identityref
+        +--rw version?                  uint16
+        +--rw schedule-type?            identityref
+        +--ro local-time?               yang:date-and-time
+        +--ro last-update?              yang:date-and-time
+        +--ro counter?                  yang:counter32
+        +--ro last-occurrence?          yang:date-and-time
+        +--ro upcoming-occurrence?      yang:date-and-time
+        +--ro last-failed-occurrence?   yang:date-and-time
+        +--ro failure-counter?          yang:counter32
+        +--ro unitary-test-status?      identityref
 ~~~~
 {: #oam-uni-test-tree-st title="Tree Structure of OAM Unitary Test" artwork-align="center"}
 
