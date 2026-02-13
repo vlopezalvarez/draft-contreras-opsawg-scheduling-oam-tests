@@ -726,7 +726,7 @@ Table of Contents
              description
              "Identity for error.";
             }
-            identity resource contention {
+            identity resource-contention {
              base error;
              description
              "Identity for resource contention.";
