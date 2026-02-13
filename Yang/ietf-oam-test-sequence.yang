@@ -140,10 +140,21 @@ module ietf-oam-test-sequence {
         }
       }
 
-      uses schedule:period-of-time;
-
-      uses schedule:recurrence-utc;
-
+  choice schedule-type {
+     description
+	  "Choice based on the type of the time range.";
+   container period {
+	 description
+	   "The OAM Test takes effect based on a precise period of
+		time.";
+	   uses schedule:period-of-time;
+   }
+   container recurrence {
+	 description
+	   "The OAM test takes effect based on a recurrence rule.";
+	 uses schedule:recurrence-basic;
+   }
+ }
       uses schedule:schedule-status;
 	 leaf test-sequence-status {
 	   type identityref {
