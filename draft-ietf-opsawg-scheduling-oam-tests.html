@@ -1978,7 +1978,62 @@ module ietf-oam-test-sequence {
     // Update with the correct RFC number when assigned
   }
 
-  // Data model definition
+  /* Identities */
+         identity test-sequence-status {
+          description
+          "Base identity for test-sequence-status.";
+         }
+         identity planned {
+          base test-sequence-status;
+          description
+          "Identity for planned.";
+         }
+         identity configured {
+          base test-sequence-status;
+          description
+          "Identity for configured.";
+         }
+         identity ready {
+          base test-sequence-status;
+          description
+          "Identity for ready.";
+         }
+         identity on-going {
+          base test-sequence-status;
+          description
+          "Identity for on-going.";
+         }
+         identity stop {
+          base test-sequence-status;
+          description
+          "Identity for stop.";
+         }
+         identity success {
+          base test-sequence-status;
+          description
+          "Identity for success.";
+         }
+         identity failure {
+          base test-sequence-status;
+          description
+          "Identity for failure";
+         }
+         identity error {
+          base test-sequence-status;
+          description
+          "Identity for error.";
+         }
+         identity resource-contention {
+          base error;
+          description
+          "Identity for resource-contention error cause.";
+         }
+         identity priority {
+          base error;
+          description
+          "Identity for priority error cause.";
+         }
+  /* Data model definition */
 
   container oam-test-sequence {
     description
@@ -2014,46 +2069,14 @@ module ietf-oam-test-sequence {
       uses schedule:recurrence-utc;
 
       uses schedule:schedule-status;
-
-      leaf test-sequence-status {
-        type enumeration {
-          enum "planned" {
-            description
-              "The test sequence is planned.";
-          }
-          enum "configured" {
-            description
-              "The test sequence is configured.";
-          }
-          enum "ready" {
-            description
-              "The test sequence is ready.";
-          }
-          enum "on-going" {
-            description
-              "The test sequence status is on-going.";
-          }
-          enum "stop" {
-            description
-              "The test sequenceis stopped.";
-          }
-          enum "success" {
-            description
-              "All tests in the sequence were successful.";
-          }
-          enum "failure" {
-            description
-              "One or more tests in the sequence got an error.";
-          }
-          enum "error" {
-            description
-              "The test sequence status has an error.";
-          }
-        }
-        config false;
-        description
-          "Status of the test sequence execution.";
-      }
+         leaf test-sequence-status {
+           type identityref {
+                 base test-sequence-status;
+           }
+           config false;
+           description
+                 "Status of the test sequence execution.";
+         }
     }
   }
 }
