@@ -602,7 +602,7 @@ Table of Contents
       error.
 
    *  "error": The state where an error occurs during the test.  This
-      state is triggere when one or tests haven't been conducted
+      state is triggere when one or more tests haven't been conducted
       successfully.
 
                 +---------+      +----------+      +---------+
@@ -1326,9 +1326,9 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-07, 3 January 2026,
+              incident-yang-08, 13 February 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-07>.
+              network-incident-yang-08>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
