@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 17 August 2026                                            Nokia
+Expires: 18 August 2026                                            Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                        13 February 2026
+                                                        14 February 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 August 2026.
+   This Internet-Draft will expire on 18 August 2026.
 
 Copyright Notice
 
@@ -464,10 +464,8 @@ Table of Contents
 
                 Figure 1: Tree Structure of OAM Unitary Test
 
-   (Note: alignment with [I-D.ietf-netmod-schedule-yang] will continue
-   with the progress of that document).  The 'unitary-test-status' state
-   machine is shown in Figure 2.  The state machine includes the
-   following states:
+   The 'unitary-test-status' state machine is shown in Figure 2.  The
+   state machine includes the following states:
 
    *  "planned": The initial state where the test is planned by the
       management and hasn't been applied to the network element.
