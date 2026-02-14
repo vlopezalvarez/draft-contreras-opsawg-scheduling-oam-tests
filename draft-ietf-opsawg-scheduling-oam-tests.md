@@ -264,7 +264,7 @@ module: ietf-oam-unitary-test
         |        +--rw recurrence-description?   string
         |        +--rw frequency?                identityref
         |        +--rw interval?                 uint32
-        +--ro state?                    identityref
+        +--rw state?                    identityref
         +--rw version?                  uint16
         +--rw schedule-type?            identityref
         +--ro local-time?               yang:date-and-time
@@ -352,7 +352,7 @@ module: ietf-oam-test-sequence
         |        +--rw recurrence-description?   string
         |        +--rw frequency?                identityref
         |        +--rw interval?                 uint32
-        +--ro state?                    identityref
+        +--rw state?                    identityref
         +--rw version?                  uint16
         +--rw schedule-type?            identityref
         +--ro local-time?               yang:date-and-time
