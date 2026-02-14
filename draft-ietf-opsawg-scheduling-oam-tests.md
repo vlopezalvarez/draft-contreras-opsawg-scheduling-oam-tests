@@ -377,7 +377,7 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 * "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
 * "success": The final state where all unitary tests are completed. This state is triggered when all tests have been conducted sucessfully.
 * "failure": The state when one or more tests in the sequence got an error.
-* "error":  The state where an error occurs during the test. This state is triggere when one or tests haven't been conducted successfully.
+* "error":  The state where an error occurs during the test. This state is triggere when one or more tests haven't been conducted successfully.
 
 ~~~~
 
