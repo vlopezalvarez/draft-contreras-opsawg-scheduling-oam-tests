@@ -421,7 +421,7 @@ The YANG models defined in this document (both for unitary and sequence tests) u
 
 Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts (e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but the conflict MUST be clearly reported via the YANG model status leaves.
 
-When a new `unitary-test` or `test-sequence` are scheduled, the request for OAM tasks schedule MAY be rejected by the server depending on the server's capability to evaluate the scheduling impact and detect conflicts prior to execution, e.g., the number of schedule conflict exceeds the specific threshold.
+When a new `unitary-test` or `test-sequence` is scheduled, the request for OAM tasks schedule MAY be rejected by the server depending on the server's capability to evaluate the scheduling impact and detect conflicts prior to execution, e.g., the number of schedule conflict exceeds the specific threshold.
 
 
 ## Coverage of Input Parameters and Output Results
