@@ -319,7 +319,12 @@ ordering, and reporting outputs. These sequences provide a structured approach t
 Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters:
 "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time"
 identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule
-specification. "unitary-test-status" enumerates the state of the OAM test. Finally, "test-sequence-status" shows the state of the OAM test sequence.
+specification. "test-sequence-status" shows the state of the OAM test sequence. "state" imported from the "ietf-schedule" module indicates the
+current state of the schedule.
+
+Note that repetition only applies to recurrence schedule type. In case of recurrence schedule type, either frequency or interval should be specified.
+Since the OAM test sequence model consists of a collection of OAM unitary tests, one or more tests in the sequence might get an error, however error
+in one or more tests doesn't prevent the subsequent tests or remaining tests to execute.
 
 {{oam-test-sequence-tree-st}} shows the structure of OAM test sequence module:
 
