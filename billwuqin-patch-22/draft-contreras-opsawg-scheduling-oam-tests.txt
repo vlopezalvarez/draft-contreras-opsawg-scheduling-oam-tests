@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 25 July 2026                                              Nokia
-                                                         21 January 2026
+Expires: 20 August 2026                                            Nokia
+                                                        16 February 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 July 2026.
+   This Internet-Draft will expire on 20 August 2026.
 
 Copyright Notice
 
@@ -1023,9 +1023,9 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-07, 3 January 2026,
+              incident-yang-08, 13 February 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-07>.
+              network-incident-yang-08>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some

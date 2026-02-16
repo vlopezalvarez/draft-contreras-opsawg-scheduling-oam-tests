@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 25 July 2026                                              Nokia
+Expires: 20 August 2026                                            Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                         21 January 2026
+                                                        16 February 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 July 2026.
+   This Internet-Draft will expire on 20 August 2026.
 
 Copyright Notice
 
@@ -977,7 +977,7 @@ Table of Contents
    cancellation) is implementation-dependent, but the conflict MUST be
    clearly reported via the YANG model status leaves.
 
-   When a new unitary-test or test-sequence are scheduled, the request
+   When a new unitary-test or test-sequence is scheduled, the request
    for OAM tasks schedule MAY be rejected by the server depending on the
    server's capability to evaluate the scheduling impact and detect
    conflicts prior to execution, e.g., the number of schedule conflict
@@ -1084,10 +1084,10 @@ Table of Contents
 
    [I-D.ietf-opsawg-oam-characterization]
               Pignataro, C., Farrel, A., and T. Mizrahi, "Guidelines for
-              Characterizing "OAM"", Work in Progress, Internet-Draft,
-              draft-ietf-opsawg-oam-characterization-15, 6 January 2026,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              oam-characterization-15>.
+              Characterizing the Term "OAM"", Work in Progress,
+              Internet-Draft, draft-ietf-opsawg-oam-characterization-17,
+              28 January 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-opsawg-oam-characterization-17>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1205,9 +1205,9 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-07, 3 January 2026,
+              incident-yang-08, 13 February 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-07>.
+              network-incident-yang-08>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
