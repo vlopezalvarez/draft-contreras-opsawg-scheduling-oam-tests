@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 18 August 2026                                            Nokia
+Expires: 20 August 2026                                            Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                        14 February 2026
+                                                        16 February 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 August 2026.
+   This Internet-Draft will expire on 20 August 2026.
 
 Copyright Notice
 
@@ -525,9 +525,16 @@ Table of Contents
    from the "ietf-schedule" module from [I-D.ietf-netmod-schedule-yang].
    "period-of-time" identifies the period values that contain a precise
    period of time, while "recurrence" identifies the properties that
-   contain a recurrence rule specification. "unitary-test-status"
-   enumerates the state of the OAM test.  Finally, "test-sequence-
-   status" shows the state of the OAM test sequence.
+   contain a recurrence rule specification. "test-sequence-status" shows
+   the state of the OAM test sequence. "state" imported from the "ietf-
+   schedule" module indicates the current state of the schedule.
+
+   Note that repetition only applies to recurrence schedule type.  In
+   case of recurrence schedule type, either frequency or interval should
+   be specified.  Since the OAM test sequence model consists of a
+   collection of OAM unitary tests, one or more tests in the sequence
+   might get an error, however error in one or more tests doesn't
+   prevent the subsequent tests or remaining tests to execute.
 
    Figure 3 shows the structure of OAM test sequence module:
 
