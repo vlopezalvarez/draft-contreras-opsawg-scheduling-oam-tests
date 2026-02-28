@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 20 August 2026                                            Nokia
-                                                        16 February 2026
+Expires: 1 September 2026                                          Nokia
+                                                        28 February 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 August 2026.
+   This Internet-Draft will expire on 1 September 2026.
 
 Copyright Notice
 
@@ -622,11 +622,13 @@ Table of Contents
              description
              "Identity for error.";
             }
+
             identity resource-contention {
              base error;
              description
              "Identity for resource contention.";
             }
+
             identity priority {
              base error;
              description
@@ -654,7 +656,6 @@ Table of Contents
          description
            "Defines the name of the test.";
        }
-
        list ne-config {
          key ne-id;
          description "List of node configurations required to enable the
@@ -706,15 +707,21 @@ Table of Contents
        description
          "Container for OAM unitary tests activation for network
          diagnosis procedures.";
-
        list oam-unitary-test {
          key name;
          description
            "List of OAM unitary tests activation for network diagnosis
            procedures.";
-
          uses oam-unitary-test;
-
+         uses schedule:schedule-status;
+         leaf unitary-test-status {
+               type identityref {
+                     base unitary-test-status;
+               }
+                   config false;
+           description
+             "Status of the test.";
+         }
      choice schedule-type {
         description
              "Choice based on the type of the time range.";
@@ -728,20 +735,10 @@ Table of Contents
             description
               "The OAM test takes effect based on a recurrence rule.";
             uses schedule:recurrence-basic;
-      }
-    }
-         uses schedule:schedule-status;
-
-         leaf unitary-test-status {
-               type identityref {
-                     base unitary-test-status;
-               }
-                   config false;
-           description
-             "Status of the test.";
-         }
        }
      }
+    }
+   }
    }
    <CODE ENDS>
 
