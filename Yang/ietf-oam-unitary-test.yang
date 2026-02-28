@@ -213,7 +213,7 @@ module ietf-oam-unitary-test {
         description
           "Status of the test.";
       }
-  choice schedule-type {
+  choice schedule-class {
      description
 	  "Choice based on the type of the time range.";
    container period {
