@@ -2001,8 +2001,8 @@ module ietf-oam-test-sequence {
       }
 
       list test-ref {
+            key "name";
         ordered-by user;
-        key "name";
         description "References to the ietf-oam-unitary-tests.";
 
         uses "oamut:oam-unitary-test";
@@ -2015,7 +2015,15 @@ module ietf-oam-test-sequence {
             executed.";
         }
       }
-
+   uses schedule:schedule-status;
+         leaf test-sequence-status {
+           type identityref {
+                 base test-sequence-status;
+           }
+           config false;
+           description
+                 "Status of the test sequence execution.";
+         }
   choice schedule-type {
      description
           "Choice based on the type of the time range.";
@@ -2029,17 +2037,8 @@ module ietf-oam-test-sequence {
          description
            "The OAM test takes effect based on a recurrence rule.";
          uses schedule:recurrence-basic;
-   }
- }
-      uses schedule:schedule-status;
-         leaf test-sequence-status {
-           type identityref {
-                 base test-sequence-status;
-           }
-           config false;
-           description
-                 "Status of the test sequence execution.";
-         }
+      }
+     }
     }
   }
 }
