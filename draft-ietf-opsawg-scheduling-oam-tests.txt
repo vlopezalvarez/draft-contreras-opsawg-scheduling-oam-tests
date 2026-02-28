@@ -1029,7 +1029,7 @@ Table of Contents
               description
                     "Status of the test sequence execution.";
             }
-     choice schedule-type {
+     choice schedule-class {
         description
              "Choice based on the type of the time range.";
       container period {
