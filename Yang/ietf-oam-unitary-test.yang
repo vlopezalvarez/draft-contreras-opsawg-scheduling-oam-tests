@@ -113,11 +113,13 @@ module ietf-oam-unitary-test {
 	  description
 	  "Identity for error.";
 	 }
+	 
 	 identity resource-contention {
 	  base error;
 	  description
 	  "Identity for resource contention.";
 	 }
+	 
 	 identity priority {
 	  base error;
 	  description
@@ -145,7 +147,6 @@ module ietf-oam-unitary-test {
       description
         "Defines the name of the test.";
     }
-
     list ne-config {
       key ne-id;
       description "List of node configurations required to enable the
@@ -197,15 +198,21 @@ module ietf-oam-unitary-test {
     description
       "Container for OAM unitary tests activation for network
       diagnosis procedures.";
-
     list oam-unitary-test {
       key name;
       description
         "List of OAM unitary tests activation for network diagnosis
         procedures.";
-
       uses oam-unitary-test;
-
+      uses schedule:schedule-status;
+      leaf unitary-test-status {
+	    type identityref {
+		  base unitary-test-status;
+	    }
+		config false;
+        description
+          "Status of the test.";
+      }
   choice schedule-type {
      description
 	  "Choice based on the type of the time range.";
@@ -219,18 +226,8 @@ module ietf-oam-unitary-test {
 	 description
 	   "The OAM test takes effect based on a recurrence rule.";
 	 uses schedule:recurrence-basic;
-   }
- }
-      uses schedule:schedule-status;
-
-      leaf unitary-test-status {
-	    type identityref {
-		  base unitary-test-status;
-	    }
-		config false;
-        description
-          "Status of the test.";
-      }
     }
   }
+ }
+}
 }
