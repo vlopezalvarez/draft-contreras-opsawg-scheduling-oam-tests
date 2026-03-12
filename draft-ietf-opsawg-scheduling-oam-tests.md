@@ -286,8 +286,8 @@ The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. 
            is executed.
 * "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
 * "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
-* "error": The state where an error occurs during the test. This state is triggere when one or tests haven't been conducted successfully.
-* "success": The final state where the test is completed. This state is triggered when the test has been conducted sucessfully.
+* "error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".
+* "success": The final state where the test is completed. This state is triggered when the test has been conducted successfully.
 
 ~~~~
 
@@ -380,9 +380,9 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
            is executed.
 * "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
 * "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
-* "success": The final state where all unitary tests are completed. This state is triggered when all tests have been conducted sucessfully.
+* "success": The final state where all unitary tests are completed. This state is triggered when all tests have been conducted successfully.
 * "failure": The state when one or more tests in the sequence got an error.
-* "error":  The state where an error occurs during the test. This state is triggere when one or more tests haven't been conducted successfully.
+* "error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".
 
 ~~~~
 
@@ -443,7 +443,7 @@ As an example, we will use {{!RFC8913}}, which defines a YANG data model for TWA
 
 When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints. This document leverages the scheduling status groupings defined in the common schedule YANG module (see [RFC XXXX: A Common YANG Data Model for Scheduling]) to detect and report such conflicts.
 
-The YANG models defined in this document (both for unitary and sequence tests) uses the `unitary-test-status` and `test-sequence-status` grouping to indicate the current scheduling state of each OAM task. If a conflict is detected (e.g., two tests require exclusive access to the same resource at the same time), the `unitary-test-status` and `test-sequence-status` leaf will reflect this by reporting a value such as `error`, reporting the conflict.
+The YANG models defined in this document (both for unitary and sequence tests) use the `unitary-test-status` and `test-sequence-status` leaves to indicate the current scheduling state of each OAM task. These leaves are of type identityref, allowing extensible reporting. If a conflict is detected (e.g., two tests require exclusive access to the same resource at the same time), the server sets the status to `error` or to a more specific error-cause identity derived from `error`: `resource-contention` for resource conflicts, or `priority` for prioritization-related conflicts. This error-cause indication allows operators and management systems to distinguish the reason for the failure.
 
 Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts (e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but the conflict MUST be clearly reported via the YANG model status leaves.
 
