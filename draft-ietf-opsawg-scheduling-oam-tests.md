@@ -230,8 +230,8 @@ there is a list called "oam-unitary-test" representing a list of specific OAM un
 a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of scope
 of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the
 "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time" identifies the period values that contain a precise period
-of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state
-of the OAM unitary test.
+of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" indicates the state
+of the OAM unitary test (see the state machine in {{st-unitary-test-status}}).
 
 Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it triggers the
 generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying test type identity.
@@ -435,6 +435,8 @@ This section discusses the issues related to reusing device models already defin
 * Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desired OAM test. This approach requires recreating new YANG models for each new test type or variation of the device models.
 * Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.
 
+The "test-type" leaf and the schema mount are complementary. The "test-type" leaf (identityref to "basic-test-type") explicitly indicates which OAM test type, and thus which YANG module, is mounted at the "root" mount point for that "ne-config" list entry. Each "ne-config" entry therefore pairs a test-type identity with the corresponding mounted module configuration under "root", so that management systems and implementations know which OAM module applies to that node. This document defines the base identity "basic-test-type" and one child identity "twamp" for TWAMP; YANG modules that augment "ietf-oam-unitary-test" may define additional child identities derived from "basic-test-type" for other OAM test types.
+
 As an example, we will use {{!RFC8913}}, which defines a YANG data model for TWAMP, to illustrate how device models could be used.
 
 # Operational Considerations
@@ -523,7 +525,7 @@ This section includes a non-exhaustive list of examples to illustrate the use of
 
 ## Create a TWAMP OAM test {#ex-create-twp-oam}
 
-{{!RFC8913}} defines a YANG model for TWAMP. There is an example for TWAMP. The following example contains the information for the four configurations (Control-Client, Server, Session-Sender and Session-Reflector).
+{{!RFC8913}} defines a YANG model for TWAMP. The following example uses the "twamp" identity defined in the ietf-oam-unitary-test module (derived from "basic-test-type") to indicate the test type; the TWAMP device model is mounted at the "root" of each "ne-config" entry. The example contains the information for the four configurations (Control-Client, Server, Session-Sender and Session-Reflector).
 
 An example of a request message body to create a TWAMP OAM test is shown in {{create-twp-oam}}. Session-Sender and Session-Reflector as expanded for illustrative purposes. The TWAMP Test scheduled in this configuration is a one-hour performance monitoring test that runs daily at 9 AM UTC. This test session is configured to start on October 17, 2023, at 09:00 UTC and recur at the same time every day. The duration of each test run is one hour, as specified by the ISO 8601 format "PT1H", with the test status marked as "scheduled". The test provides insight into network performance by monitoring the selected parameters, allowing for the detection of any potential degradations in service quality over time.
 
