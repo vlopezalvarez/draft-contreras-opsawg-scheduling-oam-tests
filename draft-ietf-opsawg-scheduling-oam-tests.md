@@ -230,8 +230,8 @@ there is a list called "oam-unitary-test" representing a list of specific OAM un
 a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of scope
 of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the
 "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time" identifies the period values that contain a precise period
-of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state
-of the OAM unitary test.
+of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" indicates the state
+of the OAM unitary test (see the state machine in {{st-unitary-test-status}}).
 
 Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it triggers the
 generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying test type identity.
@@ -286,8 +286,8 @@ The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. 
            is executed.
 * "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
 * "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
-* "error": The state where an error occurs during the test. This state is triggere when one or tests haven't been conducted successfully.
-* "success": The final state where the test is completed. This state is triggered when the test has been conducted sucessfully.
+* "error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".
+* "success": The final state where the test is completed. This state is triggered when the test has been conducted successfully.
 
 ~~~~
 
@@ -380,9 +380,9 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
            is executed.
 * "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
 * "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
-* "success": The final state where all unitary tests are completed. This state is triggered when all tests have been conducted sucessfully.
+* "success": The final state where all unitary tests are completed. This state is triggered when all tests have been conducted successfully.
 * "failure": The state when one or more tests in the sequence got an error.
-* "error":  The state where an error occurs during the test. This state is triggere when one or more tests haven't been conducted successfully.
+* "error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".
 
 ~~~~
 
@@ -435,6 +435,8 @@ This section discusses the issues related to reusing device models already defin
 * Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desired OAM test. This approach requires recreating new YANG models for each new test type or variation of the device models.
 * Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.
 
+The "test-type" leaf and the schema mount are complementary. The "test-type" leaf (identityref to "basic-test-type") explicitly indicates which OAM test type, and thus which YANG module, is mounted at the "root" mount point for that "ne-config" list entry. Each "ne-config" entry therefore pairs a test-type identity with the corresponding mounted module configuration under "root", so that management systems and implementations know which OAM module applies to that node. This document defines the base identity "basic-test-type" and one child identity "twamp" for TWAMP; YANG modules that augment "ietf-oam-unitary-test" may define additional child identities derived from "basic-test-type" for other OAM test types.
+
 As an example, we will use {{!RFC8913}}, which defines a YANG data model for TWAMP, to illustrate how device models could be used.
 
 # Operational Considerations
@@ -443,7 +445,7 @@ As an example, we will use {{!RFC8913}}, which defines a YANG data model for TWA
 
 When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints. This document leverages the scheduling status groupings defined in the common schedule YANG module (see [RFC XXXX: A Common YANG Data Model for Scheduling]) to detect and report such conflicts.
 
-The YANG models defined in this document (both for unitary and sequence tests) uses the `unitary-test-status` and `test-sequence-status` grouping to indicate the current scheduling state of each OAM task. If a conflict is detected (e.g., two tests require exclusive access to the same resource at the same time), the `unitary-test-status` and `test-sequence-status` leaf will reflect this by reporting a value such as `error`, reporting the conflict.
+The YANG models defined in this document (both for unitary and sequence tests) use the `unitary-test-status` and `test-sequence-status` leaves to indicate the current scheduling state of each OAM task. These leaves are of type identityref, allowing extensible reporting. If a conflict is detected (e.g., two tests require exclusive access to the same resource at the same time), the server sets the status to `error` or to a more specific error-cause identity derived from `error`: `resource-contention` for resource conflicts, or `priority` for prioritization-related conflicts. This error-cause indication allows operators and management systems to distinguish the reason for the failure.
 
 Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts (e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but the conflict MUST be clearly reported via the YANG model status leaves.
 
@@ -523,7 +525,7 @@ This section includes a non-exhaustive list of examples to illustrate the use of
 
 ## Create a TWAMP OAM test {#ex-create-twp-oam}
 
-{{!RFC8913}} defines a YANG model for TWAMP. There is an example for TWAMP. The following example contains the information for the four configurations (Control-Client, Server, Session-Sender and Session-Reflector).
+{{!RFC8913}} defines a YANG model for TWAMP. The following example uses the "twamp" identity defined in the ietf-oam-unitary-test module (derived from "basic-test-type") to indicate the test type; the TWAMP device model is mounted at the "root" of each "ne-config" entry. The example contains the information for the four configurations (Control-Client, Server, Session-Sender and Session-Reflector).
 
 An example of a request message body to create a TWAMP OAM test is shown in {{create-twp-oam}}. Session-Sender and Session-Reflector as expanded for illustrative purposes. The TWAMP Test scheduled in this configuration is a one-hour performance monitoring test that runs daily at 9 AM UTC. This test session is configured to start on October 17, 2023, at 09:00 UTC and recur at the same time every day. The duration of each test run is one hour, as specified by the ISO 8601 format "PT1H", with the test status marked as "scheduled". The test provides insight into network performance by monitoring the selected parameters, allowing for the detection of any potential degradations in service quality over time.
 
