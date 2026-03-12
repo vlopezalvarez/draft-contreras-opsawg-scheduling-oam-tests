@@ -1049,11 +1049,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Scheduling OAM YANG</td>
-<td class="right">February 2026</td>
+<td class="right">March 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Contreras, et al.</td>
-<td class="center">Expires 1 September 2026</td>
+<td class="center">Expires 13 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-opsawg-scheduling-oam-tests-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-28" class="published">28 February 2026</time>
+<time datetime="2026-03-12" class="published">12 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-09-01">1 September 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-13">13 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1129,7 +1129,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1495,8 +1495,8 @@ there is a list called "oam-unitary-test" representing a list of specific OAM un
 a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of scope
 of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the
 "ietf-schedule" module from <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. "period-of-time" identifies the period values that contain a precise period
-of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state
-of the OAM unitary test.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" indicates the state
+of the OAM unitary test (see the state machine in <a href="#st-unitary-test-status" class="auto internal xref">Figure 2</a>).<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it triggers the
 generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying test type identity.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3"><a href="#oam-uni-test-tree-st" class="auto internal xref">Figure 1</a> shows the structure of OAM unitary test module:<a href="#section-3.1-3" class="pilcrow">¶</a></p>
@@ -1565,10 +1565,10 @@ module: ietf-oam-unitary-test
             <p id="section-3.1-6.5.1">"stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.<a href="#section-3.1-6.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-6.6">
-            <p id="section-3.1-6.6.1">"error": The state where an error occurs during the test. This state is triggere when one or tests haven't been conducted successfully.<a href="#section-3.1-6.6.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-6.6.1">"error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".<a href="#section-3.1-6.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-6.7">
-            <p id="section-3.1-6.7.1">"success": The final state where the test is completed. This state is triggered when the test has been conducted sucessfully.<a href="#section-3.1-6.7.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-6.7.1">"success": The final state where the test is completed. This state is triggered when the test has been conducted successfully.<a href="#section-3.1-6.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <span id="name-oam-unitary-test-state-mach"></span><div id="st-unitary-test-status">
@@ -1684,13 +1684,13 @@ module: ietf-oam-test-sequence
             <p id="section-3.2-7.5.1">"stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.<a href="#section-3.2-7.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-7.6">
-            <p id="section-3.2-7.6.1">"success": The final state where all unitary tests are completed. This state is triggered when all tests have been conducted sucessfully.<a href="#section-3.2-7.6.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-7.6.1">"success": The final state where all unitary tests are completed. This state is triggered when all tests have been conducted successfully.<a href="#section-3.2-7.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-7.7">
             <p id="section-3.2-7.7.1">"failure": The state when one or more tests in the sequence got an error.<a href="#section-3.2-7.7.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-7.8">
-            <p id="section-3.2-7.8.1">"error":  The state where an error occurs during the test. This state is triggere when one or more tests haven't been conducted successfully.<a href="#section-3.2-7.8.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-7.8.1">"error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".<a href="#section-3.2-7.8.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <span id="name-oam-test-sequence-state-mac"></span><div id="st-test-sequence-status">
@@ -1841,7 +1841,7 @@ module ietf-oam-unitary-test {
           description
           "Identity for stop.";
          }
-         identity sucesss {
+         identity success {
           base unitary-test-status;
           description
           "Identity for success.";
@@ -2175,7 +2175,8 @@ module ietf-oam-test-sequence {
           <p id="section-5-2.2.1">Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-5-3">As an example, we will use <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, which defines a YANG data model for TWAMP, to illustrate how device models could be used.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3">The "test-type" leaf and the schema mount are complementary. The "test-type" leaf (identityref to "basic-test-type") explicitly indicates which OAM test type, and thus which YANG module, is mounted at the "root" mount point for that "ne-config" list entry. Each "ne-config" entry therefore pairs a test-type identity with the corresponding mounted module configuration under "root", so that management systems and implementations know which OAM module applies to that node. This document defines the base identity "basic-test-type" and one child identity "twamp" for TWAMP; YANG modules that augment "ietf-oam-unitary-test" may define additional child identities derived from "basic-test-type" for other OAM test types.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">As an example, we will use <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, which defines a YANG data model for TWAMP, to illustrate how device models could be used.<a href="#section-5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="operational-considerations">
@@ -2189,7 +2190,7 @@ module ietf-oam-test-sequence {
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-conflict-resolution-and-rep" class="section-name selfRef">Conflict Resolution and Reporting Among Scheduled OAM Tasks</a>
         </h3>
 <p id="section-6.1-1">When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints. This document leverages the scheduling status groupings defined in the common schedule YANG module (see [RFC XXXX: A Common YANG Data Model for Scheduling]) to detect and report such conflicts.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1-2">The YANG models defined in this document (both for unitary and sequence tests) uses the <code>unitary-test-status</code> and <code>test-sequence-status</code> grouping to indicate the current scheduling state of each OAM task. If a conflict is detected (e.g., two tests require exclusive access to the same resource at the same time), the <code>unitary-test-status</code> and <code>test-sequence-status</code> leaf will reflect this by reporting a value such as <code>error</code>, reporting the conflict.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">The YANG models defined in this document (both for unitary and sequence tests) use the <code>unitary-test-status</code> and <code>test-sequence-status</code> leaves to indicate the current scheduling state of each OAM task. These leaves are of type identityref, allowing extensible reporting. If a conflict is detected (e.g., two tests require exclusive access to the same resource at the same time), the server sets the status to <code>error</code> or to a more specific error-cause identity derived from <code>error</code>: <code>resource-contention</code> for resource conflicts, or <code>priority</code> for prioritization-related conflicts. This error-cause indication allows operators and management systems to distinguish the reason for the failure.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <p id="section-6.1-3">Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts (e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but the conflict MUST be clearly reported via the YANG model status leaves.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 <p id="section-6.1-4">When a new <code>unitary-test</code> or <code>test-sequence</code> are scheduled, the request for OAM tasks schedule MAY be rejected by the server depending on the server's capability to evaluate the scheduling impact and detect conflicts prior to execution, e.g., the number of schedule conflict exceeds the specific threshold.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
 </section>
@@ -2412,7 +2413,7 @@ Management and orchestration systems need to make sure to have sufficient resour
 <dd class="break"></dd>
 <dt id="I-D.tt-netmod-yang-config-templates">[I-D.tt-netmod-yang-config-templates]</dt>
         <dd>
-<span class="refAuthor">Wills, R.</span>, <span class="refAuthor">Ma, Q.</span>, and <span class="refAuthor">D. Rajaram</span>, <span class="refTitle">"YANG Configuration Templates"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-tt-netmod-yang-config-templates-01</span>, <time datetime="2025-12-23" class="refDate">23 December 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-01">https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Wills, R.</span>, <span class="refAuthor">Ma, Q.</span>, and <span class="refAuthor">D. Rajaram</span>, <span class="refTitle">"YANG Configuration Templates"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-tt-netmod-yang-config-templates-02</span>, <time datetime="2026-03-01" class="refDate">1 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-02">https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IEEE-8021ag">[IEEE-8021ag]</dt>
         <dd>
@@ -2518,7 +2519,7 @@ Management and orchestration systems need to make sure to have sufficient resour
         <h3 id="name-create-a-twamp-oam-test">
 <a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-create-a-twamp-oam-test" class="section-name selfRef">Create a TWAMP OAM test</a>
         </h3>
-<p id="appendix-A.1-1"><span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> defines a YANG model for TWAMP. There is an example for TWAMP. The following example contains the information for the four configurations (Control-Client, Server, Session-Sender and Session-Reflector).<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-1"><span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> defines a YANG model for TWAMP. The following example uses the "twamp" identity defined in the ietf-oam-unitary-test module (derived from "basic-test-type") to indicate the test type; the TWAMP device model is mounted at the "root" of each "ne-config" entry. The example contains the information for the four configurations (Control-Client, Server, Session-Sender and Session-Reflector).<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-2">An example of a request message body to create a TWAMP OAM test is shown in <a href="#create-twp-oam" class="auto internal xref">Figure 5</a>. Session-Sender and Session-Reflector as expanded for illustrative purposes. The TWAMP Test scheduled in this configuration is a one-hour performance monitoring test that runs daily at 9 AM UTC. This test session is configured to start on October 17, 2023, at 09:00 UTC and recur at the same time every day. The duration of each test run is one hour, as specified by the ISO 8601 format "PT1H", with the test status marked as "scheduled". The test provides insight into network performance by monitoring the selected parameters, allowing for the detection of any potential degradations in service quality over time.<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
 <span id="name-example-of-a-message-body-t"></span><div id="create-twp-oam">
 <figure id="figure-5">
