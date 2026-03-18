@@ -61,7 +61,10 @@ informative:
 
 --- abstract
 
-This document defines a YANG data model to support on-demand network diagnosis using Operations, Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures, intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by individual network nodes.
+This document defines a YANG data model to support on-demand network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
+This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures,
+intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by
+individual network nodes.
 
 --- middle
 
