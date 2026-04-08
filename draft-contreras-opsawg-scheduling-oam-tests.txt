@@ -640,12 +640,6 @@ Table of Contents
             "Base identity of basic test type.";
      }
 
-     identity twamp {
-          base basic-test-type;
-          description
-            "Identity for twamp protocol.";
-     }
-
      grouping oam-unitary-test {
        description
            "Specifies a grouping for OAM unitary test for network
