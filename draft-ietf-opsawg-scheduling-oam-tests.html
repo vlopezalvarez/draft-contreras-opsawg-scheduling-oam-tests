@@ -2678,30 +2678,79 @@ Management and orchestration systems need to make sure to have sufficient resour
           </figcaption></figure>
 </div>
 <p id="appendix-A.2-3">Template application is indicated using the "apply-templates" metadata. For example, the following OAM unitary tests configuration may be
-provided with the container node "oam-unitary-tests" applying the template defined in <a href="#ex-oam-test-template" class="auto internal xref">Figure 6</a><a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
+provided with the container node "oam-unitary-tests" applying the template defined in <a href="#ex-oam-test-template" class="auto internal xref">Figure 6</a>.<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-4">As described in <span>[<a href="#I-D.tt-netmod-yang-config-templates" class="cite xref">I-D.tt-netmod-yang-config-templates</a>]</span>, a template node can be overriden by having its value changed, but it can't be
+deleted.<a href="#appendix-A.2-4" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-5">As an example of overriding a node in a template, a client may configure physically present oam unitary tests "lsp-ping", "ip-ping" and
+"srmpls-ping" inheriting the template defined in <a href="#ex-oam-test-template" class="auto internal xref">Figure 6</a>, but the "ne-id" value of "srmpls-ping" needs to be "203.0.113.4":<a href="#appendix-A.2-5" class="pilcrow">¶</a></p>
 <span id="name-example-of-applying-oam-tes"></span><div id="ex-apply-oam-test-template">
 <figure id="figure-7">
-          <div class="alignLeft art-text artwork" id="appendix-A.2-4.1">
+          <div class="alignLeft art-text artwork" id="appendix-A.2-6.1">
 <pre>
-&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;oam-unitary-tests xmlns="urn:example:interface"
-         xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-config-template"
-         ct:apply-templates="oam-unitary-test-schedule"&gt;
-         &lt;oam-unitary-test&gt;
-           &lt;name&gt;lsp-ping&lt;/name&gt;
-         &lt;/oam-unitary-test&gt;
-         &lt;oam-unitary-test&gt;
-           &lt;name&gt;ip-ping&lt;/name&gt;
-         &lt;/oam-unitary-test&gt;
-         &lt;oam-unitary-test&gt;
-           &lt;name&gt;srmpls-ping&lt;/name&gt;
-         &lt;/oam-unitary-test&gt;
-&lt;/oam-unitary-tests&gt;
+   &lt;?xml version="1.0" encoding="utf-8"?&gt;
+   &lt;oam-unitary-tests xmlns="urn:example:interface"
+            xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-config-template"
+            ct:apply-templates="oam-unitary-test-schedule"&gt;
+            &lt;oam-unitary-test&gt;
+              &lt;name&gt;lsp-ping&lt;/name&gt;
+                          &lt;ne-config&gt;
+                             &lt;ne-id&gt;eth0&lt;/ne-id&gt;
+                                 &lt;managed&gt;true&lt;/managed&gt;
+                                 ...
+                          &lt;/ne-config&gt;
+            &lt;/oam-unitary-test&gt;
+            &lt;oam-unitary-test&gt;
+              &lt;name&gt;ip-ping&lt;/name&gt;
+            &lt;/oam-unitary-test&gt;
+            &lt;oam-unitary-test&gt;
+              &lt;name&gt;srmpls-ping&lt;/name&gt;
+                                 &lt;ne-config&gt;
+                             &lt;ne-id&gt;203.0.113.4&lt;/ne-id&gt;
+                                 ...
+                          &lt;/ne-config&gt;
+            &lt;/oam-unitary-test&gt;
+   &lt;/oam-unitary-tests&gt;
 </pre>
 </div>
 <figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
 <a href="#name-example-of-applying-oam-tes" class="selfRef">Example of Applying OAM Test Template</a>
           </figcaption></figure>
+</div>
+<p id="appendix-A.2-7">And the above OAM Unitary Tests configuration renders the following expanded configuration:<a href="#appendix-A.2-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.2-8">
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+   &lt;oam-unitary-tests xmlns="urn:example:interface"
+            xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-config-template"&gt;
+            &lt;oam-unitary-test&gt;
+              &lt;name&gt;lsp-ping&lt;/name&gt;
+                          &lt;ne-config&gt;
+                             &lt;ne-id&gt;eth0&lt;/ne-id&gt;
+                                 &lt;managed&gt;true&lt;/managed&gt;
+                                 ...
+                          &lt;/ne-config&gt;
+                          &lt;period-start&gt;2025-10-01T08:00:00Z&lt;/period-start&gt;
+              &lt;frequency&gt;hourly&lt;/frequency&gt;
+            &lt;/oam-unitary-test&gt;
+            &lt;oam-unitary-test&gt;
+              &lt;name&gt;ip-ping&lt;/name&gt;
+                           &lt;ne-config&gt;
+                             &lt;ne-id&gt;eth1&lt;/ne-id&gt;
+                                 &lt;managed&gt;true&lt;/managed&gt;
+                                 ...
+                          &lt;/ne-config&gt;
+                          &lt;period-start&gt;2025-10-01T08:00:00Z&lt;/period-start&gt;
+              &lt;frequency&gt;hourly&lt;/frequency&gt;
+            &lt;/oam-unitary-test&gt;
+            &lt;oam-unitary-test&gt;
+              &lt;name&gt;srmpls-ping&lt;/name&gt;
+                                 &lt;ne-config&gt;
+                             &lt;ne-id&gt;203.0.113.4&lt;/ne-id&gt;
+                                 ...
+                          &lt;/ne-config&gt;
+            &lt;/oam-unitary-test&gt;
+   &lt;/oam-unitary-tests&gt;
+</pre><a href="#appendix-A.2-8" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
