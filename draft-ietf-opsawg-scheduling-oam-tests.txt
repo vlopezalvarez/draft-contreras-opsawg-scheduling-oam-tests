@@ -1168,7 +1168,7 @@ Table of Contents
    is the secure transport layer, and the mandatory-to-implement secure
    transport is Secure Shell (SSH) [RFC6242].  The lowest RESTCONF layer
    is HTTPS, and the mandatory-to-implement secure transport is TLS
-   [RFC5246].
+   [RFC8446].
 
    The NETCONF access control model [RFC6536] provides the means to
    restrict access for particular NETCONF or RESTCONF users to a
@@ -1251,11 +1251,6 @@ Table of Contents
               DOI 10.17487/RFC3688, January 2004,
               <https://www.rfc-editor.org/rfc/rfc3688>.
 
-   [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
-              (TLS) Protocol Version 1.2", RFC 5246,
-              DOI 10.17487/RFC5246, August 2008,
-              <https://www.rfc-editor.org/rfc/rfc5246>.
-
    [RFC5357]  Hedayat, K., Krzanowski, R., Morton, A., Yum, K., and J.
               Babiarz, "A Two-Way Active Measurement Protocol (TWAMP)",
               RFC 5357, DOI 10.17487/RFC5357, October 2008,
@@ -1326,6 +1321,10 @@ Table of Contents
               and R. Wilton, "Network Management Datastore Architecture
               (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
               <https://www.rfc-editor.org/rfc/rfc8342>.
+
+   [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
+              Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
+              <https://www.rfc-editor.org/rfc/rfc8446>.
 
    [RFC8531]  Kumar, D., Wu, Q., and Z. Wang, "Generic YANG Data Model
               for Connection-Oriented Operations, Administration, and
