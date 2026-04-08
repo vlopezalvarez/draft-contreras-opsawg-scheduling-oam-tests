@@ -564,25 +564,76 @@ Ping OAM Test Template can be defined using YANG-based configuration template sp
 {: #ex-oam-test-template title="Example of OAM Test Template Definition"}
 
 Template application is indicated using the "apply-templates" metadata. For example, the following OAM unitary tests configuration may be
-provided with the container node "oam-unitary-tests" applying the template defined in {{ex-oam-test-template}}
+provided with the container node "oam-unitary-tests" applying the template defined in {{ex-oam-test-template}}.
+
+As described in {{?I-D.tt-netmod-yang-config-templates}}, a template node can be overriden by having its value changed, but it can't be
+deleted.
+
+As an example of overriding a node in a template, a client may configure physically present oam unitary tests "lsp-ping", "ip-ping" and
+"srmpls-ping" inheriting the template defined in {{ex-oam-test-template}}, but the "ne-id" value of "srmpls-ping" needs to be "203.0.113.4":
+
+~~~~
+   <?xml version="1.0" encoding="utf-8"?>
+   <oam-unitary-tests xmlns="urn:example:interface"
+            xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-config-template"
+            ct:apply-templates="oam-unitary-test-schedule">
+            <oam-unitary-test>
+              <name>lsp-ping</name>
+			  <ne-config>
+			     <ne-id>eth0</ne-id>
+				 <managed>true</managed>
+				 ...
+			  </ne-config>
+            </oam-unitary-test>
+            <oam-unitary-test>
+              <name>ip-ping</name>
+            </oam-unitary-test>
+            <oam-unitary-test>
+              <name>srmpls-ping</name>
+			  	 <ne-config>
+			     <ne-id>203.0.113.4</ne-id>
+				 ...
+			  </ne-config>
+            </oam-unitary-test>
+   </oam-unitary-tests>
+~~~~
+{: #ex-apply-oam-test-template title="Example of Applying OAM Test Template"}
+
+And the above OAM Unitary Tests configuration renders the following expanded configuration:
 
 ~~~~
 <?xml version="1.0" encoding="utf-8"?>
-<oam-unitary-tests xmlns="urn:example:interface"
-         xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-config-template"
-         ct:apply-templates="oam-unitary-test-schedule">
-         <oam-unitary-test>
-           <name>lsp-ping</name>
-         </oam-unitary-test>
-         <oam-unitary-test>
-           <name>ip-ping</name>
-         </oam-unitary-test>
-         <oam-unitary-test>
-           <name>srmpls-ping</name>
-         </oam-unitary-test>
-</oam-unitary-tests>
+   <oam-unitary-tests xmlns="urn:example:interface"
+            xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-config-template">
+            <oam-unitary-test>
+              <name>lsp-ping</name>
+			  <ne-config>
+			     <ne-id>eth0</ne-id>
+				 <managed>true</managed>
+				 ...
+			  </ne-config>
+			  <period-start>2025-10-01T08:00:00Z</period-start>
+              <frequency>hourly</frequency>
+            </oam-unitary-test>
+            <oam-unitary-test>
+              <name>ip-ping</name>
+			   <ne-config>
+			     <ne-id>eth1</ne-id>
+				 <managed>true</managed>
+				 ...
+			  </ne-config>
+			  <period-start>2025-10-01T08:00:00Z</period-start>
+              <frequency>hourly</frequency>
+            </oam-unitary-test>
+            <oam-unitary-test>
+              <name>srmpls-ping</name>
+			  	 <ne-config>
+			     <ne-id>203.0.113.4</ne-id>
+				 ...
+			  </ne-config>
+            </oam-unitary-test>
+   </oam-unitary-tests>
 ~~~~
-{: #ex-apply-oam-test-template title="Example of Applying OAM Test Template"}
 
 # Acknowledgments
 {:numbered="false"}
