@@ -251,7 +251,7 @@ module: ietf-oam-unitary-test
         |  +--rw managed?     boolean
         |  +--rw test-type?   identityref
         |  +--rw root
-        +--rw (schedule-type)?
+        +--rw (schedule-class)?
         |  +--:(period)
         |  |  +--rw period
         |  |     +--rw period-description?     string
