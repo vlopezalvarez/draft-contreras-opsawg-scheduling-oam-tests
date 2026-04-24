@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 10 October 2026                                           Nokia
+Expires: 26 October 2026                                           Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                            8 April 2026
+                                                           24 April 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 October 2026.
+   This Internet-Draft will expire on 26 October 2026.
 
 Copyright Notice
 
@@ -536,16 +536,19 @@ Table of Contents
    the current state of the schedule.
 
    Note that repetition is specified by "execution-count" parameter and
-   only applies to the recurrence schedule type.  In case of the
-   recurrence schedule type, either frequency or interval should be
-   specified.  Since the OAM test sequence model consists of a
-   collection of OAM unitary tests, one or more tests in the sequence
-   might get an error, however error in one or more tests doesn't
-   prevent the subsequent tests or remaining tests to execute.  In
-   addition, any change to the ordering of the OAM test sequence will
-   lead to different reporting output results therefore the user should
-   have full control on the ordering and "ordered-by user" parameters
-   needs to be specified.
+   only applies to the recurrence schedule type.  If no count is
+   indicated, the test is considered to run indefinitely.  In case of
+   the recurrence schedule type, either frequency or interval should be
+   specified.  Each execution runs at the scheduled recurrence interval.
+   Since the OAM test sequence model consists of a collection of OAM
+   unitary tests, one or more tests in the sequence might get an error,
+   however error in one or more tests doesn't prevent the subsequent
+   tests or remaining tests to execute.  In addition, any change to the
+   ordering of the OAM test sequence will lead to different reporting
+   output results therefore the user should have full control on the
+   ordering and "ordered-by user" parameters needs to be specified.  If
+   two or more tests are to run concurrently, they MUST be run in the
+   order specified by the user.
 
    Figure 3 shows the structure of OAM test sequence module:
 
