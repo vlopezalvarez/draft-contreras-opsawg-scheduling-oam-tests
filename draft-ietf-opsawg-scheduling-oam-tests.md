@@ -269,7 +269,7 @@ module: ietf-oam-unitary-test
         |        +--rw interval?                 uint32
         +--rw state?                    identityref
         +--rw version?                  uint16
-        +--rw schedule-type?            identityref
+        +--rw schedule-class?            identityref
         +--ro local-time?               yang:date-and-time
         +--ro last-update?              yang:date-and-time
         +--ro counter?                  yang:counter32
