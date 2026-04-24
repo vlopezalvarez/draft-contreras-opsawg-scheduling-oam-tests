@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 15 October 2026                                           Nokia
-                                                           13 April 2026
+Expires: 26 October 2026                                           Nokia
+                                                           24 April 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 October 2026.
+   This Internet-Draft will expire on 26 October 2026.
 
 Copyright Notice
 
@@ -897,13 +897,14 @@ Table of Contents
             description
               "The OAM test takes effect based on a recurrence rule.";
             uses schedule:recurrence-basic;
-        leaf execution-count {
-             type uint32;
-             default 1;
-             description
-               "Number of times the test sequence should be
-               executed.";
-           }
+            leaf execution-count {
+              type uint32;
+              description
+                "If set, limits how many times the test sequence is
+                 executed for this recurrence. If the leaf is absent, there
+                 is no limit: executions follow the recurrence until the
+                 test is removed from the system.";
+            }
          }
         }
        }
