@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 15 October 2026                                           Nokia
+Expires: 26 October 2026                                           Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                           13 April 2026
+                                                           24 April 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 October 2026.
+   This Internet-Draft will expire on 26 October 2026.
 
 Copyright Notice
 
@@ -561,7 +561,7 @@ Table of Contents
              |  |  +--rw test-type?   identityref
              |  |  +--rw root
              |  +--rw numexecutions?   uint32
-             +--rw (schedule-type)?
+             +--rw (schedule-class)?
              |  +--:(period)
              |  |  +--rw period
              |  |     +--rw period-description?     string
