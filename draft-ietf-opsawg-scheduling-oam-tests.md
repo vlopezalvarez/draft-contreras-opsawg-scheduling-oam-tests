@@ -251,7 +251,7 @@ module: ietf-oam-unitary-test
         |  +--rw managed?     boolean
         |  +--rw test-type?   identityref
         |  +--rw root
-        +--rw (schedule-class)?
+        +--rw (schedule-type)?
         |  +--:(period)
         |  |  +--rw period
         |  |     +--rw period-description?     string
@@ -350,7 +350,7 @@ module: ietf-oam-test-sequence
         |  |  +--rw test-type?   identityref
         |  |  +--rw root
         |  +--rw numexecutions?   uint32
-        +--rw (schedule-class)?
+        +--rw (schedule-type)?
         |  +--:(period)
         |  |  +--rw period
         |  |     +--rw period-description?     string
