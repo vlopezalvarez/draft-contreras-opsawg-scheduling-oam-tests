@@ -269,7 +269,7 @@ module: ietf-oam-unitary-test
         |        +--rw interval?                 uint32
         +--rw state?                    identityref
         +--rw version?                  uint16
-        +--rw schedule-class?            identityref
+        +--rw schedule-type?            identityref
         +--ro local-time?               yang:date-and-time
         +--ro last-update?              yang:date-and-time
         +--ro counter?                  yang:counter32
@@ -349,7 +349,6 @@ module: ietf-oam-test-sequence
         |  |  +--rw managed?     boolean
         |  |  +--rw test-type?   identityref
         |  |  +--rw root
-        |  +--rw numexecutions?   uint32
         +--rw (schedule-class)?
         |  +--:(period)
         |  |  +--rw period
@@ -366,6 +365,7 @@ module: ietf-oam-test-sequence
         |        +--rw recurrence-description?   string
         |        +--rw frequency?                identityref
         |        +--rw interval?                 uint32
+        |        +--rw execution-count?          uint32
         +--rw state?                    identityref
         +--rw version?                  uint16
         +--rw schedule-type?            identityref
