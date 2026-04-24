@@ -251,7 +251,7 @@ module: ietf-oam-unitary-test
         |  +--rw managed?     boolean
         |  +--rw test-type?   identityref
         |  +--rw root
-        +--rw (schedule-type)?
+        +--rw (schedule-class)?
         |  +--:(period)
         |  |  +--rw period
         |  |     +--rw period-description?     string
@@ -323,13 +323,17 @@ Each OAM test sequence references an OAM unitary test type with its concrete par
 related to time constraints: "period-of-time" and "recurrence" and one temporal parameter related to ordering: "ordered-by user". Time
 constraints parameters are imported from the "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time"
 identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule
-specification. "ordered-by user" parameter indicates that the user is responsible for the ordering on a collection of OAM unitary tests. "test-sequence-status"
-shows the state of the OAM test sequence. "state" imported from the "ietf-schedule" module indicates the current state of the schedule.
+specification. "ordered-by user" parameter indicates that the user is responsible for the ordering on a collection of OAM unitary tests.
+"test-sequence-status" shows the state of the OAM test sequence. "state" imported from the "ietf-schedule" module indicates the current state of
+the schedule.
 
-Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. In case of the recurrence schedule type, either frequency or interval should be specified.
+Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is indicated, the test
+is considered to run indefinitely.
+In case of the recurrence schedule type, either frequency or interval should be specified. Each execution runs at the scheduled recurrence interval.
 Since the OAM test sequence model consists of a collection of OAM unitary tests, one or more tests in the sequence might get an error, however error
 in one or more tests doesn't prevent the subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM test sequence will
 lead to different reporting output results therefore the user should have full control on the ordering and "ordered-by user" parameters needs to be specified.
+If two or more tests are to run concurrently, they MUST be run in the order specified by the user.
 
 {{oam-test-sequence-tree-st}} shows the structure of OAM test sequence module:
 
@@ -345,8 +349,7 @@ module: ietf-oam-test-sequence
         |  |  +--rw managed?     boolean
         |  |  +--rw test-type?   identityref
         |  |  +--rw root
-        |  +--rw numexecutions?   uint32
-        +--rw (schedule-type)?
+        +--rw (schedule-class)?
         |  +--:(period)
         |  |  +--rw period
         |  |     +--rw period-description?     string
@@ -362,6 +365,7 @@ module: ietf-oam-test-sequence
         |        +--rw recurrence-description?   string
         |        +--rw frequency?                identityref
         |        +--rw interval?                 uint32
+        |        +--rw execution-count?          uint32
         +--rw state?                    identityref
         +--rw version?                  uint16
         +--rw schedule-type?            identityref

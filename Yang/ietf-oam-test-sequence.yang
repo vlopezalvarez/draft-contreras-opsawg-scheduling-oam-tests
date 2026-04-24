@@ -154,13 +154,14 @@ module ietf-oam-test-sequence {
 	 description
 	   "The OAM test takes effect based on a recurrence rule.";
 	 uses schedule:recurrence-basic;
-     leaf execution-count {
-          type uint32;
-          default 1;
-          description
-            "Number of times the test sequence should be
-            executed.";
-        }
+	 leaf execution-count {
+	   type uint32;
+	   description
+	     "If set, limits how many times the test sequence is
+	      executed for this recurrence. If the leaf is absent, there
+	      is no limit: executions follow the recurrence until the
+	      test is removed from the system.";
+	 }
       }
      }
     }
