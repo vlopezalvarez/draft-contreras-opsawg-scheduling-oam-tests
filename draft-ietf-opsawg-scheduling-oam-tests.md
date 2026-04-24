@@ -346,7 +346,7 @@ module: ietf-oam-test-sequence
         |  |  +--rw test-type?   identityref
         |  |  +--rw root
         |  +--rw numexecutions?   uint32
-        +--rw (schedule-type)?
+        +--rw (schedule-class)?
         |  +--:(period)
         |  |  +--rw period
         |  |     +--rw period-description?     string
