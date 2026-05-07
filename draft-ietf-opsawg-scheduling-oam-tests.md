@@ -148,7 +148,8 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ## Prefix in Data Node Names
 
-  In this document, names of data nodes and other data model objects will be prefixed using the standard prefix associated with the corresponding YANG imported modules, as shown in the following table.
+In this document, names of data nodes and other data model objects will be prefixed using the standard prefix associated with the corresponding YANG imported
+modules, as shown in the following table.
 
 | Prefix | Yang Module            | Reference    |
 | ------ | ---------------------- | ------------ |
