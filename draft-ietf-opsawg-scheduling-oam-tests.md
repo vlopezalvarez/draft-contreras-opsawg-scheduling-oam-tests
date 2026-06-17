@@ -477,13 +477,45 @@ Management and orchestration systems need to make sure to have sufficient resour
 
 # Security Considerations
 
-The YANG module targeted in this document defines a schema for data that is designed to be accessed via network management protocols such as NETCONF {{!RFC6241}} or RESTCONF {{!RFC8040}}.  The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) {{!RFC6242}}. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS {{!RFC8446}}.
+This section is modeled after the template described in Section 3.7.1
+of {{!RFC9907}}.
 
-The NETCONF access control model {{!RFC6536}} provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.
+Both "ietf-oam-unitary-test " YANG module and "ietf-oam-test-sequence"
+YANG module define data models that are designed to be accessed via
+YANG-based management protocols, such as the Network Configuration Protocol
+(NETCONF) {{!RFC6241}} and RESTCONF {{!RFC8040}}.  These YANG-based management
+protocols (1) have to use a secure transport layer (e.g., Secure Shell (SSH)
+{{!RFC4252}}, TLS {{!RFC8446}}, and QUIC {{!RFC9000}}) and (2) have to use
+mutual authentication.
 
-There are a number of data nodes defined in this YANG module that are writable/creatable/deletable (i.e., config true, which is the default).  These data nodes may be considered sensitive or vulnerable in some network environments.  Write operations (e.g., edit-config) to these data nodes without proper protection can have a negative effect on network operations.
+The Network Configuration Access Control Model (NACM) {{!RFC8341}}
+provides the means to restrict access for particular NETCONF or
+RESTCONF users to a preconfigured subset of all available NETCONF or
+RESTCONF protocol operations and content.
 
-With respect to scheduling, the security considerations in {{!I-D.ietf-netmod-schedule-yang}} also apply.
+There are a number of data nodes defined in this YANG module that are
+writable/creatable/deletable (i.e., config true, which is the default).
+These data nodes may be considered sensitive or vulnerable in some network
+environments.  Write operations (e.g., edit-config) to these data nodes
+without proper protection can have a negative effect on network operations.
+
+This YANG module uses groupings from other YANG modules that
+define nodes that may be considered sensitive or vulnerable
+in network environments.  Refer to the Security Considerations
+of {{!RFC9922}} for information as to which nodes may
+be considered sensitive or vulnerable in network environments.
+
+The YANG module defines a set of identities, types, and
+groupings.  These nodes are intended to be reused by other YANG
+modules.  The module by itself does not expose any data nodes that
+are writable, data nodes that contain read-only state, or RPCs.
+As such, there are no additional security issues related to
+the YANG module that need to be considered.
+
+Modules that use the groupings that are defined in this document
+should identify the corresponding security considerations.  For
+example, reusing some of these groupings will expose privacy-related
+information (e.g., 'name' of oam unitary test).
 
 # IANA Considerations
 
