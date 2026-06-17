@@ -498,6 +498,19 @@ writable/creatable/deletable (i.e., config true, which is the default).
 These data nodes may be considered sensitive or vulnerable in some network
 environments.  Write operations (e.g., edit-config) to these data nodes
 without proper protection can have a negative effect on network operations.
+The following subtrees and data nodes have particular sensitivities/vulnerabilities:
+
+* /oamut:oam-unitary-tests/oamut:oam-unitary-test:
+  This list specifies all the oam unitary test entries for network diagnosis procedures.
+  Unauthorized write access to this list can allow intruders to modify the entries so as
+  to forge an unitary test name that does not exist or maliciously delete an existing unitary
+  test, which could be used to craft an attack.
+
+* /oamts:oam-test-sequence/oamts:test-sequence:
+  This list specifies all the oam test sequence entries for network diagnosis procedures.
+  Unauthorized write access to this list can allow intruders to modify the entries so as to forge
+  an test sequence name that does not exist or maliciously delete an existing test sequence, which
+  could be used to craft an attack.
 
 This YANG module uses groupings from other YANG modules that
 define nodes that may be considered sensitive or vulnerable
@@ -511,11 +524,6 @@ modules.  The module by itself does not expose any data nodes that
 are writable, data nodes that contain read-only state, or RPCs.
 As such, there are no additional security issues related to
 the YANG module that need to be considered.
-
-Modules that use the groupings that are defined in this document
-should identify the corresponding security considerations.  For
-example, reusing some of these groupings will expose privacy-related
-information (e.g., 'name' of oam unitary test).
 
 # IANA Considerations
 
