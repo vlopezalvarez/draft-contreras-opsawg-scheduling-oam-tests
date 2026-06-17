@@ -317,24 +317,25 @@ The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. 
 
 ## OAM Test Sequence
 
-The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints, repetitions,
-ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a coordinated manner.
+The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints,
+repetitions, ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a
+coordinated manner.
 
-Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters
-related to time constraints: "period-of-time" and "recurrence" and one temporal parameter related to ordering: "ordered-by user". Time
-constraints parameters are imported from the "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time"
-identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule
-specification. "ordered-by user" parameter indicates that the user is responsible for the ordering on a collection of OAM unitary tests.
-"test-sequence-status" shows the state of the OAM test sequence. "state" imported from the "ietf-schedule" module indicates the current state of
-the schedule.
+Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal
+parameters related to time constraints: "period-of-time" and "recurrence" and one constraint related to ordering:
+"ordered-by user". Time constraints parameters are imported from the "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}.
+"period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that
+contain a recurrence rule specification. "ordered-by user" YANG statement indicates that the user is responsible for the ordering on a
+collection of OAM unitary tests. "test-sequence-status" shows the state of the OAM test sequence. "state" imported from the
+"ietf-schedule" module indicates the current state of the schedule.
 
-Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is indicated, the test
-is considered to run indefinitely.
-In case of the recurrence schedule type, either frequency or interval should be specified. Each execution runs at the scheduled recurrence interval.
-Since the OAM test sequence model consists of a collection of OAM unitary tests, one or more tests in the sequence might get an error, however error
-in one or more tests doesn't prevent the subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM test sequence will
-lead to different reporting output results therefore the user should have full control on the ordering and "ordered-by user" parameters needs to be specified.
-If two or more tests are to run concurrently, they MUST be run in the order specified by the user.
+Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is
+indicated, the test is considered to run indefinitely. In case of the recurrence schedule type, either frequency or interval should
+be specified. Each execution runs at the scheduled recurrence interval. Since the OAM test sequence model consists of a collection
+of OAM unitary tests, one or more tests in the sequence might get an error, however error in one or more tests doesn't prevent the
+subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM test sequence will lead to different
+reporting output results therefore the user should have full control on the ordering and "ordered-by user" parameters needs to be
+specified. If two or more tests are to run concurrently, they MUST be run in the order specified by the user.
 
 {{oam-test-sequence-tree-st}} shows the structure of OAM test sequence module:
 
