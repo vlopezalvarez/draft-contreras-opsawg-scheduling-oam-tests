@@ -61,7 +61,7 @@ informative:
 
 --- abstract
 
-This document defines a YANG data model to support on-demand network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
+This document defines two YANG data models to support on-demand network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
 This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures,
 intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by
 individual network nodes.
@@ -94,13 +94,13 @@ example, {{!RFC5860}} defines the three main areas involved in OAM:
 * Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational.
 
 * Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple technologies for this
-  function, like IP Ping{{?RFC0792}}{{?RFC4443}}, VCCV Ping{{?RFC5085}}, LSP Ping {{?RFC4379}} or Ethernet Loopback {{IEEE-8021Q}}.
+  function, like IP Ping {{?RFC0792}}, {{?RFC4443}}, VCCV Ping {{?RFC5085}}, LSP Ping {{?RFC4379}} or Ethernet Loopback {{IEEE-8021Q}}.
 
 * Link Trace: This function allows a network operator to trace a path through a network from one device to another. Some technologies following this approach
-  are Y.1731 Linktrace {{ITU-T-Y1731}} or IP traceroute{{?RFC0792}}{{?RFC4443}}.
+  are Y.1731 Linktrace {{ITU-T-Y1731}} or IP traceroute {{?RFC0792}}, {{?RFC4443}}.
 
 * Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues.
-  Protocols like TWAMP{{?RFC5357}}, STAMP{{?RFC8762}}, Alternative Marking{{?RFC9341}}, IOAM (In Situ OAM) {{?RFC9197}}, or Y.1731 DMM/SLM {{ITU-T-Y1731}} can
+  Protocols like TWAMP {{?RFC5357}}, STAMP {{?RFC8762}}, Alternative Marking {{?RFC9341}}, IOAM (In Situ OAM) {{?RFC9197}}, or Y.1731 DMM/SLM {{ITU-T-Y1731}} can
   obtain performance measurements.
 
 More recently, Incident Management {{?I-D.ietf-nmop-network-incident-yang}} focuses on
@@ -108,17 +108,18 @@ the network incident diagnosis, which can be favored by dynamic invocation of OA
 
 {{!RFC8531}}, {{!RFC8532}}, {{!RFC8533}}, and {{!RFC8913}} defined YANG models for OAM technologies:
 
-o {{!RFC8531}} "A YANG Data Model for Connection Oriented OAM": defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control, and monitor connection-oriented OAM protocols such as MPLS-TP OAM {{?RFC6371}}, TRILL OAM{{?RFC7174}}, PBB-TE OAM {{IEEE-8021ag}}, and T-MPLS {{ITU-T-G81131}} OAM.
+o {{!RFC8531}} "A YANG Data Model for Connection Oriented OAM": defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control, and monitor connection-oriented OAM protocols such as MPLS-TP OAM {{?RFC6371}}, TRILL OAM {{?RFC7174}}, PBB-TE OAM {{IEEE-8021ag}}, and T-MPLS
+{{ITU-T-G81131}} OAM.
 
-o {{!RFC8532}} "A YANG Data Model for Connectionless OAM Protocols": provides a generic YANG data model that can be used to configure, control, and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection){{?RFC5880}}, LBM (Loopback Messaging){{IEEE-8021ag}}, and VCCV (Virtual Circuit Connectivity Verification){{?RFC5085}}.
+o {{!RFC8532}} "A YANG Data Model for Connectionless OAM Protocols": provides a generic YANG data model that can be used to configure, control, and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection) {{?RFC5880}}, LBM (Loopback Messaging){{IEEE-8021ag}}, and VCCV (Virtual Circuit Connectivity Verification){{?RFC5085}}.
 
-o {{!RFC8533}} "A YANG Data Model for Retrieval Methods for the Management of OAM Protocols that Use Connectionless Communications": provides a YANG data model that can be used to retrieve information related to OAM protocols such as BFD (Bidirectional Forwarding Detection){{?RFC5880}}, LBM (Loopback Messaging){{IEEE-8021ag}}, and VCCV (Virtual Circuit Connectivity Verification){{?RFC5085}}.
+o {{!RFC8533}} "A YANG Data Model for Retrieval Methods for the Management of OAM Protocols that Use Connectionless Communications": provides a YANG data model that can be used to retrieve information related to OAM protocols such as BFD (Bidirectional Forwarding Detection){{?RFC5880}}, LBM (Loopback Messaging) {{IEEE-8021ag}}, and VCCV (Virtual Circuit Connectivity Verification) {{?RFC5085}}.
 
 o {{!RFC8913}} "A YANG Data Model for Two-Way Active Measurement Protocol (TWAMP)": specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).
 
-These OAM related YANG data models defined parameters required for each of the different tests that are used in network elements today. This work aims to reuse and build upon existing YANG models for OAM technologies, such as those defined in {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}. By leveraging these foundational models, this document specifies a YANG data model for scheduling and coordinating sequences of OAM tests, enabling more advanced and automated network diagnosis procedures. In addition to reusing the device-level OAM YANG models from {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}, this document builds upon the generic scheduling framework defined in {{!I-D.ietf-netmod-schedule-yang}}. The `ietf-schedule` module provides reusable groupings and mechanisms for specifying periods of time, recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM unitary test and OAM test sequence models defined in this document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a network-wide context.
+These OAM related YANG data models defined parameters required for each of the different tests that are used in network elements today. This work aims to reuse and build upon existing YANG models for OAM technologies, such as those defined in {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}. By leveraging these foundational models, this document specifies two YANG data models for scheduling and coordinating sequences of OAM tests, enabling more advanced and automated network diagnosis procedures. In addition to reusing the device-level OAM YANG models from {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}, this document builds upon the generic scheduling framework defined in {{!RFC9922}}. The `ietf-schedule` module provides reusable groupings and mechanisms for specifying periods of time, recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM unitary test and OAM test sequence models defined in this document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a network-wide context.
 
-The YANG data model resulting from this document will conform to the Network Management Datastore Architecture (NMDA) {{!RFC8342}}.
+The YANG data models resulting from this document will conform to the Network Management Datastore Architecture (NMDA) {{!RFC8342}}.
 
 ## Terminology and Notations
 
@@ -233,7 +234,7 @@ named "oam-unitary-tests" that serves as a container for activating OAM unitary 
 there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides
 a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of scope
 of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the
-"ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time" identifies the period values that contain a precise period
+"ietf-schedule" module from {{!RFC9922}}. "period-of-time" identifies the period values that contain a precise period
 of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" indicates the state
 of the OAM unitary test (see the state machine in {{st-unitary-test-status}}).
 
@@ -322,7 +323,7 @@ ordering, and reporting outputs. These sequences provide a structured approach t
 
 Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters
 related to time constraints: "period-of-time" and "recurrence" and one temporal parameter related to ordering: "ordered-by user". Time
-constraints parameters are imported from the "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time"
+constraints parameters are imported from the "ietf-schedule" module from {{!RFC9922}}. "period-of-time"
 identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule
 specification. "ordered-by user" parameter indicates that the user is responsible for the ordering on a collection of OAM unitary tests.
 "test-sequence-status" shows the state of the OAM test sequence. "state" imported from the "ietf-schedule" module indicates the current state of
@@ -483,7 +484,7 @@ The NETCONF access control model {{!RFC6536}} provides the means to restrict acc
 
 There are a number of data nodes defined in this YANG module that are writable/creatable/deletable (i.e., config true, which is the default).  These data nodes may be considered sensitive or vulnerable in some network environments.  Write operations (e.g., edit-config) to these data nodes without proper protection can have a negative effect on network operations.
 
-With respect to scheduling, the security considerations in {{!I-D.ietf-netmod-schedule-yang}} also apply.
+With respect to scheduling, the security considerations in {{!RFC9922}} also apply.
 
 # IANA Considerations
 
