@@ -544,10 +544,10 @@ Table of Contents
    however error in one or more tests doesn't prevent the subsequent
    tests or remaining tests to execute.  In addition, any change to the
    ordering of the OAM test sequence will lead to different reporting
-   output results therefore the user should have full control on the
-   ordering and "ordered-by user" parameters needs to be specified.  If
-   two or more tests are to run concurrently, they MUST be run in the
-   order specified by the user.
+   results.  Therefore the user should have full control over the
+   ordering, as enforced by the "ordered-by user" statement.  If two or
+   more tests are to run concurrently, they MUST be run in the order
+   specified by the user.
 
    Figure 3 shows the structure of OAM test sequence module:
 
