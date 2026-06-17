@@ -228,17 +228,19 @@ This document specifies two models: OAM unitary test and OAM test sequence model
 
 ## OAM Unitary Test
 
-The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container
-named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures. Within the container,
-there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides
-a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of scope
-of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the
-"ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time" identifies the period values that contain a precise period
-of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" indicates the state
-of the OAM unitary test (see the state machine in {{st-unitary-test-status}}).
+The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a
+container named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures.
+Within the container, there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is
+defined as "name", which provides a unique name for each test. Each OAM test in the list references a test type with its concrete
+parameters. The test types are out of scope of this document. In addition, each OAM unitary test has two temporal parameters:
+"period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}.
+"period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties
+that contain a recurrence rule specification. Moreover, "schedule:schedule-status" grouping has been imported from {{!RFC9922}} to describe common properties of scheduling status. "unitary-test-status" indicates the state of the OAM unitary test (see the state
+machine in {{st-unitary-test-status}}).
 
-Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it triggers the
-generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying test type identity.
+Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it
+triggers the generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying
+test type identity.
 
 {{oam-uni-test-tree-st}} shows the structure of OAM unitary test module:
 
