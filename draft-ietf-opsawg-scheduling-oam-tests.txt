@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 8 November 2026                                           Nokia
+Expires: 1 January 2027                                            Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                              7 May 2026
+                                                            30 June 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 November 2026.
+   This Internet-Draft will expire on 1 January 2027.
 
 Copyright Notice
 
@@ -1354,9 +1354,9 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-08, 13 February 2026,
+              incident-yang-09, 28 June 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-08>.
+              network-incident-yang-09>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
@@ -1726,6 +1726,11 @@ Acknowledgments
 
    Thanks Joe Clark, Daniel King, Qiufang Ma for valuable review and
    comments.
+
+   The work of Luis M.  Contreras has been partially supported by the
+   European Union’s Horizon Program through the 6G DAta and ML
+   operations automation via an end-to-end AI framework (6G-DALI)
+   Project under Grant 101192750.
 
 Authors' Addresses
 
