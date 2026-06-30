@@ -150,8 +150,8 @@ module ietf-oam-unitary-test {
         type rt-types:router-id;
         description
           "A 32-bit number in the dotted-quad format that is used
-            to uniquely identify a node within an autonomous system
-            the ne-id. This identifier is used for both IPv4 and IPv6.";
+           to uniquely identify a node within an autonomous system.
+           This identifier is used for both IPv4 and IPv6.";
       }
 
        leaf managed {
