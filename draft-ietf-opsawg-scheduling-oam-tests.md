@@ -14,7 +14,7 @@ workgroup: "Operations and Management Area Working Group"
 keyword:
  - OAM
  - Scheduling
- - Test sequences
+ - Test Sequences
 venue:
   group: "Operations and Management Area Working Group"
   type: "Working Group"
@@ -116,7 +116,7 @@ o {{!RFC8533}} "A YANG Data Model for Retrieval Methods for the Management of OA
 
 o {{!RFC8913}} "A YANG Data Model for Two-Way Active Measurement Protocol (TWAMP)": specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).
 
-These OAM related YANG data models defined parameters required for each of the different tests that are used in network elements today. This work aims to reuse and build upon existing YANG models for OAM technologies, such as those defined in {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}. By leveraging these foundational models, this document specifies a YANG data model for scheduling and coordinating sequences of OAM tests, enabling more advanced and automated network diagnosis procedures. In addition to reusing the device-level OAM YANG models from {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}, this document builds upon the generic scheduling framework defined in {{!I-D.ietf-netmod-schedule-yang}}. The `ietf-schedule` module provides reusable groupings and mechanisms for specifying periods of time, recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM unitary test and OAM test sequence models defined in this document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a network-wide context.
+These OAM related YANG data models defined parameters required for each of the different tests that are used in network elements today. This work aims to reuse and build upon existing YANG models for OAM technologies, such as those defined in {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}. By leveraging these foundational models, this document specifies a YANG data model for scheduling and coordinating sequences of OAM tests, enabling more advanced and automated network diagnosis procedures. In addition to reusing the device-level OAM YANG models from {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}, this document builds upon the generic scheduling framework defined in {{!I-D.ietf-netmod-schedule-yang}}. The `ietf-schedule` module provides reusable groupings and mechanisms for specifying periods of time, recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM Unitary Test and OAM Test Sequence models defined in this document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a network-wide context.
 
 The YANG data model resulting from this document will conform to the Network Management Datastore Architecture (NMDA) {{!RFC8342}}.
 
@@ -126,9 +126,9 @@ This document assumes that the reader is familiar with the contents of {{!RFC795
 
 Following terms are used for the representation of this data model.
 
-o OAM unitary test: A set of parameters that define a type of OAM test to be invoked. As an example, it includes the test type, configuration parameters, and target results.
+o OAM Unitary Test: A set of parameters that define a type of OAM test to be invoked. As an example, it includes the test type, configuration parameters, and target results.
 
-o OAM test sequence: A set of OAM unitary tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.
+o OAM Test Sequence: A set of OAM Unitary Tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.
 
 Tree diagrams used in this document follow the notation defined in {{!RFC8340}}.
 
@@ -224,23 +224,23 @@ or IS-IS {{!RFC7810}}, OAM techniques also allow obtaining link metrics like del
 
 # Modelling the Scheduling of OAM Tests
 
-This document specifies two models: OAM unitary test and OAM test sequence models.
+This document specifies two models: OAM Unitary Test and OAM Test Sequence models.
 
 ## OAM Unitary Test
 
-The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container
-named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures. Within the container,
-there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides
+The OAM Unitary Test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container
+named "oam-unitary-tests" that serves as a container for activating OAM Unitary Tests for network diagnosis procedures. Within the container,
+there is a list called "oam-unitary-test" representing a list of specific OAM Unitary Tests. The list key is defined as "name", which provides
 a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of scope
-of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the
+of this document. Moreover, each OAM Unitary Test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the
 "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time" identifies the period values that contain a precise period
 of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" indicates the state
-of the OAM unitary test (see the state machine in {{st-unitary-test-status}}).
+of the OAM Unitary Test (see the state machine in {{st-unitary-test-status}}).
 
 Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it triggers the
 generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying test type identity.
 
-{{oam-uni-test-tree-st}} shows the structure of OAM unitary test module:
+{{oam-uni-test-tree-st}} shows the structure of OAM Unitary Test module:
 
 ~~~~
 module: ietf-oam-unitary-test
@@ -317,26 +317,26 @@ The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. 
 
 ## OAM Test Sequence
 
-The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints, repetitions,
+The OAM Test Sequence model consists of a collection of OAM Unitary Tests that are executed based on specified time constraints, repetitions,
 ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a coordinated manner.
 
-Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters
+Each OAM Test Sequence references an OAM Unitary Test type with its concrete parameters. Each OAM Test Sequence has two temporal parameters
 related to time constraints: "period-of-time" and "recurrence" and one temporal parameter related to ordering: "ordered-by user". Time
 constraints parameters are imported from the "ietf-schedule" module from {{!I-D.ietf-netmod-schedule-yang}}. "period-of-time"
 identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule
-specification. "ordered-by user" parameter indicates that the user is responsible for the ordering on a collection of OAM unitary tests.
-"test-sequence-status" shows the state of the OAM test sequence. "state" imported from the "ietf-schedule" module indicates the current state of
+specification. "ordered-by user" parameter indicates that the user is responsible for the ordering on a collection of OAM Unitary Tests.
+"test-sequence-status" shows the state of the OAM Test Sequence. "state" imported from the "ietf-schedule" module indicates the current state of
 the schedule.
 
 Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is indicated, the test
 is considered to run indefinitely.
 In case of the recurrence schedule type, either frequency or interval should be specified. Each execution runs at the scheduled recurrence interval.
-Since the OAM test sequence model consists of a collection of OAM unitary tests, one or more tests in the sequence might get an error, however error
-in one or more tests doesn't prevent the subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM test sequence will
+Since the OAM Test Sequence model consists of a collection of OAM Unitary Tests, one or more tests in the sequence might get an error, however error
+in one or more tests doesn't prevent the subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM Test Sequence will
 lead to different reporting output results therefore the user should have full control on the ordering and "ordered-by user" parameters needs to be specified.
 If two or more tests are to run concurrently, they MUST be run in the order specified by the user.
 
-{{oam-test-sequence-tree-st}} shows the structure of OAM test sequence module:
+{{oam-test-sequence-tree-st}} shows the structure of OAM Test Sequence module:
 
 ~~~~
 module: ietf-oam-test-sequence
@@ -379,7 +379,7 @@ module: ietf-oam-test-sequence
         +--ro failure-counter?          yang:counter32
         +--ro test-sequence-status?     identityref
 ~~~~
-{: #oam-test-sequence-tree-st title="OAM test sequence" artwork-align="center"}
+{: #oam-test-sequence-tree-st title="OAM Test Sequence" artwork-align="center"}
 
 
 The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}. The state machine includes the following states:
@@ -390,7 +390,7 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
            is executed.
 * "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
 * "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
-* "success": The final state where all unitary tests are completed. This state is triggered when all tests have been conducted successfully.
+* "success": The final state where all Unitary Tests are completed. This state is triggered when all tests have been conducted successfully.
 * "failure": The state when one or more tests in the sequence got an error.
 * "error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".
 
@@ -415,7 +415,7 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
    +---------+
 
 ~~~~
-{: #st-test-sequence-status title="OAM test sequence state machine" artwork-align="center"}
+{: #st-test-sequence-status title="OAM Test Sequence state machine" artwork-align="center"}
 
 # YANG Data Models for Scheduling OAM Tests
 
@@ -576,7 +576,7 @@ provided with the container node "oam-unitary-tests" applying the template defin
 As described in {{?I-D.tt-netmod-yang-config-templates}}, a template node can be overriden by having its value changed, but it can't be
 deleted.
 
-As an example of overriding a node in a template, a client may configure physically present oam unitary tests "lsp-ping", "ip-ping" and
+As an example of overriding a node in a template, a client may configure physically present OAM Unitary Tests "lsp-ping", "ip-ping" and
 "srmpls-ping" inheriting the template defined in {{ex-oam-test-template}}, but the "ne-id" value of "srmpls-ping" needs to be "203.0.113.4":
 
 ~~~~
