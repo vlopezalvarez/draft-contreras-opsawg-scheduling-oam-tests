@@ -17,7 +17,7 @@ individual network nodes.
 <meta content="xml2rfc 3.34.0" name="generator">
 <meta content="OAM" name="keyword">
 <meta content="Scheduling" name="keyword">
-<meta content="Test sequences" name="keyword">
+<meta content="Test Sequences" name="keyword">
 <meta content="draft-ietf-opsawg-scheduling-oam-tests-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.34.0
@@ -32,7 +32,7 @@ individual network nodes.
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.1
+    wcwidth 0.8.2
 -->
 <link href="draft-ietf-opsawg-scheduling-oam-tests.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1051,11 +1051,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Scheduling OAM YANG</td>
-<td class="right">June 2026</td>
+<td class="right">July 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Contreras, et al.</td>
-<td class="center">Expires 1 January 2027</td>
+<td class="center">Expires 6 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1068,12 +1068,12 @@ svg {
 <dd class="internet-draft">draft-ietf-opsawg-scheduling-oam-tests-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-30" class="published">30 June 2026</time>
+<time datetime="2026-07-05" class="published">5 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-01">1 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-01-06">6 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1134,7 @@ individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1334,7 +1334,7 @@ the network incident diagnosis, which can be favored by dynamic invocation of OA
 <p id="section-1-10">o <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span> "A YANG Data Model for Connectionless OAM Protocols": provides a generic YANG data model that can be used to configure, control, and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection)<span>[<a href="#RFC5880" class="cite xref">RFC5880</a>]</span>, LBM (Loopback Messaging)<span>[<a href="#IEEE-8021ag" class="cite xref">IEEE-8021ag</a>]</span>, and VCCV (Virtual Circuit Connectivity Verification)<span>[<a href="#RFC5085" class="cite xref">RFC5085</a>]</span>.<a href="#section-1-10" class="pilcrow">¶</a></p>
 <p id="section-1-11">o <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span> "A YANG Data Model for Retrieval Methods for the Management of OAM Protocols that Use Connectionless Communications": provides a YANG data model that can be used to retrieve information related to OAM protocols such as BFD (Bidirectional Forwarding Detection)<span>[<a href="#RFC5880" class="cite xref">RFC5880</a>]</span>, LBM (Loopback Messaging)<span>[<a href="#IEEE-8021ag" class="cite xref">IEEE-8021ag</a>]</span>, and VCCV (Virtual Circuit Connectivity Verification)<span>[<a href="#RFC5085" class="cite xref">RFC5085</a>]</span>.<a href="#section-1-11" class="pilcrow">¶</a></p>
 <p id="section-1-12">o <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> "A YANG Data Model for Two-Way Active Measurement Protocol (TWAMP)": specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).<a href="#section-1-12" class="pilcrow">¶</a></p>
-<p id="section-1-13">These OAM related YANG data models defined parameters required for each of the different tests that are used in network elements today. This work aims to reuse and build upon existing YANG models for OAM technologies, such as those defined in <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, and <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>. By leveraging these foundational models, this document specifies a YANG data model for scheduling and coordinating sequences of OAM tests, enabling more advanced and automated network diagnosis procedures. In addition to reusing the device-level OAM YANG models from <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, and <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>, this document builds upon the generic scheduling framework defined in <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. The <code>ietf-schedule</code> module provides reusable groupings and mechanisms for specifying periods of time, recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM unitary test and OAM test sequence models defined in this document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a network-wide context.<a href="#section-1-13" class="pilcrow">¶</a></p>
+<p id="section-1-13">These OAM related YANG data models defined parameters required for each of the different tests that are used in network elements today. This work aims to reuse and build upon existing YANG models for OAM technologies, such as those defined in <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, and <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>. By leveraging these foundational models, this document specifies a YANG data model for scheduling and coordinating sequences of OAM tests, enabling more advanced and automated network diagnosis procedures. In addition to reusing the device-level OAM YANG models from <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, and <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>, this document builds upon the generic scheduling framework defined in <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. The <code>ietf-schedule</code> module provides reusable groupings and mechanisms for specifying periods of time, recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM Unitary Test and OAM Test Sequence models defined in this document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a network-wide context.<a href="#section-1-13" class="pilcrow">¶</a></p>
 <p id="section-1-14">The YANG data model resulting from this document will conform to the Network Management Datastore Architecture (NMDA) <span>[<a href="#RFC8342" class="cite xref">RFC8342</a>]</span>.<a href="#section-1-14" class="pilcrow">¶</a></p>
 <div id="terminology-and-notations">
 <section id="section-1.1">
@@ -1343,8 +1343,8 @@ the network incident diagnosis, which can be favored by dynamic invocation of OA
         </h3>
 <p id="section-1.1-1">This document assumes that the reader is familiar with the contents of <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span> "The YANG 1.1 Data Modeling Language".<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">Following terms are used for the representation of this data model.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
-<p id="section-1.1-3">o OAM unitary test: A set of parameters that define a type of OAM test to be invoked. As an example, it includes the test type, configuration parameters, and target results.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
-<p id="section-1.1-4">o OAM test sequence: A set of OAM unitary tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">o OAM Unitary Test: A set of parameters that define a type of OAM test to be invoked. As an example, it includes the test type, configuration parameters, and target results.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<p id="section-1.1-4">o OAM Test Sequence: A set of OAM Unitary Tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
 <p id="section-1.1-5">Tree diagrams used in this document follow the notation defined in <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span>.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
 <p id="section-1.1-6">This document adopts the OAM characterization defined in <span>[<a href="#I-D.ietf-opsawg-oam-characterization" class="cite xref">I-D.ietf-opsawg-oam-characterization</a>]</span>:<a href="#section-1.1-6" class="pilcrow">¶</a></p>
 <p id="section-1.1-7">o Active OAM – uses dedicated OAM packets to assess network performance or verify continuity.<a href="#section-1.1-7" class="pilcrow">¶</a></p>
@@ -1489,23 +1489,23 @@ or IS-IS <span>[<a href="#RFC7810" class="cite xref">RFC7810</a>]</span>, OAM te
       <h2 id="name-modelling-the-scheduling-of">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-modelling-the-scheduling-of" class="section-name selfRef">Modelling the Scheduling of OAM Tests</a>
       </h2>
-<p id="section-3-1">This document specifies two models: OAM unitary test and OAM test sequence models.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">This document specifies two models: OAM Unitary Test and OAM Test Sequence models.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="oam-unitary-test">
 <section id="section-3.1">
         <h3 id="name-oam-unitary-test">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-oam-unitary-test" class="section-name selfRef">OAM Unitary Test</a>
         </h3>
-<p id="section-3.1-1">The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container
-named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures. Within the container,
-there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides
+<p id="section-3.1-1">The OAM Unitary Test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container
+named "oam-unitary-tests" that serves as a container for activating OAM Unitary Tests for network diagnosis procedures. Within the container,
+there is a list called "oam-unitary-test" representing a list of specific OAM Unitary Tests. The list key is defined as "name", which provides
 a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of scope
-of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the
+of this document. Moreover, each OAM Unitary Test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the
 "ietf-schedule" module from <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. "period-of-time" identifies the period values that contain a precise period
 of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" indicates the state
-of the OAM unitary test (see the state machine in <a href="#st-unitary-test-status" class="auto internal xref">Figure 2</a>).<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+of the OAM Unitary Test (see the state machine in <a href="#st-unitary-test-status" class="auto internal xref">Figure 2</a>).<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it triggers the
 generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying test type identity.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.1-3"><a href="#oam-uni-test-tree-st" class="auto internal xref">Figure 1</a> shows the structure of OAM unitary test module:<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-3"><a href="#oam-uni-test-tree-st" class="auto internal xref">Figure 1</a> shows the structure of OAM Unitary Test module:<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <span id="name-tree-structure-of-oam-unita"></span><div id="oam-uni-test-tree-st">
 <figure id="figure-1">
           <div class="alignCenter art-text artwork" id="section-3.1-4.1">
@@ -1611,23 +1611,23 @@ module: ietf-oam-unitary-test
         <h3 id="name-oam-test-sequence">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-oam-test-sequence" class="section-name selfRef">OAM Test Sequence</a>
         </h3>
-<p id="section-3.2-1">The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints, repetitions,
+<p id="section-3.2-1">The OAM Test Sequence model consists of a collection of OAM Unitary Tests that are executed based on specified time constraints, repetitions,
 ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a coordinated manner.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters
+<p id="section-3.2-2">Each OAM Test Sequence references an OAM Unitary Test type with its concrete parameters. Each OAM Test Sequence has two temporal parameters
 related to time constraints: "period-of-time" and "recurrence" and one temporal parameter related to ordering: "ordered-by user". Time
 constraints parameters are imported from the "ietf-schedule" module from <span>[<a href="#I-D.ietf-netmod-schedule-yang" class="cite xref">I-D.ietf-netmod-schedule-yang</a>]</span>. "period-of-time"
 identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule
-specification. "ordered-by user" parameter indicates that the user is responsible for the ordering on a collection of OAM unitary tests.
-"test-sequence-status" shows the state of the OAM test sequence. "state" imported from the "ietf-schedule" module indicates the current state of
+specification. "ordered-by user" parameter indicates that the user is responsible for the ordering on a collection of OAM Unitary Tests.
+"test-sequence-status" shows the state of the OAM Test Sequence. "state" imported from the "ietf-schedule" module indicates the current state of
 the schedule.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is indicated, the test
 is considered to run indefinitely.
 In case of the recurrence schedule type, either frequency or interval should be specified. Each execution runs at the scheduled recurrence interval.
-Since the OAM test sequence model consists of a collection of OAM unitary tests, one or more tests in the sequence might get an error, however error
-in one or more tests doesn't prevent the subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM test sequence will
+Since the OAM Test Sequence model consists of a collection of OAM Unitary Tests, one or more tests in the sequence might get an error, however error
+in one or more tests doesn't prevent the subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM Test Sequence will
 lead to different reporting output results therefore the user should have full control on the ordering and "ordered-by user" parameters needs to be specified.
 If two or more tests are to run concurrently, they MUST be run in the order specified by the user.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4"><a href="#oam-test-sequence-tree-st" class="auto internal xref">Figure 3</a> shows the structure of OAM test sequence module:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-4"><a href="#oam-test-sequence-tree-st" class="auto internal xref">Figure 3</a> shows the structure of OAM Test Sequence module:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <span id="name-oam-test-sequence-2"></span><div id="oam-test-sequence-tree-st">
 <figure id="figure-3">
           <div class="alignCenter art-text artwork" id="section-3.2-5.1">
@@ -1674,7 +1674,7 @@ module: ietf-oam-test-sequence
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-oam-test-sequence-2" class="selfRef">OAM test sequence</a>
+<a href="#name-oam-test-sequence-2" class="selfRef">OAM Test Sequence</a>
           </figcaption></figure>
 </div>
 <p id="section-3.2-6">The 'test-sequence-status' state machine is shown in <a href="#st-test-sequence-status" class="auto internal xref">Figure 4</a>. The state machine includes the following states:<a href="#section-3.2-6" class="pilcrow">¶</a></p>
@@ -1696,7 +1696,7 @@ module: ietf-oam-test-sequence
             <p id="section-3.2-7.5.1">"stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.<a href="#section-3.2-7.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-7.6">
-            <p id="section-3.2-7.6.1">"success": The final state where all unitary tests are completed. This state is triggered when all tests have been conducted successfully.<a href="#section-3.2-7.6.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-7.6.1">"success": The final state where all Unitary Tests are completed. This state is triggered when all tests have been conducted successfully.<a href="#section-3.2-7.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-7.7">
             <p id="section-3.2-7.7.1">"failure": The state when one or more tests in the sequence got an error.<a href="#section-3.2-7.7.1" class="pilcrow">¶</a></p>
@@ -1730,7 +1730,7 @@ module: ietf-oam-test-sequence
 </pre>
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-oam-test-sequence-state-mac" class="selfRef">OAM test sequence state machine</a>
+<a href="#name-oam-test-sequence-state-mac" class="selfRef">OAM Test Sequence state machine</a>
           </figcaption></figure>
 </div>
 </section>
@@ -2419,7 +2419,7 @@ Management and orchestration systems need to make sure to have sufficient resour
 <dd class="break"></dd>
 <dt id="I-D.tt-netmod-yang-config-templates">[I-D.tt-netmod-yang-config-templates]</dt>
         <dd>
-<span class="refAuthor">Wills, R.</span>, <span class="refAuthor">Ma, Q.</span>, and <span class="refAuthor">D. Rajaram</span>, <span class="refTitle">"YANG Configuration Templates"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-tt-netmod-yang-config-templates-02</span>, <time datetime="2026-03-01" class="refDate">1 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-02">https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Watsen, K.</span>, <span class="refAuthor">Ma, Q.</span>, and <span class="refAuthor">D. Rajaram</span>, <span class="refTitle">"YANG Configuration Templates"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-tt-netmod-yang-config-templates-03</span>, <time datetime="2026-07-03" class="refDate">3 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-03">https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IEEE-8021ag">[IEEE-8021ag]</dt>
         <dd>
@@ -2679,7 +2679,7 @@ Management and orchestration systems need to make sure to have sufficient resour
 provided with the container node "oam-unitary-tests" applying the template defined in <a href="#ex-oam-test-template" class="auto internal xref">Figure 6</a>.<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
 <p id="appendix-A.2-4">As described in <span>[<a href="#I-D.tt-netmod-yang-config-templates" class="cite xref">I-D.tt-netmod-yang-config-templates</a>]</span>, a template node can be overriden by having its value changed, but it can't be
 deleted.<a href="#appendix-A.2-4" class="pilcrow">¶</a></p>
-<p id="appendix-A.2-5">As an example of overriding a node in a template, a client may configure physically present oam unitary tests "lsp-ping", "ip-ping" and
+<p id="appendix-A.2-5">As an example of overriding a node in a template, a client may configure physically present OAM Unitary Tests "lsp-ping", "ip-ping" and
 "srmpls-ping" inheriting the template defined in <a href="#ex-oam-test-template" class="auto internal xref">Figure 6</a>, but the "ne-id" value of "srmpls-ping" needs to be "203.0.113.4":<a href="#appendix-A.2-5" class="pilcrow">¶</a></p>
 <span id="name-example-of-applying-oam-tes"></span><div id="ex-apply-oam-test-template">
 <figure id="figure-7">
