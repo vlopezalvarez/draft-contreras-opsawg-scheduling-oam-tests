@@ -694,3 +694,26 @@ Thanks Joe Clark, Daniel King, Qiufang Ma for valuable review and comments.
 
 The work of Luis M. Contreras has been partially supported by the  European Union’s Horizon Program through the 6G DAta and ML operations automation via an end-to-end AI framework (6G-DALI) Project under Grant 101192750.
 
+# Change Log
+
+v06 - v07
+
+* Some Editorial changes based on Hansai's comments;
+
+* Add schedule status descrption in the section OAM Unitary Test;
+
+* Change temporal parameter into YANG statement;
+
+* Change to Both Frequency and Interval are required;
+
+* Fix indentation issue based on Hansai's comments;
+
+* Fix indentation issue based on Hansai's comments;
+
+* Change two yang module prefixes;
+
+* Follow Security Considerations template defined by RFC 9907;
+
+* OAM Teminology Consistency;
+
+* fix ne-id description;
