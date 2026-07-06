@@ -2226,10 +2226,52 @@ Management and orchestration systems need to make sure to have sufficient resour
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">The YANG module targeted in this document defines a schema for data that is designed to be accessed via network management protocols such as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.  The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) <span>[<a href="#RFC6242" class="cite xref">RFC6242</a>]</span>. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">The NETCONF access control model <span>[<a href="#RFC6536" class="cite xref">RFC6536</a>]</span> provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.<a href="#section-7-2" class="pilcrow">¶</a></p>
-<p id="section-7-3">There are a number of data nodes defined in this YANG module that are writable/creatable/deletable (i.e., config true, which is the default).  These data nodes may be considered sensitive or vulnerable in some network environments.  Write operations (e.g., edit-config) to these data nodes without proper protection can have a negative effect on network operations.<a href="#section-7-3" class="pilcrow">¶</a></p>
-<p id="section-7-4">With respect to scheduling, the security considerations in <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span> also apply.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-1">This section is modeled after the template described in Section 3.7.1
+of <span>[<a href="#RFC9907" class="cite xref">RFC9907</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">Both "ietf-oam-unitary-test " YANG module and "ietf-oam-test-sequence"
+YANG module define data models that are designed to be accessed via
+YANG-based management protocols, such as the Network Configuration Protocol
+(NETCONF) <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.  These YANG-based management
+protocols (1) have to use a secure transport layer (e.g., Secure Shell (SSH)
+<span>[<a href="#RFC4252" class="cite xref">RFC4252</a>]</span>, TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, and QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) and (2) have to use
+mutual authentication.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span>
+provides the means to restrict access for particular NETCONF or
+RESTCONF users to a preconfigured subset of all available NETCONF or
+RESTCONF protocol operations and content.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">There are a number of data nodes defined in this YANG module that are
+writable/creatable/deletable (i.e., config true, which is the default).
+These data nodes may be considered sensitive or vulnerable in some network
+environments.  Write operations (e.g., edit-config) to these data nodes
+without proper protection can have a negative effect on network operations.
+The following subtrees and data nodes have particular sensitivities/vulnerabilities:<a href="#section-7-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7-5.1">
+          <p id="section-7-5.1.1">/oamut:oam-unitary-tests/oamut:oam-unitary-test:
+This list specifies all the oam unitary test entries for network diagnosis procedures.
+Unauthorized write access to this list can allow intruders to modify the entries so as
+to forge an unitary test name that does not exist or maliciously delete an existing unitary
+test, which could be used to craft an attack.<a href="#section-7-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-7-5.2">
+          <p id="section-7-5.2.1">/oamts:oam-test-sequence/oamts:test-sequence:
+This list specifies all the oam test sequence entries for network diagnosis procedures.
+Unauthorized write access to this list can allow intruders to modify the entries so as to forge
+an test sequence name that does not exist or maliciously delete an existing test sequence, which
+could be used to craft an attack.<a href="#section-7-5.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-7-6">This YANG module uses groupings from other YANG modules that
+define nodes that may be considered sensitive or vulnerable
+in network environments.  Refer to the Security Considerations
+of <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span> for information as to which nodes may
+be considered sensitive or vulnerable in network environments.<a href="#section-7-6" class="pilcrow">¶</a></p>
+<p id="section-7-7">The YANG module defines a set of identities, types, and
+groupings.  These nodes are intended to be reused by other YANG
+modules.  The module by itself does not expose any data nodes that
+are writable, data nodes that contain read-only state, or RPCs.
+As such, there are no additional security issues related to
+the YANG module that need to be considered.<a href="#section-7-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -2315,6 +2357,10 @@ Management and orchestration systems need to make sure to have sufficient resour
         <dd>
 <span class="refAuthor">Mealling, M.</span>, <span class="refTitle">"The IETF XML Registry"</span>, <span class="seriesInfo">BCP 81</span>, <span class="seriesInfo">RFC 3688</span>, <span class="seriesInfo">DOI 10.17487/RFC3688</span>, <time datetime="2004-01" class="refDate">January 2004</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3688">https://www.rfc-editor.org/rfc/rfc3688</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC4252">[RFC4252]</dt>
+        <dd>
+<span class="refAuthor">Ylonen, T.</span> and <span class="refAuthor">C. Lonvick, Ed.</span>, <span class="refTitle">"The Secure Shell (SSH) Authentication Protocol"</span>, <span class="seriesInfo">RFC 4252</span>, <span class="seriesInfo">DOI 10.17487/RFC4252</span>, <time datetime="2006-01" class="refDate">January 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4252">https://www.rfc-editor.org/rfc/rfc4252</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC5357">[RFC5357]</dt>
         <dd>
 <span class="refAuthor">Hedayat, K.</span>, <span class="refAuthor">Krzanowski, R.</span>, <span class="refAuthor">Morton, A.</span>, <span class="refAuthor">Yum, K.</span>, and <span class="refAuthor">J. Babiarz</span>, <span class="refTitle">"A Two-Way Active Measurement Protocol (TWAMP)"</span>, <span class="seriesInfo">RFC 5357</span>, <span class="seriesInfo">DOI 10.17487/RFC5357</span>, <time datetime="2008-10" class="refDate">October 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5357">https://www.rfc-editor.org/rfc/rfc5357</a>&gt;</span>. </dd>
@@ -2330,14 +2376,6 @@ Management and orchestration systems need to make sure to have sufficient resour
 <dt id="RFC6241">[RFC6241]</dt>
         <dd>
 <span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6242">[RFC6242]</dt>
-        <dd>
-<span class="refAuthor">Wasserman, M.</span>, <span class="refTitle">"Using the NETCONF Protocol over Secure Shell (SSH)"</span>, <span class="seriesInfo">RFC 6242</span>, <span class="seriesInfo">DOI 10.17487/RFC6242</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6242">https://www.rfc-editor.org/rfc/rfc6242</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6536">[RFC6536]</dt>
-        <dd>
-<span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF) Access Control Model"</span>, <span class="seriesInfo">RFC 6536</span>, <span class="seriesInfo">DOI 10.17487/RFC6536</span>, <time datetime="2012-03" class="refDate">March 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6536">https://www.rfc-editor.org/rfc/rfc6536</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6991">[RFC6991]</dt>
         <dd>
@@ -2371,6 +2409,10 @@ Management and orchestration systems need to make sure to have sufficient resour
         <dd>
 <span class="refAuthor">Bjorklund, M.</span> and <span class="refAuthor">L. Berger, Ed.</span>, <span class="refTitle">"YANG Tree Diagrams"</span>, <span class="seriesInfo">BCP 215</span>, <span class="seriesInfo">RFC 8340</span>, <span class="seriesInfo">DOI 10.17487/RFC8340</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8340">https://www.rfc-editor.org/rfc/rfc8340</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8341">[RFC8341]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Access Control Model"</span>, <span class="seriesInfo">STD 91</span>, <span class="seriesInfo">RFC 8341</span>, <span class="seriesInfo">DOI 10.17487/RFC8341</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8341">https://www.rfc-editor.org/rfc/rfc8341</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8342">[RFC8342]</dt>
         <dd>
 <span class="refAuthor">Bjorklund, M.</span>, <span class="refAuthor">Schoenwaelder, J.</span>, <span class="refAuthor">Shafer, P.</span>, <span class="refAuthor">Watsen, K.</span>, and <span class="refAuthor">R. Wilton</span>, <span class="refTitle">"Network Management Datastore Architecture (NMDA)"</span>, <span class="seriesInfo">RFC 8342</span>, <span class="seriesInfo">DOI 10.17487/RFC8342</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8342">https://www.rfc-editor.org/rfc/rfc8342</a>&gt;</span>. </dd>
@@ -2394,6 +2436,14 @@ Management and orchestration systems need to make sure to have sufficient resour
 <dt id="RFC8913">[RFC8913]</dt>
         <dd>
 <span class="refAuthor">Civil, R.</span>, <span class="refAuthor">Morton, A.</span>, <span class="refAuthor">Rahman, R.</span>, <span class="refAuthor">Jethanandani, M.</span>, and <span class="refAuthor">K. Pentikousis, Ed.</span>, <span class="refTitle">"Two-Way Active Measurement Protocol (TWAMP) YANG Data Model"</span>, <span class="seriesInfo">RFC 8913</span>, <span class="seriesInfo">DOI 10.17487/RFC8913</span>, <time datetime="2021-11" class="refDate">November 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8913">https://www.rfc-editor.org/rfc/rfc8913</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9000">[RFC9000]</dt>
+        <dd>
+<span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9000">https://www.rfc-editor.org/rfc/rfc9000</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9907">[RFC9907]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M., Ed.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="seriesInfo">BCP 216</span>, <span class="seriesInfo">RFC 9907</span>, <span class="seriesInfo">DOI 10.17487/RFC9907</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9907">https://www.rfc-editor.org/rfc/rfc9907</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9922">[RFC9922]</dt>
       <dd>

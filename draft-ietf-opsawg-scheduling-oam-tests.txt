@@ -1154,28 +1154,56 @@ Table of Contents
 
 7.  Security Considerations
 
-   The YANG module targeted in this document defines a schema for data
-   that is designed to be accessed via network management protocols such
-   as NETCONF [RFC6241] or RESTCONF [RFC8040].  The lowest NETCONF layer
-   is the secure transport layer, and the mandatory-to-implement secure
-   transport is Secure Shell (SSH) [RFC6242].  The lowest RESTCONF layer
-   is HTTPS, and the mandatory-to-implement secure transport is TLS
-   [RFC8446].
+   This section is modeled after the template described in Section 3.7.1
+   of [RFC9907].
 
-   The NETCONF access control model [RFC6536] provides the means to
-   restrict access for particular NETCONF or RESTCONF users to a
-   preconfigured subset of all available NETCONF or RESTCONF protocol
-   operations and content.
+   Both "ietf-oam-unitary-test " YANG module and "ietf-oam-test-
+   sequence" YANG module define data models that are designed to be
+   accessed via YANG-based management protocols, such as the Network
+   Configuration Protocol (NETCONF) [RFC6241] and RESTCONF [RFC8040].
+   These YANG-based management protocols (1) have to use a secure
+   transport layer (e.g., Secure Shell (SSH) [RFC4252], TLS [RFC8446],
+   and QUIC [RFC9000]) and (2) have to use mutual authentication.
+
+   The Network Configuration Access Control Model (NACM) [RFC8341]
+   provides the means to restrict access for particular NETCONF or
+   RESTCONF users to a preconfigured subset of all available NETCONF or
+   RESTCONF protocol operations and content.
 
    There are a number of data nodes defined in this YANG module that are
    writable/creatable/deletable (i.e., config true, which is the
    default).  These data nodes may be considered sensitive or vulnerable
    in some network environments.  Write operations (e.g., edit-config)
    to these data nodes without proper protection can have a negative
-   effect on network operations.
+   effect on network operations.  The following subtrees and data nodes
+   have particular sensitivities/vulnerabilities:
 
-   With respect to scheduling, the security considerations in [RFC9922]
-   also apply.
+   *  /oamut:oam-unitary-tests/oamut:oam-unitary-test: This list
+      specifies all the oam unitary test entries for network diagnosis
+      procedures.  Unauthorized write access to this list can allow
+      intruders to modify the entries so as to forge an unitary test
+      name that does not exist or maliciously delete an existing unitary
+      test, which could be used to craft an attack.
+
+   *  /oamts:oam-test-sequence/oamts:test-sequence: This list specifies
+      all the oam test sequence entries for network diagnosis
+      procedures.  Unauthorized write access to this list can allow
+      intruders to modify the entries so as to forge an test sequence
+      name that does not exist or maliciously delete an existing test
+      sequence, which could be used to craft an attack.
+
+   This YANG module uses groupings from other YANG modules that define
+   nodes that may be considered sensitive or vulnerable in network
+   environments.  Refer to the Security Considerations of [RFC9922] for
+   information as to which nodes may be considered sensitive or
+   vulnerable in network environments.
+
+   The YANG module defines a set of identities, types, and groupings.
+   These nodes are intended to be reused by other YANG modules.  The
+   module by itself does not expose any data nodes that are writable,
+   data nodes that contain read-only state, or RPCs.  As such, there are
+   no additional security issues related to the YANG module that need to
+   be considered.
 
 8.  IANA Considerations
 
@@ -1236,6 +1264,10 @@ Table of Contents
               DOI 10.17487/RFC3688, January 2004,
               <https://www.rfc-editor.org/rfc/rfc3688>.
 
+   [RFC4252]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Authentication Protocol", RFC 4252, DOI 10.17487/RFC4252,
+              January 2006, <https://www.rfc-editor.org/rfc/rfc4252>.
+
    [RFC5357]  Hedayat, K., Krzanowski, R., Morton, A., Yum, K., and J.
               Babiarz, "A Two-Way Active Measurement Protocol (TWAMP)",
               RFC 5357, DOI 10.17487/RFC5357, October 2008,
@@ -1256,15 +1288,6 @@ Table of Contents
               and A. Bierman, Ed., "Network Configuration Protocol
               (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
               <https://www.rfc-editor.org/rfc/rfc6241>.
-
-   [RFC6242]  Wasserman, M., "Using the NETCONF Protocol over Secure
-              Shell (SSH)", RFC 6242, DOI 10.17487/RFC6242, June 2011,
-              <https://www.rfc-editor.org/rfc/rfc6242>.
-
-   [RFC6536]  Bierman, A. and M. Bjorklund, "Network Configuration
-              Protocol (NETCONF) Access Control Model", RFC 6536,
-              DOI 10.17487/RFC6536, March 2012,
-              <https://www.rfc-editor.org/rfc/rfc6536>.
 
    [RFC6991]  Schoenwaelder, J., Ed., "Common YANG Data Types",
               RFC 6991, DOI 10.17487/RFC6991, July 2013,
@@ -1302,6 +1325,11 @@ Table of Contents
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
               <https://www.rfc-editor.org/rfc/rfc8340>.
 
+   [RFC8341]  Bierman, A. and M. Bjorklund, "Network Configuration
+              Access Control Model", STD 91, RFC 8341,
+              DOI 10.17487/RFC8341, March 2018,
+              <https://www.rfc-editor.org/rfc/rfc8341>.
+
    [RFC8342]  Bjorklund, M., Schoenwaelder, J., Shafer, P., Watsen, K.,
               and R. Wilton, "Network Management Datastore Architecture
               (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
@@ -1335,6 +1363,16 @@ Table of Contents
               K. Pentikousis, Ed., "Two-Way Active Measurement Protocol
               (TWAMP) YANG Data Model", RFC 8913, DOI 10.17487/RFC8913,
               November 2021, <https://www.rfc-editor.org/rfc/rfc8913>.
+
+   [RFC9000]  Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
+              Multiplexed and Secure Transport", RFC 9000,
+              DOI 10.17487/RFC9000, May 2021,
+              <https://www.rfc-editor.org/rfc/rfc9000>.
+
+   [RFC9907]  Bierman, A., Boucadair, M., Ed., and Q. Wu, "Guidelines
+              for Authors and Reviewers of Documents Containing YANG
+              Data Models", BCP 216, RFC 9907, DOI 10.17487/RFC9907,
+              March 2026, <https://www.rfc-editor.org/rfc/rfc9907>.
 
    [RFC9922]  Ma, Q., Ed., Wu, Q., Boucadair, M., Ed., and D. King, "A
               Common YANG Data Model for Scheduling", RFC 9922,
