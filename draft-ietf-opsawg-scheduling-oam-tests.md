@@ -696,8 +696,6 @@ The work of Luis M. Contreras has been partially supported by the  European Unio
 
 # Change between Revision
 
- v06 - v07
-
   * Follow Security Considerations template defined by RFC 9907;
 
   * OAM Teminology Consistency;
