@@ -694,6 +694,10 @@ Thanks Joe Clark, Daniel King, Qiufang Ma for valuable review and comments.
 
 The work of Luis M. Contreras has been partially supported by the  European Union’s Horizon Program through the 6G DAta and ML operations automation via an end-to-end AI framework (6G-DALI) Project under Grant 101192750.
 
+# Change between Revision
+
+ v06 - v07
+
   * Follow Security Considerations template defined by RFC 9907;
 
   * OAM Teminology Consistency;
