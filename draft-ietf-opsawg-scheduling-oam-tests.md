@@ -696,24 +696,24 @@ The work of Luis M. Contreras has been partially supported by the  European Unio
 
 # Change Log
 
-v06 - v07
+  v06 - v07
 
-* Some Editorial changes based on Hansai's comments;
+  * Some Editorial changes based on Hansai's comments;
 
-* Add schedule status descrption in the section OAM Unitary Test;
+  * Add schedule status descrption in the section OAM Unitary Test;
 
-* Change temporal parameter into YANG statement;
+  * Change temporal parameter into YANG statement;
 
-* Change to Both Frequency and Interval are required;
+  * Change to Both Frequency and Interval are required;
 
-* Fix indentation issue based on Hansai's comments;
+  * Fix indentation issue based on Hansai's comments;
 
-* Fix indentation issue based on Hansai's comments;
+  * Fix indentation issue based on Hansai's comments;
 
-* Change two yang module prefixes;
+  * Change two yang module prefixes;
 
-* Follow Security Considerations template defined by RFC 9907;
+  * Follow Security Considerations template defined by RFC 9907;
 
-* OAM Teminology Consistency;
+  * OAM Teminology Consistency;
 
-* fix ne-id description;
+  * fix ne-id description;
