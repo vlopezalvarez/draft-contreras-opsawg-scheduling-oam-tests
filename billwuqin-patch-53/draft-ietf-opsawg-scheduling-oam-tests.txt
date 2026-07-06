@@ -111,6 +111,7 @@ Table of Contents
    Appendix A.  Examples
      A.1.  Create a TWAMP OAM test
      A.2.  Ping OAM Test Template
+   Appendix B.  Change between Revision
    Acknowledgments
    Authors' Addresses
 
@@ -1753,6 +1754,14 @@ A.2.  Ping OAM Test Template
             </oam-unitary-test>
    </oam-unitary-tests>
 
+Appendix B.  Change between Revision
+
+   *  Follow Security Considerations template defined by RFC 9907;
+
+   *  OAM Teminology Consistency;
+
+   *  fix ne-id description;
+
 Acknowledgments
 
    Thanks Joe Clark, Daniel King, Qiufang Ma for valuable review and
@@ -1762,12 +1771,6 @@ Acknowledgments
    European Union’s Horizon Program through the 6G DAta and ML
    operations automation via an end-to-end AI framework (6G-DALI)
    Project under Grant 101192750.
-
-   *  Follow Security Considerations template defined by RFC 9907;
-
-   *  OAM Teminology Consistency;
-
-   *  fix ne-id description;
 
 Authors' Addresses
 
