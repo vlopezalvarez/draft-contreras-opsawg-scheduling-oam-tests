@@ -518,13 +518,13 @@ With respect to scheduling, the security considerations in {{!RFC9922}} also app
       Name:       ietf-oam-unitary-test
       Maintained by IANA? N
       Namespace:  urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test
-      Prefix:     as
+      Prefix:     oamut
       Reference:  RFC XXXX
 
       Name:       ietf-oam-test-sequence
       Maintained by IANA? N
       Namespace:  urn:ietf:params:xml:ns:yang:ietf-oam-test-sequence
-      Prefix:     as
+      Prefix:     oamts
       Reference:  RFC XXXX
 ~~~~
 
