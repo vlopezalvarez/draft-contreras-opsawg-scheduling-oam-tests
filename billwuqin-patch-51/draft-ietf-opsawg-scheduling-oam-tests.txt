@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 19 December 2026                                          Nokia
+Expires: 7 January 2027                                            Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                            17 June 2026
+                                                             6 July 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -17,13 +17,13 @@ A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
 
 Abstract
 
-   This document defines a YANG data model to support on-demand network
-   diagnosis using Operations, Administration, and Maintenance (OAM)
-   tests.  This document defines both 'oam-unitary-test' and 'oam-test-
-   sequence' YANG modules to manage the lifecycle of network diagnosis
-   procedures, intended for use by external management and orchestration
-   systems (including SDN controllers and network orchestrators), rather
-   than by individual network nodes.
+   This document defines two YANG data models to support on-demand
+   network diagnosis using Operations, Administration, and Maintenance
+   (OAM) tests.  This document defines both 'oam-unitary-test' and 'oam-
+   test-sequence' YANG modules to manage the lifecycle of network
+   diagnosis procedures, intended for use by external management and
+   orchestration systems (including SDN controllers and network
+   orchestrators), rather than by individual network nodes.
 
 About This Document
 
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 December 2026.
+   This Internet-Draft will expire on 7 January 2027.
 
 Copyright Notice
 
@@ -157,19 +157,19 @@ Table of Contents
 
    *  Loopback: This function allows a device to loop back a received
       packet back to the sender for diagnostic purposes.  There are
-      multiple technologies for this function, like IP
-      Ping[RFC0792][RFC4443], VCCV Ping[RFC5085], LSP Ping [RFC4379] or
-      Ethernet Loopback [IEEE-8021Q].
+      multiple technologies for this function, like IP Ping [RFC0792],
+      [RFC4443], VCCV Ping [RFC5085], LSP Ping [RFC4379] or Ethernet
+      Loopback [IEEE-8021Q].
 
    *  Link Trace: This function allows a network operator to trace a
       path through a network from one device to another.  Some
       technologies following this approach are Y.1731 Linktrace
-      [ITU-T-Y1731] or IP traceroute[RFC0792][RFC4443].
+      [ITU-T-Y1731] or IP traceroute [RFC0792], [RFC4443].
 
    *  Performance Monitoring: This function allows a network operator to
       monitor the performance of a network and to identify and diagnose
-      performance issues.  Protocols like TWAMP[RFC5357],
-      STAMP[RFC8762], Alternative Marking[RFC9341], IOAM (In Situ OAM)
+      performance issues.  Protocols like TWAMP [RFC5357], STAMP
+      [RFC8762], Alternative Marking [RFC9341], IOAM (In Situ OAM)
       [RFC9197], or Y.1731 DMM/SLM [ITU-T-Y1731] can obtain performance
       measurements.
 
@@ -184,13 +184,13 @@ Table of Contents
    a YANG data model for connection-oriented OAM protocols.  The main
    aim of this document is to define a generic YANG data model that can
    be used to configure, control, and monitor connection-oriented OAM
-   protocols such as MPLS-TP OAM [RFC6371], TRILL OAM[RFC7174], PBB-TE
+   protocols such as MPLS-TP OAM [RFC6371], TRILL OAM [RFC7174], PBB-TE
    OAM [IEEE-8021ag], and T-MPLS [ITU-T-G81131] OAM.
 
    o [RFC8532] "A YANG Data Model for Connectionless OAM Protocols":
    provides a generic YANG data model that can be used to configure,
    control, and monitor connectionless OAM protocols such as BFD
-   (Bidirectional Forwarding Detection)[RFC5880], LBM (Loopback
+   (Bidirectional Forwarding Detection) [RFC5880], LBM (Loopback
    Messaging)[IEEE-8021ag], and VCCV (Virtual Circuit Connectivity
    Verification)[RFC5085].
 
@@ -198,8 +198,8 @@ Table of Contents
    Management of OAM Protocols that Use Connectionless Communications":
    provides a YANG data model that can be used to retrieve information
    related to OAM protocols such as BFD (Bidirectional Forwarding
-   Detection)[RFC5880], LBM (Loopback Messaging)[IEEE-8021ag], and VCCV
-   (Virtual Circuit Connectivity Verification)[RFC5085].
+   Detection)[RFC5880], LBM (Loopback Messaging) [IEEE-8021ag], and VCCV
+   (Virtual Circuit Connectivity Verification) [RFC5085].
 
    o [RFC8913] "A YANG Data Model for Two-Way Active Measurement
    Protocol (TWAMP)": specifies a YANG data model for client and server
@@ -210,20 +210,19 @@ Table of Contents
    This work aims to reuse and build upon existing YANG models for OAM
    technologies, such as those defined in [RFC8531], [RFC8532], and
    [RFC8533].  By leveraging these foundational models, this document
-   specifies a YANG data model for scheduling and coordinating sequences
-   of OAM tests, enabling more advanced and automated network diagnosis
-   procedures.  In addition to reusing the device-level OAM YANG models
-   from [RFC8531], [RFC8532], and [RFC8533], this document builds upon
-   the generic scheduling framework defined in
-   [I-D.ietf-netmod-schedule-yang].  The ietf-schedule module provides
-   reusable groupings and mechanisms for specifying periods of time,
-   recurrence rules, and scheduling status.  These constructs are
-   directly imported and used in the OAM unitary test and OAM test
-   sequence models defined in this document, enabling precise
-   scheduling, repetition, and conflict reporting for OAM tasks in a
-   network-wide context.
+   specifies two YANG data models for scheduling and coordinating
+   sequences of OAM tests, enabling more advanced and automated network
+   diagnosis procedures.  In addition to reusing the device-level OAM
+   YANG models from [RFC8531], [RFC8532], and [RFC8533], this document
+   builds upon the generic scheduling framework defined in [RFC9922].
+   The ietf-schedule module provides reusable groupings and mechanisms
+   for specifying periods of time, recurrence rules, and scheduling
+   status.  These constructs are directly imported and used in the OAM
+   unitary test and OAM test sequence models defined in this document,
+   enabling precise scheduling, repetition, and conflict reporting for
+   OAM tasks in a network-wide context.
 
-   The YANG data model resulting from this document will conform to the
+   The YANG data models resulting from this document will conform to the
    Network Management Datastore Architecture (NMDA) [RFC8342].
 
 1.1.  Terminology and Notations
@@ -233,11 +232,11 @@ Table of Contents
 
    Following terms are used for the representation of this data model.
 
-   o OAM unitary test: A set of parameters that define a type of OAM
+   o OAM Unitary Test: A set of parameters that define a type of OAM
    test to be invoked.  As an example, it includes the test type,
    configuration parameters, and target results.
 
-   o OAM test sequence: A set of OAM unitary tests that are run based on
+   o OAM Test Sequence: A set of OAM Unitary Tests that are run based on
    a set of time constraints, number of repetitions, order, and
    reporting outputs.
 
@@ -395,8 +394,8 @@ Table of Contents
 
 3.  Modelling the Scheduling of OAM Tests
 
-   This document specifies two models: OAM unitary test and OAM test
-   sequence models.
+   This document specifies two models: OAM Unitary Test and OAM Test
+   Sequence models.
 
 3.1.  OAM Unitary Test
 
@@ -408,14 +407,16 @@ Table of Contents
    representing a list of specific OAM unitary tests.  The list key is
    defined as "name", which provides a unique name for each test.  Each
    OAM test in the list references a test type with its concrete
-   parameters.  The test types are out of scope of this document.
-   Moreover, each OAM unitary test has two temporal parameters: "period-
+   parameters.  The test types are out of scope of this document.  In
+   addition, each OAM unitary test has two temporal parameters: "period-
    of-time" and "recurrence".  Both are imported from the "ietf-
-   schedule" module from [I-D.ietf-netmod-schedule-yang]. "period-of-
-   time" identifies the period values that contain a precise period of
-   time, while "recurrence" identifies the properties that contain a
-   recurrence rule specification. "unitary-test-status" indicates the
-   state of the OAM unitary test (see the state machine in Figure 2).
+   schedule" module from [RFC9922]. "period-of-time" identifies the
+   period values that contain a precise period of time, while
+   "recurrence" identifies the properties that contain a recurrence rule
+   specification.  Moreover, "schedule:schedule-status" grouping has
+   been imported from [RFC9922] to describe common properties of
+   scheduling status. "unitary-test-status" indicates the state of the
+   OAM unitary test (see the state machine in Figure 2).
 
    Each oam-unitary-test instance defined by this model is conceptually
    an instance of an active or hybrid OAM operation, since it triggers
@@ -423,7 +424,7 @@ Table of Contents
    such differentiation by referencing the underlying test type
    identity.
 
-   Figure 1 shows the structure of OAM unitary test module:
+   Figure 1 shows the structure of OAM Unitary Test module:
 
      module: ietf-oam-unitary-test
        +--rw oam-unitary-tests
@@ -524,21 +525,21 @@ Table of Contents
    Each OAM test sequence references an OAM unitary test type with its
    concrete parameters.  Each OAM test sequence has two temporal
    parameters related to time constraints: "period-of-time" and
-   "recurrence" and one temporal parameter related to ordering:
-   "ordered-by user".  Time constraints parameters are imported from the
-   "ietf-schedule" module from [I-D.ietf-netmod-schedule-yang]. "period-
-   of-time" identifies the period values that contain a precise period
-   of time, while "recurrence" identifies the properties that contain a
-   recurrence rule specification. "ordered-by user" parameter indicates
-   that the user is responsible for the ordering on a collection of OAM
-   unitary tests. "test-sequence-status" shows the state of the OAM test
+   "recurrence" and one constraint related to ordering: "ordered-by
+   user".  Time constraints parameters are imported from the "ietf-
+   schedule" module from [RFC9922]. "period-of-time" identifies the
+   period values that contain a precise period of time, while
+   "recurrence" identifies the properties that contain a recurrence rule
+   specification. "ordered-by user" YANG statement indicates that the
+   user is responsible for the ordering on a collection of OAM unitary
+   tests. "test-sequence-status" shows the state of the OAM test
    sequence. "state" imported from the "ietf-schedule" module indicates
    the current state of the schedule.
 
    Note that repetition is specified by "execution-count" parameter and
    only applies to the recurrence schedule type.  If no count is
    indicated, the test is considered to run indefinitely.  In case of
-   the recurrence schedule type, either frequency or interval should be
+   the recurrence schedule type, both frequency and interval should be
    specified.  Each execution runs at the scheduled recurrence interval.
    Since the OAM test sequence model consists of a collection of OAM
    unitary tests, one or more tests in the sequence might get an error,
@@ -550,7 +551,7 @@ Table of Contents
    two or more tests are to run concurrently, they MUST be run in the
    order specified by the user.
 
-   Figure 3 shows the structure of OAM test sequence module:
+   Figure 3 shows the structure of OAM Test Sequence module:
 
      module: ietf-oam-test-sequence
        +--rw oam-test-sequence
@@ -592,7 +593,7 @@ Table of Contents
              +--ro failure-counter?          yang:counter32
              +--ro test-sequence-status?     identityref
 
-                        Figure 3: OAM test sequence
+                        Figure 3: OAM Test Sequence
 
    The 'test-sequence-status' state machine is shown in Figure 4.  The
    state machine includes the following states:
@@ -615,7 +616,7 @@ Table of Contents
    *  "stop": The state where the test is manually stopped.  This state
       is triggered when the test is manually interrupted.
 
-   *  "success": The final state where all unitary tests are completed.
+   *  "success": The final state where all Unitary Tests are completed.
       This state is triggered when all tests have been conducted
       successfully.
 
@@ -646,7 +647,7 @@ Table of Contents
              +-| success |<----------------------------+
                +---------+
 
-                 Figure 4: OAM test sequence state machine
+                 Figure 4: OAM Test Sequence state machine
 
 4.  YANG Data Models for Scheduling OAM Tests
 
@@ -701,23 +702,22 @@ Table of Contents
        without modification, is permitted pursuant to, and subject
        to the license terms contained in, the Revised BSD License
        set forth in Section 4.c of the IETF Trust's Legal Provisions
-       Relating to IETF Documents
-         (https://trustee.ietf.org/license-info).
+       Relating to IETF Documents (https://trustee.ietf.org/license-info).
 
-        This version of this YANG module is part of RFC XXXX
-        (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-        for full legal notices.
+       This version of this YANG module is part of RFC XXXX
+       (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+       for full legal notices.
 
-            The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
-        NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
-        'MAY', and 'OPTIONAL' in this document are to be interpreted as
-        described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
-        they appear in all capitals, as shown here.";
+           The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
+       NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
+       'MAY', and 'OPTIONAL' in this document are to be interpreted as
+       described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
+       they appear in all capitals, as shown here.";
 
-     // RFC Ed.: update the date below with the date of RFC
-     // publication and remove this note.
-     // RFC Ed.: replace XXXX with actual RFC number and remove
-     // this note.
+       // RFC Ed.: update the date below with the date of RFC
+       // publication and remove this note.
+       // RFC Ed.: replace XXXX with actual RFC number and remove
+       // this note.
 
      revision "2026-01-13" {
        description
@@ -730,66 +730,66 @@ Table of Contents
 
      /* Identities */
             identity unitary-test-status {
-             description
-             "Base identity for unitary-test-status.";
+              description
+                "Base identity for unitary-test-status.";
             }
             identity planned {
-             base unitary-test-status;
-             description
-             "Identity for planned.";
+              base unitary-test-status;
+              description
+                "Identity for planned.";
             }
             identity configured {
-             base unitary-test-status;
-             description
-             "Identity for configured.";
+              base unitary-test-status;
+              description
+                "Identity for configured.";
             }
             identity ready {
-             base unitary-test-status;
-             description
-             "Identity for ready.";
+              base unitary-test-status;
+              description
+                "Identity for ready.";
             }
             identity on-going {
-             base unitary-test-status;
-             description
-             "Identity for on-going.";
+              base unitary-test-status;
+              description
+                "Identity for on-going.";
             }
             identity stop {
-             base unitary-test-status;
-             description
-             "Identity for stop.";
+              base unitary-test-status;
+              description
+                "Identity for stop.";
             }
             identity success {
-             base unitary-test-status;
-             description
-             "Identity for success.";
+              base unitary-test-status;
+              description
+                "Identity for success.";
             }
 
             identity error {
-             base unitary-test-status;
-             description
-             "Identity for error.";
+              base unitary-test-status;
+              description
+                "Identity for error.";
             }
 
             identity resource-contention {
-             base error;
-             description
-             "Identity for resource contention.";
+              base error;
+              description
+                "Identity for resource contention.";
             }
 
             identity priority {
-             base error;
-             description
-             "Identity for priority.";
+              base error;
+              description
+                "Identity for priority.";
             }
 
-     identity basic-test-type {
+        identity basic-test-type {
           description
             "Base identity of basic test type.";
      }
 
      grouping oam-unitary-test {
        description
-           "Specifies a grouping for OAM unitary test for network
+          "Specifies a grouping for OAM unitary test for network
            diagnosis procedures.";
 
        leaf name {
@@ -865,7 +865,7 @@ Table of Contents
          }
      choice schedule-class {
         description
-             "Choice based on the type of the time range.";
+              "Choice based on the type of the time range.";
       container period {
             description
               "The OAM Test takes effect based on a precise period of
@@ -895,12 +895,8 @@ Table of Contents
 
      import ietf-oam-unitary-test {
        prefix "oamut";
-       // Update the reference with the correct RFC number or other
-       // reference when assigned
-       // reference "RFCXXXX";
      }
 
-     // reference ietf-netmod-schedule-yang
      import ietf-schedule { prefix "schedule"; }
 
      organization
@@ -933,74 +929,73 @@ Table of Contents
         (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
         for full legal notices.";
 
-     // RFC Ed.: update the date below with the date of RFC
-     // publication and remove this note.
-     // RFC Ed.: replace XXXX with actual RFC number and remove
-     // this note.
+       // RFC Ed.: update the date below with the date of RFC
+       // publication and remove this note.
+       // RFC Ed.: replace XXXX with actual RFC number and remove
+       // this note.
 
      revision "2026-01-13" {
        description "Initial version";
        reference "RFCXXXX";
-       // Update with the correct RFC number when assigned
      }
 
      /* Identities */
             identity test-sequence-status {
-             description
-             "Base identity for test-sequence-status.";
+              description
+                "Base identity for test-sequence-status.";
             }
             identity planned {
-             base test-sequence-status;
-             description
-             "Identity for planned.";
+              base test-sequence-status;
+              description
+               "Identity for planned.";
             }
             identity configured {
-             base test-sequence-status;
-             description
-             "Identity for configured.";
+              base test-sequence-status;
+              description
+               "Identity for configured.";
             }
             identity ready {
-             base test-sequence-status;
-             description
-             "Identity for ready.";
+              base test-sequence-status;
+              description
+               "Identity for ready.";
             }
             identity on-going {
-             base test-sequence-status;
-             description
-             "Identity for on-going.";
+              base test-sequence-status;
+              description
+                "Identity for on-going.";
             }
             identity stop {
-             base test-sequence-status;
-             description
-             "Identity for stop.";
+              base test-sequence-status;
+              description
+               "Identity for stop.";
             }
             identity success {
-             base test-sequence-status;
-             description
-             "Identity for success.";
+              base test-sequence-status;
+              description
+               "Identity for success.";
             }
             identity failure {
-             base test-sequence-status;
-             description
-             "Identity for failure";
+              base test-sequence-status;
+              description
+               "Identity for failure";
             }
             identity error {
-             base test-sequence-status;
-             description
-             "Identity for error.";
+              base test-sequence-status;
+              description
+               "Identity for error.";
             }
             identity resource-contention {
-             base error;
-             description
-             "Identity for resource-contention error cause.";
+              base error;
+              description
+               "Identity for resource-contention error cause.";
             }
             identity priority {
-             base error;
-             description
-             "Identity for priority error cause.";
+              base error;
+              description
+               "Identity for priority error cause.";
             }
-     /* Data model definition */
 
+     /* Data model definition */
      container oam-test-sequence {
        description
          "Container for executing a sequence of ietf-oam-unitary-tests
@@ -1051,7 +1046,7 @@ Table of Contents
                  executed for this recurrence. If the leaf is absent, there
                  is no limit: executions follow the recurrence until the
                  test is removed from the system.";
-            }
+              }
          }
         }
        }
@@ -1234,13 +1229,13 @@ Table of Contents
          Name:       ietf-oam-unitary-test
          Maintained by IANA? N
          Namespace:  urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test
-         Prefix:     as
+         Prefix:     oamut
          Reference:  RFC XXXX
 
          Name:       ietf-oam-test-sequence
          Maintained by IANA? N
          Namespace:  urn:ietf:params:xml:ns:yang:ietf-oam-test-sequence
-         Prefix:     as
+         Prefix:     oamts
          Reference:  RFC XXXX
 
 9.  Implementation Status
@@ -1252,13 +1247,6 @@ Table of Contents
 10.  References
 
 10.1.  Normative References
-
-   [I-D.ietf-netmod-schedule-yang]
-              Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Common YANG
-              Data Model for Scheduling", Work in Progress, Internet-
-              Draft, draft-ietf-netmod-schedule-yang-10, 7 August 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              schedule-yang-10>.
 
    [I-D.ietf-opsawg-oam-characterization]
               Pignataro, C., Farrel, A., and T. Mizrahi, "Guidelines for
@@ -1397,9 +1385,9 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-08, 13 February 2026,
+              incident-yang-09, 28 June 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-08>.
+              network-incident-yang-09>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
@@ -1410,11 +1398,11 @@ Table of Contents
               terminology-23>.
 
    [I-D.tt-netmod-yang-config-templates]
-              Wills, R., Ma, Q., and D. Rajaram, "YANG Configuration
+              Watsen, K., Ma, Q., and D. Rajaram, "YANG Configuration
               Templates", Work in Progress, Internet-Draft, draft-tt-
-              netmod-yang-config-templates-02, 1 March 2026,
+              netmod-yang-config-templates-03, 3 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-tt-netmod-
-              yang-config-templates-02>.
+              yang-config-templates-03>.
 
    [IEEE-8021ag]
               "IEEE Standard for Local and Metropolitan Area Networks –
@@ -1700,7 +1688,7 @@ A.2.  Ping OAM Test Template
    deleted.
 
    As an example of overriding a node in a template, a client may
-   configure physically present oam unitary tests "lsp-ping", "ip-ping"
+   configure physically present OAM Unitary Tests "lsp-ping", "ip-ping"
    and "srmpls-ping" inheriting the template defined in Figure 6, but
    the "ne-id" value of "srmpls-ping" needs to be "203.0.113.4":
 
@@ -1769,6 +1757,11 @@ Acknowledgments
 
    Thanks Joe Clark, Daniel King, Qiufang Ma for valuable review and
    comments.
+
+   The work of Luis M.  Contreras has been partially supported by the
+   European Union’s Horizon Program through the 6G DAta and ML
+   operations automation via an end-to-end AI framework (6G-DALI)
+   Project under Grant 101192750.
 
 Authors' Addresses
 
