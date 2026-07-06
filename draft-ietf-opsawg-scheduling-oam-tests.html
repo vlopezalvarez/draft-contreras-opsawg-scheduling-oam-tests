@@ -1625,13 +1625,13 @@ parameters related to time constraints: "period-of-time" and "recurrence" and on
 contain a recurrence rule specification. "ordered-by user" YANG statement indicates that the user is responsible for the ordering on a
 collection of OAM unitary tests. "test-sequence-status" shows the state of the OAM test sequence. "state" imported from the
 "ietf-schedule" module indicates the current state of the schedule.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is
-indicated, the test is considered to run indefinitely. In case of the recurrence schedule type, either frequency or interval should
-be specified. Each execution runs at the scheduled recurrence interval. Since the OAM test sequence model consists of a collection
-of OAM unitary tests, one or more tests in the sequence might get an error, however error in one or more tests doesn't prevent the
-subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM test sequence will lead to different
-reporting output results therefore the user should have full control on the ordering and "ordered-by user" parameters needs to be
-specified. If two or more tests are to run concurrently, they MUST be run in the order specified by the user.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is indicated, the test
+is considered to run indefinitely.
+In case of the recurrence schedule type, both frequency and interval should be specified. Each execution runs at the scheduled recurrence interval.
+Since the OAM test sequence model consists of a collection of OAM unitary tests, one or more tests in the sequence might get an error, however error
+in one or more tests doesn't prevent the subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM test sequence will
+lead to different reporting output results therefore the user should have full control on the ordering and "ordered-by user" parameters needs to be specified.
+If two or more tests are to run concurrently, they MUST be run in the order specified by the user.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4"><a href="#oam-test-sequence-tree-st" class="auto internal xref">Figure 3</a> shows the structure of OAM Test Sequence module:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <span id="name-oam-test-sequence-2"></span><div id="oam-test-sequence-tree-st">
 <figure id="figure-3">

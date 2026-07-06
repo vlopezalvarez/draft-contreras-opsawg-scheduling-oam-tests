@@ -539,7 +539,7 @@ Table of Contents
    Note that repetition is specified by "execution-count" parameter and
    only applies to the recurrence schedule type.  If no count is
    indicated, the test is considered to run indefinitely.  In case of
-   the recurrence schedule type, either frequency or interval should be
+   the recurrence schedule type, both frequency and interval should be
    specified.  Each execution runs at the scheduled recurrence interval.
    Since the OAM test sequence model consists of a collection of OAM
    unitary tests, one or more tests in the sequence might get an error,
