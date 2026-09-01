@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 7 January 2027                                            Nokia
-                                                             6 July 2026
+Expires: 5 March 2027                                              Nokia
+                                                        1 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 January 2027.
+   This Internet-Draft will expire on 5 March 2027.
 
 Copyright Notice
 
@@ -531,6 +531,12 @@ Table of Contents
           "RFC 8528: YANG Schema Mount";
      }
 
+     import ietf-inet-types {
+        prefix inet;
+        reference
+          "RFC 9911: Common YANG Data Types";
+     }
+
      organization
        "IETF OPSAWG (Operations and Management Area Working Group)";
 
@@ -655,11 +661,12 @@ Table of Contents
            unitary tests.";
 
          leaf ne-id {
-           type rt-types:router-id;
+           type inet:host;
            description
-             "A 32-bit number in the dotted-quad format that is used
-               to uniquely identify a node within an autonomous system
-               the ne-id. This identifier is used for both IPv4 and IPv6.";
+             "This is identification of a network node within an autonomous system
+              such as router, switch, firewalls, etc. It should be as fine-grained
+              as possible to both guide the operator and guarantee uniqueness of the
+              network element.";
          }
 
           leaf managed {
@@ -1078,9 +1085,9 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-09, 28 June 2026,
+              incident-yang-14, 18 August 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-09>.
+              network-incident-yang-14>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
