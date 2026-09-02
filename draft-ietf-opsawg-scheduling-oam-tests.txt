@@ -1646,7 +1646,7 @@ A.1.  Create a TWAMP OAM test
    daily at 9 AM UTC.  This test session is configured to start on
    October 17, 2023, at 09:00 UTC and recur at the same time every day.
    The duration of each test run is one hour, as specified by the ISO
-   8601 format "PT1H", with the test status marked as "scheduled".  The
+   8601 format "PT1H", with the test status marked as "configured".  The
    test provides insight into network performance by monitoring the
    selected parameters, allowing for the detection of any potential
    degradations in service quality over time.
