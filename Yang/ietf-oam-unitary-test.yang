@@ -22,6 +22,12 @@ module ietf-oam-unitary-test {
        "RFC 8528: YANG Schema Mount";
   }
 
+  import ietf-inet-types {
+     prefix inet;
+     reference
+       "RFC 9911: Common YANG Data Types";
+  }
+
   organization
     "IETF OPSAWG (Operations and Management Area Working Group)";
 
@@ -72,64 +78,105 @@ module ietf-oam-unitary-test {
   }
 
   /* Identities */	
-	 identity unitary-test-status {
+  identity unitary-test-status {
 	   description
 	     "Base identity for unitary-test-status.";
-	 }
+  }
 	 identity planned {
 	   base unitary-test-status;
 	   description
 	     "Identity for planned.";
-	 }
-	 identity configured {
+  }
+  identity configured {
 	   base unitary-test-status;
 	   description
 	     "Identity for configured.";
-	 }
-	 identity ready {
+  }
+  identity ready {
 	   base unitary-test-status;
 	   description
 	     "Identity for ready.";
-	 }
-	 identity on-going {
+  }
+  identity on-going {
 	   base unitary-test-status;
 	   description
 	     "Identity for on-going.";
-	 }
-	 identity stop {
+  }
+  identity stop {
 	   base unitary-test-status;
 	   description
 	     "Identity for stop.";
-	 }
-	 identity success {
+  }
+  identity success {
 	   base unitary-test-status;
 	   description
 	     "Identity for success.";
-	 }
+  }
 
-	 identity error {
+  identity error {
 	   base unitary-test-status;
 	   description
 	     "Identity for error.";
-	 }
+  }
 	 
-	 identity resource-contention {
+  identity resource-contention {
 	   base error;
 	   description
 	     "Identity for resource contention.";
-	 }
+  }
 	 
-	 identity priority {
+  identity priority {
 	   base error;
 	   description
 	     "Identity for priority.";
-	 }
+  }
 
-     identity basic-test-type {
+  identity basic-test-type {
        description
          "Base identity of basic test type.";
   }
-
+  identity connection-oriented-oam {
+       base unitary-test-type;
+       description
+         "Base identity of connection oriented oam test type.";
+       reference
+         "RFC 8531: Connection-Oriented OAM YANG Data Model";
+  }
+  identity connectionless-oam {
+       base unitary-test-type;
+       description
+         "Base identity of connectionless oam test type.";
+       reference
+         "RFC 8532: Generic YANG Data Model for Connectionless OAM";
+  }
+  identity in-situ-oam {
+       base unitary-test-type;
+       description
+         "Base identity of In Situ OAM test type.";
+       reference
+        "RFC 9617: In Situ OAM (IOAM) YANG Data Model";
+  }
+  identity twamp {
+       base unitary-test-type;
+       description
+         "Base identity of TWAMP test type.";
+       reference
+         "RFC 8913: Two-Way Active Measurement Protocol (TWAMP) YANG Data Model";
+  }
+  identity lsp-ping {
+       base unitary-test-type;
+       description
+         "Base identity of MPLS LSP Ping test type.";
+       reference
+        "RFC 9228: MPLS LSP Ping YANG Data Model";
+  }
+  identity bfd {
+       base unitary-test-type;
+       description
+         "Base identity of BFD test type.";
+       reference
+        "RFC 9107: BFD (Bidirectional Forwarding Detection) YANG Model";
+  }
   grouping oam-unitary-test {
     description
        "Specifies a grouping for OAM unitary test for network
@@ -146,11 +193,12 @@ module ietf-oam-unitary-test {
         unitary tests.";
 
       leaf ne-id {
-        type rt-types:router-id;
+        type inet:host;
         description
-          "A 32-bit number in the dotted-quad format that is used
-           to uniquely identify a node within an autonomous system.
-           This identifier is used for both IPv4 and IPv6.";
+          "This is identification of a network node within an autonomous system
+           such as router, switch, firewalls, etc. It should be as fine-grained
+           as possible to both guide the operator and guarantee uniqueness of the
+           network element.";
       }
 
        leaf managed {
@@ -218,9 +266,9 @@ module ietf-oam-unitary-test {
    container recurrence {
 	 description
 	   "The OAM test takes effect based on a recurrence rule.";
-	 uses schedule:recurrence-basic;
+	 uses schedule:recurrence-utc;
     }
+   }
   }
  }
-}
 }
