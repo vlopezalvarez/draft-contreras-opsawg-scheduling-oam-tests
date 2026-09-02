@@ -479,15 +479,25 @@ As an example, we will use {{!RFC8913}}, which defines a YANG data model for TWA
 
 ## Conflict Resolution and Reporting Among Scheduled OAM Tasks
 
-When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints. This document leverages the scheduling status groupings defined in the common schedule YANG module (see {{!RFC9922}} A Common YANG Data Model for Scheduling]) to detect and report such conflicts. 
+When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints.
+This document leverages the scheduling status groupings defined in the common schedule YANG module (see {{!RFC9922}} A Common YANG Data Model for Scheduling])
+to detect and report such conflicts. 
 
-The YANG models defined in this document (both for unitary and sequence tests) use the unitary-test-status and test-sequence-status leaves to indicate the current scheduling state of each OAM task. These leaves are of type identityref, allowing extensible reporting. If a conflict is detected (e.g., two tests require exclusive access to the same resource at the same time), the server sets the status to error or to a more specific error-cause identity derived from error: resource-contention for resource conflicts, or priority for prioritization-related conflicts. This error-cause indication allows operators and management systems to distinguish the reasons for the failure.
+The YANG models defined in this document (both for unitary and sequence tests) use the unitary-test-status and test-sequence-status leaves to indicate the current
+scheduling state of each OAM task. These leaves are of type identityref, allowing extensible reporting. If a conflict is detected (e.g., two tests require exclusive
+access to the same resource at the same time), the server sets the status to error or to a more specific error-cause identity derived from error: resource-contention
+for resource conflicts, or priority for prioritization-related conflicts. This error-cause indication allows operators and management systems to distinguish the
+reasons for the failure.
 
-Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts (e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but the conflict MUST be clearly reported via the YANG model status leaves.
+Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts
+(e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but the conflict MUST be clearly reported via the YANG model status leaves.
 
-To support deterministic operations across heterogeneous multi-vendor environments, implementations RECOMMEND performing a commit-time validation, e.g., if a scheduling conflict (e.g., the number of schedule conflict exceeds the specific threshold) or resource over-allocation is detectable a priori, the configuration commit SHOULD be rejected by the server rather than accepted for delayed resolution.
+To support deterministic operations across heterogeneous multi-vendor environments, implementations RECOMMEND performing a commit-time validation, e.g., if a scheduling
+conflict (e.g., the number of schedule conflict exceeds the specific threshold) or resource over-allocation is detectable a priori, the configuration commit SHOULD be
+rejected by the server rather than accepted for delayed resolution.
 
-If a conflict cannot be caught a priori or occurs dynamically during runtime execution, the server resolves the resource friction using a well-defined precedence model. OAM task categories are prioritized according to the following operational hierarchy:
+If a conflict cannot be caught a priori or occurs dynamically during runtime execution, the server resolves the resource friction using a well-defined precedence model.
+OAM task categories are prioritized according to the following operational hierarchy:
 
 - On-Demand Troubleshooting: Manually triggered diagnostics designed to pinpoint live issues MUST take absolute precedence, overriding and preempting any scheduled or proactive monitoring sequences.
 
@@ -497,7 +507,8 @@ If a conflict cannot be caught a priori or occurs dynamically during runtime exe
 - Proactive SLA Supervision: Routine, recurring performance verification tests operate under lowest relative priority and may be systematically deferred, rescheduled, or canceled when high-priority
   tasks claim the required execution resources.
 
-When an active test or upcoming schedule is modified or aborted by a higher-priority operation, the server must update the corresponding unitary-test-status or test-sequence-status leaf. It must also log the preempted event alongside an error notification to ensure visibility across the network management layer.
+When an active test or upcoming schedule is modified or aborted by a higher-priority operation, the server must update the corresponding unitary-test-status or test-sequence-status leaf.
+It must also log the preempted event alongside an error notification to ensure visibility across the network management layer.
 
 
 ## Coverage of Input Parameters and Output Results
