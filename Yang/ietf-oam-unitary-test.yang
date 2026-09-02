@@ -7,7 +7,7 @@ module ietf-oam-unitary-test {
   import ietf-schedule {
     prefix schedule;
     reference
-      "RFC XXXX: A Common YANG Data Model for Scheduling";
+      "RFC 9922: A Common YANG Data Model for Scheduling";
   }
 
   import ietf-routing-types {
@@ -20,6 +20,12 @@ module ietf-oam-unitary-test {
      prefix yangmnt;
      reference
        "RFC 8528: YANG Schema Mount";
+  }
+
+  import ietf-inet-types {
+     prefix inet;
+     reference
+       "RFC 9911: Common YANG Data Types";
   }
 
   organization
@@ -146,11 +152,12 @@ module ietf-oam-unitary-test {
         unitary tests.";
 
       leaf ne-id {
-        type rt-types:router-id;
+        type inet:host;
         description
-          "A 32-bit number in the dotted-quad format that is used
-           to uniquely identify a node within an autonomous system.
-           This identifier is used for both IPv4 and IPv6.";
+          "This is identification of a network node within an autonomous system
+           such as router, switch, firewalls, etc. It should be as fine-grained
+           as possible to both guide the operator and guarantee uniqueness of the
+           network element.";
       }
 
        leaf managed {

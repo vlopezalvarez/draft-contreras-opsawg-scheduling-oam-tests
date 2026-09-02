@@ -256,22 +256,6 @@ module: ietf-oam-unitary-test
         |  +--rw managed?     boolean
         |  +--rw test-type?   identityref
         |  +--rw root
-        +--rw (schedule-class)?
-        |  +--:(period)
-        |  |  +--rw period
-        |  |     +--rw period-description?     string
-        |  |     +--rw period-start?           yang:date-and-time
-        |  |     +--rw time-zone-identifier?   sys:timezone-name
-        |  |     +--rw (period-type)?
-        |  |        +--:(explicit)
-        |  |        |  +--rw period-end?       yang:date-and-time
-        |  |        +--:(duration)
-        |  |           +--rw duration?         duration
-        |  +--:(recurrence)
-        |     +--rw recurrence
-        |        +--rw recurrence-description?   string
-        |        +--rw frequency?                identityref
-        |        +--rw interval?                 uint32
         +--rw state?                    identityref
         +--rw version?                  uint16
         +--rw schedule-type?            identityref
@@ -283,6 +267,30 @@ module: ietf-oam-unitary-test
         +--ro last-failed-occurrence?   yang:date-and-time
         +--ro failure-counter?          yang:counter32
         +--ro unitary-test-status?      identityref
+        +--rw (schedule-class)?
+           +--:(period)
+           |  +--rw period
+           |     +--rw period-description?     string
+           |     +--rw period-start?           yang:date-and-time
+           |     +--rw time-zone-identifier?   sys:timezone-name
+           |     +--rw (period-type)?
+           |        +--:(explicit)
+           |        |  +--rw period-end?       yang:date-and-time
+           |        +--:(duration)
+           |           +--rw duration?         duration
+           +--:(recurrence)
+              +--rw recurrence
+                 +--rw recurrence-first
+                 |  +--rw start-time-utc?   yang:date-and-time
+                 |  +--rw duration?         uint32
+                 +--rw (recurrence-end)?
+                 |  +--:(until)
+                 |  |  +--rw utc-until?          yang:date-and-time
+                 |  +--:(count)
+                 |     +--rw count?              uint32
+                 +--rw recurrence-description?   string
+                 +--rw frequency?                identityref
+                 +--rw interval?                 uint32
 ~~~~
 {: #oam-uni-test-tree-st title="Tree Structure of OAM Unitary Test" artwork-align="center"}
 
@@ -349,29 +357,12 @@ module: ietf-oam-test-sequence
      +--rw test-sequence* [name]
         +--rw name                      string
         +--rw test-ref* [name]
-        |  +--rw name             string
+        |  +--rw name         string
         |  +--rw ne-config* [ne-id]
-        |  |  +--rw ne-id        inet:host
-        |  |  +--rw managed?     boolean
-        |  |  +--rw test-type?   identityref
-        |  |  +--rw root
-        +--rw (schedule-class)?
-        |  +--:(period)
-        |  |  +--rw period
-        |  |     +--rw period-description?     string
-        |  |     +--rw period-start?           yang:date-and-time
-        |  |     +--rw time-zone-identifier?   sys:timezone-name
-        |  |     +--rw (period-type)?
-        |  |        +--:(explicit)
-        |  |        |  +--rw period-end?       yang:date-and-time
-        |  |        +--:(duration)
-        |  |           +--rw duration?         duration
-        |  +--:(recurrence)
-        |     +--rw recurrence
-        |        +--rw recurrence-description?   string
-        |        +--rw frequency?                identityref
-        |        +--rw interval?                 uint32
-        |        +--rw execution-count?          uint32
+        |     +--rw ne-id        rt-types:router-id
+        |     +--rw managed?     boolean
+        |     +--rw test-type?   identityref
+        |     +--rw root
         +--rw state?                    identityref
         +--rw version?                  uint16
         +--rw schedule-type?            identityref
@@ -383,6 +374,31 @@ module: ietf-oam-test-sequence
         +--ro last-failed-occurrence?   yang:date-and-time
         +--ro failure-counter?          yang:counter32
         +--ro test-sequence-status?     identityref
+        +--rw (schedule-class)?
+           +--:(period)
+           |  +--rw period
+           |     +--rw period-description?     string
+           |     +--rw period-start?           yang:date-and-time
+           |     +--rw time-zone-identifier?   sys:timezone-name
+           |     +--rw (period-type)?
+           |        +--:(explicit)
+           |        |  +--rw period-end?       yang:date-and-time
+           |        +--:(duration)
+           |           +--rw duration?         duration
+           +--:(recurrence)
+              +--rw recurrence
+                 +--rw recurrence-first
+                 |  +--rw start-time-utc?   yang:date-and-time
+                 |  +--rw duration?         uint32
+                 +--rw (recurrence-end)?
+                 |  +--:(until)
+                 |  |  +--rw utc-until?          yang:date-and-time
+                 |  +--:(count)
+                 |     +--rw count?              uint32
+                 +--rw recurrence-description?   string
+                 +--rw frequency?                identityref
+                 +--rw interval?                 uint32
+                 +--rw execution-count?          uint32
 ~~~~
 {: #oam-test-sequence-tree-st title="OAM Test Sequence" artwork-align="center"}
 
