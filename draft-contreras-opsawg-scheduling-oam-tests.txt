@@ -1221,7 +1221,7 @@ A.1.  Create a TWAMP OAM test
            "recurrence-description": "Daily at 9 AM UTC",
            "frequency": "oam-types:daily",
            "interval": 1,
-           "unitary-test-status": "scheduled",
+           "unitary-test-status": "configured",
            "ne-config": [
              {
                "ne-id": "203.0.113.3",
