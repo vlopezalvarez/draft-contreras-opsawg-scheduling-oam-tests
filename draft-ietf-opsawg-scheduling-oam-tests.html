@@ -2211,7 +2211,7 @@ module ietf-oam-test-sequence {
    container recurrence {
          description
            "The OAM test takes effect based on a recurrence rule.";
-         uses schedule:recurrence-basic;
+         uses schedule:recurrence-utc;
          leaf execution-count {
            type uint32;
            description
