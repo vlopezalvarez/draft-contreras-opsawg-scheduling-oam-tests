@@ -432,7 +432,7 @@ Table of Contents
          +--rw oam-unitary-test* [name]
             +--rw name                      string
             +--rw ne-config* [ne-id]
-            |  +--rw ne-id        rt-types:router-id
+            |  +--rw ne-id        inet:host
             |  +--rw managed?     boolean
             |  +--rw test-type?   identityref
             |  +--rw root
