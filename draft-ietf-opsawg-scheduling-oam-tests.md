@@ -544,12 +544,6 @@ in network environments.  Refer to the Security Considerations
 of {{!RFC9922}} for information as to which nodes may
 be considered sensitive or vulnerable in network environments.
 
-The YANG module defines a set of identities, types, and
-groupings.  These nodes are intended to be reused by other YANG
-modules.  The module by itself does not expose any data nodes that
-are writable, data nodes that contain read-only state, or RPCs.
-As such, there are no additional security issues related to
-the YANG module that need to be considered.
 
 # IANA Considerations
 
