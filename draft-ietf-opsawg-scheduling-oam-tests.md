@@ -171,13 +171,14 @@ the architecture depicted in {{scheduling-model-usage}}, The goal of this docume
 provide a mechanism to via a YANG-based interface, manage the lifecycle
 of network diagnosis procedure from the network controller to network
 elements with a focus on scheduling Network Diagnosis. In addition,
-the network controller use schema mount mechanism to retrieve ietf-yang-library
+the network controller use schema mount mechanism {{!RFC8528}} to retrieve ietf-yang-library
 data from the underlying network element and instantiate specific OAM modules
 the network element supports under the designated data node (labeled as a
 mount-point).  If multiple identical devices are being managed, the network
 controller can reference a shared schema entry configured in its own
 /schema-mounts state data to mount the same model structure across all
-those network element locations.
+those network element locations. For more details on how schema mount works
+please refer to {{!RFC8528}}.
 
 ~~~~
                                +-----------------+
