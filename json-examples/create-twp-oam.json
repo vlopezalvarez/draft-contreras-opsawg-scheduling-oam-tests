@@ -3,15 +3,10 @@
     "oam-unitary-test": [
       {
         "name": "TWAMP-Test-scheduled-daily",
-        "period-description": "TWAMP Test Period",
-        "period-start": "2023-10-17T09:00:00Z",
-        "time-zone-identifier": "UTC",
-        "period-type": {
-          "duration": {
-            "duration": "PT1H"
-          }
-        },
-        "recurrence-description": "Daily at 9 AM UTC",
+        "recurrence": {
+        "recurrence-first": "2023-10-17T09:00:00Z",
+        "duration": "PT1H"
+        "recurrence-description": "TWAMP Test Reccurence, Daily at 9 AM UTC",
         "frequency": "oam-types:daily",
         "interval": 1,
         "unitary-test-status": "configured",
