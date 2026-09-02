@@ -442,6 +442,9 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 
 ## YANG Model for Scheduling OAM Unitary Test
 
+This module imports typedefs from {{!RFC9922}}, {{!RFC8528}} and {{!RFC8294}}, and it
+references {{!RFC8531}}, {{!RFC8532}}, {{!RFC9617}}, {{!RFC8913}}, {{!RFC9228}}, {{!RFC9107}}.
+
 ~~~~~~~~~~
 <CODE BEGINS> file ietf-oam-unitary-test@2026-01-13.yang
 {::include ./Yang/ietf-oam-unitary-test.yang}
@@ -450,6 +453,8 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 ~~~~~~~~~~
 
 ## YANG Model for OAM Test Sequence
+
+This module imports typedefs from {{!RFC9922}}.
 
 ~~~~~~~~~~
 <CODE BEGINS> file ietf-oam-test-sequence@2026-01-13.yang
