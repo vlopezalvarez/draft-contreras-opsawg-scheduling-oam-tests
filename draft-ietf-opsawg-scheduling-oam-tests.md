@@ -591,14 +591,16 @@ the YANG module that need to be considered.
 
 # Implementation Status
 
-This section will be used to track the status of the implementations of the model. It is aimed at being removed if the document becomes RFC.
+This section will be used to track the status of the implementations of the model. It is aimed at being removed if
+the document becomes RFC.
 
 # Acknowledgments
 {:numbered="false"}
 
-Thanks Joe Clark, Daniel King, Qiufang Ma for valuable review and comments.
+Thanks Joe Clark, Daniel King, Qiufang Ma and Fung Lim for valuable review and comments.
 
-The work of Luis M. Contreras has been partially supported by the  European Union’s Horizon Program through the 6G DAta and ML operations automation via an end-to-end AI framework (6G-DALI) Project under Grant 101192750.
+The work of Luis M. Contreras has been partially supported by the  European Union’s Horizon Program through the 6G DAta and ML operations
+automation via an end-to-end AI framework (6G-DALI) Project under Grant 101192750.
 
 --- back
 
