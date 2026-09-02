@@ -479,7 +479,7 @@ As an example, we will use {{!RFC8913}}, which defines a YANG data model for TWA
 
 ## Conflict Resolution and Reporting Among Scheduled OAM Tasks
 
-When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints. This document leverages the scheduling status groupings defined in the common schedule YANG module (see [RFC XXXX: A Common YANG Data Model for Scheduling]) to detect and report such conflicts.
+When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints. This document leverages the scheduling status groupings defined in the common schedule YANG module (see {{!RFC9922}}) to detect and report such conflicts.
 
 The YANG models defined in this document (both for unitary and sequence tests) use the `unitary-test-status` and `test-sequence-status` leaves to indicate the current scheduling state of each OAM task. These leaves are of type identityref, allowing extensible reporting. If a conflict is detected (e.g., two tests require exclusive access to the same resource at the same time), the server sets the status to `error` or to a more specific error-cause identity derived from `error`: `resource-contention` for resource conflicts, or `priority` for prioritization-related conflicts. This error-cause indication allows operators and management systems to distinguish the reason for the failure.
 
