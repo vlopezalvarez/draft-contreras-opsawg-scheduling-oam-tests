@@ -432,7 +432,7 @@ Table of Contents
          +--rw oam-unitary-test* [name]
             +--rw name                      string
             +--rw ne-config* [ne-id]
-            |  +--rw ne-id        rt-types:router-id
+            |  +--rw ne-id        inet:host
             |  +--rw managed?     boolean
             |  +--rw test-type?   identityref
             |  +--rw root
@@ -670,6 +670,10 @@ Table of Contents
 
 4.1.  YANG Model for Scheduling OAM Unitary Test
 
+   This module imports typedefs from [RFC9922], [RFC8528] and [RFC8294],
+   and it references [RFC8531], [RFC8532], [RFC9617], [RFC8913],
+   [RFC9228], [RFC9107].
+
    <CODE BEGINS>
     file ietf-oam-unitary-test@2026-01-13.yang
    module ietf-oam-unitary-test {
@@ -694,6 +698,12 @@ Table of Contents
         prefix yangmnt;
         reference
           "RFC 8528: YANG Schema Mount";
+     }
+
+     import ietf-inet-types {
+        prefix inet;
+        reference
+          "RFC 9911: Common YANG Data Types";
      }
 
      organization
@@ -746,64 +756,105 @@ Table of Contents
      }
 
      /* Identities */
-            identity unitary-test-status {
+     identity unitary-test-status {
               description
                 "Base identity for unitary-test-status.";
-            }
+     }
             identity planned {
               base unitary-test-status;
               description
                 "Identity for planned.";
-            }
-            identity configured {
+     }
+     identity configured {
               base unitary-test-status;
               description
                 "Identity for configured.";
-            }
-            identity ready {
+     }
+     identity ready {
               base unitary-test-status;
               description
                 "Identity for ready.";
-            }
-            identity on-going {
+     }
+     identity on-going {
               base unitary-test-status;
               description
                 "Identity for on-going.";
-            }
-            identity stop {
+     }
+     identity stop {
               base unitary-test-status;
               description
                 "Identity for stop.";
-            }
-            identity success {
+     }
+     identity success {
               base unitary-test-status;
               description
                 "Identity for success.";
-            }
+     }
 
-            identity error {
+     identity error {
               base unitary-test-status;
               description
                 "Identity for error.";
-            }
+     }
 
-            identity resource-contention {
+     identity resource-contention {
               base error;
               description
                 "Identity for resource contention.";
-            }
+     }
 
-            identity priority {
+     identity priority {
               base error;
               description
                 "Identity for priority.";
-            }
+     }
 
-        identity basic-test-type {
+     identity basic-test-type {
           description
             "Base identity of basic test type.";
      }
-
+     identity connection-oriented-oam {
+          base unitary-test-type;
+          description
+            "Base identity of connection oriented oam test type.";
+          reference
+            "RFC 8531: Connection-Oriented OAM YANG Data Model";
+     }
+     identity connectionless-oam {
+          base unitary-test-type;
+          description
+            "Base identity of connectionless oam test type.";
+          reference
+            "RFC 8532: Generic YANG Data Model for Connectionless OAM";
+     }
+     identity in-situ-oam {
+          base unitary-test-type;
+          description
+            "Base identity of In Situ OAM test type.";
+          reference
+           "RFC 9617: In Situ OAM (IOAM) YANG Data Model";
+     }
+     identity twamp {
+          base unitary-test-type;
+          description
+            "Base identity of TWAMP test type.";
+          reference
+            "RFC 8913: Two-Way Active Measurement Protocol (TWAMP) YANG Data Model";
+     }
+     identity lsp-ping {
+          base unitary-test-type;
+          description
+            "Base identity of MPLS LSP Ping test type.";
+          reference
+           "RFC 9228: MPLS LSP Ping YANG Data Model";
+     }
+     identity bfd {
+          base unitary-test-type;
+          description
+            "Base identity of BFD test type.";
+          reference
+           "RFC 9107: BFD (Bidirectional Forwarding Detection) YANG Model";
+     }
      grouping oam-unitary-test {
        description
           "Specifies a grouping for OAM unitary test for network
@@ -820,11 +871,12 @@ Table of Contents
            unitary tests.";
 
          leaf ne-id {
-           type rt-types:router-id;
+           type inet:host;
            description
-             "A 32-bit number in the dotted-quad format that is used
-              to uniquely identify a node within an autonomous system.
-              This identifier is used for both IPv4 and IPv6.";
+             "This is identification of a network node within an autonomous system
+              such as router, switch, firewalls, etc. It should be as fine-grained
+              as possible to both guide the operator and guarantee uniqueness of the
+              network element.";
          }
 
           leaf managed {
@@ -892,15 +944,17 @@ Table of Contents
       container recurrence {
             description
               "The OAM test takes effect based on a recurrence rule.";
-            uses schedule:recurrence-basic;
+            uses schedule:recurrence-utc;
        }
+      }
      }
     }
-   }
    }
    <CODE ENDS>
 
 4.2.  YANG Model for OAM Test Sequence
+
+   This module imports typedefs from [RFC9922].
 
    <CODE BEGINS>
     file ietf-oam-test-sequence@2026-01-13.yang
@@ -1055,7 +1109,7 @@ Table of Contents
       container recurrence {
             description
               "The OAM test takes effect based on a recurrence rule.";
-            uses schedule:recurrence-basic;
+            uses schedule:recurrence-utc;
             leaf execution-count {
               type uint32;
               description
@@ -1348,6 +1402,11 @@ Normative References
               Paths (LSPs)", RFC 8233, DOI 10.17487/RFC8233, September
               2017, <https://www.rfc-editor.org/rfc/rfc8233>.
 
+   [RFC8294]  Liu, X., Qu, Y., Lindem, A., Hopps, C., and L. Berger,
+              "Common YANG Data Types for the Routing Area", RFC 8294,
+              DOI 10.17487/RFC8294, December 2017,
+              <https://www.rfc-editor.org/rfc/rfc8294>.
+
    [RFC8340]  Bjorklund, M. and L. Berger, Ed., "YANG Tree Diagrams",
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
               <https://www.rfc-editor.org/rfc/rfc8340>.
@@ -1365,6 +1424,10 @@ Normative References
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/rfc/rfc8446>.
+
+   [RFC8528]  Bjorklund, M. and L. Lhotka, "YANG Schema Mount",
+              RFC 8528, DOI 10.17487/RFC8528, March 2019,
+              <https://www.rfc-editor.org/rfc/rfc8528>.
 
    [RFC8531]  Kumar, D., Wu, Q., and Z. Wang, "Generic YANG Data Model
               for Connection-Oriented Operations, Administration, and
@@ -1395,6 +1458,21 @@ Normative References
               Multiplexed and Secure Transport", RFC 9000,
               DOI 10.17487/RFC9000, May 2021,
               <https://www.rfc-editor.org/rfc/rfc9000>.
+
+   [RFC9107]  Raszuk, R., Ed., Decraene, B., Ed., Cassar, C., Åman, E.,
+              and K. Wang, "BGP Optimal Route Reflection (BGP ORR)",
+              RFC 9107, DOI 10.17487/RFC9107, August 2021,
+              <https://www.rfc-editor.org/rfc/rfc9107>.
+
+   [RFC9228]  Crocker, D., Ed., "Delivered-To Email Header Field",
+              RFC 9228, DOI 10.17487/RFC9228, April 2022,
+              <https://www.rfc-editor.org/rfc/rfc9228>.
+
+   [RFC9617]  Zhou, T., Ed., Guichard, J., Brockners, F., and S.
+              Raghavan, "A YANG Data Model for In Situ Operations,
+              Administration, and Maintenance (IOAM)", RFC 9617,
+              DOI 10.17487/RFC9617, August 2024,
+              <https://www.rfc-editor.org/rfc/rfc9617>.
 
    [RFC9907]  Bierman, A., Boucadair, M., Ed., and Q. Wu, "Guidelines
               for Authors and Reviewers of Documents Containing YANG
@@ -1587,8 +1665,7 @@ A.1.  Create a TWAMP OAM test
                                                               9 AM UTC",
            "frequency": "oam-types:daily",
            "interval": 1,
-           }
-           "unitary-test-status": "scheduled",
+           "unitary-test-status": "configured",
            "ne-config": [
              {
                "ne-id": "203.0.113.3",
