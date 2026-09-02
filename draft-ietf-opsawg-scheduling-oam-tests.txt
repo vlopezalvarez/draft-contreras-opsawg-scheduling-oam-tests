@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 7 January 2027                                            Nokia
+Expires: 6 March 2027                                              Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                             6 July 2026
+                                                        2 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 January 2027.
+   This Internet-Draft will expire on 6 March 2027.
 
 Copyright Notice
 
@@ -665,7 +665,7 @@ Table of Contents
      import ietf-schedule {
        prefix schedule;
        reference
-         "RFC XXXX: A Common YANG Data Model for Scheduling";
+         "RFC 9922: A Common YANG Data Model for Scheduling";
      }
 
      import ietf-routing-types {
@@ -1396,9 +1396,9 @@ Informative References
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-09, 28 June 2026,
+              incident-yang-14, 18 August 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-09>.
+              network-incident-yang-14>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
@@ -1438,7 +1438,7 @@ Informative References
               <https://www.itu.int/rec/T-REC-Y.1731/en>.
 
    [RFC0792]  Postel, J., "Internet Control Message Protocol", STD 5,
-              RFC 792, DOI 10.17487/RFC0792, September 1981,
+              RFC 792, DOI 10.17487/RFC792, September 1981,
               <https://www.rfc-editor.org/rfc/rfc792>.
 
    [RFC4176]  El Mghazli, Y., Ed., Nadeau, T., Boucadair, M., Chan, K.,
