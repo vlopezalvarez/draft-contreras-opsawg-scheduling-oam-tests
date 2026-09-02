@@ -591,8 +591,10 @@ the YANG module that need to be considered.
 
 # Implementation Status
 
-This section will be used to track the status of the implementations of the model. It is aimed at being removed if
-the document becomes RFC.
+There are currently no known implementations of the YANG modules
+defined in this document. This section is intended to track
+implementation experience as it becomes available and is expected
+to be removed if the document is published as an RFC.
 
 # Acknowledgments
 {:numbered="false"}
