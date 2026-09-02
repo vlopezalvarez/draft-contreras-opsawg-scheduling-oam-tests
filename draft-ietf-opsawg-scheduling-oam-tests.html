@@ -2068,9 +2068,16 @@ module ietf-oam-test-sequence {
 
   import ietf-oam-unitary-test {
     prefix "oamut";
+    reference
+      "RFC XXXX: A YANG Data Model for Network Diagnosis using
+       Scheduled Sequences of OAM Tests";
   }
 
-  import ietf-schedule { prefix "schedule"; }
+  import ietf-schedule {
+    prefix "schedule";
+    reference
+      "RFC 9922: A Common YANG Data Model for Scheduling";
+  }
 
   organization
     "IETF OPSAWG (Operations and Management Area Working Group)";
@@ -2085,7 +2092,7 @@ module ietf-oam-test-sequence {
          Author:   Qin Wu
                   &lt;bill.wu@huawei.com&gt;";
   description
-    "This module defines the 'oam-test-sequence-test' YANG model for
+    "This module defines the 'ietf-oam-test-sequence' YANG model for
     management of network diagnosis procedures.
 
     Copyright (c) 2026 IETF Trust and the persons identified as
@@ -2398,8 +2405,10 @@ the YANG module that need to be considered.<a href="#section-7-7" class="pilcrow
       <h2 id="name-implementation-status">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-implementation-status" class="section-name selfRef">Implementation Status</a>
       </h2>
-<p id="section-9-1">This section will be used to track the status of the implementations of the model. It is aimed at being removed if
-the document becomes RFC.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">There are currently no known implementations of the YANG modules
+defined in this document. This section is intended to track
+implementation experience as it becomes available and is expected
+to be removed if the document is published as an RFC.<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
