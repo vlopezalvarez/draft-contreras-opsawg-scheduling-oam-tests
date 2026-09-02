@@ -494,7 +494,8 @@ Operators and management systems SHOULD monitor the scheduling status of OAM tas
 
 To support deterministic operations across heterogeneous multi-vendor environments, implementations RECOMMEND performing a commit-time validation, e.g., if a scheduling
 conflict (e.g., the number of schedule conflict exceeds the specific threshold) or resource over-allocation is detectable a priori, the configuration commit SHOULD be
-rejected by the server rather than accepted for delayed resolution.
+rejected by the server rather than accepted for delayed resolution. Another example is when manually running OAM test is colliding with previously scheduled OAM tests,
+we need to make sure to check the existence of schedule tests before running manual OAM testing.
 
 If a conflict cannot be caught a priori or occurs dynamically during runtime execution, the server resolves the resource friction using a well-defined precedence model.
 OAM task categories are prioritized according to the following operational hierarchy:
