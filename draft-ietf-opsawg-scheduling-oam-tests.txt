@@ -1165,9 +1165,8 @@ Table of Contents
    When multiple OAM tasks are scheduled to run concurrently or overlap
    in time, conflicts may arise due to resource contention or
    operational constraints.  This document leverages the scheduling
-   status groupings defined in the common schedule YANG module (see [RFC
-   XXXX: A Common YANG Data Model for Scheduling]) to detect and report
-   such conflicts.
+   status groupings defined in the common schedule YANG module (see
+   [RFC9922]) to detect and report such conflicts.
 
    The YANG models defined in this document (both for unitary and
    sequence tests) use the unitary-test-status and test-sequence-status
