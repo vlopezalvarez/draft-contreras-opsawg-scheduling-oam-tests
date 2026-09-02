@@ -167,7 +167,7 @@ modules, as shown in the following table.
 A service provider network's management operations can be automated
 using a variety of means such as interfaces based on YANG modules
 {{!RFC8969}} {{!RFC6241}} {{!RFC8040}}.  From that standpoint, and considering
-the architecture depicted in Figure 1, The goal of this document is to
+the architecture depicted in {{scheduling-model-usage}}, The goal of this document is to
 provide a mechanism to via a YANG-based interface, manage the lifecycle
 of network diagnosis procedure from the network controller to network
 elements with a focus on scheduling Network Diagnosis. In addition,
