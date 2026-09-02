@@ -966,9 +966,16 @@ Table of Contents
 
      import ietf-oam-unitary-test {
        prefix "oamut";
+       reference
+         "RFC XXXX: A YANG Data Model for Network Diagnosis using
+          Scheduled Sequences of OAM Tests";
      }
 
-     import ietf-schedule { prefix "schedule"; }
+     import ietf-schedule {
+       prefix "schedule";
+       reference
+         "RFC 9922: A Common YANG Data Model for Scheduling";
+     }
 
      organization
        "IETF OPSAWG (Operations and Management Area Working Group)";
@@ -983,7 +990,7 @@ Table of Contents
             Author:   Qin Wu
                      <bill.wu@huawei.com>";
      description
-       "This module defines the 'oam-test-sequence-test' YANG model for
+       "This module defines the 'ietf-oam-test-sequence' YANG model for
        management of network diagnosis procedures.
 
        Copyright (c) 2026 IETF Trust and the persons identified as
@@ -1298,13 +1305,6 @@ Table of Contents
    information as to which nodes may be considered sensitive or
    vulnerable in network environments.
 
-   The YANG module defines a set of identities, types, and groupings.
-   These nodes are intended to be reused by other YANG modules.  The
-   module by itself does not expose any data nodes that are writable,
-   data nodes that contain read-only state, or RPCs.  As such, there are
-   no additional security issues related to the YANG module that need to
-   be considered.
-
 8.  IANA Considerations
 
 8.1.  Updates to the IETF XML Registry for New YANG Module
@@ -1340,9 +1340,10 @@ Table of Contents
 
 9.  Implementation Status
 
-   This section will be used to track the status of the implementations
-   of the model.  It is aimed at being removed if the document becomes
-   RFC.
+   There are currently no known implementations of the YANG modules
+   defined in this document.  This section is intended to track
+   implementation experience as it becomes available and is expected to
+   be removed if the document is published as an RFC.
 
 Acknowledgments
 
