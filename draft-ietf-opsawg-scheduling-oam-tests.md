@@ -305,6 +305,7 @@ The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. 
 * "error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".
 * "success": The final state where the test is completed. This state is triggered when the test has been conducted successfully.
 
+Note that how state transition triggering generation of YANG notifications and how external management and orchestration systems subscribe to these YANG notifications are not in the scope of this document.
 ~~~~
 
    +---------+      +----------+      +---------+
@@ -414,7 +415,7 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 * "success": The final state where all Unitary Tests are completed. This state is triggered when all tests have been conducted successfully.
 * "failure": The state when one or more tests in the sequence got an error.
 * "error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".
-
+Note that how state transition triggering generation of YANG notifications and how external management and orchestration systems subscribe to these YANG notifications are not in the scope of this document.
 ~~~~
 
     +---------+      +----------+      +---------+
