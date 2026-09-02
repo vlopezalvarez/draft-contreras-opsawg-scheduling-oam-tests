@@ -162,6 +162,47 @@ modules, as shown in the following table.
 > RFC Editor Note:
 > Please replace XXXX with the RFC number assigned to this document if the document becomes a RFC. Please remove this note in that case.
 
+# Sample OAM Test Scheduling Network Model Usage
+
+A service provider network's management operations can be automated
+using a variety of means such as interfaces based on YANG modules
+{{!RFC8969}} {{!RFC6241}} {{!RFC8040}}.  From that standpoint, and considering
+the architecture depicted in Figure 1, The goal of this document is to
+provide a mechanism to via a YANG-based interface, manage the lifecycle
+of network diagnosis procedure from the network controller to network
+elements with a focus on scheduling Network Diagnosis. In addition,
+the network controller use schema mount mechanism to retrieve ietf-yang-library
+data from the underlying network element and instantiate specific OAM modules
+the network element supports under the designated data node (labeled as a
+mount-point).  If multiple identical devices are being managed, the network
+controller can reference a shared schema entry configured in its own
+/schema-mounts state data to mount the same model structure across all
+those network element locations.
+
+~~~~
+                               +-----------------+
+                               |     Customer    |
+                               +--------+--------+
+               Customer Service Models  |
+                  (e.g., L3SM, L2SM)    |
+                               +--------+--------+
+                               |    Service      |
+                               |  Orchestration  |
+                               +------+---+------+
+                   Network Models     |   | OAM Test Scheduling
+                 (e.g., L3NM, L2NM)   |   | Network Model
+                               +------+---+------+
+                               |     Network     |
+                               |   Controller    |
+                               +--------+--------+
+                                        |
+                  +---------------------+---------------------+
+                  |                  Network                  |
+                  +-------------------------------------------+
+
+~~~~
+{: #scheduling-model-usage title="OAM Test Scheduling Network Model Usage" artwork-align="center"}
+
 # Network-wide OAM Use Cases
 
 This document covers how to use OAM for network-wide use cases. These use cases rely primarily on active or hybrid OAM methods, depending on whether dedicated test packets or augmented data packets are used, following {{!I-D.ietf-opsawg-oam-characterization}}.
