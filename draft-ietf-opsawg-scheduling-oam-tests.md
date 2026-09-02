@@ -407,13 +407,13 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 
 * "planned": The initial state where the test is planned by the management and hasn't been applied to the network element.
 * "configured": The state where the test is being configured. This state is triggered when the planned test configuration is applied to the network element.
-* "ready": The state where the test is ready to be executed. This is state is triggered after the planned test configuration is applied and before the test
-           is executed.
+* "ready": The state where the test is ready to be executed. This is state is triggered after the planned test configuration is applied and before the test is executed.
 * "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
 * "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
 * "success": The final state where all Unitary Tests are completed. This state is triggered when all tests have been conducted successfully.
 * "failure": The state when one or more tests in the sequence got an error.
-* "error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".
+* "error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations
+           may report a more specific error cause using child identities such as "resource-contention" or "priority".
 
 ~~~~
 
@@ -496,10 +496,26 @@ Similarly, the output results of OAM tests—such as test status, performance me
 
 In summary, this document focuses on the scheduling, coordination, and status tracking of OAM tests, while relying on existing YANG models for the detailed specification of test parameters and results.
 
-## Performance impact of concurrent OAM task scheduling
+## Performance impact and Operational Guidance for concurrent OAM task scheduling
 
 Concurrent OAM tasks scheduling may cause performance strain on oam test devices due to intensive processing on both the server and the client.
 Management and orchestration systems need to make sure to have sufficient resource before conducting those multiple concurrent OAM tasks.
+
+Concurrent OAM task scheduling introduces significant resource strain across managed devices. To plan capacity at scale and safeguard network
+stability, implementations SHOULD adhere to the following operational boundaries:
+
+- Concurrency Limits: Devices SHOULD enforce limits on concurrent active tests to prevent CPU starvation. Active traffic per interface MUST
+  be bounded to a minimal fraction (e.g., <1%) of link capacity. Network-wide tasks MUST be staggered using random jitter to avoid
+  synchronized telemetry and processing spikes.
+
+- Preemptive Control: Implementations SHOULD NOT rely solely on reporting resource-contention errors after a failure. Managed nodes SHOULD
+  apply local rate limiting and preemptive traffic-shaping. If resource thresholds are approached, devices SHOULD automatically defer or
+  back off pending tests, while prioritizing vital keep-alives over ad-hoc diagnostics.
+
+- SLA and Windowing Considerations: High-frequency proactive supervision MUST use various different QoS markings to reflect real line-rate
+  conditions without degrading SLAs. Bulk diagnostics SHOULD run at low priority. Routine supervision is suited for in-service periods,
+  whereas intrusive OAM loopbacks {{ITU-T-Y1731}} and multi-path tracing SHOULD be restricted to maintenance windows, where false alarms
+  must be suppressed.
 
 # Security Considerations
 
