@@ -7,7 +7,7 @@ module ietf-oam-unitary-test {
   import ietf-schedule {
     prefix schedule;
     reference
-      "RFC XXXX: A Common YANG Data Model for Scheduling";
+      "RFC 9922: A Common YANG Data Model for Scheduling";
   }
 
   import ietf-routing-types {
