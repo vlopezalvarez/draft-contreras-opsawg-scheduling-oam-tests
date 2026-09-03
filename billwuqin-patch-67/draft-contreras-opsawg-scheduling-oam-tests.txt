@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 6 March 2027                                              Nokia
-                                                        2 September 2026
+Expires: 7 March 2027                                              Nokia
+                                                        3 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 March 2027.
+   This Internet-Draft will expire on 7 March 2027.
 
 Copyright Notice
 
@@ -795,9 +795,16 @@ Table of Contents
 
      import ietf-oam-unitary-test {
        prefix "oamut";
+       reference
+         "RFC XXXX: A YANG Data Model for Network Diagnosis using
+          Scheduled Sequences of OAM Tests";
      }
 
-     import ietf-schedule { prefix "schedule"; }
+     import ietf-schedule {
+       prefix "schedule";
+       reference
+         "RFC 9922: A Common YANG Data Model for Scheduling";
+     }
 
      organization
        "IETF OPSAWG (Operations and Management Area Working Group)";
@@ -812,7 +819,7 @@ Table of Contents
             Author:   Qin Wu
                      <bill.wu@huawei.com>";
      description
-       "This module defines the 'oam-test-sequence-test' YANG model for
+       "This module defines the 'ietf-oam-test-sequence' YANG model for
        management of network diagnosis procedures.
 
        Copyright (c) 2026 IETF Trust and the persons identified as

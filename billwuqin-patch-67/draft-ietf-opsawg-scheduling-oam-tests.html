@@ -9,7 +9,7 @@
 <meta content="Victor Lopez" name="author">
 <meta content="Qin Wu" name="author">
 <meta content="
-       This document defines two YANG data models to support on-demand network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
+       This document defines two YANG data models to support scheduled network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
 This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures,
 intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by
 individual network nodes. 
@@ -28,11 +28,11 @@ individual network nodes.
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.11.5
+    platformdirs 4.11.7
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.2
+    wcwidth 0.8.3
 -->
 <link href="draft-ietf-opsawg-scheduling-oam-tests.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1052,7 +1052,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Contreras, et al.</td>
-<td class="center">Expires 6 March 2027</td>
+<td class="center">Expires 7 March 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg {
 <dd class="internet-draft">draft-ietf-opsawg-scheduling-oam-tests-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-02" class="published">2 September 2026</time>
+<time datetime="2026-09-03" class="published">3 September 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-03-06">6 March 2027</time></dd>
+<dd class="expires"><time datetime="2027-03-07">7 March 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1091,7 +1091,7 @@ svg {
 <h1 id="title">A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM Tests</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines two YANG data models to support on-demand network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
+<p id="section-abstract-1">This document defines two YANG data models to support scheduled network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
 This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures,
 intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by
 individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
@@ -1131,7 +1131,7 @@ individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1226,7 +1226,7 @@ individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-coverage-of-input-parameter" class="internal xref">Coverage of Input Parameters and Output Results</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-performance-impact-of-concu" class="internal xref">Performance impact of concurrent OAM task scheduling</a></p>
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-performance-impact-and-oper" class="internal xref">Performance impact and Operational Guidance for concurrent OAM task scheduling</a></p>
 </li>
             </ul>
 </li>
@@ -1500,12 +1500,12 @@ or IS-IS <span>[<a href="#RFC7810" class="cite xref">RFC7810</a>]</span>, OAM te
 container named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures.
 Within the container, there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is
 defined as "name", which provides a unique name for each test. Each OAM test in the list references a test type with its concrete
-parameters. The test types are out of scope of this document. In addition, each OAM unitary test has two temporal parameters:
-"period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>.
-"period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties
-that contain a recurrence rule specification. Moreover, "schedule:schedule-status" grouping has been imported from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span> to
-describe common properties of scheduling status. "unitary-test-status" indicates the state of the OAM unitary test (see the state
-machine in <a href="#st-unitary-test-status" class="auto internal xref">Figure 2</a>).<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+parameters. In addition, each OAM unitary test has two temporal parameters:
+"period" and "recurrence". Both are imported from the "ietf-schedule" module from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>.
+"period" identifies the one shot period values that contain a precise period of time and can be used to support on-demand troubleshooting
+, while "recurrence" identifies the properties that contain a recurrence rule specification and can be used to periodic troubleshooting.
+Moreover, "schedule:schedule-status" grouping has been imported from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span> to describe common properties of scheduling status.
+"unitary-test-status" indicates the state of the OAM unitary test (see the state machine in <a href="#st-unitary-test-status" class="auto internal xref">Figure 2</a>).<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it
 triggers the generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying
 test type identity.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
@@ -1628,19 +1628,20 @@ module: ietf-oam-unitary-test
 repetitions, ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a
 coordinated manner.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal
-parameters related to time constraints: "period-of-time" and "recurrence" and one constraint related to ordering:
+parameters related to time constraints: "period" and "recurrence" and one constraint related to ordering:
 "ordered-by user". Time constraints parameters are imported from the "ietf-schedule" module from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>.
-"period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that
-contain a recurrence rule specification. "ordered-by user" YANG statement indicates that the user is responsible for the ordering on a
-collection of OAM unitary tests. "test-sequence-status" shows the state of the OAM test sequence. "state" imported from the
+"period " identifies the one shot period values that contain a precise period of time and can be used to support on demand
+troubleshooting, while "recurrence" identifies the properties that contain a recurrence rule specification and can be used
+to support periodical troubleshooting. "ordered-by user" YANG statement indicates that the user is responsible for the ordering on
+a collection of OAM unitary tests. "test-sequence-status" shows the state of the OAM test sequence. "state" imported from the
 "ietf-schedule" module indicates the current state of the schedule.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is indicated, the test
-is considered to run indefinitely.
-In case of the recurrence schedule type, both frequency and interval should be specified. Each execution runs at the scheduled recurrence interval.
-Since the OAM test sequence model consists of a collection of OAM unitary tests, one or more tests in the sequence might get an error, however error
-in one or more tests doesn't prevent the subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM test sequence will
-lead to different reporting output results therefore the user should have full control on the ordering and "ordered-by user" parameters needs to be specified.
-If two or more tests are to run concurrently, they MUST be run in the order specified by the user.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is
+indicated, the test is considered to run indefinitely. In case of the recurrence schedule type, both frequency and interval should
+be specified. Each execution runs at the scheduled recurrence interval. Since the OAM test sequence model consists of a collection
+of OAM unitary tests, one or more tests in the sequence might get an error, however error in one or more tests doesn't prevent the
+subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM test sequence will lead to
+different reporting output results therefore the user should have full control on the ordering and "ordered-by user" parameters
+needs to be specified. If two or more tests are to run concurrently, they MUST be run in the order specified by the user.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4"><a href="#oam-test-sequence-tree-st" class="auto internal xref">Figure 3</a> shows the structure of OAM Test Sequence module:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <span id="name-oam-test-sequence-2"></span><div id="oam-test-sequence-tree-st">
 <figure id="figure-3">
@@ -1708,8 +1709,7 @@ module: ietf-oam-test-sequence
             <p id="section-3.2-7.2.1">"configured": The state where the test is being configured. This state is triggered when the planned test configuration is applied to the network element.<a href="#section-3.2-7.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-7.3">
-            <p id="section-3.2-7.3.1">"ready": The state where the test is ready to be executed. This is state is triggered after the planned test configuration is applied and before the test
-         is executed.<a href="#section-3.2-7.3.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-7.3.1">"ready": The state where the test is ready to be executed. This is state is triggered after the planned test configuration is applied and before the test is executed.<a href="#section-3.2-7.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-7.4">
             <p id="section-3.2-7.4.1">"on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.<a href="#section-3.2-7.4.1" class="pilcrow">¶</a></p>
@@ -2070,9 +2070,16 @@ module ietf-oam-test-sequence {
 
   import ietf-oam-unitary-test {
     prefix "oamut";
+    reference
+      "RFC XXXX: A YANG Data Model for Network Diagnosis using
+       Scheduled Sequences of OAM Tests";
   }
 
-  import ietf-schedule { prefix "schedule"; }
+  import ietf-schedule {
+    prefix "schedule";
+    reference
+      "RFC 9922: A Common YANG Data Model for Scheduling";
+  }
 
   organization
     "IETF OPSAWG (Operations and Management Area Working Group)";
@@ -2087,7 +2094,7 @@ module ietf-oam-test-sequence {
          Author:   Qin Wu
                   &lt;bill.wu@huawei.com&gt;";
   description
-    "This module defines the 'oam-test-sequence-test' YANG model for
+    "This module defines the 'ietf-oam-test-sequence' YANG model for
     management of network diagnosis procedures.
 
     Copyright (c) 2026 IETF Trust and the persons identified as
@@ -2249,7 +2256,7 @@ module ietf-oam-test-sequence {
           <p id="section-5-2.2.1">Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-5-3">The "test-type" leaf and the schema mount are complementary. The "test-type" leaf (identityref to "basic-test-type") explicitly indicates which OAM test type, and thus which YANG module, is mounted at the "root" mount point for that "ne-config" list entry. Each "ne-config" entry therefore pairs a test-type identity with the corresponding mounted module configuration under "root", so that management systems and implementations know which OAM module applies to that node. This document defines the base identity "basic-test-type" and one child identity "twamp" for TWAMP; YANG modules that augment "ietf-oam-unitary-test" may define additional child identities derived from "basic-test-type" for other OAM test types.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3">The "test-type" leaf and the schema mount are complementary. The "test-type" leaf (identityref to "basic-test-type") explicitly indicates which OAM test type, and thus which YANG module, is mounted at the "root" mount point for that "ne-config" list entry. Each "ne-config" entry therefore pairs a test-type identity with the corresponding mounted module configuration under "root", so that management systems and implementations know which OAM module applies to that node. This document defines the base identity "basic-test-type" and a set of child identities for OAM test type; YANG modules that augment "ietf-oam-unitary-test" may define additional child identities derived from "basic-test-type" for other OAM test types.<a href="#section-5-3" class="pilcrow">¶</a></p>
 <p id="section-5-4">As an example, we will use <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, which defines a YANG data model for TWAMP, to illustrate how device models could be used.<a href="#section-5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2263,10 +2270,37 @@ module ietf-oam-test-sequence {
         <h3 id="name-conflict-resolution-and-rep">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-conflict-resolution-and-rep" class="section-name selfRef">Conflict Resolution and Reporting Among Scheduled OAM Tasks</a>
         </h3>
-<p id="section-6.1-1">When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints. This document leverages the scheduling status groupings defined in the common schedule YANG module (see <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>) to detect and report such conflicts.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1-2">The YANG models defined in this document (both for unitary and sequence tests) use the <code>unitary-test-status</code> and <code>test-sequence-status</code> leaves to indicate the current scheduling state of each OAM task. These leaves are of type identityref, allowing extensible reporting. If a conflict is detected (e.g., two tests require exclusive access to the same resource at the same time), the server sets the status to <code>error</code> or to a more specific error-cause identity derived from <code>error</code>: <code>resource-contention</code> for resource conflicts, or <code>priority</code> for prioritization-related conflicts. This error-cause indication allows operators and management systems to distinguish the reason for the failure.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.1-3">Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts (e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but the conflict MUST be clearly reported via the YANG model status leaves.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.1-4">When a new <code>unitary-test</code> or <code>test-sequence</code> are scheduled, the request for OAM tasks schedule MAY be rejected by the server depending on the server's capability to evaluate the scheduling impact and detect conflicts prior to execution, e.g., the number of schedule conflict exceeds the specific threshold.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints.
+This document leverages the scheduling status groupings defined in the common schedule YANG module (see <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span> A Common YANG Data Model for Scheduling])
+to detect and report such conflicts.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">The YANG models defined in this document (both for unitary and sequence tests) use the unitary-test-status and test-sequence-status leaves to indicate the current
+scheduling state of each OAM task. These leaves are of type identityref, allowing extensible reporting. If a conflict is detected (e.g., two tests require exclusive
+access to the same resource at the same time), the server sets the status to error or to a more specific error-cause identity derived from error: resource-contention
+for resource conflicts, or priority for prioritization-related conflicts. This error-cause indication allows operators and management systems to distinguish the
+reasons for the failure.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts
+(e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but the conflict MUST be clearly reported via the YANG model status leaves.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-4">To support deterministic operations across heterogeneous multi-vendor environments, implementations RECOMMEND performing a commit-time validation, e.g., if a scheduling
+conflict (e.g., the number of schedule conflict exceeds the specific threshold) or resource over-allocation is detectable a priori, the configuration commit SHOULD be
+rejected by the server rather than accepted for delayed resolution. Another example is when manually running OAM test is colliding with previously scheduled OAM tests,
+we need to make sure to check the existence of schedule tests before running manual OAM testing.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.1-5">If a conflict cannot be caught a priori or occurs dynamically during runtime execution, the server resolves the resource friction using a well-defined precedence model.
+OAM task categories are prioritized according to the following operational hierarchy:<a href="#section-6.1-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-6.1">
+            <p id="section-6.1-6.1.1">On-Demand Troubleshooting: Manually triggered diagnostics designed to pinpoint live issues MUST take absolute precedence, overriding and preempting any scheduled or proactive monitoring sequences.<a href="#section-6.1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.1-6.2">
+            <p id="section-6.1-6.2.1">Birth-Certificate/Verification Tests: Initial service activation verification sequences take secondary precedence, superseding background tasks but yielding to active troubleshooting if system
+resources are exhausted.<a href="#section-6.1-6.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.1-6.3">
+            <p id="section-6.1-6.3.1">Proactive SLA Supervision: Routine, recurring performance verification tests operate under lowest relative priority and may be systematically deferred, rescheduled, or canceled when high-priority
+tasks claim the required execution resources.<a href="#section-6.1-6.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-6.1-7">When an active test or upcoming schedule is modified or aborted by a higher-priority operation, the server must update the corresponding unitary-test-status or test-sequence-status leaf.
+It must also log the preempted event alongside an error notification to ensure visibility across the network management layer.<a href="#section-6.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="coverage-of-input-parameters-and-output-results">
@@ -2279,13 +2313,33 @@ module ietf-oam-test-sequence {
 <p id="section-6.2-3">In summary, this document focuses on the scheduling, coordination, and status tracking of OAM tests, while relying on existing YANG models for the detailed specification of test parameters and results.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="performance-impact-of-concurrent-oam-task-scheduling">
+<div id="performance-impact-and-operational-guidance-for-concurrent-oam-task-scheduling">
 <section id="section-6.3">
-        <h3 id="name-performance-impact-of-concu">
-<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-performance-impact-of-concu" class="section-name selfRef">Performance impact of concurrent OAM task scheduling</a>
+        <h3 id="name-performance-impact-and-oper">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-performance-impact-and-oper" class="section-name selfRef">Performance impact and Operational Guidance for concurrent OAM task scheduling</a>
         </h3>
 <p id="section-6.3-1">Concurrent OAM tasks scheduling may cause performance strain on oam test devices due to intensive processing on both the server and the client.
 Management and orchestration systems need to make sure to have sufficient resource before conducting those multiple concurrent OAM tasks.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">Concurrent OAM task scheduling introduces significant resource strain across managed devices. To plan capacity at scale and safeguard network
+stability, implementations SHOULD adhere to the following operational boundaries:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3-3.1">
+            <p id="section-6.3-3.1.1">Concurrency Limits: Devices SHOULD enforce limits on concurrent active tests to prevent CPU starvation. Active traffic per interface MUST
+be bounded to a minimal fraction (e.g., &lt;1%) of link capacity. Network-wide tasks MUST be staggered using random jitter to avoid
+synchronized telemetry and processing spikes.<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.3-3.2">
+            <p id="section-6.3-3.2.1">Preemptive Control: Implementations SHOULD NOT rely solely on reporting resource-contention errors after a failure. Managed nodes SHOULD
+apply local rate limiting and preemptive traffic-shaping. If resource thresholds are approached, devices SHOULD automatically defer or
+back off pending tests, while prioritizing vital keep-alives over ad-hoc diagnostics.<a href="#section-6.3-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.3-3.3">
+            <p id="section-6.3-3.3.1">SLA and Windowing Considerations: High-frequency proactive supervision MUST use various different QoS markings to reflect real line-rate
+conditions without degrading SLAs. Bulk diagnostics SHOULD run at low priority. Routine supervision is suited for in-service periods,
+whereas intrusive OAM loopbacks <span>[<a href="#ITU-T-Y1731" class="cite xref">ITU-T-Y1731</a>]</span> and multi-path tracing SHOULD be restricted to maintenance windows, where false alarms
+must be suppressed.<a href="#section-6.3-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
 </section>
 </div>
 </section>
@@ -2335,12 +2389,6 @@ define nodes that may be considered sensitive or vulnerable
 in network environments.  Refer to the Security Considerations
 of <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span> for information as to which nodes may
 be considered sensitive or vulnerable in network environments.<a href="#section-7-6" class="pilcrow">¶</a></p>
-<p id="section-7-7">The YANG module defines a set of identities, types, and
-groupings.  These nodes are intended to be reused by other YANG
-modules.  The module by itself does not expose any data nodes that
-are writable, data nodes that contain read-only state, or RPCs.
-As such, there are no additional security issues related to
-the YANG module that need to be considered.<a href="#section-7-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -2400,8 +2448,10 @@ the YANG module that need to be considered.<a href="#section-7-7" class="pilcrow
       <h2 id="name-implementation-status">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-implementation-status" class="section-name selfRef">Implementation Status</a>
       </h2>
-<p id="section-9-1">This section will be used to track the status of the implementations of the model. It is aimed at being removed if
-the document becomes RFC.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">There are currently no known implementations of the YANG modules
+defined in this document. This section is intended to track
+implementation experience as it becomes available and is expected
+to be removed if the document is published as an RFC.<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
