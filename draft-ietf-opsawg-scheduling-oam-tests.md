@@ -75,7 +75,7 @@ models and their utilization in Service Provider's network management and the ne
 operations is also essential. Relevant data models are still missing to cover specific needs.
 
 The term OAM is used in this document as defined in {{?RFC6291}} and further characterized according to the classification guidelines in
-{{!I-D.ietf-opsawg-oam-characterization}}. The scope of this document applies primarily to active and hybrid OAM mechanisms, as scheduling tests generally implies
+{{!RFC10014}}. The scope of this document applies primarily to active and hybrid OAM mechanisms, as scheduling tests generally implies
 the generation of additional OAM traffic. Passive OAM mechanisms are not the focus of this work.
 
 Specifically, OAM functions provide the means to identify and isolate faults, measure and report the network performance (see section 4.2, {{?RFC6632}}. For
@@ -84,8 +84,8 @@ example, {{!RFC5860}} defines the three main areas involved in OAM:
 * Fault management, which allows network operators quickly identify and isolate faults in the network. Examples of these mechanisms for fault detection and
   isolation are: continuity check, link trace, and loopback.
 
-* Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as frame
-  delay measurement, frame delay variation measurement, and frame loss measurement.
+* Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as packet
+  delay measurement, packet delay variation measurement, and packet loss measurement.
 
 * Security management defines mechanisms to protect OAM communications from unauthorized access and tampering.
 
@@ -133,7 +133,7 @@ o OAM Test Sequence: A set of OAM Unitary Tests that are run based on a set of t
 
 Tree diagrams used in this document follow the notation defined in {{!RFC8340}}.
 
-This document adopts the OAM characterization defined in {{!I-D.ietf-opsawg-oam-characterization}}:
+This document adopts the OAM characterization defined in {{!RFC10014}}:
 
 o Active OAM – uses dedicated OAM packets to assess network performance or verify continuity.
 
@@ -141,7 +141,7 @@ o Passive OAM – observes existing data traffic without injecting OAM packets.
 
 o Hybrid OAM – combines active and passive methods.
 
-The use of the terms in-band and out-of-band is avoided in this document, consistent with {{!I-D.ietf-opsawg-oam-characterization}}.
+The use of the terms in-band and out-of-band is avoided in this document, consistent with {{!RFC10014}}.
 
 ## Requirements Language
 
@@ -206,7 +206,7 @@ please refer to {{!RFC8528}}.
 
 # Network-wide OAM Use Cases
 
-This document covers how to use OAM for network-wide use cases. These use cases rely primarily on active or hybrid OAM methods, depending on whether dedicated test packets or augmented data packets are used, following {{!I-D.ietf-opsawg-oam-characterization}}.
+This document covers how to use OAM for network-wide use cases. These use cases rely primarily on active or hybrid OAM methods, depending on whether dedicated test packets or augmented data packets are used, following {{!RFC10014}}.
 
 The following illustrative examples are provided.
 
@@ -247,15 +247,15 @@ in order to meet the requirements of the customer or end user (e.g., IP Connecti
 {{?RFC9543}}).
 
 As part of service fulfillment and assurance (e.g., Section 2.3.3 of {{?RFC4176}}), proactive verification is undertaken to assess whether SLAs are met and
-implement appropriate adjustment measures when service distortion is observed. Proactive supervision requires running tests both end-to-end, but also on
+implement appropriate adjustment measures when service distortion is observed. Proactive supervision requires running tests not only end-to-end, but also on
 service components to identify early symptoms and resolve issues before they impact the customer or end user. This help prevent or minimize the impact of the
-end user. Mitigation action may be enforced to alliviate the impact of networks incidents and nullify the impact on services that are delivered via that network.
+end user. Mitigation action may be enforced to alleviate the impact of networks incidents and nullify the impact on services that are delivered via that network.
 
 Proactive testing might be done via OAM tests. These tests can be run periodically at regular intervals depending on the specific SLA requirements and
 the network operator procedures. These procedures may require documenting the test results for future auditing processes with the customers (eventually,
 negotiated and agreed with a customer as part of service assurance).
 
-## Performance-based Path Routing
+## Performance-based Traffic Engineering and Routing
 
 Path Computation Elements (PCEs) are used to compute end-to-end paths in a network {{?RFC4655}}. PCEs are used for Traffic Engineering (TE) purposes
 (e.g., optimize network performance, reduce congestion, and improve the overall user experience).
@@ -340,7 +340,7 @@ The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. 
 
 * "planned": The initial state where the test is planned by the management and hasn't been applied to the network element.
 * "configured": The state where the test is being configured. This state is triggered when the planned test configuration is applied to the network element.
-* "ready": The state where the test is ready to be executed. This is state is triggered after the planned test configuration is applied and before the test
+* "ready": The state where the test is ready to be executed. This state is triggered after the planned test configuration is applied and before the test
            is executed.
 * "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
 * "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
@@ -454,7 +454,7 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 
 * "planned": The initial state where the test is planned by the management and hasn't been applied to the network element.
 * "configured": The state where the test is being configured. This state is triggered when the planned test configuration is applied to the network element.
-* "ready": The state where the test is ready to be executed. This is state is triggered after the planned test configuration is applied and before the test is executed.
+* "ready": The state where the test is ready to be executed. This state is triggered after the planned test configuration is applied and before the test is executed.
 * "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
 * "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
 * "success": The final state where all Unitary Tests are completed. This state is triggered when all tests have been conducted successfully.
@@ -533,7 +533,7 @@ When multiple OAM tasks are scheduled to run concurrently or overlap in time, co
 This document leverages the scheduling status groupings defined in the common schedule YANG module (see {{!RFC9922}} A Common YANG Data Model for Scheduling])
 to detect and report such conflicts.
 
-The YANG models defined in this document (both for unitary and sequence tests) use the unitary-test-status and test-sequence-status leaves to indicate the current
+The YANG models defined in this document (both for unitary test and test sequence) use the unitary-test-status and test-sequence-status leaves to indicate the current
 scheduling state of each OAM task. These leaves are of type identityref, allowing extensible reporting. If a conflict is detected (e.g., two tests require exclusive
 access to the same resource at the same time), the server sets the status to error or to a more specific error-cause identity derived from error: resource-contention
 for resource conflicts, or priority for prioritization-related conflicts. This error-cause indication allows operators and management systems to distinguish the
@@ -566,13 +566,13 @@ It must also log the preempted event alongside an error notification to ensure o
 
 The YANG models defined in this document are designed to schedule OAM tests at a network-wide level. The input parameters required to configure and execute specific OAM functions (such as test type, target, and configuration options) are referenced or reused from the existing device-level OAM YANG models (e.g., {{!RFC8531}}, {{!RFC8532}}, {{!RFC8533}}, {{!RFC8913}}). This approach avoids duplication and ensures consistency with established models.
 
-Similarly, the output results of OAM tests—such as test status, performance metrics, and diagnostic information—are expected to be reported using the mechanisms and data nodes defined in those foundational YANG modules. The scheduling models in this document provide references to these results and enable their collection and correlation across multiple tests and devices, but do not redefine the detailed input/output parameters of each OAM function.
+Similarly, the output results of OAM tests such as test status, performance metrics, and diagnostic information,are expected to be reported using the mechanisms and data nodes defined in those foundational YANG modules. The scheduling models in this document provide references to these output results and enable their collection and correlation across multiple tests and devices, but do not redefine the detailed input/output parameters of each OAM function.
 
 In summary, this document focuses on the scheduling, coordination, and status tracking of OAM tests, while relying on existing YANG models for the detailed specification of test parameters and results.
 
 ## Performance impact and Operational Guidance for concurrent OAM task scheduling
 
-Concurrent OAM tasks scheduling may cause performance strain on oam test devices due to intensive processing on both the server and the client.
+Concurrent OAM tasks scheduling may cause performance strain on OAM test devices due to intensive processing on both the server and the client.
 Management and orchestration systems need to make sure to have sufficient resource before conducting those multiple concurrent OAM tasks.
 
 Concurrent OAM task scheduling introduces significant resource strain across managed devices. To plan capacity at scale and safeguard network
