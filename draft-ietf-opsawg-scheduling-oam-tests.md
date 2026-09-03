@@ -554,7 +554,7 @@ OAM task categories are prioritized according to the following operational hiera
   tasks claim the required execution resources.
 
 When an active test or upcoming schedule is modified or aborted by a higher-priority operation, the server must update the corresponding unitary-test-status or test-sequence-status leaf.
-It must also log the preempted event alongside an error notification to ensure visibility across the network management layer.
+It must also log the preempted event alongside an error notification to ensure observability across the network management layer.
 
 
 ## Coverage of Input Parameters and Output Results
@@ -585,6 +585,22 @@ stability, implementations SHOULD adhere to the following operational boundaries
   conditions without degrading SLAs. Bulk diagnostics SHOULD run at low priority. Routine supervision is suited for in-service periods,
   whereas intrusive OAM loopbacks {{ITU-T-Y1731}} and multi-path tracing SHOULD be restricted to maintenance windows, where false alarms
   must be suppressed.
+
+## Impact on Security Operations
+
+Centrally orchestrated and scheduled OAM tests introduce specific traffic patterns—characterized by distinct timing, predictable volumes,
+and targeted path probing—that differ from normal network traffic. Network operators must evaluate the impact of these automated patterns
+on security operations systems:
+
+- Anomaly Detection & IDS/IPS: Automated OAM traffic may trigger false positives in flow-based Intrusion Detection/Prevention Systems
+  (IDS/IPS) or behavioral anomaly detectors, which might flag rapid, scheduled path probing as network scanning or reconnaissance.
+   Operators should configure security baseline policies to recognize authorized OAM orchestration boundaries or whitelist centralized
+   test sources.
+
+- Packet Capture & Parsing Observability: Centralized scheduling can significantly increase packet volume during test windows. Network
+  monitoring tools, packet capture systems, and protocol parsing must be capable of identifying, parsing, and filtering these
+  scheduled OAM packets. This ensures that synthetic test traffic does not overwhelm log storage, degrade packet processing performance,
+  or obscure genuine malicious payloads hidden within traffic flows.
 
 # Security Considerations
 
