@@ -344,14 +344,14 @@ Table of Contents
 
 3.1.  Troubleshooting
 
-   After the detection of a problem [I-D.ietf-nmop-terminology] in the
-   network, OAM tests are performed to find the root cause for the
-   detected problem.  However, a detected problem can be caused by a
-   variety of factors, such as a misconfiguration, hardware failure, or
-   a software bug.  OAM tests can help identify likely root causes by
-   testing specific components of the network and looking for anomalies
-   or issues.  Also, the reliability and efficiency of the tests depend
-   on the nature of the test itself.
+   After the detection of a problem [RFC9940] in the network, OAM tests
+   are performed to find the root cause for the detected problem.
+   However, a detected problem can be caused by a variety of factors,
+   such as a misconfiguration, hardware failure, or a software bug.  OAM
+   tests can help identify likely root causes by testing specific
+   components of the network and looking for anomalies or issues.  Also,
+   the reliability and efficiency of the tests depend on the nature of
+   the test itself.
 
    There are a variety of OAM tests that can be executed as a function
    of the target scenario.  For example, if the issue is related to a
@@ -1635,14 +1635,6 @@ Informative References
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
               network-incident-yang-14>.
 
-   [I-D.ietf-nmop-terminology]
-              Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
-              Key Terms for Network Fault and Problem Management", Work
-              in Progress, Internet-Draft, draft-ietf-nmop-terminology-
-              23, 18 August 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              terminology-23>.
-
    [I-D.tt-netmod-yang-config-templates]
               Watsen, K., Ma, Q., and D. Rajaram, "YANG Configuration
               Templates", Work in Progress, Internet-Draft, draft-tt-
@@ -1760,6 +1752,11 @@ Informative References
               Framework for Network Slices in Networks Built from IETF
               Technologies", RFC 9543, DOI 10.17487/RFC9543, March 2024,
               <https://www.rfc-editor.org/rfc/rfc9543>.
+
+   [RFC9940]  Davis, N., Ed., Farrel, A., Ed., Graf, T., Wu, Q., and C.
+              Yu, "Some Key Terms for Network Fault and Problem
+              Management", RFC 9940, DOI 10.17487/RFC9940, April 2026,
+              <https://www.rfc-editor.org/rfc/rfc9940>.
 
 Appendix A.  Examples
 
