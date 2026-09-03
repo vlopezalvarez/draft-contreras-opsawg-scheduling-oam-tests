@@ -28,11 +28,11 @@ individual network nodes.
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.11.5
+    platformdirs 4.11.7
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.2
+    wcwidth 0.8.3
 -->
 <link href="draft-ietf-opsawg-scheduling-oam-tests.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1500,12 +1500,12 @@ or IS-IS <span>[<a href="#RFC7810" class="cite xref">RFC7810</a>]</span>, OAM te
 container named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures.
 Within the container, there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is
 defined as "name", which provides a unique name for each test. Each OAM test in the list references a test type with its concrete
-parameters. The test types are out of scope of this document. In addition, each OAM unitary test has two temporal parameters:
-"period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>.
-"period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties
-that contain a recurrence rule specification. Moreover, "schedule:schedule-status" grouping has been imported from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span> to
-describe common properties of scheduling status. "unitary-test-status" indicates the state of the OAM unitary test (see the state
-machine in <a href="#st-unitary-test-status" class="auto internal xref">Figure 2</a>).<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+parameters. In addition, each OAM unitary test has two temporal parameters:
+"period" and "recurrence". Both are imported from the "ietf-schedule" module from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>.
+"period" identifies the one shot period values that contain a precise period of time and can be used to support on-demand troubleshooting
+, while "recurrence" identifies the properties that contain a recurrence rule specification and can be used to periodic troubleshooting.
+Moreover, "schedule:schedule-status" grouping has been imported from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span> to describe common properties of scheduling status.
+"unitary-test-status" indicates the state of the OAM unitary test (see the state machine in <a href="#st-unitary-test-status" class="auto internal xref">Figure 2</a>).<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it
 triggers the generation or coordination of OAM packets. The YANG model allows such differentiation by referencing the underlying
 test type identity.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
@@ -1627,19 +1627,20 @@ module: ietf-oam-unitary-test
 repetitions, ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a
 coordinated manner.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal
-parameters related to time constraints: "period-of-time" and "recurrence" and one constraint related to ordering:
+parameters related to time constraints: "period" and "recurrence" and one constraint related to ordering:
 "ordered-by user". Time constraints parameters are imported from the "ietf-schedule" module from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>.
-"period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that
-contain a recurrence rule specification. "ordered-by user" YANG statement indicates that the user is responsible for the ordering on a
-collection of OAM unitary tests. "test-sequence-status" shows the state of the OAM test sequence. "state" imported from the
+"period " identifies the one shot period values that contain a precise period of time and can be used to support on demand
+troubleshooting, while "recurrence" identifies the properties that contain a recurrence rule specification and can be used
+to support periodical troubleshooting. "ordered-by user" YANG statement indicates that the user is responsible for the ordering on
+a collection of OAM unitary tests. "test-sequence-status" shows the state of the OAM test sequence. "state" imported from the
 "ietf-schedule" module indicates the current state of the schedule.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is indicated, the test
-is considered to run indefinitely.
-In case of the recurrence schedule type, both frequency and interval should be specified. Each execution runs at the scheduled recurrence interval.
-Since the OAM test sequence model consists of a collection of OAM unitary tests, one or more tests in the sequence might get an error, however error
-in one or more tests doesn't prevent the subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM test sequence will
-lead to different reporting output results therefore the user should have full control on the ordering and "ordered-by user" parameters needs to be specified.
-If two or more tests are to run concurrently, they MUST be run in the order specified by the user.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is
+indicated, the test is considered to run indefinitely. In case of the recurrence schedule type, both frequency and interval should
+be specified. Each execution runs at the scheduled recurrence interval. Since the OAM test sequence model consists of a collection
+of OAM unitary tests, one or more tests in the sequence might get an error, however error in one or more tests doesn't prevent the
+subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM test sequence will lead to
+different reporting output results therefore the user should have full control on the ordering and "ordered-by user" parameters
+needs to be specified. If two or more tests are to run concurrently, they MUST be run in the order specified by the user.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4"><a href="#oam-test-sequence-tree-st" class="auto internal xref">Figure 3</a> shows the structure of OAM Test Sequence module:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <span id="name-oam-test-sequence-2"></span><div id="oam-test-sequence-tree-st">
 <figure id="figure-3">
