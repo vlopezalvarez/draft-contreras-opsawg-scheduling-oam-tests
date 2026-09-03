@@ -9,7 +9,7 @@
 <meta content="Victor Lopez" name="author">
 <meta content="Qin Wu" name="author">
 <meta content="
-       This document defines two YANG data models to support on-demand network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
+       This document defines two YANG data models to support scheduled network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
 This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures,
 intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by
 individual network nodes. 
@@ -1091,7 +1091,7 @@ svg {
 <h1 id="title">A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM Tests</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines two YANG data models to support on-demand network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
+<p id="section-abstract-1">This document defines two YANG data models to support scheduled network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
 This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures,
 intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by
 individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
@@ -2269,10 +2269,37 @@ module ietf-oam-test-sequence {
         <h3 id="name-conflict-resolution-and-rep">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-conflict-resolution-and-rep" class="section-name selfRef">Conflict Resolution and Reporting Among Scheduled OAM Tasks</a>
         </h3>
-<p id="section-6.1-1">When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints. This document leverages the scheduling status groupings defined in the common schedule YANG module (see <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>) to detect and report such conflicts.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1-2">The YANG models defined in this document (both for unitary and sequence tests) use the <code>unitary-test-status</code> and <code>test-sequence-status</code> leaves to indicate the current scheduling state of each OAM task. These leaves are of type identityref, allowing extensible reporting. If a conflict is detected (e.g., two tests require exclusive access to the same resource at the same time), the server sets the status to <code>error</code> or to a more specific error-cause identity derived from <code>error</code>: <code>resource-contention</code> for resource conflicts, or <code>priority</code> for prioritization-related conflicts. This error-cause indication allows operators and management systems to distinguish the reason for the failure.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.1-3">Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts (e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but the conflict MUST be clearly reported via the YANG model status leaves.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.1-4">When a new <code>unitary-test</code> or <code>test-sequence</code> are scheduled, the request for OAM tasks schedule MAY be rejected by the server depending on the server's capability to evaluate the scheduling impact and detect conflicts prior to execution, e.g., the number of schedule conflict exceeds the specific threshold.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints.
+This document leverages the scheduling status groupings defined in the common schedule YANG module (see <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span> A Common YANG Data Model for Scheduling])
+to detect and report such conflicts.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">The YANG models defined in this document (both for unitary and sequence tests) use the unitary-test-status and test-sequence-status leaves to indicate the current
+scheduling state of each OAM task. These leaves are of type identityref, allowing extensible reporting. If a conflict is detected (e.g., two tests require exclusive
+access to the same resource at the same time), the server sets the status to error or to a more specific error-cause identity derived from error: resource-contention
+for resource conflicts, or priority for prioritization-related conflicts. This error-cause indication allows operators and management systems to distinguish the
+reasons for the failure.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts
+(e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but the conflict MUST be clearly reported via the YANG model status leaves.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-4">To support deterministic operations across heterogeneous multi-vendor environments, implementations RECOMMEND performing a commit-time validation, e.g., if a scheduling
+conflict (e.g., the number of schedule conflict exceeds the specific threshold) or resource over-allocation is detectable a priori, the configuration commit SHOULD be
+rejected by the server rather than accepted for delayed resolution. Another example is when manually running OAM test is colliding with previously scheduled OAM tests,
+we need to make sure to check the existence of schedule tests before running manual OAM testing.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.1-5">If a conflict cannot be caught a priori or occurs dynamically during runtime execution, the server resolves the resource friction using a well-defined precedence model.
+OAM task categories are prioritized according to the following operational hierarchy:<a href="#section-6.1-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-6.1">
+            <p id="section-6.1-6.1.1">On-Demand Troubleshooting: Manually triggered diagnostics designed to pinpoint live issues MUST take absolute precedence, overriding and preempting any scheduled or proactive monitoring sequences.<a href="#section-6.1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.1-6.2">
+            <p id="section-6.1-6.2.1">Birth-Certificate/Verification Tests: Initial service activation verification sequences take secondary precedence, superseding background tasks but yielding to active troubleshooting if system
+resources are exhausted.<a href="#section-6.1-6.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.1-6.3">
+            <p id="section-6.1-6.3.1">Proactive SLA Supervision: Routine, recurring performance verification tests operate under lowest relative priority and may be systematically deferred, rescheduled, or canceled when high-priority
+tasks claim the required execution resources.<a href="#section-6.1-6.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-6.1-7">When an active test or upcoming schedule is modified or aborted by a higher-priority operation, the server must update the corresponding unitary-test-status or test-sequence-status leaf.
+It must also log the preempted event alongside an error notification to ensure visibility across the network management layer.<a href="#section-6.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="coverage-of-input-parameters-and-output-results">

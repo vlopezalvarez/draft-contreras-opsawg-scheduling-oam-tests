@@ -17,7 +17,7 @@ A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
 
 Abstract
 
-   This document defines two YANG data models to support on-demand
+   This document defines two YANG data models to support scheduled
    network diagnosis using Operations, Administration, and Maintenance
    (OAM) tests.  This document defines both 'oam-unitary-test' and 'oam-
    test-sequence' YANG modules to manage the lifecycle of network
@@ -1176,7 +1176,8 @@ Table of Contents
    in time, conflicts may arise due to resource contention or
    operational constraints.  This document leverages the scheduling
    status groupings defined in the common schedule YANG module (see
-   [RFC9922]) to detect and report such conflicts.
+   [RFC9922] A Common YANG Data Model for Scheduling]) to detect and
+   report such conflicts.
 
    The YANG models defined in this document (both for unitary and
    sequence tests) use the unitary-test-status and test-sequence-status
@@ -1187,7 +1188,7 @@ Table of Contents
    error or to a more specific error-cause identity derived from error:
    resource-contention for resource conflicts, or priority for
    prioritization-related conflicts.  This error-cause indication allows
-   operators and management systems to distinguish the reason for the
+   operators and management systems to distinguish the reasons for the
    failure.
 
    Operators and management systems SHOULD monitor the scheduling status
@@ -1196,11 +1197,40 @@ Table of Contents
    cancellation) is implementation-dependent, but the conflict MUST be
    clearly reported via the YANG model status leaves.
 
-   When a new unitary-test or test-sequence are scheduled, the request
-   for OAM tasks schedule MAY be rejected by the server depending on the
-   server's capability to evaluate the scheduling impact and detect
-   conflicts prior to execution, e.g., the number of schedule conflict
-   exceeds the specific threshold.
+   To support deterministic operations across heterogeneous multi-vendor
+   environments, implementations RECOMMEND performing a commit-time
+   validation, e.g., if a scheduling conflict (e.g., the number of
+   schedule conflict exceeds the specific threshold) or resource over-
+   allocation is detectable a priori, the configuration commit SHOULD be
+   rejected by the server rather than accepted for delayed resolution.
+   Another example is when manually running OAM test is colliding with
+   previously scheduled OAM tests, we need to make sure to check the
+   existence of schedule tests before running manual OAM testing.
+
+   If a conflict cannot be caught a priori or occurs dynamically during
+   runtime execution, the server resolves the resource friction using a
+   well-defined precedence model.  OAM task categories are prioritized
+   according to the following operational hierarchy:
+
+   *  On-Demand Troubleshooting: Manually triggered diagnostics designed
+      to pinpoint live issues MUST take absolute precedence, overriding
+      and preempting any scheduled or proactive monitoring sequences.
+
+   *  Birth-Certificate/Verification Tests: Initial service activation
+      verification sequences take secondary precedence, superseding
+      background tasks but yielding to active troubleshooting if system
+      resources are exhausted.
+
+   *  Proactive SLA Supervision: Routine, recurring performance
+      verification tests operate under lowest relative priority and may
+      be systematically deferred, rescheduled, or canceled when high-
+      priority tasks claim the required execution resources.
+
+   When an active test or upcoming schedule is modified or aborted by a
+   higher-priority operation, the server must update the corresponding
+   unitary-test-status or test-sequence-status leaf.  It must also log
+   the preempted event alongside an error notification to ensure
+   visibility across the network management layer.
 
 6.2.  Coverage of Input Parameters and Output Results
 
