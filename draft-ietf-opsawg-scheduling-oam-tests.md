@@ -607,6 +607,13 @@ on security operations systems:
   scheduled OAM packets. This ensures that synthetic test traffic does not overwhelm log storage, degrade packet processing performance,
   or obscure genuine malicious payloads hidden within traffic flows.
 
+# Operational Considerations for Auditing and Results Tracking
+
+To support the accounting and auditing requirements described in Section 2.2 and Section 2.3, the test results of the scheduling model
+including mounted device-model result or audit nodes should be associated with schedule instance to ensure that automated audit tools
+and operators can seamlessly validate test execution, correlate schedules with actual performance data, and maintain a verifiable audit
+trail.
+
 # Security Considerations
 
 This section is modeled after the template described in Section 3.7.1
