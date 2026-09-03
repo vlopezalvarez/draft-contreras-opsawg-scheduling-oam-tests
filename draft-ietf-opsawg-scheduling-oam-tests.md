@@ -586,6 +586,22 @@ stability, implementations SHOULD adhere to the following operational boundaries
   whereas intrusive OAM loopbacks {{ITU-T-Y1731}} and multi-path tracing SHOULD be restricted to maintenance windows, where false alarms
   must be suppressed.
 
+## Impact on Security Operations
+
+Centrally orchestrated and scheduled OAM tests introduce specific traffic patterns—characterized by distinct timing, predictable volumes,
+and targeted path probing—that differ from normal network traffic. Network operators must evaluate the impact of these automated patterns
+on security operations systems:
+
+- Anomaly Detection & IDS/IPS: Automated OAM traffic may trigger false positives in flow-based Intrusion Detection/Prevention Systems
+  (IDS/IPS) or behavioral anomaly detectors, which might flag rapid, scheduled path probing as network scanning or reconnaissance.
+   Operators should configure security baseline policies to recognize authorized OAM orchestration boundaries or whitelist centralized
+   test sources.
+
+- Packet Capture & Parsing Visibility: Centralized scheduling can significantly increase packet volume during test windows. Network
+  monitoring tools, packet capture systems, and protocol parsing must be capable of identifying, parsing, and filtering these
+  scheduled OAM packets. This ensures that synthetic test traffic does not overwhelm log storage, degrade packet processing performance,
+  or obscure genuine malicious payloads hidden within traffic flows.
+
 # Security Considerations
 
 This section is modeled after the template described in Section 3.7.1
