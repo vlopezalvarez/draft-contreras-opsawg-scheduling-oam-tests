@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 6 March 2027                                              Nokia
+Expires: 7 March 2027                                              Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                        2 September 2026
+                                                        3 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 March 2027.
+   This Internet-Draft will expire on 7 March 2027.
 
 Copyright Notice
 
@@ -1158,8 +1158,8 @@ Table of Contents
    corresponding mounted module configuration under "root", so that
    management systems and implementations know which OAM module applies
    to that node.  This document defines the base identity "basic-test-
-   type" and one child identity "twamp" for TWAMP; YANG modules that
-   augment "ietf-oam-unitary-test" may define additional child
+   type" and a set of child identities for OAM test type; YANG modules
+   that augment "ietf-oam-unitary-test" may define additional child
    identities derived from "basic-test-type" for other OAM test types.
 
    As an example, we will use [RFC8913], which defines a YANG data model
