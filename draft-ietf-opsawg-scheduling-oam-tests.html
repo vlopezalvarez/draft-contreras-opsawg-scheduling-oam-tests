@@ -1231,6 +1231,9 @@ individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
                 <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-performance-impact-and-oper" class="internal xref">Performance impact and Operational Guidance for concurrent OAM task scheduling</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
+                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-impact-on-security-operatio" class="internal xref">Impact on Security Operations</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
@@ -2355,7 +2358,7 @@ tasks claim the required execution resources.<a href="#section-7.1-6.3.1" class=
 </li>
         </ul>
 <p id="section-7.1-7">When an active test or upcoming schedule is modified or aborted by a higher-priority operation, the server must update the corresponding unitary-test-status or test-sequence-status leaf.
-It must also log the preempted event alongside an error notification to ensure visibility across the network management layer.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
+It must also log the preempted event alongside an error notification to ensure observability across the network management layer.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="coverage-of-input-parameters-and-output-results">
@@ -2393,6 +2396,30 @@ back off pending tests, while prioritizing vital keep-alives over ad-hoc diagnos
 conditions without degrading SLAs. Bulk diagnostics SHOULD run at low priority. Routine supervision is suited for in-service periods,
 whereas intrusive OAM loopbacks <span>[<a href="#ITU-T-Y1731" class="cite xref">ITU-T-Y1731</a>]</span> and multi-path tracing SHOULD be restricted to maintenance windows, where false alarms
 must be suppressed.<a href="#section-7.3-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="impact-on-security-operations">
+<section id="section-7.4">
+        <h3 id="name-impact-on-security-operatio">
+<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-impact-on-security-operatio" class="section-name selfRef">Impact on Security Operations</a>
+        </h3>
+<p id="section-7.4-1">Centrally orchestrated and scheduled OAM tests introduce specific traffic patterns—characterized by distinct timing, predictable volumes,
+and targeted path probing—that differ from normal network traffic. Network operators must evaluate the impact of these automated patterns
+on security operations systems:<a href="#section-7.4-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.4-2.1">
+            <p id="section-7.4-2.1.1">Anomaly Detection &amp; IDS/IPS: Automated OAM traffic may trigger false positives in flow-based Intrusion Detection/Prevention Systems
+(IDS/IPS) or behavioral anomaly detectors, which might flag rapid, scheduled path probing as network scanning or reconnaissance.
+ Operators should configure security baseline policies to recognize authorized OAM orchestration boundaries or whitelist centralized
+ test sources.<a href="#section-7.4-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-7.4-2.2">
+            <p id="section-7.4-2.2.1">Packet Capture &amp; Parsing Observability: Centralized scheduling can significantly increase packet volume during test windows. Network
+monitoring tools, packet capture systems, and protocol parsing must be capable of identifying, parsing, and filtering these
+scheduled OAM packets. This ensures that synthetic test traffic does not overwhelm log storage, degrade packet processing performance,
+or obscure genuine malicious payloads hidden within traffic flows.<a href="#section-7.4-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
