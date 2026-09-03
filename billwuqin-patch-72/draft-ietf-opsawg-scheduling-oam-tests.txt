@@ -1281,7 +1281,7 @@ Table of Contents
    higher-priority operation, the server must update the corresponding
    unitary-test-status or test-sequence-status leaf.  It must also log
    the preempted event alongside an error notification to ensure
-   visibility across the network management layer.
+   observability across the network management layer.
 
 7.2.  Coverage of Input Parameters and Output Results
 
@@ -1356,7 +1356,7 @@ Table of Contents
       policies to recognize authorized OAM orchestration boundaries or
       whitelist centralized test sources.
 
-   *  Packet Capture & Parsing Visibility: Centralized scheduling can
+   *  Packet Capture & Parsing Observability: Centralized scheduling can
       significantly increase packet volume during test windows.  Network
       monitoring tools, packet capture systems, and protocol parsing
       must be capable of identifying, parsing, and filtering these

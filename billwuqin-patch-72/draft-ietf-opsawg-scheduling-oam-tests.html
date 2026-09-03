@@ -2358,7 +2358,7 @@ tasks claim the required execution resources.<a href="#section-7.1-6.3.1" class=
 </li>
         </ul>
 <p id="section-7.1-7">When an active test or upcoming schedule is modified or aborted by a higher-priority operation, the server must update the corresponding unitary-test-status or test-sequence-status leaf.
-It must also log the preempted event alongside an error notification to ensure visibility across the network management layer.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
+It must also log the preempted event alongside an error notification to ensure observability across the network management layer.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="coverage-of-input-parameters-and-output-results">
@@ -2416,7 +2416,7 @@ on security operations systems:<a href="#section-7.4-1" class="pilcrow">¶</a></
  test sources.<a href="#section-7.4-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-7.4-2.2">
-            <p id="section-7.4-2.2.1">Packet Capture &amp; Parsing Visibility: Centralized scheduling can significantly increase packet volume during test windows. Network
+            <p id="section-7.4-2.2.1">Packet Capture &amp; Parsing Observability: Centralized scheduling can significantly increase packet volume during test windows. Network
 monitoring tools, packet capture systems, and protocol parsing must be capable of identifying, parsing, and filtering these
 scheduled OAM packets. This ensures that synthetic test traffic does not overwhelm log storage, degrade packet processing performance,
 or obscure genuine malicious payloads hidden within traffic flows.<a href="#section-7.4-2.2.1" class="pilcrow">¶</a></p>
