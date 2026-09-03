@@ -83,29 +83,30 @@ Table of Contents
      1.1.  Terminology and Notations
      1.2.  Requirements Language
      1.3.  Prefix in Data Node Names
-   2.  Network-wide OAM Use Cases
-     2.1.  Troubleshooting
-     2.2.  Birth Certificate
-     2.3.  Proactive Supervision
-     2.4.  Performance-based Path Routing
-   3.  Modelling the Scheduling of OAM Tests
-     3.1.  OAM Unitary Test
-     3.2.  OAM Test Sequence
-   4.  YANG Data Models for Scheduling OAM Tests
-     4.1.  YANG Model for Scheduling OAM Unitary Test
-     4.2.  YANG Model for OAM Test Sequence
-   5.  Using Device Model Within OAM Scheduling Models
-   6.  Operational Considerations
-     6.1.  Conflict Resolution and Reporting Among Scheduled OAM Tasks
-     6.2.  Coverage of Input Parameters and Output Results
-     6.3.  Performance impact and Operational Guidance for concurrent
+   2.  Sample OAM Test Scheduling Network Model Usage
+   3.  Network-wide OAM Use Cases
+     3.1.  Troubleshooting
+     3.2.  Birth Certificate
+     3.3.  Proactive Supervision
+     3.4.  Performance-based Path Routing
+   4.  Modelling the Scheduling of OAM Tests
+     4.1.  OAM Unitary Test
+     4.2.  OAM Test Sequence
+   5.  YANG Data Models for Scheduling OAM Tests
+     5.1.  YANG Model for Scheduling OAM Unitary Test
+     5.2.  YANG Model for OAM Test Sequence
+   6.  Using Device Model Within OAM Scheduling Models
+   7.  Operational Considerations
+     7.1.  Conflict Resolution and Reporting Among Scheduled OAM Tasks
+     7.2.  Coverage of Input Parameters and Output Results
+     7.3.  Performance impact and Operational Guidance for concurrent
            OAM task scheduling
-   7.  Security Considerations
-   8.  IANA Considerations
-     8.1.  Updates to the IETF XML Registry for New YANG Module
-     8.2.  Updates to the YANG Module Names Registry for New YANG
+   8.  Security Considerations
+   9.  IANA Considerations
+     9.1.  Updates to the IETF XML Registry for New YANG Module
+     9.2.  Updates to the YANG Module Names Registry for New YANG
            Module
-   9.  Implementation Status
+   10. Implementation Status
    Acknowledgments
    References
      Normative References
@@ -290,7 +291,48 @@ Table of Contents
       to this document if the document becomes a RFC.  Please remove
       this note in that case.
 
-2.  Network-wide OAM Use Cases
+2.  Sample OAM Test Scheduling Network Model Usage
+
+   A service provider network's management operations can be automated
+   using a variety of means such as interfaces based on YANG modules
+   [RFC8969] [RFC6241] [RFC8040].  From that standpoint, and considering
+   the architecture depicted in Figure 1, The goal of this document is
+   to provide a mechanism to via a YANG-based interface, manage the
+   lifecycle of network diagnosis procedure from the network controller
+   to network elements with a focus on scheduling Network Diagnosis.  In
+   addition, the network controller use schema mount mechanism [RFC8528]
+   to retrieve ietf-yang-library data from the underlying network
+   element and instantiate specific OAM modules the network element
+   supports under the designated data node (labeled as a mount-point).
+   If multiple identical devices are being managed, the network
+   controller can reference a shared schema entry configured in its own
+   /schema-mounts state data to mount the same model structure across
+   all those network element locations.  For more details on how schema
+   mount works please refer to [RFC8528].
+
+                                     +-----------------+
+                                     |     Customer    |
+                                     +--------+--------+
+                     Customer Service Models  |
+                        (e.g., L3SM, L2SM)    |
+                                     +--------+--------+
+                                     |    Service      |
+                                     |  Orchestration  |
+                                     +------+---+------+
+                         Network Models     |   | OAM Test Scheduling
+                       (e.g., L3NM, L2NM)   |   | Network Model
+                                     +------+---+------+
+                                     |     Network     |
+                                     |   Controller    |
+                                     +--------+--------+
+                                              |
+                        +---------------------+---------------------+
+                        |                  Network                  |
+                        +-------------------------------------------+
+
+             Figure 1: OAM Test Scheduling Network Model Usage
+
+3.  Network-wide OAM Use Cases
 
    This document covers how to use OAM for network-wide use cases.
    These use cases rely primarily on active or hybrid OAM methods,
@@ -299,7 +341,7 @@ Table of Contents
 
    The following illustrative examples are provided.
 
-2.1.  Troubleshooting
+3.1.  Troubleshooting
 
    After the detection of a problem [I-D.ietf-nmop-terminology] in the
    network, OAM tests are performed to find the root cause for the
@@ -325,7 +367,7 @@ Table of Contents
    that can be executed in order to narrow down the cause of the problem
    and thus help locate candidate root cause.
 
-2.2.  Birth Certificate
+3.2.  Birth Certificate
 
    The aim of a birth certificate process is to validate that all
    relevant parameters are set appropriately in accordance with the
@@ -351,7 +393,7 @@ Table of Contents
    of the documentation process performed by the operator.  Many of
    these tasks take place during pre-deployment phases.
 
-2.3.  Proactive Supervision
+3.3.  Proactive Supervision
 
    Some network services require fulfillment of strict Service Level
    Agreements (SLAs).  An SLA defines the performance parameters that
@@ -377,7 +419,7 @@ Table of Contents
    processes with the customers (eventually, negotiated and agreed with
    a customer as part of service assurance).
 
-2.4.  Performance-based Path Routing
+3.4.  Performance-based Path Routing
 
    Path Computation Elements (PCEs) are used to compute end-to-end paths
    in a network [RFC4655].  PCEs are used for Traffic Engineering (TE)
@@ -394,12 +436,12 @@ Table of Contents
    [RFC7810], OAM techniques also allow obtaining link metrics like
    delay and loss which can be used in the PCE algorithms.
 
-3.  Modelling the Scheduling of OAM Tests
+4.  Modelling the Scheduling of OAM Tests
 
    This document specifies two models: OAM Unitary Test and OAM Test
    Sequence models.
 
-3.1.  OAM Unitary Test
+4.1.  OAM Unitary Test
 
    The OAM unitary test model encompasses parameters that define a
    specific type of OAM test to be performed.  The YANG model includes a
@@ -419,7 +461,7 @@ Table of Contents
    "schedule:schedule-status" grouping has been imported from [RFC9922]
    to describe common properties of scheduling status. "unitary-test-
    status" indicates the state of the OAM unitary test (see the state
-   machine in Figure 2).
+   machine in Figure 3).
 
    Each oam-unitary-test instance defined by this model is conceptually
    an instance of an active or hybrid OAM operation, since it triggers
@@ -427,7 +469,7 @@ Table of Contents
    such differentiation by referencing the underlying test type
    identity.
 
-   Figure 1 shows the structure of OAM Unitary Test module:
+   Figure 2 shows the structure of OAM Unitary Test module:
 
     module: ietf-oam-unitary-test
       +--rw oam-unitary-tests
@@ -474,9 +516,9 @@ Table of Contents
                      +--rw frequency?                identityref
                      +--rw interval?                 uint32
 
-                Figure 1: Tree Structure of OAM Unitary Test
+                Figure 2: Tree Structure of OAM Unitary Test
 
-   The 'unitary-test-status' state machine is shown in Figure 2.  The
+   The 'unitary-test-status' state machine is shown in Figure 3.  The
    state machine includes the following states:
 
    *  "planned": The initial state where the test is planned by the
@@ -528,9 +570,9 @@ Table of Contents
                     |                                  |
                     +----------------------------------+
 
-                  Figure 2: OAM Unitary Test State Machine
+                  Figure 3: OAM Unitary Test State Machine
 
-3.2.  OAM Test Sequence
+4.2.  OAM Test Sequence
 
    The OAM test sequence model consists of a collection of OAM unitary
    tests that are executed based on specified time constraints,
@@ -568,7 +610,7 @@ Table of Contents
    two or more tests are to run concurrently, they MUST be run in the
    order specified by the user.
 
-   Figure 3 shows the structure of OAM Test Sequence module:
+   Figure 4 shows the structure of OAM Test Sequence module:
 
     module: ietf-oam-test-sequence
       +--rw oam-test-sequence
@@ -618,9 +660,9 @@ Table of Contents
                      +--rw interval?                 uint32
                      +--rw execution-count?          uint32
 
-                        Figure 3: OAM Test Sequence
+                        Figure 4: OAM Test Sequence
 
-   The 'test-sequence-status' state machine is shown in Figure 4.  The
+   The 'test-sequence-status' state machine is shown in Figure 5.  The
    state machine includes the following states:
 
    *  "planned": The initial state where the test is planned by the
@@ -675,11 +717,11 @@ Table of Contents
              +-| success |<----------------------------+
                +---------+
 
-                 Figure 4: OAM Test Sequence state machine
+                 Figure 5: OAM Test Sequence state machine
 
-4.  YANG Data Models for Scheduling OAM Tests
+5.  YANG Data Models for Scheduling OAM Tests
 
-4.1.  YANG Model for Scheduling OAM Unitary Test
+5.1.  YANG Model for Scheduling OAM Unitary Test
 
    This module imports typedefs from [RFC9922], [RFC8528] and [RFC8294],
    and it references [RFC8531], [RFC8532], [RFC9617], [RFC8913],
@@ -963,7 +1005,7 @@ Table of Contents
    }
    <CODE ENDS>
 
-4.2.  YANG Model for OAM Test Sequence
+5.2.  YANG Model for OAM Test Sequence
 
    This module imports typedefs from [RFC9922].
 
@@ -1143,7 +1185,7 @@ Table of Contents
    }
    <CODE ENDS>
 
-5.  Using Device Model Within OAM Scheduling Models
+6.  Using Device Model Within OAM Scheduling Models
 
    This section discusses the issues related to reusing device models
    already defined in IETF within the context of scheduling OAM tests.
@@ -1176,9 +1218,9 @@ Table of Contents
    As an example, we will use [RFC8913], which defines a YANG data model
    for TWAMP, to illustrate how device models could be used.
 
-6.  Operational Considerations
+7.  Operational Considerations
 
-6.1.  Conflict Resolution and Reporting Among Scheduled OAM Tasks
+7.1.  Conflict Resolution and Reporting Among Scheduled OAM Tasks
 
    When multiple OAM tasks are scheduled to run concurrently or overlap
    in time, conflicts may arise due to resource contention or
@@ -1240,7 +1282,7 @@ Table of Contents
    the preempted event alongside an error notification to ensure
    visibility across the network management layer.
 
-6.2.  Coverage of Input Parameters and Output Results
+7.2.  Coverage of Input Parameters and Output Results
 
    The YANG models defined in this document are designed to schedule OAM
    tests at a network-wide level.  The input parameters required to
@@ -1262,7 +1304,7 @@ Table of Contents
    and status tracking of OAM tests, while relying on existing YANG
    models for the detailed specification of test parameters and results.
 
-6.3.  Performance impact and Operational Guidance for concurrent OAM
+7.3.  Performance impact and Operational Guidance for concurrent OAM
       task scheduling
 
    Concurrent OAM tasks scheduling may cause performance strain on oam
@@ -1297,7 +1339,7 @@ Table of Contents
       [ITU-T-Y1731] and multi-path tracing SHOULD be restricted to
       maintenance windows, where false alarms must be suppressed.
 
-7.  Security Considerations
+8.  Security Considerations
 
    This section is modeled after the template described in Section 3.7.1
    of [RFC9907].
@@ -1343,9 +1385,9 @@ Table of Contents
    information as to which nodes may be considered sensitive or
    vulnerable in network environments.
 
-8.  IANA Considerations
+9.  IANA Considerations
 
-8.1.  Updates to the IETF XML Registry for New YANG Module
+9.1.  Updates to the IETF XML Registry for New YANG Module
 
    IANA is requested to register the following URI in the "ns" registry
    within the "IETF XML Registry" group [RFC3688].
@@ -1358,7 +1400,7 @@ Table of Contents
          Registrant Contact: The IESG.
          XML: N/A, the requested URI is an XML namespace.
 
-8.2.  Updates to the YANG Module Names Registry for New YANG Module
+9.2.  Updates to the YANG Module Names Registry for New YANG Module
 
    IANA is requested to register the following YANG module in the "YANG
    Module Names" registry [RFC6020] within the "YANG Parameters"
@@ -1376,7 +1418,7 @@ Table of Contents
          Prefix:     oamts
          Reference:  RFC XXXX
 
-9.  Implementation Status
+10.  Implementation Status
 
    There are currently no known implementations of the YANG modules
    defined in this document.  This section is intended to track
@@ -1521,6 +1563,11 @@ Normative References
               K. Pentikousis, Ed., "Two-Way Active Measurement Protocol
               (TWAMP) YANG Data Model", RFC 8913, DOI 10.17487/RFC8913,
               November 2021, <https://www.rfc-editor.org/rfc/rfc8913>.
+
+   [RFC8969]  Wu, Q., Ed., Boucadair, M., Ed., Lopez, D., Xie, C., and
+              L. Geng, "A Framework for Automating Service and Network
+              Management with YANG", RFC 8969, DOI 10.17487/RFC8969,
+              January 2021, <https://www.rfc-editor.org/rfc/rfc8969>.
 
    [RFC9000]  Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", RFC 9000,
@@ -1672,11 +1719,6 @@ Informative References
               DOI 10.17487/RFC8762, March 2020,
               <https://www.rfc-editor.org/rfc/rfc8762>.
 
-   [RFC8969]  Wu, Q., Ed., Boucadair, M., Ed., Lopez, D., Xie, C., and
-              L. Geng, "A Framework for Automating Service and Network
-              Management with YANG", RFC 8969, DOI 10.17487/RFC8969,
-              January 2021, <https://www.rfc-editor.org/rfc/rfc8969>.
-
    [RFC9197]  Brockners, F., Ed., Bhandari, S., Ed., and T. Mizrahi,
               Ed., "Data Fields for In Situ Operations, Administration,
               and Maintenance (IOAM)", RFC 9197, DOI 10.17487/RFC9197,
@@ -1708,7 +1750,7 @@ A.1.  Create a TWAMP OAM test
    (Control-Client, Server, Session-Sender and Session-Reflector).
 
    An example of a request message body to create a TWAMP OAM test is
-   shown in Figure 5.  Session-Sender and Session-Reflector as expanded
+   shown in Figure 6.  Session-Sender and Session-Reflector as expanded
    for illustrative purposes.  The TWAMP Test scheduled in this
    configuration is a one-hour performance monitoring test that runs
    daily at 9 AM UTC.  This test session is configured to start on
@@ -1820,7 +1862,7 @@ A.1.  Create a TWAMP OAM test
      }
    }
 
-       Figure 5: Example of a Message Body to Create a TWAMP OAM test
+       Figure 6: Example of a Message Body to Create a TWAMP OAM test
 
 A.2.  Ping OAM Test Template
 
@@ -1847,12 +1889,12 @@ A.2.  Ping OAM Test Template
         </template>
    </templates>
 
-             Figure 6: Example of OAM Test Template Definition
+             Figure 7: Example of OAM Test Template Definition
 
    Template application is indicated using the "apply-templates"
    metadata.  For example, the following OAM unitary tests configuration
    may be provided with the container node "oam-unitary-tests" applying
-   the template defined in Figure 6.
+   the template defined in Figure 7.
 
    As described in [I-D.tt-netmod-yang-config-templates], a template
    node can be overriden by having its value changed, but it can't be
@@ -1860,7 +1902,7 @@ A.2.  Ping OAM Test Template
 
    As an example of overriding a node in a template, a client may
    configure physically present OAM Unitary Tests "lsp-ping", "ip-ping"
-   and "srmpls-ping" inheriting the template defined in Figure 6, but
+   and "srmpls-ping" inheriting the template defined in Figure 7, but
    the "ne-id" value of "srmpls-ping" needs to be "203.0.113.4":
 
     <?xml version="1.0" encoding="utf-8"?>
@@ -1887,7 +1929,7 @@ A.2.  Ping OAM Test Template
              </oam-unitary-test>
     </oam-unitary-tests>
 
-            Figure 7: Example of Applying OAM Test Template
+            Figure 8: Example of Applying OAM Test Template
 
    And the above OAM Unitary Tests configuration renders the following
    expanded configuration:
