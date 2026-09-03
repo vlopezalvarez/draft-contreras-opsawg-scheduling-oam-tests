@@ -212,7 +212,7 @@ The following illustrative examples are provided.
 
 ## Troubleshooting
 
-After the detection of a problem {{?I-D.ietf-nmop-terminology}} in the network, OAM tests are performed to find the root cause for the detected problem. However, a
+After the detection of a problem {{?RFC9940}} in the network, OAM tests are performed to find the root cause for the detected problem. However, a
 detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help identify likely root
 causes by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests depend on the nature of
 the test itself.
