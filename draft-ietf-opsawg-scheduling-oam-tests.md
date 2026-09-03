@@ -554,7 +554,7 @@ OAM task categories are prioritized according to the following operational hiera
   tasks claim the required execution resources.
 
 When an active test or upcoming schedule is modified or aborted by a higher-priority operation, the server must update the corresponding unitary-test-status or test-sequence-status leaf.
-It must also log the preempted event alongside an error notification to ensure visibility across the network management layer.
+It must also log the preempted event alongside an error notification to ensure observability across the network management layer.
 
 
 ## Coverage of Input Parameters and Output Results
@@ -597,7 +597,7 @@ on security operations systems:
    Operators should configure security baseline policies to recognize authorized OAM orchestration boundaries or whitelist centralized
    test sources.
 
-- Packet Capture & Parsing Visibility: Centralized scheduling can significantly increase packet volume during test windows. Network
+- Packet Capture & Parsing Observability: Centralized scheduling can significantly increase packet volume during test windows. Network
   monitoring tools, packet capture systems, and protocol parsing must be capable of identifying, parsing, and filtering these
   scheduled OAM packets. This ensures that synthetic test traffic does not overwhelm log storage, degrade packet processing performance,
   or obscure genuine malicious payloads hidden within traffic flows.
