@@ -138,7 +138,7 @@ Table of Contents
 
    Specifically, OAM functions provide the means to identify and isolate
    faults, measure and report the network performance (see section 4.2,
-   [RFC6632].  For example, [RFC5860] defines the three main areas
+   [RFC6632]).  For example, [RFC5860] defines the three main areas
    involved in OAM:
 
    *  Fault management, which allows network operators quickly identify
@@ -159,6 +159,9 @@ Table of Contents
 
    *  Continuity Check: This function verifies that a path exists
       between two points in a network and that the path is operational.
+      Some technologies following this approach are Y.1731 Continuity
+      Check [ITU-T-Y1731], Ethernet OAM Continuity Check [IEEE-8021Q],
+      MPLS-TP BFD CC [RFC6428].
 
    *  Loopback: This function allows a device to loop back a received
       packet back to the sender for diagnostic purposes.  There are
@@ -182,8 +185,8 @@ Table of Contents
    [I-D.ietf-nmop-network-incident-yang] focuses on the network incident
    diagnosis, which can be favored by dynamic invocation of OAM tests.
 
-   [RFC8531], [RFC8532], [RFC8533], and [RFC8913] defined YANG models
-   for OAM technologies:
+   [RFC8531], [RFC8532], [RFC8533] defined YANG models for OAM
+   technologies:
 
    o [RFC8531] "A YANG Data Model for Connection Oriented OAM": defines
    a YANG data model for connection-oriented OAM protocols.  The main
@@ -205,10 +208,6 @@ Table of Contents
    related to OAM protocols such as BFD (Bidirectional Forwarding
    Detection)[RFC5880], LBM (Loopback Messaging) [IEEE-8021ag], and VCCV
    (Virtual Circuit Connectivity Verification) [RFC5085].
-
-   o [RFC8913] "A YANG Data Model for Two-Way Active Measurement
-   Protocol (TWAMP)": specifies a YANG data model for client and server
-   implementations of the Two-Way Active Measurement Protocol (TWAMP).
 
    These OAM related YANG data models defined parameters required for
    each of the different tests that are used in network elements today.
@@ -386,7 +385,7 @@ Table of Contents
    depends on the network service that is tested.  For example, if the
    service is a Virtual Private Network (VPN), Two-Way Active
    Measurement Protocol (TWAMP) Light [RFC5357] will be used, while if
-   the service is an E-LINE, ITU-T Y.1731 Ethernet CFM tests
+   the service is an E-LINE, ITU-T Y.1731 Ethernet PM tests
    [ITU-T-Y1731] will be executed.
 
    Typically, once the birth certificate process has been completed and
@@ -1219,7 +1218,8 @@ Table of Contents
    identities derived from "basic-test-type" for other OAM test types.
 
    As an example, we will use [RFC8913], which defines a YANG data model
-   for TWAMP, to illustrate how device models could be used.
+   for TWAMP, to illustrate how device models could be used in
+   Appendix A.1.
 
 7.  Operational Considerations
 
@@ -1720,6 +1720,12 @@ Informative References
               Administration, and Maintenance Framework for MPLS-Based
               Transport Networks", RFC 6371, DOI 10.17487/RFC6371,
               September 2011, <https://www.rfc-editor.org/rfc/rfc6371>.
+
+   [RFC6428]  Allan, D., Ed., Swallow, G., Ed., and J. Drake, Ed.,
+              "Proactive Connectivity Verification, Continuity Check,
+              and Remote Defect Indication for the MPLS Transport
+              Profile", RFC 6428, DOI 10.17487/RFC6428, November 2011,
+              <https://www.rfc-editor.org/rfc/rfc6428>.
 
    [RFC6632]  Ersue, M., Ed. and B. Claise, "An Overview of the IETF
               Network Management Standards", RFC 6632,

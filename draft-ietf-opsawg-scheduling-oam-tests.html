@@ -1302,7 +1302,7 @@ operations is also essential. Relevant data models are still missing to cover sp
 <p id="section-1-2">The term OAM is used in this document as defined in <span>[<a href="#RFC6291" class="cite xref">RFC6291</a>]</span> and further characterized according to the classification guidelines in
 <span>[<a href="#RFC10014" class="cite xref">RFC10014</a>]</span>. The scope of this document applies primarily to active and hybrid OAM mechanisms, as scheduling tests generally implies
 the generation of additional OAM traffic. Passive OAM mechanisms are not the focus of this work.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">Specifically, OAM functions provide the means to identify and isolate faults, measure and report the network performance (see section 4.2, <span>[<a href="#RFC6632" class="cite xref">RFC6632</a>]</span>. For
+<p id="section-1-3">Specifically, OAM functions provide the means to identify and isolate faults, measure and report the network performance (see section 4.2, <span>[<a href="#RFC6632" class="cite xref">RFC6632</a>]</span>). For
 example, <span>[<a href="#RFC5860" class="cite xref">RFC5860</a>]</span> defines the three main areas involved in OAM:<a href="#section-1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-4.1">
@@ -1320,7 +1320,8 @@ delay measurement, packet delay variation measurement, and packet loss measureme
 <p id="section-1-5"><span>[<a href="#RFC7276" class="cite xref">RFC7276</a>]</span> presents OAM tools for detecting and isolating failures in networks and for performance monitoring, some examples are:<a href="#section-1-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-6.1">
-          <p id="section-1-6.1.1">Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational.<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
+          <p id="section-1-6.1.1">Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational. Some technologies following
+this approach are Y.1731 Continuity Check <span>[<a href="#ITU-T-Y1731" class="cite xref">ITU-T-Y1731</a>]</span>, Ethernet OAM Continuity Check <span>[<a href="#IEEE-8021Q" class="cite xref">IEEE-8021Q</a>]</span>, MPLS-TP BFD CC <span>[<a href="#RFC6428" class="cite xref">RFC6428</a>]</span>.<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-6.2">
           <p id="section-1-6.2.1">Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple technologies for this
@@ -1338,14 +1339,24 @@ obtain performance measurements.<a href="#section-1-6.4.1" class="pilcrow">¶</a
       </ul>
 <p id="section-1-7">More recently, Incident Management <span>[<a href="#I-D.ietf-nmop-network-incident-yang" class="cite xref">I-D.ietf-nmop-network-incident-yang</a>]</span> focuses on
 the network incident diagnosis, which can be favored by dynamic invocation of OAM tests.<a href="#section-1-7" class="pilcrow">¶</a></p>
-<p id="section-1-8"><span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>, and <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> defined YANG models for OAM technologies:<a href="#section-1-8" class="pilcrow">¶</a></p>
-<p id="section-1-9">o <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span> "A YANG Data Model for Connection Oriented OAM": defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control, and monitor connection-oriented OAM protocols such as MPLS-TP OAM <span>[<a href="#RFC6371" class="cite xref">RFC6371</a>]</span>, TRILL OAM <span>[<a href="#RFC7174" class="cite xref">RFC7174</a>]</span>, PBB-TE OAM <span>[<a href="#IEEE-8021ag" class="cite xref">IEEE-8021ag</a>]</span>, and T-MPLS
-<span>[<a href="#ITU-T-G81131" class="cite xref">ITU-T-G81131</a>]</span> OAM.<a href="#section-1-9" class="pilcrow">¶</a></p>
-<p id="section-1-10">o <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span> "A YANG Data Model for Connectionless OAM Protocols": provides a generic YANG data model that can be used to configure, control, and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection) <span>[<a href="#RFC5880" class="cite xref">RFC5880</a>]</span>, LBM (Loopback Messaging)<span>[<a href="#IEEE-8021ag" class="cite xref">IEEE-8021ag</a>]</span>, and VCCV (Virtual Circuit Connectivity Verification)<span>[<a href="#RFC5085" class="cite xref">RFC5085</a>]</span>.<a href="#section-1-10" class="pilcrow">¶</a></p>
-<p id="section-1-11">o <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span> "A YANG Data Model for Retrieval Methods for the Management of OAM Protocols that Use Connectionless Communications": provides a YANG data model that can be used to retrieve information related to OAM protocols such as BFD (Bidirectional Forwarding Detection)<span>[<a href="#RFC5880" class="cite xref">RFC5880</a>]</span>, LBM (Loopback Messaging) <span>[<a href="#IEEE-8021ag" class="cite xref">IEEE-8021ag</a>]</span>, and VCCV (Virtual Circuit Connectivity Verification) <span>[<a href="#RFC5085" class="cite xref">RFC5085</a>]</span>.<a href="#section-1-11" class="pilcrow">¶</a></p>
-<p id="section-1-12">o <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> "A YANG Data Model for Two-Way Active Measurement Protocol (TWAMP)": specifies a YANG data model for client and server implementations of the Two-Way Active Measurement Protocol (TWAMP).<a href="#section-1-12" class="pilcrow">¶</a></p>
-<p id="section-1-13">These OAM related YANG data models defined parameters required for each of the different tests that are used in network elements today. This work aims to reuse and build upon existing YANG models for OAM technologies, such as those defined in <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, and <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>. By leveraging these foundational models, this document specifies two YANG data models for scheduling and coordinating sequences of OAM tests, enabling more advanced and automated network diagnosis procedures. In addition to reusing the device-level OAM YANG models from <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, and <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>, this document builds upon the generic scheduling framework defined in <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>. The <code>ietf-schedule</code> module provides reusable groupings and mechanisms for specifying periods of time, recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM unitary test and OAM test sequence models defined in this document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a network-wide context.<a href="#section-1-13" class="pilcrow">¶</a></p>
-<p id="section-1-14">The YANG data models resulting from this document will conform to the Network Management Datastore Architecture (NMDA) <span>[<a href="#RFC8342" class="cite xref">RFC8342</a>]</span>.<a href="#section-1-14" class="pilcrow">¶</a></p>
+<p id="section-1-8"><span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span> defined YANG models for OAM technologies:<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-9">o <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span> "A YANG Data Model for Connection Oriented OAM": defines a YANG data model for connection-oriented OAM protocols. The main aim of this document
+is to define a generic YANG data model that can be used to configure, control, and monitor connection-oriented OAM protocols such as MPLS-TP OAM <span>[<a href="#RFC6371" class="cite xref">RFC6371</a>]</span>,
+TRILL OAM <span>[<a href="#RFC7174" class="cite xref">RFC7174</a>]</span>, PBB-TE OAM <span>[<a href="#IEEE-8021ag" class="cite xref">IEEE-8021ag</a>]</span>, and T-MPLS <span>[<a href="#ITU-T-G81131" class="cite xref">ITU-T-G81131</a>]</span> OAM.<a href="#section-1-9" class="pilcrow">¶</a></p>
+<p id="section-1-10">o <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span> "A YANG Data Model for Connectionless OAM Protocols": provides a generic YANG data model that can be used to configure, control, and monitor
+connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection) <span>[<a href="#RFC5880" class="cite xref">RFC5880</a>]</span>, LBM (Loopback Messaging)<span>[<a href="#IEEE-8021ag" class="cite xref">IEEE-8021ag</a>]</span>, and VCCV (Virtual Circuit
+Connectivity Verification)<span>[<a href="#RFC5085" class="cite xref">RFC5085</a>]</span>.<a href="#section-1-10" class="pilcrow">¶</a></p>
+<p id="section-1-11">o <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span> "A YANG Data Model for Retrieval Methods for the Management of OAM Protocols that Use Connectionless Communications": provides a YANG data model
+that can be used to retrieve information related to OAM protocols such as BFD (Bidirectional Forwarding Detection)<span>[<a href="#RFC5880" class="cite xref">RFC5880</a>]</span>, LBM (Loopback Messaging)
+<span>[<a href="#IEEE-8021ag" class="cite xref">IEEE-8021ag</a>]</span>, and VCCV (Virtual Circuit Connectivity Verification) <span>[<a href="#RFC5085" class="cite xref">RFC5085</a>]</span>.<a href="#section-1-11" class="pilcrow">¶</a></p>
+<p id="section-1-12">These OAM related YANG data models defined parameters required for each of the different tests that are used in network elements today. This work aims to reuse
+and build upon existing YANG models for OAM technologies, such as those defined in <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, and <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>. By leveraging these foundational
+models, this document specifies two YANG data models for scheduling and coordinating sequences of OAM tests, enabling more advanced and automated network
+diagnosis procedures. In addition to reusing the device-level OAM YANG models from <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, and <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>, this document builds upon the
+generic scheduling framework defined in <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>. The <code>ietf-schedule</code> module provides reusable groupings and mechanisms for specifying periods of time,
+recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM unitary test and OAM test sequence models defined in this
+document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a network-wide context.<a href="#section-1-12" class="pilcrow">¶</a></p>
+<p id="section-1-13">The YANG data models resulting from this document will conform to the Network Management Datastore Architecture (NMDA) <span>[<a href="#RFC8342" class="cite xref">RFC8342</a>]</span>.<a href="#section-1-13" class="pilcrow">¶</a></p>
 <div id="terminology-and-notations">
 <section id="section-1.1">
         <h3 id="name-terminology-and-notations">
@@ -1368,7 +1379,9 @@ the network incident diagnosis, which can be favored by dynamic invocation of OA
         <h3 id="name-requirements-language">
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-requirements-language" class="section-name selfRef">Requirements Language</a>
         </h3>
-<p id="section-1.2-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in  <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>, <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY",
+and "OPTIONAL" in this document are to be interpreted as described in  <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>, <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in
+all capitals, as shown here.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="prefix-in-data-node-names">
@@ -1479,7 +1492,8 @@ please refer to <span>[<a href="#RFC8528" class="cite xref">RFC8528</a>]</span>.
       <h2 id="name-network-wide-oam-use-cases">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-network-wide-oam-use-cases" class="section-name selfRef">Network-wide OAM Use Cases</a>
       </h2>
-<p id="section-3-1">This document covers how to use OAM for network-wide use cases. These use cases rely primarily on active or hybrid OAM methods, depending on whether dedicated test packets or augmented data packets are used, following <span>[<a href="#RFC10014" class="cite xref">RFC10014</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">This document covers how to use OAM for network-wide use cases. These use cases rely primarily on active or hybrid OAM methods, depending on
+whether dedicated test packets or augmented data packets are used, following <span>[<a href="#RFC10014" class="cite xref">RFC10014</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The following illustrative examples are provided.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="troubleshooting">
 <section id="section-3.1">
@@ -1508,7 +1522,7 @@ certificate process is done once the configuration of the network elements is co
 <p id="section-3.2-2">If the birth certificate is successful, it means that the network service is functioning correctly (that is, measured service is matching the expected service) and
 meets the requirements defined by the operator. The process requires running a set of OAM tasks (e.g., tests) to verify that the service is performing as expected.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">The set of OAM tests conducted as part of a birth certificate process depends on the network service that is tested.  For example, if the service is a Virtual
-Private Network (VPN), Two-Way Active Measurement Protocol (TWAMP) Light <span>[<a href="#RFC5357" class="cite xref">RFC5357</a>]</span> will be used, while if the service is an E-LINE, ITU-T Y.1731 Ethernet CFM
+Private Network (VPN), Two-Way Active Measurement Protocol (TWAMP) Light <span>[<a href="#RFC5357" class="cite xref">RFC5357</a>]</span> will be used, while if the service is an E-LINE, ITU-T Y.1731 Ethernet PM
 tests <span>[<a href="#ITU-T-Y1731" class="cite xref">ITU-T-Y1731</a>]</span> will be executed.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">Typically, once the birth certificate process has been completed and the OAM tests have been executed, the test results are stored as part of the documentation
 process performed by the operator. Many of these tasks take place during pre-deployment phases.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
@@ -2312,17 +2326,27 @@ module ietf-oam-test-sequence {
       <h2 id="name-using-device-model-within-o">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-using-device-model-within-o" class="section-name selfRef">Using Device Model Within OAM Scheduling Models</a>
       </h2>
-<p id="section-6-1">This section discusses the issues related to reusing device models already defined in IETF within the context of scheduling OAM tests. There are two main approaches to enable OAM scheduling models:<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">This section discusses the issues related to reusing device models already defined in IETF within the context of scheduling OAM tests.
+There are two main approaches to enable OAM scheduling models:<a href="#section-6-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6-2.1">
-          <p id="section-6-2.1.1">Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desired OAM test. This approach requires recreating new YANG models for each new test type or variation of the device models.<a href="#section-6-2.1.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.1.1">Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable
+the configuration and utilization of the desired OAM test. This approach requires recreating new YANG models for each new test type or
+variation of the device models.<a href="#section-6-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-6-2.2">
-          <p id="section-6-2.2.1">Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.<a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.2.1">Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG
+modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any
+modifications.<a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-6-3">The "test-type" leaf and the schema mount are complementary. The "test-type" leaf (identityref to "basic-test-type") explicitly indicates which OAM test type, and thus which YANG module, is mounted at the "root" mount point for that "ne-config" list entry. Each "ne-config" entry therefore pairs a test-type identity with the corresponding mounted module configuration under "root", so that management systems and implementations know which OAM module applies to that node. This document defines the base identity "basic-test-type" and a set of child identities for OAM test type; YANG modules that augment "ietf-oam-unitary-test" may define additional child identities derived from "basic-test-type" for other OAM test types.<a href="#section-6-3" class="pilcrow">¶</a></p>
-<p id="section-6-4">As an example, we will use <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, which defines a YANG data model for TWAMP, to illustrate how device models could be used.<a href="#section-6-4" class="pilcrow">¶</a></p>
+<p id="section-6-3">The "test-type" leaf and the schema mount are complementary. The "test-type" leaf (identityref to "basic-test-type") explicitly indicates
+which OAM test type, and thus which YANG module, is mounted at the "root" mount point for that "ne-config" list entry. Each "ne-config" entry
+therefore pairs a test-type identity with the corresponding mounted module configuration under "root", so that management systems and
+implementations know which OAM module applies to that node. This document defines the base identity "basic-test-type" and a set of child
+identities for OAM test type; YANG modules that augment "ietf-oam-unitary-test" may define additional child identities derived from
+"basic-test-type" for other OAM test types.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4">As an example, we will use <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, which defines a YANG data model for TWAMP, to illustrate how device models could be used in <a href="#ex-create-twp-oam" class="auto internal xref">Appendix A.1</a>.<a href="#section-6-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="operational-considerations">
@@ -2373,9 +2397,16 @@ It must also log the preempted event alongside an error notification to ensure o
         <h3 id="name-coverage-of-input-parameter">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-coverage-of-input-parameter" class="section-name selfRef">Coverage of Input Parameters and Output Results</a>
         </h3>
-<p id="section-7.2-1">The YANG models defined in this document are designed to schedule OAM tests at a network-wide level. The input parameters required to configure and execute specific OAM functions (such as test type, target, and configuration options) are referenced or reused from the existing device-level OAM YANG models (e.g., <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>, <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>). This approach avoids duplication and ensures consistency with established models.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.2-2">Similarly, the output results of OAM tests such as test status, performance metrics, and diagnostic information,are expected to be reported using the mechanisms and data nodes defined in those foundational YANG modules. The scheduling models in this document provide references to these output results and enable their collection and correlation across multiple tests and devices, but do not redefine the detailed input/output parameters of each OAM function.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
-<p id="section-7.2-3">In summary, this document focuses on the scheduling, coordination, and status tracking of OAM tests, while relying on existing YANG models for the detailed specification of test parameters and results.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">The YANG models defined in this document are designed to schedule OAM tests at a network-wide level. The input parameters required to configure
+and execute specific OAM functions (such as test type, target, and configuration options) are referenced or reused from the existing device-level
+OAM YANG models (e.g., <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, <span>[<a href="#RFC8533" class="cite xref">RFC8533</a>]</span>, <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>). This approach avoids duplication and ensures consistency with
+established models.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-2">Similarly, the output results of OAM tests such as test status, performance metrics, and diagnostic information,are expected to be reported using
+the mechanisms and data nodes defined in those foundational YANG modules. The scheduling models in this document provide references to these output
+results and enable their collection and correlation across multiple tests and devices, but do not redefine the detailed input/output parameters of
+each OAM function.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.2-3">In summary, this document focuses on the scheduling, coordination, and status tracking of OAM tests, while relying on existing YANG models for the
+detailed specification of test parameters and results.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="performance-impact-and-operational-guidance-for-concurrent-oam-task-scheduling">
@@ -2772,6 +2803,10 @@ automation via an end-to-end AI framework (6G-DALI) Project under Grant 10119275
         <dd>
 <span class="refAuthor">Busi, I., Ed.</span> and <span class="refAuthor">D. Allan, Ed.</span>, <span class="refTitle">"Operations, Administration, and Maintenance Framework for MPLS-Based Transport Networks"</span>, <span class="seriesInfo">RFC 6371</span>, <span class="seriesInfo">DOI 10.17487/RFC6371</span>, <time datetime="2011-09" class="refDate">September 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6371">https://www.rfc-editor.org/rfc/rfc6371</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC6428">[RFC6428]</dt>
+        <dd>
+<span class="refAuthor">Allan, D., Ed.</span>, <span class="refAuthor">Swallow, G., Ed.</span>, and <span class="refAuthor">J. Drake, Ed.</span>, <span class="refTitle">"Proactive Connectivity Verification, Continuity Check, and Remote Defect Indication for the MPLS Transport Profile"</span>, <span class="seriesInfo">RFC 6428</span>, <span class="seriesInfo">DOI 10.17487/RFC6428</span>, <time datetime="2011-11" class="refDate">November 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6428">https://www.rfc-editor.org/rfc/rfc6428</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC6632">[RFC6632]</dt>
         <dd>
 <span class="refAuthor">Ersue, M., Ed.</span> and <span class="refAuthor">B. Claise</span>, <span class="refTitle">"An Overview of the IETF Network Management Standards"</span>, <span class="seriesInfo">RFC 6632</span>, <span class="seriesInfo">DOI 10.17487/RFC6632</span>, <time datetime="2012-06" class="refDate">June 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6632">https://www.rfc-editor.org/rfc/rfc6632</a>&gt;</span>. </dd>
@@ -2824,8 +2859,15 @@ automation via an end-to-end AI framework (6G-DALI) Project under Grant 10119275
         <h3 id="name-create-a-twamp-oam-test">
 <a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-create-a-twamp-oam-test" class="section-name selfRef">Create a TWAMP OAM test</a>
         </h3>
-<p id="appendix-A.1-1"><span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> defines a YANG model for TWAMP. The following example uses the "twamp" identity defined in the ietf-oam-unitary-test module (derived from "basic-test-type") to indicate the test type; the TWAMP device model is mounted at the "root" of each "ne-config" entry. The example contains the information for the four configurations (Control-Client, Server, Session-Sender and Session-Reflector).<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-2">An example of a request message body to create a TWAMP OAM test is shown in <a href="#create-twp-oam" class="auto internal xref">Figure 6</a>. Session-Sender and Session-Reflector as expanded for illustrative purposes. The TWAMP Test scheduled in this configuration is a one-hour performance monitoring test that runs daily at 9 AM UTC. This test session is configured to start on October 17, 2023, at 09:00 UTC and recur at the same time every day. The duration of each test run is one hour, as specified by the ISO 8601 format "PT1H", with the test status marked as "configured". The test provides insight into network performance by monitoring the selected parameters, allowing for the detection of any potential degradations in service quality over time.<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-1"><span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> defines a YANG model for TWAMP. The following example uses the "twamp" identity defined in the ietf-oam-unitary-test module
+(derived from "basic-test-type") to indicate the test type; the TWAMP device model is mounted at the "root" of each "ne-config" entry.
+The example contains the information for the four configurations (Control-Client, Server, Session-Sender and Session-Reflector).<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-2">An example of a request message body to create a TWAMP OAM test is shown in <a href="#create-twp-oam" class="auto internal xref">Figure 6</a>. Session-Sender and Session-Reflector as
+expanded for illustrative purposes. The TWAMP Test scheduled in this configuration is a one-hour performance monitoring test that runs
+daily at 9 AM UTC. This test session is configured to start on October 17, 2023, at 09:00 UTC and recur at the same time every day. The
+duration of each test run is one hour, as specified by the ISO 8601 format "PT1H", with the test status marked as "configured". The test
+provides insight into network performance by monitoring the selected parameters, allowing for the detection of any potential degradations
+in service quality over time.<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
 <span id="name-example-of-a-message-body-t"></span><div id="create-twp-oam">
 <figure id="figure-6">
           <div class="breakable lang-json sourcecode" id="appendix-A.1-3.1">
