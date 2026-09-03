@@ -610,7 +610,7 @@ on security operations systems:
 # Operational Considerations for Auditing and Results Tracking
 
 To support the accounting and auditing requirements described in Section 2.2 and Section 2.3, the test results of the scheduling model
-including mounted device-model result or audit nodes should be associated with schedule instance to ensure that automated audit tools
+including mounted device-model result or audit nodes should be associated with each schedule instance to ensure that automated audit tools
 and operators can seamlessly validate test execution, correlate schedules with actual performance data, and maintain a verifiable audit
 trail.
 
