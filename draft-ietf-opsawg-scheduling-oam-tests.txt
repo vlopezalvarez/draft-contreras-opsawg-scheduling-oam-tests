@@ -695,10 +695,12 @@ Table of Contents
       state is triggered when one or more tests haven't been conducted
       successfully.  Implementations may report a more specific error
       cause using child identities such as "resource-contention" or
-      "priority".  Note that how state transition triggering generation
-      of YANG notifications and how external management and
-      orchestration systems subscribe to these YANG notifications are
-      not in the scope of this document.
+      "priority".
+
+   Note that how state transition triggering generation of YANG
+   notifications and how external management and orchestration systems
+   subscribe to these YANG notifications are not in the scope of this
+   document.
 
                 +---------+      +----------+      +---------+
              +->| planned |----->|configured|----->|  ready  |
