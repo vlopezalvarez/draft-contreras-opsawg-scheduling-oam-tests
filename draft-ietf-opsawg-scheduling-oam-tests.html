@@ -1226,7 +1226,7 @@ individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-coverage-of-input-parameter" class="internal xref">Coverage of Input Parameters and Output Results</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-performance-impact-of-concu" class="internal xref">Performance impact of concurrent OAM task scheduling</a></p>
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-performance-impact-and-oper" class="internal xref">Performance impact and Operational Guidance for concurrent OAM task scheduling</a></p>
 </li>
             </ul>
 </li>
@@ -1708,8 +1708,7 @@ module: ietf-oam-test-sequence
             <p id="section-3.2-7.2.1">"configured": The state where the test is being configured. This state is triggered when the planned test configuration is applied to the network element.<a href="#section-3.2-7.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-7.3">
-            <p id="section-3.2-7.3.1">"ready": The state where the test is ready to be executed. This is state is triggered after the planned test configuration is applied and before the test
-         is executed.<a href="#section-3.2-7.3.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-7.3.1">"ready": The state where the test is ready to be executed. This is state is triggered after the planned test configuration is applied and before the test is executed.<a href="#section-3.2-7.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-7.4">
             <p id="section-3.2-7.4.1">"on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.<a href="#section-3.2-7.4.1" class="pilcrow">¶</a></p>
@@ -1724,7 +1723,8 @@ module: ietf-oam-test-sequence
             <p id="section-3.2-7.7.1">"failure": The state when one or more tests in the sequence got an error.<a href="#section-3.2-7.7.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-7.8">
-            <p id="section-3.2-7.8.1">"error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".<a href="#section-3.2-7.8.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-7.8.1">"error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations
+         may report a more specific error cause using child identities such as "resource-contention" or "priority".<a href="#section-3.2-7.8.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <span id="name-oam-test-sequence-state-mac"></span><div id="st-test-sequence-status">
@@ -2285,13 +2285,33 @@ module ietf-oam-test-sequence {
 <p id="section-6.2-3">In summary, this document focuses on the scheduling, coordination, and status tracking of OAM tests, while relying on existing YANG models for the detailed specification of test parameters and results.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="performance-impact-of-concurrent-oam-task-scheduling">
+<div id="performance-impact-and-operational-guidance-for-concurrent-oam-task-scheduling">
 <section id="section-6.3">
-        <h3 id="name-performance-impact-of-concu">
-<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-performance-impact-of-concu" class="section-name selfRef">Performance impact of concurrent OAM task scheduling</a>
+        <h3 id="name-performance-impact-and-oper">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-performance-impact-and-oper" class="section-name selfRef">Performance impact and Operational Guidance for concurrent OAM task scheduling</a>
         </h3>
 <p id="section-6.3-1">Concurrent OAM tasks scheduling may cause performance strain on oam test devices due to intensive processing on both the server and the client.
 Management and orchestration systems need to make sure to have sufficient resource before conducting those multiple concurrent OAM tasks.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">Concurrent OAM task scheduling introduces significant resource strain across managed devices. To plan capacity at scale and safeguard network
+stability, implementations SHOULD adhere to the following operational boundaries:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3-3.1">
+            <p id="section-6.3-3.1.1">Concurrency Limits: Devices SHOULD enforce limits on concurrent active tests to prevent CPU starvation. Active traffic per interface MUST
+be bounded to a minimal fraction (e.g., &lt;1%) of link capacity. Network-wide tasks MUST be staggered using random jitter to avoid
+synchronized telemetry and processing spikes.<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.3-3.2">
+            <p id="section-6.3-3.2.1">Preemptive Control: Implementations SHOULD NOT rely solely on reporting resource-contention errors after a failure. Managed nodes SHOULD
+apply local rate limiting and preemptive traffic-shaping. If resource thresholds are approached, devices SHOULD automatically defer or
+back off pending tests, while prioritizing vital keep-alives over ad-hoc diagnostics.<a href="#section-6.3-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.3-3.3">
+            <p id="section-6.3-3.3.1">SLA and Windowing Considerations: High-frequency proactive supervision MUST use various different QoS markings to reflect real line-rate
+conditions without degrading SLAs. Bulk diagnostics SHOULD run at low priority. Routine supervision is suited for in-service periods,
+whereas intrusive OAM loopbacks <span>[<a href="#ITU-T-Y1731" class="cite xref">ITU-T-Y1731</a>]</span> and multi-path tracing SHOULD be restricted to maintenance windows, where false alarms
+must be suppressed.<a href="#section-6.3-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
 </section>
 </div>
 </section>
