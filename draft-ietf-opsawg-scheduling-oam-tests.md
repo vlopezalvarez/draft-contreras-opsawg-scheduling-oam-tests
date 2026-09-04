@@ -292,7 +292,7 @@ parameters. In addition, each OAM unitary test has two temporal parameters:
 "period" and "recurrence". Both are imported from the "ietf-schedule" module from {{!RFC9922}}.
 "period" identifies the one shot period values that contain a precise period of time and can be used to support on-demand troubleshooting
 , while "recurrence" identifies the properties that contain a recurrence rule specification and can be used to periodic troubleshooting.
-Moreover, "schedule:schedule-status" grouping has been imported from {{!RFC9922}} to describe common properties of scheduling status.
+Moreover, "schedule:schedule-status" grouping has been imported from {{!RFC9922}} to describe common properties of scheduling status. Wrap-around of the "counter" and "failure-counter" leaves is as specified in {{!RFC9922}}.
 "unitary-test-status" indicates the state of the OAM unitary test (see the state machine in {{st-unitary-test-status}}).
 
 Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM operation, since it
