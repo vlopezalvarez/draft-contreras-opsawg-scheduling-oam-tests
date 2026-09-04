@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 7 March 2027                                              Nokia
+Expires: 8 March 2027                                              Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                        3 September 2026
+                                                        4 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 March 2027.
+   This Internet-Draft will expire on 8 March 2027.
 
 Copyright Notice
 
@@ -459,9 +459,10 @@ Table of Contents
    identifies the properties that contain a recurrence rule
    specification and can be used to periodic troubleshooting.  Moreover,
    "schedule:schedule-status" grouping has been imported from [RFC9922]
-   to describe common properties of scheduling status. "unitary-test-
-   status" indicates the state of the OAM unitary test (see the state
-   machine in Figure 3).
+   to describe common properties of scheduling status.  Wrap-around of
+   the "counter" and "failure-counter" leaves is as specified in
+   [RFC9922]. "unitary-test-status" indicates the state of the OAM
+   unitary test (see the state machine in Figure 3).
 
    Each oam-unitary-test instance defined by this model is conceptually
    an instance of an active or hybrid OAM operation, since it triggers
