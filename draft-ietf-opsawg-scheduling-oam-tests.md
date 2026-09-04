@@ -601,6 +601,14 @@ each OAM function.
 In summary, this document focuses on the scheduling, coordination, and status tracking of OAM tests, while relying on existing YANG models for the
 detailed specification of test parameters and results.
 
+## Use of the managed Leaf
+
+The "managed" leaf in each "ne-config" entry defaults to "true", meaning that the orchestrator or controller hosting this model is expected to configure the device OAM function through the "root" schema-mount point.
+
+Operators set "managed" to "false" when the OAM function on that network element is configured outside this model, for example by a device CLI, a local script, or a different controller. In that case, any attempt to access data below "root" fails with error-tag "access-denied" and error-app-tag "oamut-not-managed", as specified in the YANG module.
+
+Scheduling of the unitary test or test sequence still applies when "managed" is "false": time constraints and status reporting remain in this model, but the device-level OAM configuration is not pushed through the mount point. Implementations that cannot disable mount access may keep "managed" as a read-only value of "true".
+
 ## Performance impact and Operational Guidance for concurrent OAM task scheduling
 
 Concurrent OAM tasks scheduling may cause performance strain on OAM test devices due to intensive processing on both the server and the client.
