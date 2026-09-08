@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 8 March 2027                                              Nokia
+Expires: 12 March 2027                                             Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                        4 September 2026
+                                                        8 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 March 2027.
+   This Internet-Draft will expire on 12 March 2027.
 
 Copyright Notice
 
@@ -99,9 +99,10 @@ Table of Contents
    7.  Operational Considerations
      7.1.  Conflict Resolution and Reporting Among Scheduled OAM Tasks
      7.2.  Coverage of Input Parameters and Output Results
-     7.3.  Performance impact and Operational Guidance for concurrent
+     7.3.  Use of the managed Leaf
+     7.4.  Performance impact and Operational Guidance for concurrent
            OAM task scheduling
-     7.4.  Impact on Security Operations
+     7.5.  Impact on Security Operations
    8.  Operational Considerations for Auditing and Results Tracking
    9.  Security Considerations
    10. IANA Considerations
@@ -1309,7 +1310,27 @@ Table of Contents
    and status tracking of OAM tests, while relying on existing YANG
    models for the detailed specification of test parameters and results.
 
-7.3.  Performance impact and Operational Guidance for concurrent OAM
+7.3.  Use of the managed Leaf
+
+   The "managed" leaf in each "ne-config" entry defaults to "true",
+   meaning that the orchestrator or controller hosting this model is
+   expected to configure the device OAM function through the "root"
+   schema-mount point.
+
+   Operators set "managed" to "false" when the OAM function on that
+   network element is configured outside this model, for example by a
+   device CLI, a local script, or a different controller.  In that case,
+   any attempt to access data below "root" fails with error-tag "access-
+   denied" and error-app-tag "oamut-not-managed", as specified in the
+   YANG module.
+
+   Scheduling of the unitary test or test sequence still applies when
+   "managed" is "false": time constraints and status reporting remain in
+   this model, but the device-level OAM configuration is not pushed
+   through the mount point.  Implementations that cannot disable mount
+   access may keep "managed" as a read-only value of "true".
+
+7.4.  Performance impact and Operational Guidance for concurrent OAM
       task scheduling
 
    Concurrent OAM tasks scheduling may cause performance strain on OAM
@@ -1344,7 +1365,7 @@ Table of Contents
       [ITU-T-Y1731] and multi-path tracing SHOULD be restricted to
       maintenance windows, where false alarms must be suppressed.
 
-7.4.  Impact on Security Operations
+7.5.  Impact on Security Operations
 
    Centrally orchestrated and scheduled OAM tests introduce specific
    traffic patterns—characterized by distinct timing, predictable

@@ -1052,7 +1052,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Contreras, et al.</td>
-<td class="center">Expires 8 March 2027</td>
+<td class="center">Expires 12 March 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg {
 <dd class="internet-draft">draft-ietf-opsawg-scheduling-oam-tests-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-04" class="published">4 September 2026</time>
+<time datetime="2026-09-08" class="published">8 September 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-03-08">8 March 2027</time></dd>
+<dd class="expires"><time datetime="2027-03-12">12 March 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1131,7 +1131,7 @@ individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1229,10 +1229,13 @@ individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-coverage-of-input-parameter" class="internal xref">Coverage of Input Parameters and Output Results</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-performance-impact-and-oper" class="internal xref">Performance impact and Operational Guidance for concurrent OAM task scheduling</a></p>
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-use-of-the-managed-leaf" class="internal xref">Use of the managed Leaf</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
-                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-impact-on-security-operatio" class="internal xref">Impact on Security Operations</a></p>
+                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.  <a href="#name-performance-impact-and-oper" class="internal xref">Performance impact and Operational Guidance for concurrent OAM task scheduling</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5">
+                <p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5" class="auto internal xref">7.5</a>.  <a href="#name-impact-on-security-operatio" class="internal xref">Impact on Security Operations</a></p>
 </li>
             </ul>
 </li>
@@ -2409,55 +2412,65 @@ each OAM function.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
 detailed specification of test parameters and results.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="performance-impact-and-operational-guidance-for-concurrent-oam-task-scheduling">
+<div id="use-of-the-managed-leaf">
 <section id="section-7.3">
-        <h3 id="name-performance-impact-and-oper">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-performance-impact-and-oper" class="section-name selfRef">Performance impact and Operational Guidance for concurrent OAM task scheduling</a>
+        <h3 id="name-use-of-the-managed-leaf">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-use-of-the-managed-leaf" class="section-name selfRef">Use of the managed Leaf</a>
         </h3>
-<p id="section-7.3-1">Concurrent OAM tasks scheduling may cause performance strain on OAM test devices due to intensive processing on both the server and the client.
-Management and orchestration systems need to make sure to have sufficient resource before conducting those multiple concurrent OAM tasks.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.3-2">Concurrent OAM task scheduling introduces significant resource strain across managed devices. To plan capacity at scale and safeguard network
-stability, implementations SHOULD adhere to the following operational boundaries:<a href="#section-7.3-2" class="pilcrow">¶</a></p>
+<p id="section-7.3-1">The "managed" leaf in each "ne-config" entry defaults to "true", meaning that the orchestrator or controller hosting this model is expected to configure the device OAM function through the "root" schema-mount point.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.3-2">Operators set "managed" to "false" when the OAM function on that network element is configured outside this model, for example by a device CLI, a local script, or a different controller. In that case, any attempt to access data below "root" fails with error-tag "access-denied" and error-app-tag "oamut-not-managed", as specified in the YANG module.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
+<p id="section-7.3-3">Scheduling of the unitary test or test sequence still applies when "managed" is "false": time constraints and status reporting remain in this model, but the device-level OAM configuration is not pushed through the mount point. Implementations that cannot disable mount access may keep "managed" as a read-only value of "true".<a href="#section-7.3-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="performance-impact-and-operational-guidance-for-concurrent-oam-task-scheduling">
+<section id="section-7.4">
+        <h3 id="name-performance-impact-and-oper">
+<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-performance-impact-and-oper" class="section-name selfRef">Performance impact and Operational Guidance for concurrent OAM task scheduling</a>
+        </h3>
+<p id="section-7.4-1">Concurrent OAM tasks scheduling may cause performance strain on OAM test devices due to intensive processing on both the server and the client.
+Management and orchestration systems need to make sure to have sufficient resource before conducting those multiple concurrent OAM tasks.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
+<p id="section-7.4-2">Concurrent OAM task scheduling introduces significant resource strain across managed devices. To plan capacity at scale and safeguard network
+stability, implementations SHOULD adhere to the following operational boundaries:<a href="#section-7.4-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-7.3-3.1">
-            <p id="section-7.3-3.1.1">Concurrency Limits: Devices SHOULD enforce limits on concurrent active tests to prevent CPU starvation. Active traffic per interface MUST
+<li class="normal" id="section-7.4-3.1">
+            <p id="section-7.4-3.1.1">Concurrency Limits: Devices SHOULD enforce limits on concurrent active tests to prevent CPU starvation. Active traffic per interface MUST
 be bounded to a minimal fraction (e.g., &lt;1%) of link capacity. Network-wide tasks MUST be staggered using random jitter to avoid
-synchronized telemetry and processing spikes.<a href="#section-7.3-3.1.1" class="pilcrow">¶</a></p>
+synchronized telemetry and processing spikes.<a href="#section-7.4-3.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-7.3-3.2">
-            <p id="section-7.3-3.2.1">Preemptive Control: Implementations SHOULD NOT rely solely on reporting resource-contention errors after a failure. Managed nodes SHOULD
+          <li class="normal" id="section-7.4-3.2">
+            <p id="section-7.4-3.2.1">Preemptive Control: Implementations SHOULD NOT rely solely on reporting resource-contention errors after a failure. Managed nodes SHOULD
 apply local rate limiting and preemptive traffic-shaping. If resource thresholds are approached, devices SHOULD automatically defer or
-back off pending tests, while prioritizing vital keep-alives over ad-hoc diagnostics.<a href="#section-7.3-3.2.1" class="pilcrow">¶</a></p>
+back off pending tests, while prioritizing vital keep-alives over ad-hoc diagnostics.<a href="#section-7.4-3.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-7.3-3.3">
-            <p id="section-7.3-3.3.1">SLA and Windowing Considerations: High-frequency proactive supervision MUST use various different QoS markings to reflect real line-rate
+          <li class="normal" id="section-7.4-3.3">
+            <p id="section-7.4-3.3.1">SLA and Windowing Considerations: High-frequency proactive supervision MUST use various different QoS markings to reflect real line-rate
 conditions without degrading SLAs. Bulk diagnostics SHOULD run at low priority. Routine supervision is suited for in-service periods,
 whereas intrusive OAM loopbacks <span>[<a href="#ITU-T-Y1731" class="cite xref">ITU-T-Y1731</a>]</span> and multi-path tracing SHOULD be restricted to maintenance windows, where false alarms
-must be suppressed.<a href="#section-7.3-3.3.1" class="pilcrow">¶</a></p>
+must be suppressed.<a href="#section-7.4-3.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="impact-on-security-operations">
-<section id="section-7.4">
+<section id="section-7.5">
         <h3 id="name-impact-on-security-operatio">
-<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-impact-on-security-operatio" class="section-name selfRef">Impact on Security Operations</a>
+<a href="#section-7.5" class="section-number selfRef">7.5. </a><a href="#name-impact-on-security-operatio" class="section-name selfRef">Impact on Security Operations</a>
         </h3>
-<p id="section-7.4-1">Centrally orchestrated and scheduled OAM tests introduce specific traffic patterns—characterized by distinct timing, predictable volumes,
+<p id="section-7.5-1">Centrally orchestrated and scheduled OAM tests introduce specific traffic patterns—characterized by distinct timing, predictable volumes,
 and targeted path probing—that differ from normal network traffic. Network operators must evaluate the impact of these automated patterns
-on security operations systems:<a href="#section-7.4-1" class="pilcrow">¶</a></p>
+on security operations systems:<a href="#section-7.5-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-7.4-2.1">
-            <p id="section-7.4-2.1.1">Anomaly Detection &amp; IDS/IPS: Automated OAM traffic may trigger false positives in flow-based Intrusion Detection/Prevention Systems
+<li class="normal" id="section-7.5-2.1">
+            <p id="section-7.5-2.1.1">Anomaly Detection &amp; IDS/IPS: Automated OAM traffic may trigger false positives in flow-based Intrusion Detection/Prevention Systems
 (IDS/IPS) or behavioral anomaly detectors, which might flag rapid, scheduled path probing as network scanning or reconnaissance.
  Operators should configure security baseline policies to recognize authorized OAM orchestration boundaries or whitelist centralized
- test sources.<a href="#section-7.4-2.1.1" class="pilcrow">¶</a></p>
+ test sources.<a href="#section-7.5-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-7.4-2.2">
-            <p id="section-7.4-2.2.1">Packet Capture &amp; Parsing Observability: Centralized scheduling can significantly increase packet volume during test windows. Network
+          <li class="normal" id="section-7.5-2.2">
+            <p id="section-7.5-2.2.1">Packet Capture &amp; Parsing Observability: Centralized scheduling can significantly increase packet volume during test windows. Network
 monitoring tools, packet capture systems, and protocol parsing must be capable of identifying, parsing, and filtering these
 scheduled OAM packets. This ensures that synthetic test traffic does not overwhelm log storage, degrade packet processing performance,
-or obscure genuine malicious payloads hidden within traffic flows.<a href="#section-7.4-2.2.1" class="pilcrow">¶</a></p>
+or obscure genuine malicious payloads hidden within traffic flows.<a href="#section-7.5-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
