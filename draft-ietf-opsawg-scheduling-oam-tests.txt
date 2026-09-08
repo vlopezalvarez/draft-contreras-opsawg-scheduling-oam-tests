@@ -99,17 +99,18 @@ Table of Contents
    7.  Operational Considerations
      7.1.  Conflict Resolution and Reporting Among Scheduled OAM Tasks
      7.2.  Coverage of Input Parameters and Output Results
-     7.3.  Use of the managed Leaf
+     7.3.  Use of the Managed Leaf
      7.4.  Performance impact and Operational Guidance for concurrent
            OAM task scheduling
      7.5.  Impact on Security Operations
-   8.  Operational Considerations for Auditing and Results Tracking
-   9.  Security Considerations
-   10. IANA Considerations
-     10.1.  Updates to the IETF XML Registry for New YANG Module
-     10.2.  Updates to the YANG Module Names Registry for New YANG
+   8.  Schedule Health Verification
+   9.  Operational Considerations for Auditing and Results Tracking
+   10. Security Considerations
+   11. IANA Considerations
+     11.1.  Updates to the IETF XML Registry for New YANG Module
+     11.2.  Updates to the YANG Module Names Registry for New YANG
             Module
-   11. Implementation Status
+   12. Implementation Status
    Acknowledgments
    References
      Normative References
@@ -1317,7 +1318,7 @@ Table of Contents
    and status tracking of OAM tests, while relying on existing YANG
    models for the detailed specification of test parameters and results.
 
-7.3.  Use of the managed Leaf
+7.3.  Use of the Managed Leaf
 
    The "managed" leaf in each "ne-config" entry defaults to "true",
    meaning that the orchestrator or controller hosting this model is
@@ -1397,7 +1398,28 @@ Table of Contents
       performance, or obscure genuine malicious payloads hidden within
       traffic flows.
 
-8.  Operational Considerations for Auditing and Results Tracking
+8.  Schedule Health Verification
+
+   operators should follow a post-configuration validation checklist to
+   verify schedule health and configuration deployment. verification
+   focuses on two primary phases:
+
+   *  Schedule Acceptance Verification: Operators must inspect the root
+      schedule instance to ensure it has been successfully accepted by
+      the controller.  This is validated by verifying that the upcoming-
+      occurrence leaf and status counters imported from the ietf-
+      schedule module reflect a valid, upcoming execution timestamp
+      rather than an error or inactive state.
+
+   *  Mount Application Verification: Operators must verify that the OAM
+      configuration nested under the schema mount root has been
+      successfully propagated to each target network element (ne-id).
+      This is achieved by querying the local state of the mounted OAM
+      unitary test or test sequence modules on individual network
+      elements to confirm that the configuration was applied correctly
+      and the elements are primed for the upcoming schedule trigger.
+
+9.  Operational Considerations for Auditing and Results Tracking
 
    To support the accounting and auditing requirements described in
    Section 2.2 and Section 2.3, the test results of the scheduling model
@@ -1407,7 +1429,7 @@ Table of Contents
    schedules with actual performance data, and maintain a verifiable
    audit trail.
 
-9.  Security Considerations
+10.  Security Considerations
 
    This section is modeled after the template described in Section 3.7.1
    of [RFC9907].
@@ -1453,9 +1475,9 @@ Table of Contents
    information as to which nodes may be considered sensitive or
    vulnerable in network environments.
 
-10.  IANA Considerations
+11.  IANA Considerations
 
-10.1.  Updates to the IETF XML Registry for New YANG Module
+11.1.  Updates to the IETF XML Registry for New YANG Module
 
    IANA is requested to register the following URI in the "ns" registry
    within the "IETF XML Registry" group [RFC3688].
@@ -1468,7 +1490,7 @@ Table of Contents
          Registrant Contact: The IESG.
          XML: N/A, the requested URI is an XML namespace.
 
-10.2.  Updates to the YANG Module Names Registry for New YANG Module
+11.2.  Updates to the YANG Module Names Registry for New YANG Module
 
    IANA is requested to register the following YANG module in the "YANG
    Module Names" registry [RFC6020] within the "YANG Parameters"
@@ -1486,7 +1508,7 @@ Table of Contents
          Prefix:     oamts
          Reference:  RFC XXXX
 
-11.  Implementation Status
+12.  Implementation Status
 
    There are currently no known implementations of the YANG modules
    defined in this document.  This section is intended to track
