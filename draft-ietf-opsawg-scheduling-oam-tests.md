@@ -356,8 +356,8 @@ The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. 
 * "ready": The state where the test is ready to be executed. This state is triggered after the planned test configuration is applied and before the test
            is executed.
 * "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
-* "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
-* "error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully. Implementations
+* "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted. A manual stop is not a successful completion and is not an execution error; the next cycle, if any, starts from "planned".
+* "error": The state where an error occurs during the test. This state is triggered when the test has not been conducted successfully. Implementations
            may report a more specific error cause using child identities such as "resource-contention" or "priority".
 * "success": The final state where the test is completed. This state is triggered when the test has been conducted successfully.
 
@@ -369,19 +369,19 @@ notifications are not in the scope of this document.
    +---------+      +----------+      +---------+
 +->| planned |----->|configured|----->|  ready  |
 |  +---------+      +----------+      +---------+
-|                        |                |
-|                        |                V
-|            +-------+   |          +----------+
-|      +-----| error |<--+----------| on-going |
-|      |     +-------+              +----------+
-|      |                                  |
-|      V                                  |
-|  +---------+      +--------+            |
-+--| success |<-----|  stop  |<------------+
-   +---------+      +--------+            |
-       A                                  |
-       |                                  |
-       +----------------------------------+
+|    A   A   A              |              |
+|    |   |   |              |              V
+|    |   |   |  +-------+   |          +----------+
+|    |   |   ---| error |<--+----------| on-going |
+|    |   |      +-------+              +----------+
+|    |   |                                 |
+|    |   |          +--------+             |
+|    |   -----------|  stop  |<------------+
+|    |              +--------+             |
+|    |                                     |
+| +---------+                              |
++-| success |<-----------------------------+
+  +---------+
 
 ~~~~
 {: #st-unitary-test-status title="OAM Unitary Test State Machine" artwork-align="center"}
@@ -469,9 +469,9 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 * "configured": The state where the test is being configured. This state is triggered when the planned test configuration is applied to the network element.
 * "ready": The state where the test is ready to be executed. This state is triggered after the planned test configuration is applied and before the test is executed.
 * "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
-* "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted.
+* "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted. A manual stop is not a sequence failure and is not a successful completion; the next cycle, if any, starts from "planned".
 * "success": The final state where all Unitary Tests are completed. This state is triggered when all tests have been conducted successfully.
-* "failure": The state when one or more tests in the sequence got an error.
+* "failure": The state when one or more tests in the sequence got an error while the sequence continued to execute remaining tests.
 * "error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully.
            Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".
 
@@ -483,16 +483,19 @@ YANG notifications are not in the scope of this document.
     +---------+      +----------+      +---------+
  +->| planned |----->|configured|----->|  ready  |
  |  +---------+      +----------+      +---------+
- |    A   A                 |              |
- |    |   |                 |              V
- |    |   |     +-------+   |          +----------+
- |    |   ------| error |<--+----------| on-going |
- |    |         +-------+              +----------+
+ |    A   A   A             |              |
+ |    |   |   |             |              V
+ |    |   |   | +-------+   |          +----------+
+ |    |   |   +-| error |<--+----------| on-going |
+ |    |   |     +-------+              +----------+
+ |    |   |                                |
+ |    |   |         +--------+             |
+ |    |   ----------|  stop  |<------------+
+ |    |             +--------+             |
  |    |                                    |
- |    |                                    |
- | +---------+      +--------+             |
- | | failure |<-----|  stop  |<------------+
- | +---------+      +--------+             |
+ |    |         +---------+                |
+ |    ----------| failure |<---------------+
+ |              +---------+                |
  |                                         |
  | +---------+                             |
  +-| success |<----------------------------+
