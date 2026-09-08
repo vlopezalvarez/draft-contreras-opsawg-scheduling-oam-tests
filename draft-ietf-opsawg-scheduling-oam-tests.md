@@ -650,7 +650,7 @@ on security operations systems:
   scheduled OAM packets. This ensures that synthetic test traffic does not overwhelm log storage, degrade packet processing performance,
   or obscure genuine malicious payloads hidden within traffic flows.
 
-# Schedule Health Verification
+## Schedule Health Verification
 
 operators should follow a post-configuration validation checklist to verify schedule health and configuration deployment. verification
 focuses on two primary phases:
@@ -664,7 +664,7 @@ focuses on two primary phases:
   sequence modules on individual network elements to confirm that the configuration was applied correctly and the elements are primed for
   the upcoming schedule trigger.
 
-# Operational Considerations for Auditing and Results Tracking
+## Operational Considerations for Auditing and Results Tracking
 
 To support the accounting and auditing requirements described in Section 2.2 and Section 2.3, the test results of the scheduling model
 including mounted device-model result or audit nodes should be associated with each schedule instance to ensure that automated audit tools
