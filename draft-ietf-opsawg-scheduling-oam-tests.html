@@ -1721,10 +1721,11 @@ a collection of OAM unitary tests. "test-sequence-status" shows the state of the
 <p id="section-4.2-3">Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is
 indicated, the test is considered to run indefinitely. In case of the recurrence schedule type, both frequency and interval should
 be specified. Each execution runs at the scheduled recurrence interval. Since the OAM test sequence model consists of a collection
-of OAM unitary tests, one or more tests in the sequence might get an error, however error in one or more tests doesn't prevent the
-subsequent tests or remaining tests to execute. In addition, any change to the ordering of the OAM test sequence will lead to
-different reporting output results therefore the user should have full control on the ordering and "ordered-by user" parameters
-needs to be specified. If two or more tests are to run concurrently, they MUST be run in the order specified by the user.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+of OAM unitary tests, one or more tests on one or multiple ne nodes in the sequence might get an error, however error in one or more tests
+doesn't prevent the subsequent tests or remaining tests on the same ne nodes or on various different ne nodes to execute. In addition,
+any change to the ordering of the OAM test sequence will lead to different reporting output results therefore the user should have full
+control on the ordering and "ordered-by user" parameters needs to be specified. If two or more tests are to run concurrently, they MUST
+be run in the order specified by the user.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.2-4"><a href="#oam-test-sequence-tree-st" class="auto internal xref">Figure 4</a> shows the structure of OAM Test Sequence module:<a href="#section-4.2-4" class="pilcrow">¶</a></p>
 <span id="name-oam-test-sequence-2"></span><div id="oam-test-sequence-tree-st">
 <figure id="figure-4">
@@ -1737,7 +1738,7 @@ module: ietf-oam-test-sequence
         +--rw test-ref* [name]
         |  +--rw name         string
         |  +--rw ne-config* [ne-id]
-        |     +--rw ne-id        rt-types:router-id
+        |     +--rw ne-id        inet:host
         |     +--rw managed?     boolean
         |     +--rw test-type?   identityref
         |     +--rw root

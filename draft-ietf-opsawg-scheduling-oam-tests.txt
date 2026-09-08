@@ -606,14 +606,15 @@ Table of Contents
    the recurrence schedule type, both frequency and interval should be
    specified.  Each execution runs at the scheduled recurrence interval.
    Since the OAM test sequence model consists of a collection of OAM
-   unitary tests, one or more tests in the sequence might get an error,
-   however error in one or more tests doesn't prevent the subsequent
-   tests or remaining tests to execute.  In addition, any change to the
-   ordering of the OAM test sequence will lead to different reporting
-   output results therefore the user should have full control on the
-   ordering and "ordered-by user" parameters needs to be specified.  If
-   two or more tests are to run concurrently, they MUST be run in the
-   order specified by the user.
+   unitary tests, one or more tests on one or multiple ne nodes in the
+   sequence might get an error, however error in one or more tests
+   doesn't prevent the subsequent tests or remaining tests on the same
+   ne nodes or on various different ne nodes to execute.  In addition,
+   any change to the ordering of the OAM test sequence will lead to
+   different reporting output results therefore the user should have
+   full control on the ordering and "ordered-by user" parameters needs
+   to be specified.  If two or more tests are to run concurrently, they
+   MUST be run in the order specified by the user.
 
    Figure 4 shows the structure of OAM Test Sequence module:
 
@@ -624,7 +625,7 @@ Table of Contents
             +--rw test-ref* [name]
             |  +--rw name         string
             |  +--rw ne-config* [ne-id]
-            |     +--rw ne-id        rt-types:router-id
+            |     +--rw ne-id        inet:host
             |     +--rw managed?     boolean
             |     +--rw test-type?   identityref
             |     +--rw root
