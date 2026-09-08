@@ -103,14 +103,15 @@ Table of Contents
      7.4.  Performance impact and Operational Guidance for concurrent
            OAM task scheduling
      7.5.  Impact on Security Operations
-   8.  Schedule Health Verification
-   9.  Operational Considerations for Auditing and Results Tracking
-   10. Security Considerations
-   11. IANA Considerations
-     11.1.  Updates to the IETF XML Registry for New YANG Module
-     11.2.  Updates to the YANG Module Names Registry for New YANG
-            Module
-   12. Implementation Status
+     7.6.  Schedule Health Verification
+     7.7.  Operational Considerations for Auditing and Results
+           Tracking
+   8.  Security Considerations
+   9.  IANA Considerations
+     9.1.  Updates to the IETF XML Registry for New YANG Module
+     9.2.  Updates to the YANG Module Names Registry for New YANG
+           Module
+   10. Implementation Status
    Acknowledgments
    References
      Normative References
@@ -1399,7 +1400,7 @@ Table of Contents
       performance, or obscure genuine malicious payloads hidden within
       traffic flows.
 
-8.  Schedule Health Verification
+7.6.  Schedule Health Verification
 
    operators should follow a post-configuration validation checklist to
    verify schedule health and configuration deployment. verification
@@ -1420,7 +1421,7 @@ Table of Contents
       elements to confirm that the configuration was applied correctly
       and the elements are primed for the upcoming schedule trigger.
 
-9.  Operational Considerations for Auditing and Results Tracking
+7.7.  Operational Considerations for Auditing and Results Tracking
 
    To support the accounting and auditing requirements described in
    Section 2.2 and Section 2.3, the test results of the scheduling model
@@ -1430,7 +1431,7 @@ Table of Contents
    schedules with actual performance data, and maintain a verifiable
    audit trail.
 
-10.  Security Considerations
+8.  Security Considerations
 
    This section is modeled after the template described in Section 3.7.1
    of [RFC9907].
@@ -1476,9 +1477,9 @@ Table of Contents
    information as to which nodes may be considered sensitive or
    vulnerable in network environments.
 
-11.  IANA Considerations
+9.  IANA Considerations
 
-11.1.  Updates to the IETF XML Registry for New YANG Module
+9.1.  Updates to the IETF XML Registry for New YANG Module
 
    IANA is requested to register the following URI in the "ns" registry
    within the "IETF XML Registry" group [RFC3688].
@@ -1491,7 +1492,7 @@ Table of Contents
          Registrant Contact: The IESG.
          XML: N/A, the requested URI is an XML namespace.
 
-11.2.  Updates to the YANG Module Names Registry for New YANG Module
+9.2.  Updates to the YANG Module Names Registry for New YANG Module
 
    IANA is requested to register the following YANG module in the "YANG
    Module Names" registry [RFC6020] within the "YANG Parameters"
@@ -1509,7 +1510,7 @@ Table of Contents
          Prefix:     oamts
          Reference:  RFC XXXX
 
-12.  Implementation Status
+10.  Implementation Status
 
    There are currently no known implementations of the YANG modules
    defined in this document.  This section is intended to track
