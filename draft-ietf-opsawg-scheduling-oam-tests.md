@@ -604,7 +604,7 @@ each OAM function.
 In summary, this document focuses on the scheduling, coordination, and status tracking of OAM tests, while relying on existing YANG models for the
 detailed specification of test parameters and results.
 
-## Use of the managed Leaf
+## Use of the Managed Leaf
 
 The "managed" leaf in each "ne-config" entry defaults to "true", meaning that the orchestrator or controller hosting this model is expected to configure the device OAM function through the "root" schema-mount point.
 
@@ -648,6 +648,20 @@ on security operations systems:
   monitoring tools, packet capture systems, and protocol parsing must be capable of identifying, parsing, and filtering these
   scheduled OAM packets. This ensures that synthetic test traffic does not overwhelm log storage, degrade packet processing performance,
   or obscure genuine malicious payloads hidden within traffic flows.
+
+# Schedule Health Verification
+
+operators should follow a post-configuration validation checklist to verify schedule health and configuration deployment. verification
+focuses on two primary phases:
+
+- Schedule Acceptance Verification: Operators must inspect the root schedule instance to ensure it has been successfully accepted by the controller.
+  This is validated by verifying that the upcoming-occurrence leaf and status counters imported from the ietf-schedule module reflect a valid,
+   upcoming execution timestamp rather than an error or inactive state.
+
+- Mount Application Verification: Operators must verify that the OAM configuration nested under the schema mount root has been successfully
+  propagated to each target network element (ne-id). This is achieved by querying the local state of the mounted OAM unitary test or test
+  sequence modules on individual network elements to confirm that the configuration was applied correctly and the elements are primed for
+  the upcoming schedule trigger.
 
 # Operational Considerations for Auditing and Results Tracking
 
