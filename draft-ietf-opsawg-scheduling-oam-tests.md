@@ -775,7 +775,8 @@ This section includes a non-exhaustive list of examples to illustrate the use of
 
 ## Create a TWAMP OAM test {#ex-create-twp-oam}
 
-{{!RFC8913}} defines a YANG model for TWAMP. The following example uses the "twamp" identity defined in the ietf-oam-unitary-test module
+{{!RFC8913}} defines a YANG model for TWAMP. The following example demonstrates how scheduled test results look like from mounted
+device models surface through NMDA retrieval. This example uses the "twamp" identity defined in the ietf-oam-unitary-test module
 (derived from "basic-test-type") to indicate the test type; the TWAMP device model is mounted at the "root" of each "ne-config" entry.
 The example contains the information for the four configurations (Control-Client, Server, Session-Sender and Session-Reflector).
 
