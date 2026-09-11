@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 12 March 2027                                             Nokia
-                                                        8 September 2026
+Expires: 15 March 2027                                             Nokia
+                                                       11 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 March 2027.
+   This Internet-Draft will expire on 15 March 2027.
 
 Copyright Notice
 
@@ -1221,7 +1221,7 @@ A.1.  Create a TWAMP OAM test
            "name": "TWAMP-Test-scheduled-daily",
            "recurrence": {
            "recurrence-first": "2023-10-17T09:00:00Z",
-           "duration": "PT1H"
+           "duration": "PT1H",
            "recurrence-description": "TWAMP Test Reccurence, Daily at \
                                                               9 AM UTC",
            "frequency": "oam-types:daily",
@@ -1308,7 +1308,7 @@ A.1.  Create a TWAMP OAM test
                }
              }
            ]
-         }
+         }}
        ]
      }
    }
