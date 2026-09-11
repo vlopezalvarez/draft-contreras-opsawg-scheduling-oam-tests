@@ -5,7 +5,7 @@
         "name": "TWAMP-Test-scheduled-daily",
         "recurrence": {
         "recurrence-first": "2023-10-17T09:00:00Z",
-        "duration": "PT1H"
+        "duration": "PT1H",
         "recurrence-description": "TWAMP Test Reccurence, Daily at 9 AM UTC",
         "frequency": "oam-types:daily",
         "interval": 1,
@@ -91,7 +91,7 @@
             }
           }
         ]
-      }
+      }}
     ]
   }
 }
