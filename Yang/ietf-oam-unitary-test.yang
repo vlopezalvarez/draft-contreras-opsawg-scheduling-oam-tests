@@ -10,12 +10,6 @@ module ietf-oam-unitary-test {
       "RFC 9922: A Common YANG Data Model for Scheduling";
   }
 
-  import ietf-routing-types {
-    prefix rt-types;
-    reference
-      "RFC 8294: Common YANG Data Types for the Routing Area";
-  }
-
   import ietf-yang-schema-mount {
      prefix yangmnt;
      reference
@@ -68,7 +62,7 @@ module ietf-oam-unitary-test {
     // RFC Ed.: replace XXXX with actual RFC number and remove
     // this note.
 
-  revision "2026-01-13" {
+  revision "2026-09-14" {
     description
       "Initial version";
     reference
@@ -136,28 +130,28 @@ module ietf-oam-unitary-test {
          "Base identity of basic test type.";
   }
   identity connection-oriented-oam {
-       base unitary-test-type;
+       base basic-test-type;
        description
          "Base identity of connection oriented oam test type.";
        reference
          "RFC 8531: Connection-Oriented OAM YANG Data Model";
   }
   identity connectionless-oam {
-       base unitary-test-type;
+       base basic-test-type;
        description
          "Base identity of connectionless oam test type.";
        reference
          "RFC 8532: Generic YANG Data Model for Connectionless OAM";
   }
   identity in-situ-oam {
-       base unitary-test-type;
+       base basic-test-type;
        description
          "Base identity of In Situ OAM test type.";
        reference
         "RFC 9617: In Situ OAM (IOAM) YANG Data Model";
   }
   identity twamp {
-       base unitary-test-type;
+       base basic-test-type;
        description
          "Base identity of TWAMP test type.";
        reference
@@ -171,7 +165,7 @@ module ietf-oam-unitary-test {
         "RFC 9228: MPLS LSP Ping YANG Data Model";
   }
   identity bfd {
-       base unitary-test-type;
+       base basic-test-type;
        description
          "Base identity of BFD test type.";
        reference
