@@ -1343,16 +1343,12 @@ Table of Contents
 7.4.  Performance impact and Operational Guidance for concurrent OAM
       task scheduling
 
-   Concurrent OAM tasks scheduling may cause performance strain on OAM
-   test devices due to intensive processing on both the server and the
-   client.  Management and orchestration systems need to make sure to
-   have sufficient resource before conducting those multiple concurrent
-   OAM tasks.
-
    Concurrent OAM task scheduling introduces significant resource strain
-   across managed devices.  To plan capacity at scale and safeguard
-   network stability, implementations SHOULD adhere to the following
-   operational boundaries:
+   across managed devices.  Management and orchestration systems need to
+   make sure to have sufficient resource before conducting those
+   multiple concurrent OAM tasks.  To plan capacity at scale and
+   safeguard network stability, implementations SHOULD adhere to the
+   following operational boundaries:
 
    *  Concurrency Limits: Devices SHOULD enforce limits on concurrent
       active tests to prevent CPU starvation.  Active traffic per
@@ -1380,21 +1376,21 @@ Table of Contents
    Centrally orchestrated and scheduled OAM tests introduce specific
    traffic patterns—characterized by distinct timing, predictable
    volumes, and targeted path probing—that differ from normal network
-   traffic.  Network operators must evaluate the impact of these
+   traffic.  Network operators MUST evaluate the impact of these
    automated patterns on security operations systems:
 
    *  Anomaly Detection & IDS/IPS: Automated OAM traffic may trigger
       false positives in flow-based Intrusion Detection/Prevention
       Systems (IDS/IPS) or behavioral anomaly detectors, which might
-      flag rapid, scheduled path probing as network scanning or
-      reconnaissance.  Operators should configure security baseline
-      policies to recognize authorized OAM orchestration boundaries or
-      whitelist centralized test sources.
+      flag rapid, scheduled path probing as network scanning.  Operators
+      SHOULD configure security baseline policies to recognize
+      authorized OAM orchestration boundaries or whitelist controlled
+      test sources.
 
    *  Packet Capture & Parsing Observability: Centralized scheduling can
       significantly increase packet volume during test windows.  Network
       monitoring tools, packet capture systems, and protocol parsing
-      must be capable of identifying, parsing, and filtering these
+      MUST be capable of identifying, parsing, and filtering these
       scheduled OAM packets.  This ensures that synthetic test traffic
       does not overwhelm log storage, degrade packet processing
       performance, or obscure genuine malicious payloads hidden within
@@ -1402,7 +1398,7 @@ Table of Contents
 
 7.6.  Schedule Health Verification
 
-   operators should follow a post-configuration validation checklist to
+   Operators SHOULD follow a post-configuration validation checklist to
    verify schedule health and configuration deployment. verification
    focuses on two primary phases:
 
