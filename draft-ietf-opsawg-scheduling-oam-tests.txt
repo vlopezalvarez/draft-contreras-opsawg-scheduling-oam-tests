@@ -2080,6 +2080,8 @@ Appendix B.  Change between Revision
 
    *  Operational Consideration Update;
 
+   *  Sample OAM Test Scheduling Network Model Usage;
+
    v06 - v07
 
    *  Some Editorial changes based on Hansai's comments;
