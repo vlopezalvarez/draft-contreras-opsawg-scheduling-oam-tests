@@ -893,6 +893,23 @@ And the above OAM Unitary Tests configuration renders the following expanded con
 
 # Change between Revision
 
+  v07 - v08
+  * Change ne-id data type to inet:host;
+
+  * Add Child identities for unitary-test-type;
+
+  * Add references for imported types and used reference in the YANG model section;
+  
+  * Change recurrence-basic to recurrence-utc;
+
+  * Point counter wrapp-around to RFC9922;
+
+  * Explain when operators set managed to false;
+
+  * Align stop transitions in unitary and sequence state machines;
+
+  * Operational Consideration Update;
+
   v06 - v07
 
   * Some Editorial changes based on Hansai's comments;
