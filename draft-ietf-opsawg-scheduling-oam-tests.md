@@ -899,7 +899,7 @@ And the above OAM Unitary Tests configuration renders the following expanded con
   * Add Child identities for unitary-test-type;
 
   * Add references for imported types and used reference in the YANG model section;
-  
+
   * Change recurrence-basic to recurrence-utc;
 
   * Point counter wrapp-around to RFC9922;
