@@ -910,6 +910,8 @@ And the above OAM Unitary Tests configuration renders the following expanded con
 
   * Operational Consideration Update;
 
+  * Sample OAM Test Scheduling Network Model Usage;
+
   v06 - v07
 
   * Some Editorial changes based on Hansai's comments;
