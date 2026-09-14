@@ -589,7 +589,6 @@ OAM task categories are prioritized according to the following operational hiera
 When an active test or upcoming schedule is modified or aborted by a higher-priority operation, the server must update the corresponding unitary-test-status or test-sequence-status leaf.
 It must also log the preempted event alongside an error notification to ensure observability across the network management layer.
 
-
 ## Coverage of Input Parameters and Output Results
 
 The YANG models defined in this document are designed to schedule OAM tests at a network-wide level. The input parameters required to configure
@@ -607,18 +606,21 @@ detailed specification of test parameters and results.
 
 ## Use of the Managed Leaf
 
-The "managed" leaf in each "ne-config" entry defaults to "true", meaning that the orchestrator or controller hosting this model is expected to configure the device OAM function through the "root" schema-mount point.
+The "managed" leaf in each "ne-config" entry defaults to "true", meaning that the orchestrator or controller hosting this model is expected to
+configure the device OAM function through the "root" schema-mount point.
 
-Operators set "managed" to "false" when the OAM function on that network element is configured outside this model, for example by a device CLI, a local script, or a different controller. In that case, any attempt to access data below "root" fails with error-tag "access-denied" and error-app-tag "oamut-not-managed", as specified in the YANG module.
+Operators set "managed" to "false" when the OAM function on that network element is configured outside this model, for example by a device CLI,
+a local script, or a different controller. In that case, any attempt to access data below "root" fails with error-tag "access-denied" and
+error-app-tag "oamut-not-managed", as specified in the YANG module.
 
-Scheduling of the unitary test or test sequence still applies when "managed" is "false": time constraints and status reporting remain in this model, but the device-level OAM configuration is not pushed through the mount point. Implementations that cannot disable mount access may keep "managed" as a read-only value of "true".
+Scheduling of the unitary test or test sequence still applies when "managed" is "false": time constraints and status reporting remain in this
+model, but the device-level OAM configuration is not pushed through the mount point. Implementations that cannot disable mount access may keep
+"managed" as a read-only value of "true".
 
 ## Performance impact and Operational Guidance for concurrent OAM task scheduling
 
-Concurrent OAM tasks scheduling may cause performance strain on OAM test devices due to intensive processing on both the server and the client.
-Management and orchestration systems need to make sure to have sufficient resource before conducting those multiple concurrent OAM tasks.
-
-Concurrent OAM task scheduling introduces significant resource strain across managed devices. To plan capacity at scale and safeguard network
+Concurrent OAM task scheduling introduces significant resource strain across managed devices. Management and orchestration systems need to
+make sure to have sufficient resource before conducting those multiple concurrent OAM tasks. To plan capacity at scale and safeguard network
 stability, implementations SHOULD adhere to the following operational boundaries:
 
 - Concurrency Limits: Devices SHOULD enforce limits on concurrent active tests to prevent CPU starvation. Active traffic per interface MUST
@@ -637,22 +639,21 @@ stability, implementations SHOULD adhere to the following operational boundaries
 ## Impact on Security Operations
 
 Centrally orchestrated and scheduled OAM tests introduce specific traffic patterns—characterized by distinct timing, predictable volumes,
-and targeted path probing—that differ from normal network traffic. Network operators must evaluate the impact of these automated patterns
+and targeted path probing—that differ from normal network traffic. Network operators MUST evaluate the impact of these automated patterns
 on security operations systems:
 
 - Anomaly Detection & IDS/IPS: Automated OAM traffic may trigger false positives in flow-based Intrusion Detection/Prevention Systems
-  (IDS/IPS) or behavioral anomaly detectors, which might flag rapid, scheduled path probing as network scanning or reconnaissance.
-   Operators should configure security baseline policies to recognize authorized OAM orchestration boundaries or whitelist centralized
-   test sources.
+  (IDS/IPS) or behavioral anomaly detectors, which might flag rapid, scheduled path probing as network scanning. Operators SHOULD configure
+  security baseline policies to recognize authorized OAM orchestration boundaries or whitelist controlled test sources.
 
 - Packet Capture & Parsing Observability: Centralized scheduling can significantly increase packet volume during test windows. Network
-  monitoring tools, packet capture systems, and protocol parsing must be capable of identifying, parsing, and filtering these
+  monitoring tools, packet capture systems, and protocol parsing MUST be capable of identifying, parsing, and filtering these
   scheduled OAM packets. This ensures that synthetic test traffic does not overwhelm log storage, degrade packet processing performance,
   or obscure genuine malicious payloads hidden within traffic flows.
 
 ## Schedule Health Verification
 
-operators should follow a post-configuration validation checklist to verify schedule health and configuration deployment. verification
+Operators SHOULD follow a post-configuration validation checklist to verify schedule health and configuration deployment. verification
 focuses on two primary phases:
 
 - Schedule Acceptance Verification: Operators must inspect the root schedule instance to ensure it has been successfully accepted by the controller.
