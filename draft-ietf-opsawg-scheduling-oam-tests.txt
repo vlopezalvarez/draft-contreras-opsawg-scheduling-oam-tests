@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 15 March 2027                                             Nokia
+Expires: 18 March 2027                                             Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                       11 September 2026
+                                                       14 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 March 2027.
+   This Internet-Draft will expire on 18 March 2027.
 
 Copyright Notice
 
@@ -2062,6 +2062,23 @@ A.2.  Ping OAM Test Template
    </oam-unitary-tests>
 
 Appendix B.  Change between Revision
+
+   v07 - v08 * Change ne-id data type to inet:host;
+
+   *  Add Child identities for unitary-test-type;
+
+   *  Add references for imported types and used reference in the YANG
+      model section;
+
+   *  Change recurrence-basic to recurrence-utc;
+
+   *  Point counter wrapp-around to RFC9922;
+
+   *  Explain when operators set managed to false;
+
+   *  Align stop transitions in unitary and sequence state machines;
+
+   *  Operational Consideration Update;
 
    v06 - v07
 
