@@ -589,7 +589,7 @@ Table of Contents
    parameters related to time constraints: "period" and "recurrence" and
    one constraint related to ordering: "ordered-by user".  Time
    constraints parameters are imported from the "ietf-schedule" module
-   from [RFC9922]. "period " identifies the one shot period values that
+   from [RFC9922]. "period" identifies the one shot period values that
    contain a precise period of time and can be used to support on demand
    troubleshooting, while "recurrence" identifies the properties that
    contain a recurrence rule specification and can be used to support
