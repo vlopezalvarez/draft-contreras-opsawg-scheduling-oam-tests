@@ -131,7 +131,6 @@ module ietf-oam-test-sequence {
 	    key "name";
         ordered-by user;
         description "References to the ietf-oam-unitary-tests.";
-
         uses "oamut:oam-unitary-test";
       }
    uses schedule:schedule-status;
@@ -148,8 +147,8 @@ module ietf-oam-test-sequence {
 	  "Choice based on the type of the time range.";
    container period {
 	 description
-	   "The OAM Test takes effect based on a precise period of
-		time.";
+	   "The OAM Test takes effect based on a precise
+	   period of time.";
 	   uses schedule:period-of-time;
    }
    container recurrence {
@@ -159,10 +158,11 @@ module ietf-oam-test-sequence {
 	 leaf execution-count {
 	   type uint32;
 	   description
-	     "If set, limits how many times the test sequence is
-	      executed for this recurrence. If the leaf is absent, there
-	      is no limit: executions follow the recurrence until the
-	      test is removed from the system.";
+	     "If set, limits how many times the test sequence
+		  is executed for this recurrence. If the leaf is
+		  absent, there is no limit: executions follow the
+		  recurrence until the test is removed from the
+		  system.";
 	   }
       }
      }
