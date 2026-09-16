@@ -44,7 +44,8 @@ module ietf-oam-unitary-test {
     without modification, is permitted pursuant to, and subject
     to the license terms contained in, the Revised BSD License
     set forth in Section 4.c of the IETF Trust's Legal Provisions
-    Relating to IETF Documents (https://trustee.ietf.org/license-info).
+    Relating to IETF Documents 
+	(https://trustee.ietf.org/license-info).
 
     This version of this YANG module is part of RFC XXXX
     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
@@ -154,7 +155,8 @@ module ietf-oam-unitary-test {
        description
          "Base identity of TWAMP test type.";
        reference
-         "RFC 8913: Two-Way Active Measurement Protocol (TWAMP) YANG Data Model";
+         "RFC 8913: Two-Way Active Measurement Protocol
+		  (TWAMP) YANG Data Model";
   }
   identity lsp-ping {
        base basic-test-type;
@@ -168,7 +170,8 @@ module ietf-oam-unitary-test {
        description
          "Base identity of BFD test type.";
        reference
-        "RFC 9107: BFD (Bidirectional Forwarding Detection) YANG Model";
+        "RFC 9107: BFD (Bidirectional Forwarding
+		 Detection) YANG Model";
   }
   grouping oam-unitary-test {
     description
@@ -191,10 +194,11 @@ module ietf-oam-unitary-test {
       leaf ne-id {
         type inet:host;
         description
-          "This is identification of a network node within an autonomous system
-           such as router, switch, firewalls, etc. It should be as fine-grained
-           as possible to both guide the operator and guarantee uniqueness of the
-           network element.";
+          "This is identification of a network node within an
+		   autonomous system such as router, switch, firewalls, etc.
+		   It should be as fine-grained as possible to both guide
+		   the operator and guarantee uniqueness of the network
+		   element.";
       }
 
        leaf managed {
