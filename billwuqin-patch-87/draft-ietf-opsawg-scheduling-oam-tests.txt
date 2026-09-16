@@ -233,15 +233,13 @@ Table of Contents
    This document assumes that the reader is familiar with the contents
    of [RFC7950] "The YANG 1.1 Data Modeling Language".
 
-   Following terms are used for the representation of this data model.
+   Following terms are used for the representation of this data model:
 
-   o OAM Unitary Test: A set of parameters that define a type of OAM
-   test to be invoked.  As an example, it includes the test type,
-   configuration parameters, and target results.
+   o OAM Unitary Test: A single OAM test which is executed at each
+   scheduled time.
 
-   o OAM Test Sequence: A set of OAM Unitary Tests that are run based on
-   a set of time constraints, number of repetitions, order, and
-   reporting outputs.
+   o OAM Test Sequence: A set of OAM Unitary Tests that are executed on
+   a specified order at each scheduled time.
 
    Tree diagrams used in this document follow the notation defined in
    [RFC8340].
@@ -309,25 +307,27 @@ Table of Contents
    all those network element locations.  For more details on how schema
    mount works please refer to [RFC8528].
 
-                                     +-----------------+
-                                     |     Customer    |
-                                     +--------+--------+
-                     Customer Service Models  |
-                        (e.g., L3SM, L2SM)    |
-                                     +--------+--------+
-                                     |    Service      |
-                                     |  Orchestration  |
-                                     +------+---+------+
-                         Network Models     |   | OAM Test Scheduling
-                       (e.g., L3NM, L2NM)   |   | Network Model
-                                     +------+---+------+
-                                     |     Network     |
-                                     |   Controller    |
-                                     +--------+--------+
-                                              |
-                        +---------------------+---------------------+
-                        |                  Network                  |
-                        +-------------------------------------------+
+                                    +-----------------+
+                                    |     Customer    |
+                                    +--------+--------+
+                    Customer Service Models  |
+                       (e.g., L3SM, L2SM)    |
+                                    +--------+--------+
+                                    |    Service      |
+                                    |  Orchestration  |
+                                    +------+---+------+
+                        Network Models     |   | OAM Test Scheduling
+                      (e.g., L3NM, L2NM)   |   | Network Model
+                                    +------+---+------+
+                                    |     Network     |
+                                    |   Controller    |
+                                    +--------+--------+
+                                             | Device OAM Model
+                                             | (e.g., BFD, Connection
+                                             | -oriented OAM)
+                       +---------------------+---------------------+
+                       |                  Network                  |
+                       +-------------------------------------------+
 
              Figure 1: OAM Test Scheduling Network Model Usage
 
@@ -451,17 +451,18 @@ Table of Contents
    defined as "name", which provides a unique name for each test.  Each
    OAM test in the list references a test type with its concrete
    parameters.  In addition, each OAM unitary test has two temporal
-   parameters: "period" and "recurrence".  Both are imported from the
-   "ietf-schedule" module from [RFC9922]. "period" identifies the one
-   shot period values that contain a precise period of time and can be
-   used to support on-demand troubleshooting , while "recurrence"
-   identifies the properties that contain a recurrence rule
-   specification and can be used to periodic troubleshooting.  Moreover,
-   "schedule:schedule-status" grouping has been imported from [RFC9922]
-   to describe common properties of scheduling status.  Wrap-around of
-   the "counter" and "failure-counter" leaves is as specified in
-   [RFC9922]. "unitary-test-status" indicates the state of the OAM
-   unitary test (see the state machine in Figure 3).
+   parameters: "period" container and "recurrence" container . Both
+   import groupings from the "ietf-schedule" module from [RFC9922].
+   "period" container identifies the one shot period values that contain
+   a precise period of time and can be used to support on-demand
+   troubleshooting, while "recurrence" container identifies the
+   properties that contain a recurrence rule specification and can be
+   used to periodic troubleshooting.  Moreover, "schedule:schedule-
+   status" grouping has been imported from [RFC9922] to describe common
+   properties of scheduling status.  Wrap-around of the "counter" and
+   "failure-counter" leaves is as specified in [RFC9922]. "unitary-test-
+   status" leaf indicates the state of the OAM unitary test (see the
+   state machine in Figure 3).
 
    Each oam-unitary-test instance defined by this model is conceptually
    an instance of an active or hybrid OAM operation, since it triggers
@@ -522,11 +523,11 @@ Table of Contents
    state machine includes the following states:
 
    *  "planned": The initial state where the test is planned by the
-      management and hasn't been applied to the network element.
+      management and hasn't been applied to any network element.
 
    *  "configured": The state where the test is being configured.  This
       state is triggered when the planned test configuration is applied
-      to the network element.
+      to one or more network element(s).
 
    *  "ready": The state where the test is ready to be executed.  This
       state is triggered after the planned test configuration is applied
@@ -537,9 +538,10 @@ Table of Contents
       results haven't been produced.
 
    *  "stop": The state where the test is manually stopped.  This state
-      is triggered when the test is manually interrupted.  A manual stop
-      is not a successful completion and is not an execution error; the
-      next cycle, if any, starts from "planned".
+      is triggered when the test is manually interrupted, using
+      mechanisms which are outside the scope of this document.  A manual
+      stop is not a successful completion and is not an execution error;
+      the next cycle, if any, starts from "planned".
 
    *  "error": The state where an error occurs during the test.  This
       state is triggered when the test has not been conducted
