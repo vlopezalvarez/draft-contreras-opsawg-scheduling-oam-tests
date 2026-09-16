@@ -20,8 +20,8 @@ venue:
   type: "Working Group"
   mail: "opsawg@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/opsawg/"
-  github: "vlopezalvarez/draft-ietf-opsawg-scheduling-oam-tests"
-  latest: "https://vlopezalvarez.github.io/draft-ietf-opsawg-scheduling-oam-tests/draft-ietf-opsawg-scheduling-oam-tests.html"
+  github: "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests"
+  latest: "https://vlopezalvarez.github.io/draft-contreras-opsawg-scheduling-oam-tests/draft-ietf-opsawg-scheduling-oam-tests.html"
 
 author:
  -
@@ -61,7 +61,7 @@ informative:
 
 --- abstract
 
-This document defines two YANG data models to support scheduled network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
+This document defines two YANG Data Models to support scheduled network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
 This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures,
 intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by
 individual network nodes.
@@ -128,8 +128,6 @@ diagnosis procedures. In addition to reusing the device-level OAM YANG models fr
 generic scheduling framework defined in {{!RFC9922}}. The `ietf-schedule` module provides reusable groupings and mechanisms for specifying periods of time,
 recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM unitary test and OAM test sequence models defined in this
 document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a network-wide context.
-
-The YANG data models resulting from this document will conform to the Network Management Datastore Architecture (NMDA) {{!RFC8342}}.
 
 ## Terminology and Notations
 
@@ -376,7 +374,7 @@ notifications are not in the scope of this document.
 |    |   |      +-------+              +----------+
 |    |   |                                 |
 |    |   |          +--------+             |
-|    |   -----------|  stop  |<------------+
+|    |   +----------|  stop  |<------------+
 |    |              +--------+             |
 |    |                                     |
 | +---------+                              |
@@ -491,11 +489,11 @@ YANG notifications are not in the scope of this document.
  |    |   |     +-------+              +----------+
  |    |   |                                |
  |    |   |         +--------+             |
- |    |   ----------|  stop  |<------------+
+ |    |   +---------|  stop  |<------------+
  |    |             +--------+             |
  |    |                                    |
  |    |         +---------+                |
- |    ----------| failure |<---------------+
+ |    +---------| failure |<---------------+
  |              +---------+                |
  |                                         |
  | +---------+                             |
@@ -509,11 +507,11 @@ YANG notifications are not in the scope of this document.
 
 ## YANG Model for Scheduling OAM Unitary Test
 
-This module imports typedefs from {{!RFC9922}}, {{!RFC8528}} and {{!RFC8294}}, and it
+This module imports typedefs from {{!RFC9922}}, {{!RFC8528}} and {{!RFC9911}}, and it
 references {{!RFC8531}}, {{!RFC8532}}, {{!RFC9617}}, {{!RFC8913}}, {{!RFC9228}}, {{!RFC9107}}.
 
 ~~~~~~~~~~
-<CODE BEGINS> file ietf-oam-unitary-test@2026-01-13.yang
+<CODE BEGINS> file ietf-oam-unitary-test@2026-09-14.yang
 {::include ./Yang/ietf-oam-unitary-test.yang}
 
 <CODE ENDS>
@@ -524,7 +522,7 @@ references {{!RFC8531}}, {{!RFC8532}}, {{!RFC9617}}, {{!RFC8913}}, {{!RFC9228}},
 This module imports typedefs from {{!RFC9922}}.
 
 ~~~~~~~~~~
-<CODE BEGINS> file ietf-oam-test-sequence@2026-01-13.yang
+<CODE BEGINS> file ietf-oam-test-sequence@2026-09-14.yang
 
 {::include ./Yang/ietf-oam-test-sequence.yang}
 
