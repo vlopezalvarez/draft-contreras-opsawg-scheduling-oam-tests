@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 18 March 2027                                             Nokia
+Expires: 20 March 2027                                             Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                       14 September 2026
+                                                       16 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 March 2027.
+   This Internet-Draft will expire on 20 March 2027.
 
 Copyright Notice
 
@@ -748,7 +748,6 @@ Table of Contents
      namespace "urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test";
      prefix "oamut";
 
-     // reference ietf-netmod-schedule-yang
      import ietf-schedule {
        prefix schedule;
        reference
@@ -794,13 +793,7 @@ Table of Contents
 
        This version of this YANG module is part of RFC XXXX
        (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
-       for full legal notices.
-
-           The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
-       NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
-       'MAY', and 'OPTIONAL' in this document are to be interpreted as
-       described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
-       they appear in all capitals, as shown here.";
+       for full legal notices. ";
 
        // RFC Ed.: update the date below with the date of RFC
        // publication and remove this note.
@@ -811,8 +804,8 @@ Table of Contents
        description
          "Initial version";
        reference
-         "RFCXXXX: A YANG Data Model for Network Diagnosis by Scheduling
-          Sequences of OAM Tests";
+         "RFCXXXX: A YANG Data Model for Network Diagnosis using
+          Scheduled Sequences of OAM Tests";
           // Update with the correct RFC number when assigned
      }
 
@@ -879,21 +872,27 @@ Table of Contents
           description
             "Base identity of connection oriented oam test type.";
           reference
-            "RFC 8531: Connection-Oriented OAM YANG Data Model";
+            "RFC 8531: Generic YANG Data Model for Connection-Oriented
+                       Operations, Administration, and Maintenance (OAM)
+                       Protocols";
      }
      identity connectionless-oam {
           base basic-test-type;
           description
             "Base identity of connectionless oam test type.";
           reference
-            "RFC 8532: Generic YANG Data Model for Connectionless OAM";
+            "RFC 8532: Generic YANG Data Model for the Management of
+                       Operations, Administration, and Maintenance (OAM)
+                       Protocols That Use Connectionless
+                       Communications";
      }
      identity in-situ-oam {
           base basic-test-type;
           description
             "Base identity of In Situ OAM test type.";
           reference
-           "RFC 9617: In Situ OAM (IOAM) YANG Data Model";
+           "RFC 9617: A YANG Data Model for In Situ Operations,
+                      Administration, and Maintenance (IOAM)";
      }
      identity twamp {
           base basic-test-type;
