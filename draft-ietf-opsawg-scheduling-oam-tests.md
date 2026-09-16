@@ -386,27 +386,31 @@ notifications are not in the scope of this document.
 
 ## OAM Test Sequence
 
-The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints,
-repetitions, ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a
-coordinated manner.
+The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on
+specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a
+structured approach to running multiple OAM tests in a coordinated manner.
 
-Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal
-parameters related to time constraints: "period" and "recurrence" and one constraint related to ordering:
-"ordered-by user". Time constraints parameters are imported from the "ietf-schedule" module from {{!RFC9922}}.
-"period " identifies the one shot period values that contain a precise period of time and can be used to support on demand
-troubleshooting, while "recurrence" identifies the properties that contain a recurrence rule specification and can be used
-to support periodical troubleshooting. "ordered-by user" YANG statement indicates that the user is responsible for the ordering on
-a collection of OAM unitary tests. "test-sequence-status" shows the state of the OAM test sequence. "state" imported from the
-"ietf-schedule" module indicates the current state of the schedule.
+Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test
+sequence has two temporal parameters related to time constraints: "period" and "recurrence" and one
+constraint related to ordering: "ordered-by user". Time constraints parameters are imported from the
+"ietf-schedule" module from {{!RFC9922}}. "period" identifies the one shot period values that contain
+a precise period of time and can be used to support on demand troubleshooting, while "recurrence"
+identifies the properties that contain a recurrence rule specification and can be used to support
+periodical troubleshooting. "ordered-by user" YANG statement indicates that the user is responsible for
+the ordering on a collection of OAM unitary tests. "test-sequence-status" shows the state of the OAM
+test sequence. "state" imported from the "ietf-schedule" module indicates the current state of the
+schedule.
 
-Note that repetition is specified by "execution-count" parameter and only applies to the recurrence schedule type. If no count is
-indicated, the test is considered to run indefinitely. In case of the recurrence schedule type, both frequency and interval should
-be specified. Each execution runs at the scheduled recurrence interval. Since the OAM test sequence model consists of a collection
-of OAM unitary tests, one or more tests on one or multiple ne nodes in the sequence might get an error, however error in one or more tests
-doesn't prevent the subsequent tests or remaining tests on the same ne nodes or on various different ne nodes to execute. In addition,
-any change to the ordering of the OAM test sequence will lead to different reporting output results therefore the user should have full
-control on the ordering and "ordered-by user" parameters needs to be specified. If two or more tests are to run concurrently, they MUST
-be run in the order specified by the user.
+Note that repetition is specified by "execution-count" parameter and only applies to the recurrence
+schedule type. If no count is indicated, the test is considered to run indefinitely. In case of the
+recurrence schedule type, both frequency and interval should be specified. Each execution runs at the
+scheduled recurrence interval. Since the OAM test sequence model consists of a collection of OAM unitary
+tests, one or more tests on one or multiple ne nodes in the sequence might get an error, however error
+in one or more tests doesn't prevent the subsequent tests or remaining tests on the same ne nodes or on
+various different ne nodes to execute. In addition, any change to the ordering of the OAM test sequence
+will lead to different reporting output results therefore the user should have full control on the
+ordering and "ordered-by user" parameters needs to be specified. If two or more tests are to run
+concurrently, they MUST be run in the order specified by the user.
 
 {{oam-test-sequence-tree-st}} shows the structure of OAM Test Sequence module:
 
@@ -462,20 +466,30 @@ module: ietf-oam-test-sequence
 {: #oam-test-sequence-tree-st title="OAM Test Sequence" artwork-align="center"}
 
 
-The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}. The state machine includes the following states:
+The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}. The state machine
+includes the following states:
 
-* "planned": The initial state where the test is planned by the management and hasn't been applied to the network element.
-* "configured": The state where the test is being configured. This state is triggered when the planned test configuration is applied to the network element.
-* "ready": The state where the test is ready to be executed. This state is triggered after the planned test configuration is applied and before the test is executed.
-* "on-going": The state where the test is currently running. This state is triggered when the test has been executed but the test results haven't been produced.
-* "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted. A manual stop is not a sequence failure and is not a successful completion; the next cycle, if any, starts from "planned".
-* "success": The final state where all Unitary Tests are completed. This state is triggered when all tests have been conducted successfully.
-* "failure": The state when one or more tests in the sequence got an error while the sequence continued to execute remaining tests.
-* "error": The state where an error occurs during the test. This state is triggered when one or more tests haven't been conducted successfully.
-           Implementations may report a more specific error cause using child identities such as "resource-contention" or "priority".
+* "planned": The initial state where the test is planned by the management and hasn't been applied to
+             the network element.
+* "configured": The state where the test is being configured. This state is triggered when the planned
+                test configuration is applied to the network element.
+* "ready": The state where the test is ready to be executed. This state is triggered after the planned
+           test configuration is applied and before the test is executed.
+* "on-going": The state where the test is currently running. This state is triggered when the test has
+              been executed but the test results haven't been produced.
+* "stop": The state where the test is manually stopped. This state is triggered when the test is manually
+          interrupted. A manual stop is not a sequence failure and is not a successful completion; the
+          next cycle, if any, starts from "planned".
+* "success": The final state where all Unitary Tests are completed. This state is triggered when all tests
+             have been conducted successfully.
+* "failure": The state when one or more tests in the sequence got an error while the sequence continued to
+             execute remaining tests.
+* "error": The state where an error occurs during the test. This state is triggered when one or more tests
+           haven't been conducted successfully. Implementations may report a more specific error cause using
+           child identities such as "resource-contention" or "priority".
 
-Note that how state transition triggering generation of YANG notifications and how external management and orchestration systems subscribe to these
-YANG notifications are not in the scope of this document.
+Note that how state transition triggering generation of YANG notifications and how external management and
+orchestration systems subscribe to these YANG notifications are not in the scope of this document.
 
 ~~~~
 
@@ -531,144 +545,200 @@ This module imports typedefs from {{!RFC9922}}.
 
 # Using Device Model Within OAM Scheduling Models
 
-This section discusses the issues related to reusing device models already defined in IETF within the context of scheduling OAM tests.
-There are two main approaches to enable OAM scheduling models:
+This section discusses the issues related to reusing device models already defined in
+IETF within the context of scheduling OAM tests. There are two main approaches to
+enable OAM scheduling models:
 
-* Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable
-  the configuration and utilization of the desired OAM test. This approach requires recreating new YANG models for each new test type or
-  variation of the device models.
+* Importing YANG model into the OAM scheduling models. This approach will copy the
+  device model into the OAM unitary test model to enable the configuration and
+  utilization of the desired OAM test. This approach requires recreating new YANG
+  models for each new test type or variation of the device models.
 
-* Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG
-  modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any
-  modifications.
+* Schema-mount allows mounting a data model at a specified location of another
+  (parent) schema. The main difference with importing the YANG modules is that
+   they don't have to be prepared for mounting; any existing modules such as
+   "ietf-twamp" can be mounted without any modifications.
 
-The "test-type" leaf and the schema mount are complementary. The "test-type" leaf (identityref to "basic-test-type") explicitly indicates
-which OAM test type, and thus which YANG module, is mounted at the "root" mount point for that "ne-config" list entry. Each "ne-config" entry
-therefore pairs a test-type identity with the corresponding mounted module configuration under "root", so that management systems and
-implementations know which OAM module applies to that node. This document defines the base identity "basic-test-type" and a set of child
-identities for OAM test type; YANG modules that augment "ietf-oam-unitary-test" may define additional child identities derived from
-"basic-test-type" for other OAM test types.
+The "test-type" leaf and the schema mount are complementary. The "test-type" leaf
+(identityref to "basic-test-type") explicitly indicates which OAM test type, and
+thus which YANG module, is mounted at the "root" mount point for that "ne-config"
+list entry. Each "ne-config" entry therefore pairs a test-type identity with the
+corresponding mounted module configuration under "root", so that management
+systems and implementations know which OAM module applies to that node. This
+document defines the base identity "basic-test-type" and a set of child
+identities for OAM test type; YANG modules that augment "ietf-oam-unitary-test"
+may define additional child identities derived from "basic-test-type" for other
+OAM test types.
 
-As an example, we will use {{!RFC8913}}, which defines a YANG data model for TWAMP, to illustrate how device models could be used in {{ex-create-twp-oam}}.
+As an example, we will use {{!RFC8913}}, which defines a YANG data model for
+TWAMP, to illustrate how device models could be used in {{ex-create-twp-oam}}.
 
 # Operational Considerations
 
 ## Conflict Resolution and Reporting Among Scheduled OAM Tasks
 
-When multiple OAM tasks are scheduled to run concurrently or overlap in time, conflicts may arise due to resource contention or operational constraints.
-This document leverages the scheduling status groupings defined in the common schedule YANG module (see {{!RFC9922}} A Common YANG Data Model for Scheduling])
+When multiple OAM tasks are scheduled to run concurrently or overlap in time,
+conflicts may arise due to resource contention or operational constraints.
+This document leverages the scheduling status groupings defined in the common
+schedule YANG module (see {{!RFC9922}} A Common YANG Data Model for Scheduling])
 to detect and report such conflicts.
 
-The YANG models defined in this document (both for unitary test and test sequence) use the unitary-test-status and test-sequence-status leaves to indicate the current
-scheduling state of each OAM task. These leaves are of type identityref, allowing extensible reporting. If a conflict is detected (e.g., two tests require exclusive
-access to the same resource at the same time), the server sets the status to error or to a more specific error-cause identity derived from error: resource-contention
-for resource conflicts, or priority for prioritization-related conflicts. This error-cause indication allows operators and management systems to distinguish the
+The YANG models defined in this document (both for unitary test and test sequence)
+use the unitary-test-status and test-sequence-status leaves to indicate the current
+scheduling state of each OAM task. These leaves are of type identityref, allowing
+extensible reporting. If a conflict is detected (e.g., two tests require exclusive
+access to the same resource at the same time), the server sets the status to error
+or to a more specific error-cause identity derived from error: resource-contention
+for resource conflicts, or priority for prioritization-related conflicts. This
+error-cause indication allows operators and management systems to distinguish the
 reasons for the failure.
 
-Operators and management systems SHOULD monitor the scheduling status of OAM tasks and take appropriate action if a conflict is reported. The resolution of conflicts
-(e.g., rescheduling, prioritization, or cancellation) is implementation-dependent, but the conflict MUST be clearly reported via the YANG model status leaves.
+Operators and management systems SHOULD monitor the scheduling status of OAM tasks
+and take appropriate action if a conflict is reported. The resolution of conflicts
+(e.g., rescheduling, prioritization, or cancellation) is implementation-dependent,
+but the conflict MUST be clearly reported via the YANG model status leaves.
 
-To support deterministic operations across heterogeneous multi-vendor environments, implementations RECOMMEND performing a commit-time validation, e.g., if a scheduling
-conflict (e.g., the number of schedule conflict exceeds the specific threshold) or resource over-allocation is detectable a priori, the configuration commit SHOULD be
-rejected by the server rather than accepted for delayed resolution. Another example is when manually running OAM test is colliding with previously scheduled OAM tests,
-we need to make sure to check the existence of schedule tests before running manual OAM testing.
+To support deterministic operations across heterogeneous multi-vendor environments,
+implementations RECOMMEND performing a commit-time validation, e.g., if a scheduling
+conflict (e.g., the number of schedule conflict exceeds the specific threshold) or
+resource over-allocation is detectable a priori, the configuration commit SHOULD be
+rejected by the server rather than accepted for delayed resolution. Another example
+is when manually running OAM test is colliding with previously scheduled OAM tests,
+we need to make sure to check the existence of schedule tests before running manual
+OAM testing.
 
-If a conflict cannot be caught a priori or occurs dynamically during runtime execution, the server resolves the resource friction using a well-defined precedence model.
+If a conflict cannot be caught a priori or occurs dynamically during runtime execution,
+the server resolves the resource friction using a well-defined precedence model.
 OAM task categories are prioritized according to the following operational hierarchy:
 
-- On-Demand Troubleshooting: Manually triggered diagnostics designed to pinpoint live issues MUST take absolute precedence, overriding and preempting any scheduled or proactive monitoring sequences.
+- On-Demand Troubleshooting: Manually triggered diagnostics designed to pinpoint
+  live issues MUST take absolute precedence, overriding and preempting any scheduled
+  or proactive monitoring sequences.
 
-- Birth-Certificate/Verification Tests: Initial service activation verification sequences take secondary precedence, superseding background tasks but yielding to active troubleshooting if system
-  resources are exhausted.
+- Birth-Certificate/Verification Tests: Initial service activation verification
+  sequences take secondary precedence, superseding background tasks but yielding
+  to active troubleshooting if system resources are exhausted.
 
-- Proactive SLA Supervision: Routine, recurring performance verification tests operate under lowest relative priority and may be systematically deferred, rescheduled, or canceled when high-priority
-  tasks claim the required execution resources.
+- Proactive SLA Supervision: Routine, recurring performance verification tests
+  operate under lowest relative priority and may be systematically deferred,
+  rescheduled, or canceled when high-priority tasks claim the required execution
+  resources.
 
-When an active test or upcoming schedule is modified or aborted by a higher-priority operation, the server must update the corresponding unitary-test-status or test-sequence-status leaf.
-It must also log the preempted event alongside an error notification to ensure observability across the network management layer.
+When an active test or upcoming schedule is modified or aborted by a higher-priority
+operation, the server must update the corresponding unitary-test-status or
+test-sequence-status leaf. It must also log the preempted event alongside an error
+notification to ensure observability across the network management layer.
 
 ## Coverage of Input Parameters and Output Results
 
-The YANG models defined in this document are designed to schedule OAM tests at a network-wide level. The input parameters required to configure
-and execute specific OAM functions (such as test type, target, and configuration options) are referenced or reused from the existing device-level
-OAM YANG models (e.g., {{!RFC8531}}, {{!RFC8532}}, {{!RFC8533}}, {{!RFC8913}}). This approach avoids duplication and ensures consistency with
-established models.
+The YANG models defined in this document are designed to schedule OAM tests at a
+network-wide level. The input parameters required to configure and execute specific
+OAM functions (such as test type, target, and configuration options) are referenced
+or reused from the existing device-level OAM YANG models (e.g., {{!RFC8531}},
+{{!RFC8532}}, {{!RFC8533}}, {{!RFC8913}}). This approach avoids duplication and
+ensures consistency with established models.
 
-Similarly, the output results of OAM tests such as test status, performance metrics, and diagnostic information,are expected to be reported using
-the mechanisms and data nodes defined in those foundational YANG modules. The scheduling models in this document provide references to these output
-results and enable their collection and correlation across multiple tests and devices, but do not redefine the detailed input/output parameters of
-each OAM function.
+Similarly, the output results of OAM tests such as test status, performance metrics,
+and diagnostic information,are expected to be reported using the mechanisms and data
+nodes defined in those foundational YANG modules. The scheduling models in this
+document provide references to these output results and enable their collection and
+correlation across multiple tests and devices, but do not redefine the detailed
+input/output parameters of each OAM function.
 
-In summary, this document focuses on the scheduling, coordination, and status tracking of OAM tests, while relying on existing YANG models for the
-detailed specification of test parameters and results.
+In summary, this document focuses on the scheduling, coordination, and status tracking
+of OAM tests, while relying on existing YANG models for the detailed specification of
+test parameters and results.
 
 ## Use of the Managed Leaf
 
-The "managed" leaf in each "ne-config" entry defaults to "true", meaning that the orchestrator or controller hosting this model is expected to
-configure the device OAM function through the "root" schema-mount point.
+The "managed" leaf in each "ne-config" entry defaults to "true", meaning that the
+orchestrator or controller hosting this model is expected to configure the device
+OAM function through the "root" schema-mount point.
 
-Operators set "managed" to "false" when the OAM function on that network element is configured outside this model, for example by a device CLI,
-a local script, or a different controller. In that case, any attempt to access data below "root" fails with error-tag "access-denied" and
-error-app-tag "oamut-not-managed", as specified in the YANG module.
+Operators set "managed" to "false" when the OAM function on that network element is
+configured outside this model, for example by a device CLI, a local script, or a
+different controller. In that case, any attempt to access data below "root" fails
+with error-tag "access-denied" and error-app-tag "oamut-not-managed", as specified
+in the YANG module.
 
-Scheduling of the unitary test or test sequence still applies when "managed" is "false": time constraints and status reporting remain in this
-model, but the device-level OAM configuration is not pushed through the mount point. Implementations that cannot disable mount access may keep
-"managed" as a read-only value of "true".
+Scheduling of the unitary test or test sequence still applies when "managed" is
+"false": time constraints and status reporting remain in this model, but the
+device-level OAM configuration is not pushed through the mount point.
+Implementations that cannot disable mount access may keep "managed" as a read-only
+value of "true".
 
 ## Performance impact and Operational Guidance for concurrent OAM task scheduling
 
-Concurrent OAM task scheduling introduces significant resource strain across managed devices. Management and orchestration systems need to
-make sure to have sufficient resource before conducting those multiple concurrent OAM tasks. To plan capacity at scale and safeguard network
-stability, implementations SHOULD adhere to the following operational boundaries:
+Concurrent OAM task scheduling introduces significant resource strain across managed
+devices. Management and orchestration systems need to make sure to have sufficient
+resource before conducting those multiple concurrent OAM tasks. To plan capacity at
+scale and safeguard network stability, implementations SHOULD adhere to the following
+operational boundaries:
 
-- Concurrency Limits: Devices SHOULD enforce limits on concurrent active tests to prevent CPU starvation. Active traffic per interface MUST
-  be bounded to a minimal fraction (e.g., <1%) of link capacity. Network-wide tasks MUST be staggered using random jitter to avoid
-  synchronized telemetry and processing spikes.
+- Concurrency Limits: Devices SHOULD enforce limits on concurrent active tests to
+  prevent CPU starvation. Active traffic per interface MUST be bounded to a minimal
+  fraction (e.g., <1%) of link capacity. Network-wide tasks MUST be staggered using
+  random jitter to avoid synchronized telemetry and processing spikes.
 
-- Preemptive Control: Implementations SHOULD NOT rely solely on reporting resource-contention errors after a failure. Managed nodes SHOULD
-  apply local rate limiting and preemptive traffic-shaping. If resource thresholds are approached, devices SHOULD automatically defer or
-  back off pending tests, while prioritizing vital keep-alives over ad-hoc diagnostics.
+- Preemptive Control: Implementations SHOULD NOT rely solely on reporting
+  resource-contention errors after a failure. Managed nodes SHOULD apply local rate
+  limiting and preemptive traffic-shaping. If resource thresholds are approached,
+  devices SHOULD automatically defer or back off pending tests, while prioritizing
+  vital keep-alives over ad-hoc diagnostics.
 
-- SLA and Windowing Considerations: High-frequency proactive supervision MUST use various different QoS markings to reflect real line-rate
-  conditions without degrading SLAs. Bulk diagnostics SHOULD run at low priority. Routine supervision is suited for in-service periods,
-  whereas intrusive OAM loopbacks {{ITU-T-Y1731}} and multi-path tracing SHOULD be restricted to maintenance windows, where false alarms
-  must be suppressed.
+- SLA and Windowing Considerations: High-frequency proactive supervision MUST use
+  various different QoS markings to reflect real line-rate conditions without degrading
+  SLAs. Bulk diagnostics SHOULD run at low priority. Routine supervision is suited for
+  in-service periods, whereas intrusive OAM loopbacks {{ITU-T-Y1731}} and multi-path
+  tracing SHOULD be restricted to maintenance windows, where false alarms must be
+  suppressed.
 
 ## Impact on Security Operations
 
-Centrally orchestrated and scheduled OAM tests introduce specific traffic patterns—characterized by distinct timing, predictable volumes,
-and targeted path probing—that differ from normal network traffic. Network operators MUST evaluate the impact of these automated patterns
-on security operations systems:
+Centrally orchestrated and scheduled OAM tests introduce specific traffic
+patterns—characterized by distinct timing, predictable volumes, and targeted path
+probing—that differ from normal network traffic. Network operators MUST evaluate
+the impact of these automated patterns on security operations systems:
 
-- Anomaly Detection & IDS/IPS: Automated OAM traffic may trigger false positives in flow-based Intrusion Detection/Prevention Systems
-  (IDS/IPS) or behavioral anomaly detectors, which might flag rapid, scheduled path probing as network scanning. Operators SHOULD configure
-  security baseline policies to recognize authorized OAM orchestration boundaries or whitelist controlled test sources.
+- Anomaly Detection & IDS/IPS: Automated OAM traffic may trigger false positives in
+  flow-based Intrusion Detection/Prevention Systems (IDS/IPS) or behavioral anomaly
+  detectors, which might flag rapid, scheduled path probing as network scanning.
+  Operators SHOULD configure security baseline policies to recognize authorized OAM
+  orchestration boundaries or whitelist controlled test sources.
 
-- Packet Capture & Parsing Observability: Centralized scheduling can significantly increase packet volume during test windows. Network
-  monitoring tools, packet capture systems, and protocol parsing MUST be capable of identifying, parsing, and filtering these
-  scheduled OAM packets. This ensures that synthetic test traffic does not overwhelm log storage, degrade packet processing performance,
-  or obscure genuine malicious payloads hidden within traffic flows.
+- Packet Capture & Parsing Observability: Centralized scheduling can significantly
+  increase packet volume during test windows. Network monitoring tools, packet capture
+  systems, and protocol parsing MUST be capable of identifying, parsing, and filtering
+  these scheduled OAM packets. This ensures that synthetic test traffic does not
+  overwhelm log storage, degrade packet processing performance, or obscure genuine
+  malicious payloads hidden within traffic flows.
 
 ## Schedule Health Verification
 
-Operators SHOULD follow a post-configuration validation checklist to verify schedule health and configuration deployment. verification
-focuses on two primary phases:
+Operators SHOULD follow a post-configuration validation checklist to verify
+schedule health and configuration deployment. verification focuses on two
+primary phases:
 
-- Schedule Acceptance Verification: Operators must inspect the root schedule instance to ensure it has been successfully accepted by the controller.
-  This is validated by verifying that the upcoming-occurrence leaf and status counters imported from the ietf-schedule module reflect a valid,
-   upcoming execution timestamp rather than an error or inactive state.
+- Schedule Acceptance Verification: Operators must inspect the root schedule
+  instance to ensure it has been successfully accepted by the controller. This
+  is validated by verifying that the upcoming-occurrence leaf and status counters
+  imported from the ietf-schedule module reflect a valid, upcoming execution
+  timestamp rather than an error or inactive state.
 
-- Mount Application Verification: Operators must verify that the OAM configuration nested under the schema mount root has been successfully
-  propagated to each target network element (ne-id). This is achieved by querying the local state of the mounted OAM unitary test or test
-  sequence modules on individual network elements to confirm that the configuration was applied correctly and the elements are primed for
-  the upcoming schedule trigger.
+- Mount Application Verification: Operators must verify that the OAM configuration
+  nested under the schema mount root has been successfully propagated to each target
+  network element (ne-id). This is achieved by querying the local state of the mounted
+  OAM unitary test or test sequence modules on individual network elements to confirm
+  that the configuration was applied correctly and the elements are primed for the
+  upcoming schedule trigger.
 
 ## Operational Considerations for Auditing and Results Tracking
 
-To support the accounting and auditing requirements described in Section 2.2 and Section 2.3, the test results of the scheduling model
-including mounted device-model result or audit nodes should be associated with each schedule instance to ensure that automated audit tools
-and operators can seamlessly validate test execution, correlate schedules with actual performance data, and maintain a verifiable audit
-trail.
+To support the accounting and auditing requirements described in Section 2.2 and
+Section 2.3, the test results of the scheduling model including mounted device-model
+result or audit nodes should be associated with each schedule instance to ensure that
+automated audit tools and operators can seamlessly validate test execution, correlate
+schedules with actual performance data, and maintain a verifiable audit trail.
 
 # Security Considerations
 
@@ -697,15 +767,15 @@ The following subtrees and data nodes have particular sensitivities/vulnerabilit
 
 * /oamut:oam-unitary-tests/oamut:oam-unitary-test:
   This list specifies all the oam unitary test entries for network diagnosis procedures.
-  Unauthorized write access to this list can allow intruders to modify the entries so as
-  to forge an unitary test name that does not exist or maliciously delete an existing unitary
-  test, which could be used to craft an attack.
+  Unauthorized write access to this list can allow intruders to modify the entries so
+  as to forge an unitary test name that does not exist or maliciously delete an existing
+  unitary test, which could be used to craft an attack.
 
 * /oamts:oam-test-sequence/oamts:test-sequence:
   This list specifies all the oam test sequence entries for network diagnosis procedures.
-  Unauthorized write access to this list can allow intruders to modify the entries so as to forge
-  an test sequence name that does not exist or maliciously delete an existing test sequence, which
-  could be used to craft an attack.
+  Unauthorized write access to this list can allow intruders to modify the entries so as
+  to forge an test sequence name that does not exist or maliciously delete an existing
+  test sequence, which could be used to craft an attack.
 
 This YANG module uses groupings from other YANG modules that
 define nodes that may be considered sensitive or vulnerable
