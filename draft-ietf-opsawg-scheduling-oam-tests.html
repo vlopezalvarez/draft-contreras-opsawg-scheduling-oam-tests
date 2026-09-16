@@ -9,7 +9,7 @@
 <meta content="Victor Lopez" name="author">
 <meta content="Qin Wu" name="author">
 <meta content="
-       This document defines two YANG data models to support scheduled network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
+       This document defines two YANG Data Models to support scheduled network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
 This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures,
 intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by
 individual network nodes. 
@@ -1091,7 +1091,7 @@ svg {
 <h1 id="title">A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM Tests</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines two YANG data models to support scheduled network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
+<p id="section-abstract-1">This document defines two YANG Data Models to support scheduled network diagnosis using Operations, Administration, and Maintenance (OAM) tests.
 This document defines both 'oam-unitary-test' and 'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures,
 intended for use by external management and orchestration systems (including SDN controllers and network orchestrators), rather than by
 individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
@@ -1102,7 +1102,7 @@ individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">
-        The latest revision of this draft can be found at <span><a href="https://vlopezalvarez.github.io/draft-ietf-opsawg-scheduling-oam-tests/draft-ietf-opsawg-scheduling-oam-tests.html">https://vlopezalvarez.github.io/draft-ietf-opsawg-scheduling-oam-tests/draft-ietf-opsawg-scheduling-oam-tests.html</a></span>.
+        The latest revision of this draft can be found at <span><a href="https://vlopezalvarez.github.io/draft-contreras-opsawg-scheduling-oam-tests/draft-ietf-opsawg-scheduling-oam-tests.html">https://vlopezalvarez.github.io/draft-contreras-opsawg-scheduling-oam-tests/draft-ietf-opsawg-scheduling-oam-tests.html</a></span>.
         Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-opsawg-scheduling-oam-tests/">https://datatracker.ietf.org/doc/draft-ietf-opsawg-scheduling-oam-tests/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">
         Discussion of this document takes place on the
@@ -1110,7 +1110,7 @@ individual network nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p
         which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/opsawg/">https://mailarchive.ietf.org/arch/browse/opsawg/</a></span>.
         Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/opsawg/">https://www.ietf.org/mailman/listinfo/opsawg/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 <p id="section-note.1-4">Source for this draft and an issue tracker can be found at
-        <span><a href="https://github.com/vlopezalvarez/draft-ietf-opsawg-scheduling-oam-tests">https://github.com/vlopezalvarez/draft-ietf-opsawg-scheduling-oam-tests</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+        <span><a href="https://github.com/vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests">https://github.com/vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1362,7 +1362,6 @@ diagnosis procedures. In addition to reusing the device-level OAM YANG models fr
 generic scheduling framework defined in <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>. The <code>ietf-schedule</code> module provides reusable groupings and mechanisms for specifying periods of time,
 recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM unitary test and OAM test sequence models defined in this
 document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a network-wide context.<a href="#section-1-12" class="pilcrow">¶</a></p>
-<p id="section-1-13">The YANG data models resulting from this document will conform to the Network Management Datastore Architecture (NMDA) <span>[<a href="#RFC8342" class="cite xref">RFC8342</a>]</span>.<a href="#section-1-13" class="pilcrow">¶</a></p>
 <div id="terminology-and-notations">
 <section id="section-1.1">
         <h3 id="name-terminology-and-notations">
@@ -1687,7 +1686,7 @@ notifications are not in the scope of this document.<a href="#section-4.1-7" cla
 |    |   |      +-------+              +----------+
 |    |   |                                 |
 |    |   |          +--------+             |
-|    |   -----------|  stop  |&lt;------------+
+|    |   +----------|  stop  |&lt;------------+
 |    |              +--------+             |
 |    |                                     |
 | +---------+                              |
@@ -1828,11 +1827,11 @@ YANG notifications are not in the scope of this document.<a href="#section-4.2-8
  |    |   |     +-------+              +----------+
  |    |   |                                |
  |    |   |         +--------+             |
- |    |   ----------|  stop  |&lt;------------+
+ |    |   +---------|  stop  |&lt;------------+
  |    |             +--------+             |
  |    |                                    |
  |    |         +---------+                |
- |    ----------| failure |&lt;---------------+
+ |    +---------| failure |&lt;---------------+
  |              +---------+                |
  |                                         |
  | +---------+                             |
@@ -1859,10 +1858,10 @@ YANG notifications are not in the scope of this document.<a href="#section-4.2-8
         <h3 id="name-yang-model-for-scheduling-o">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-yang-model-for-scheduling-o" class="section-name selfRef">YANG Model for Scheduling OAM Unitary Test</a>
         </h3>
-<p id="section-5.1-1">This module imports typedefs from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>, <span>[<a href="#RFC8528" class="cite xref">RFC8528</a>]</span> and <span>[<a href="#RFC8294" class="cite xref">RFC8294</a>]</span>, and it
+<p id="section-5.1-1">This module imports typedefs from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>, <span>[<a href="#RFC8528" class="cite xref">RFC8528</a>]</span> and <span>[<a href="#RFC9911" class="cite xref">RFC9911</a>]</span>, and it
 references <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>, <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, <span>[<a href="#RFC9228" class="cite xref">RFC9228</a>]</span>, <span>[<a href="#RFC9107" class="cite xref">RFC9107</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <div class="breakable sourcecode" id="section-5.1-2">
-<pre>&lt;CODE BEGINS&gt; file ietf-oam-unitary-test@2026-01-13.yang
+<pre>&lt;CODE BEGINS&gt; file ietf-oam-unitary-test@2026-09-14.yang
 module ietf-oam-unitary-test {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test";
@@ -2143,7 +2142,7 @@ module ietf-oam-unitary-test {
         </h3>
 <p id="section-5.2-1">This module imports typedefs from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <div class="breakable sourcecode" id="section-5.2-2">
-<pre>&lt;CODE BEGINS&gt; file ietf-oam-test-sequence@2026-01-13.yang
+<pre>&lt;CODE BEGINS&gt; file ietf-oam-test-sequence@2026-09-14.yang
 
 module ietf-oam-test-sequence {
   yang-version 1.1;
@@ -2198,7 +2197,7 @@ module ietf-oam-test-sequence {
     // RFC Ed.: replace XXXX with actual RFC number and remove
     // this note.
 
-  revision "2026-01-13" {
+  revision "2026-09-14" {
     description "Initial version";
     reference "RFCXXXX";
   }
@@ -2700,10 +2699,6 @@ automation via an end-to-end AI framework (6G-DALI) Project under Grant 10119275
         <dd>
 <span class="refAuthor">Dhody, D.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Manral, V.</span>, <span class="refAuthor">Ali, Z.</span>, and <span class="refAuthor">K. Kumaki</span>, <span class="refTitle">"Extensions to the Path Computation Element Communication Protocol (PCEP) to Compute Service-Aware Label Switched Paths (LSPs)"</span>, <span class="seriesInfo">RFC 8233</span>, <span class="seriesInfo">DOI 10.17487/RFC8233</span>, <time datetime="2017-09" class="refDate">September 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8233">https://www.rfc-editor.org/rfc/rfc8233</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8294">[RFC8294]</dt>
-        <dd>
-<span class="refAuthor">Liu, X.</span>, <span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Lindem, A.</span>, <span class="refAuthor">Hopps, C.</span>, and <span class="refAuthor">L. Berger</span>, <span class="refTitle">"Common YANG Data Types for the Routing Area"</span>, <span class="seriesInfo">RFC 8294</span>, <span class="seriesInfo">DOI 10.17487/RFC8294</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8294">https://www.rfc-editor.org/rfc/rfc8294</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC8340">[RFC8340]</dt>
         <dd>
 <span class="refAuthor">Bjorklund, M.</span> and <span class="refAuthor">L. Berger, Ed.</span>, <span class="refTitle">"YANG Tree Diagrams"</span>, <span class="seriesInfo">BCP 215</span>, <span class="seriesInfo">RFC 8340</span>, <span class="seriesInfo">DOI 10.17487/RFC8340</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8340">https://www.rfc-editor.org/rfc/rfc8340</a>&gt;</span>. </dd>
@@ -2711,10 +2706,6 @@ automation via an end-to-end AI framework (6G-DALI) Project under Grant 10119275
 <dt id="RFC8341">[RFC8341]</dt>
         <dd>
 <span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Access Control Model"</span>, <span class="seriesInfo">STD 91</span>, <span class="seriesInfo">RFC 8341</span>, <span class="seriesInfo">DOI 10.17487/RFC8341</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8341">https://www.rfc-editor.org/rfc/rfc8341</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8342">[RFC8342]</dt>
-        <dd>
-<span class="refAuthor">Bjorklund, M.</span>, <span class="refAuthor">Schoenwaelder, J.</span>, <span class="refAuthor">Shafer, P.</span>, <span class="refAuthor">Watsen, K.</span>, and <span class="refAuthor">R. Wilton</span>, <span class="refTitle">"Network Management Datastore Architecture (NMDA)"</span>, <span class="seriesInfo">RFC 8342</span>, <span class="seriesInfo">DOI 10.17487/RFC8342</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8342">https://www.rfc-editor.org/rfc/rfc8342</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8446">[RFC8446]</dt>
         <dd>
@@ -2763,6 +2754,10 @@ automation via an end-to-end AI framework (6G-DALI) Project under Grant 10119275
 <dt id="RFC9907">[RFC9907]</dt>
         <dd>
 <span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M., Ed.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="seriesInfo">BCP 216</span>, <span class="seriesInfo">RFC 9907</span>, <span class="seriesInfo">DOI 10.17487/RFC9907</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9907">https://www.rfc-editor.org/rfc/rfc9907</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9911">[RFC9911]</dt>
+        <dd>
+<span class="refAuthor">Schönwälder, J., Ed.</span>, <span class="refTitle">"Common YANG Data Types"</span>, <span class="seriesInfo">RFC 9911</span>, <span class="seriesInfo">DOI 10.17487/RFC9911</span>, <time datetime="2025-12" class="refDate">December 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9911">https://www.rfc-editor.org/rfc/rfc9911</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9922">[RFC9922]</dt>
         <dd>
