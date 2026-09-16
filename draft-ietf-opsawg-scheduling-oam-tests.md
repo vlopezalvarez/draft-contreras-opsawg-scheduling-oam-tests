@@ -109,21 +109,26 @@ the network incident diagnosis, which can be favored by dynamic invocation of OA
 
 {{!RFC8531}}, {{!RFC8532}}, {{!RFC8533}} defined YANG models for OAM technologies:
 
-o {{!RFC8531}} "A YANG Data Model for Connection Oriented OAM": defines a YANG data model for connection-oriented OAM protocols. The main aim of this document
-is to define a generic YANG data model that can be used to configure, control, and monitor connection-oriented OAM protocols such as MPLS-TP OAM {{?RFC6371}},
-TRILL OAM {{?RFC7174}}, PBB-TE OAM {{IEEE-8021ag}}, and T-MPLS {{ITU-T-G81131}} OAM.
+o {{!RFC8531}} "A YANG Data Model for Connection Oriented OAM": defines
+   a YANG data model for connection-oriented OAM protocols.  The main
+   aim of this document is to define a generic YANG data model that can
+   be used to configure, control, and monitor connection-oriented OAM
+   protocols such as MPLS-TP OAM {{?RFC6371}} and TRILL OAM {{?RFC7174}}.
 
-o {{!RFC8532}} "A YANG Data Model for Connectionless OAM Protocols": provides a generic YANG data model that can be used to configure, control, and monitor
-connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection) {{?RFC5880}}, LBM (Loopback Messaging){{IEEE-8021ag}}, and VCCV (Virtual Circuit
-Connectivity Verification){{?RFC5085}}.
+o {{!RFC8532}} "A YANG Data Model for Connectionless OAM Protocols": provides
+   a generic YANG data model that can be used to configure, control, and monitor
+   connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection)
+   {{?RFC5880}}, ICMP Ping {{?RFC792}} {{?RFC4443}}, and LSP Ping {{?RFC8029}}.
 
-o {{!RFC8533}} "A YANG Data Model for Retrieval Methods for the Management of OAM Protocols that Use Connectionless Communications": provides a YANG data model
-that can be used to retrieve information related to OAM protocols such as BFD (Bidirectional Forwarding Detection){{?RFC5880}}, LBM (Loopback Messaging)
-{{IEEE-8021ag}}, and VCCV (Virtual Circuit Connectivity Verification) {{?RFC5085}}.
+o {{!RFC8533}} "A YANG Data Model for Retrieval Methods for the Management of OAM
+   Protocols that Use Connectionless Communications": provides a YANG data model
+   that can be used to retrieve information related to OAM protocols such as BFD
+   (Bidirectional Forwarding Detection) {{?RFC5880}}, ICMP Ping {{?RFC792}}
+   {{?RFC4443}}, and LSP Ping {{?RFC8029}}.
 
-These OAM related YANG data models defined parameters required for each of the different tests that are used in network elements today. This work aims to reuse
-and build upon existing YANG models for OAM technologies, such as those defined in {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}. By leveraging these foundational
-models, this document specifies two YANG data models for scheduling and coordinating sequences of OAM tests, enabling more advanced and automated network
+These OAM related YANG data models at the device level defined parameters required for each of the different tests that are used in network elements today. This work
+aims to reuse and build upon existing YANG models for OAM technologies, such as those defined in {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}. By leveraging these foundational
+models, this document specifies two Network Models {{!RFC8969}} for scheduling and coordinating sequences of OAM tests, enabling more advanced and automated network
 diagnosis procedures. In addition to reusing the device-level OAM YANG models from {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}, this document builds upon the
 generic scheduling framework defined in {{!RFC9922}}. The `ietf-schedule` module provides reusable groupings and mechanisms for specifying periods of time,
 recurrence rules, and scheduling status. These constructs are directly imported and used in the OAM unitary test and OAM test sequence models defined in this
@@ -182,7 +187,7 @@ provide a mechanism to via a YANG-based interface, manage the lifecycle
 of network diagnosis procedure from the network controller to network
 elements with a focus on scheduling Network Diagnosis. In addition,
 the network controller use schema mount mechanism {{!RFC8528}} to retrieve ietf-yang-library
-data from the underlying network element and instantiate specific OAM modules
+data from the underlying network element and instantiate specific device-level OAM modules
 the network element supports under the designated data node (labeled as a
 mount-point).  If multiple identical devices are being managed, the network
 controller can reference a shared schema entry configured in its own
