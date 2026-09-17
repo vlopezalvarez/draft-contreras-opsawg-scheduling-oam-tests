@@ -59,7 +59,9 @@ module ietf-oam-test-sequence {
   /* Identities */	
 	 identity test-sequence-status {
 	   description
-	     "Base identity for test-sequence-status.";
+	     "Base identity for test-sequence-status. Note
+          that it only allows extensible error reporting
+          such as resource contention, priority conflict.";
 	 }
 	 identity planned {
 	   base test-sequence-status;
