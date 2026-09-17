@@ -442,15 +442,15 @@ specified time constraints, repetitions, ordering, and reporting outputs. These 
 structured approach to running multiple OAM tests in a coordinated manner.
 
 Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test
-sequence has two temporal parameters related to time constraints: "period" and "recurrence" and one
-constraint related to ordering: "ordered-by user". Time constraints parameters are imported from the
-"ietf-schedule" module from {{!RFC9922}}. "period" identifies the one shot period values that contain
-a precise period of time and can be used to support on demand troubleshooting, while "recurrence"
-identifies the properties that contain a recurrence rule specification and can be used to support
-periodical troubleshooting. "ordered-by user" YANG statement indicates that the user is responsible for
-the ordering on a collection of OAM unitary tests. "test-sequence-status" shows the state of the OAM
-test sequence. "state" imported from the "ietf-schedule" module indicates the current state of the
-schedule.
+sequence has two temporal parameters related to time constraints: "period" container and "recurrence"
+container and one constraint related to ordering: "ordered-by user". Time constraints parameters are
+imported from the "ietf-schedule" module from {{!RFC9922}}. "period" identifies the one shot period
+values that contain a precise period of time and can be used to support on demand troubleshooting,
+while "recurrence" identifies the properties that contain a recurrence rule specification and can be
+used to support periodical troubleshooting. "ordered-by user" YANG statement indicates that the user
+is responsible for the ordering on a collection of OAM unitary tests. "test-sequence-status" shows
+the state of the OAM test sequence. "state" imported from the "ietf-schedule" module indicates the
+current state of the schedule.
 
 Note that repetition is specified by "count" parameter and only applies to the recurrence
 schedule type. If no count is indicated, the test is considered to run indefinitely. In case of the
@@ -639,7 +639,7 @@ to detect and report such conflicts.
 The YANG models defined in this document (both for unitary test and test sequence)
 use the unitary-test-status and test-sequence-status leaves to indicate the current
 scheduling state of each OAM task. These leaves are of type identityref, allowing
-extensible reporting. If a conflict is detected (e.g., two tests require exclusive
+extensible error reporting. If a conflict is detected (e.g., two tests require exclusive
 access to the same resource at the same time), the server sets the corresponding
 status to error or to a more specific error-cause identity derived from error:
 resource-contention for resource conflicts, or priority for prioritization-related
