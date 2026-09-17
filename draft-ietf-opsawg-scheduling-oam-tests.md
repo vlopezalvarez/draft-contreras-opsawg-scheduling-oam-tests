@@ -516,7 +516,7 @@ module: ietf-oam-test-sequence
 ~~~~
 {: #oam-test-sequence-tree-st title="OAM Test Sequence" artwork-align="center"}
 
-### Test Sequence Status State Machine 
+### Test Sequence Status State Machine
 
 The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}. The state machine
 includes the following states:
