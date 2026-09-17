@@ -1220,18 +1220,23 @@ A.1.  Create a TWAMP OAM test
          {
            "name": "TWAMP-Test-scheduled-daily",
            "recurrence": {
-           "recurrence-first": "2023-10-17T09:00:00Z",
-           "duration": "PT1H",
+           "recurrence-first": {
+           "start-time-utc": "2026-10-17T09:00:00Z",
+           "duration": "PT1H"
+            },
+           "utc-until": "2026-12-31T23:59:59Z",
            "recurrence-description": "TWAMP Test Reccurence, Daily at \
                                                               9 AM UTC",
            "frequency": "oam-types:daily",
-           "interval": 1,
+           "interval": 1
+           },
            "unitary-test-status": "configured",
            "ne-config": [
              {
                "ne-id": "203.0.113.3",
                "managed": "true",
                "test-type": "twamp",
+               "root": {
                "twamp": {
                  "session-sender": {
                    "admin-state": true,
@@ -1262,11 +1267,13 @@ A.1.  Create a TWAMP OAM test
                    ]
                  }
                }
-             },
-             {
+             }
+           },
+           {
                "ne-id": "203.0.113.4",
                "managed": "true",
                "test-type": "twamp",
+               "root": {
                "twamp": {
                  "session-reflector": {
                    "admin-state": true,
@@ -1307,8 +1314,9 @@ A.1.  Create a TWAMP OAM test
                  }
                }
              }
-           ]
-         }}
+           }
+         ]
+        }
        ]
      }
    }

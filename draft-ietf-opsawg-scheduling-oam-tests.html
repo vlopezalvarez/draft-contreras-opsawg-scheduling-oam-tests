@@ -1925,7 +1925,7 @@ orchestration systems subscribe to these YANG notifications are not in the scope
         </h3>
 <p id="section-5.1-1">This module imports typedefs from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>, <span>[<a href="#RFC8528" class="cite xref">RFC8528</a>]</span> and <span>[<a href="#RFC9911" class="cite xref">RFC9911</a>]</span>, and it
 uses references defined in <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>, <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>,
-<span>[<a href="#RFC9228" class="cite xref">RFC9228</a>]</span>, <span>[<a href="#RFC9107" class="cite xref">RFC9107</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC8029" class="cite xref">RFC8029</a>]</span>, <span>[<a href="#RFC9107" class="cite xref">RFC9107</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <div class="breakable sourcecode" id="section-5.1-2">
 <pre>&lt;CODE BEGINS&gt; file ietf-oam-unitary-test@2026-09-14.yang
 module ietf-oam-unitary-test {
@@ -3006,10 +3006,6 @@ AI framework (6G-DALI) Project under Grant 101192750.<a href="#section-11-2" cla
         <dd>
 <span class="refAuthor">Brockners, F., Ed.</span>, <span class="refAuthor">Bhandari, S., Ed.</span>, and <span class="refAuthor">T. Mizrahi, Ed.</span>, <span class="refTitle">"Data Fields for In Situ Operations, Administration, and Maintenance (IOAM)"</span>, <span class="seriesInfo">RFC 9197</span>, <span class="seriesInfo">DOI 10.17487/RFC9197</span>, <time datetime="2022-05" class="refDate">May 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9197">https://www.rfc-editor.org/rfc/rfc9197</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC9228">[RFC9228]</dt>
-        <dd>
-<span class="refAuthor">Crocker, D., Ed.</span>, <span class="refTitle">"Delivered-To Email Header Field"</span>, <span class="seriesInfo">RFC 9228</span>, <span class="seriesInfo">DOI 10.17487/RFC9228</span>, <time datetime="2022-04" class="refDate">April 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9228">https://www.rfc-editor.org/rfc/rfc9228</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC9341">[RFC9341]</dt>
         <dd>
 <span class="refAuthor">Fioccola, G., Ed.</span>, <span class="refAuthor">Cociglio, M.</span>, <span class="refAuthor">Mirsky, G.</span>, <span class="refAuthor">Mizrahi, T.</span>, and <span class="refAuthor">T. Zhou</span>, <span class="refTitle">"Alternate-Marking Method"</span>, <span class="seriesInfo">RFC 9341</span>, <span class="seriesInfo">DOI 10.17487/RFC9341</span>, <time datetime="2022-12" class="refDate">December 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9341">https://www.rfc-editor.org/rfc/rfc9341</a>&gt;</span>. </dd>
@@ -3070,18 +3066,23 @@ degradations in service quality over time.<a href="#appendix-A.1-2" class="pilcr
       {
         "name": "TWAMP-Test-scheduled-daily",
         "recurrence": {
-        "recurrence-first": "2023-10-17T09:00:00Z",
-        "duration": "PT1H",
+        "recurrence-first": {
+        "start-time-utc": "2026-10-17T09:00:00Z",
+        "duration": "PT1H"
+         },
+        "utc-until": "2026-12-31T23:59:59Z",
         "recurrence-description": "TWAMP Test Reccurence, Daily at \
                                                            9 AM UTC",
         "frequency": "oam-types:daily",
-        "interval": 1,
+        "interval": 1
+        },
         "unitary-test-status": "configured",
         "ne-config": [
           {
             "ne-id": "203.0.113.3",
             "managed": "true",
             "test-type": "twamp",
+            "root": {
             "twamp": {
               "session-sender": {
                 "admin-state": true,
@@ -3112,11 +3113,13 @@ degradations in service quality over time.<a href="#appendix-A.1-2" class="pilcr
                 ]
               }
             }
-          },
-          {
+          }
+        },
+        {
             "ne-id": "203.0.113.4",
             "managed": "true",
             "test-type": "twamp",
+            "root": {
             "twamp": {
               "session-reflector": {
                 "admin-state": true,
@@ -3157,8 +3160,9 @@ degradations in service quality over time.<a href="#appendix-A.1-2" class="pilcr
               }
             }
           }
-        ]
-      }}
+        }
+      ]
+     }
     ]
   }
 }

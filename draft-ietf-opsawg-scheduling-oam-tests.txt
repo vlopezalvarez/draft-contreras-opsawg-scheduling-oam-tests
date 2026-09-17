@@ -737,7 +737,7 @@ Table of Contents
 
    This module imports typedefs from [RFC9922], [RFC8528] and [RFC9911],
    and it uses references defined in [RFC8531], [RFC8532], [RFC9617],
-   [RFC8913], [RFC9228], [RFC9107].
+   [RFC8913], [RFC8029], [RFC9107].
 
    <CODE BEGINS>
     file ietf-oam-unitary-test@2026-09-14.yang
@@ -1813,10 +1813,6 @@ Informative References
               and Maintenance (IOAM)", RFC 9197, DOI 10.17487/RFC9197,
               May 2022, <https://www.rfc-editor.org/rfc/rfc9197>.
 
-   [RFC9228]  Crocker, D., Ed., "Delivered-To Email Header Field",
-              RFC 9228, DOI 10.17487/RFC9228, April 2022,
-              <https://www.rfc-editor.org/rfc/rfc9228>.
-
    [RFC9341]  Fioccola, G., Ed., Cociglio, M., Mirsky, G., Mizrahi, T.,
               and T. Zhou, "Alternate-Marking Method", RFC 9341,
               DOI 10.17487/RFC9341, December 2022,
@@ -1875,18 +1871,23 @@ A.1.  Create a TWAMP OAM test
          {
            "name": "TWAMP-Test-scheduled-daily",
            "recurrence": {
-           "recurrence-first": "2023-10-17T09:00:00Z",
-           "duration": "PT1H",
+           "recurrence-first": {
+           "start-time-utc": "2026-10-17T09:00:00Z",
+           "duration": "PT1H"
+            },
+           "utc-until": "2026-12-31T23:59:59Z",
            "recurrence-description": "TWAMP Test Reccurence, Daily at \
                                                               9 AM UTC",
            "frequency": "oam-types:daily",
-           "interval": 1,
+           "interval": 1
+           },
            "unitary-test-status": "configured",
            "ne-config": [
              {
                "ne-id": "203.0.113.3",
                "managed": "true",
                "test-type": "twamp",
+               "root": {
                "twamp": {
                  "session-sender": {
                    "admin-state": true,
@@ -1917,11 +1918,13 @@ A.1.  Create a TWAMP OAM test
                    ]
                  }
                }
-             },
-             {
+             }
+           },
+           {
                "ne-id": "203.0.113.4",
                "managed": "true",
                "test-type": "twamp",
+               "root": {
                "twamp": {
                  "session-reflector": {
                    "admin-state": true,
@@ -1962,8 +1965,9 @@ A.1.  Create a TWAMP OAM test
                  }
                }
              }
-           ]
-         }}
+           }
+         ]
+        }
        ]
      }
    }
