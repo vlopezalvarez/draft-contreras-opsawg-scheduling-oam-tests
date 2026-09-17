@@ -452,7 +452,7 @@ the ordering on a collection of OAM unitary tests. "test-sequence-status" shows 
 test sequence. "state" imported from the "ietf-schedule" module indicates the current state of the
 schedule.
 
-Note that repetition is specified by "execution-count" parameter and only applies to the recurrence
+Note that repetition is specified by "count" parameter and only applies to the recurrence
 schedule type. If no count is indicated, the test is considered to run indefinitely. In case of the
 recurrence schedule type, both frequency and interval should be specified. Each execution runs at the
 scheduled recurrence interval. Since the OAM test sequence model consists of a collection of OAM unitary
@@ -512,7 +512,6 @@ module: ietf-oam-test-sequence
                  +--rw recurrence-description?   string
                  +--rw frequency?                identityref
                  +--rw interval?                 uint32
-                 +--rw execution-count?          uint32
 ~~~~
 {: #oam-test-sequence-tree-st title="OAM Test Sequence" artwork-align="center"}
 
@@ -814,8 +813,8 @@ Both "ietf-oam-unitary-test " YANG module and "ietf-oam-test-sequence"
 YANG module define data models that are designed to be accessed via
 YANG-based management protocols, such as the Network Configuration Protocol
 (NETCONF) {{!RFC6241}} and RESTCONF {{!RFC8040}}.  These YANG-based management
-protocols (1) have to use a secure transport layer (e.g., Secure Shell (SSH)
-{{!RFC4252}}, TLS {{!RFC8446}}, and QUIC {{!RFC9000}}) and (2) have to use
+protocols (1) MUST use a secure transport layer (e.g., Secure Shell (SSH)
+{{!RFC4252}}, TLS {{!RFC8446}}, and QUIC {{!RFC9000}}) and (2) MUST use
 mutual authentication.
 
 The Network Configuration Access Control Model (NACM) {{!RFC8341}}
