@@ -915,8 +915,7 @@ scheduled test results look like from mounted device models surface through NMDA
 retrieval. This example uses the "twamp" identity defined in the ietf-oam-unitary-test
 module (derived from "basic-test-type") to indicate the test type; the TWAMP device
 model is mounted at the "root" of each "ne-config" entry. The example contains the
-information for the four configurations (Control-Client, Server, Session-Sender
-and Session-Reflector).
+information for the two configurations (Session-Sender and Session-Reflector).
 
 An example of a request message body to create a TWAMP OAM test is shown in
 {{create-twp-oam}}. Session-Sender and Session-Reflector as expanded for illustrative
