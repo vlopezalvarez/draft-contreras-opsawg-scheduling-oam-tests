@@ -120,20 +120,20 @@ monitoring, some examples are:
 More recently, Incident Management {{?I-D.ietf-nmop-network-incident-yang}} focuses on
 the network incident diagnosis, which can be favored by dynamic invocation of OAM tests.
 
-{{!RFC8531}}, {{!RFC8532}}, {{!RFC8533}} defined YANG models for OAM technologies:
+{{?RFC8531}}, {{?RFC8532}}, {{?RFC8533}} defined YANG models for OAM technologies:
 
-o {{!RFC8531}} "A YANG Data Model for Connection Oriented OAM": defines
+o {{?RFC8531}} "A YANG Data Model for Connection Oriented OAM": defines
    a YANG data model for connection-oriented OAM protocols.  The main
    aim of this document is to define a generic YANG data model that can
    be used to configure, control, and monitor connection-oriented OAM
    protocols such as MPLS-TP OAM {{?RFC6371}} and TRILL OAM {{?RFC7174}}.
 
-o {{!RFC8532}} "A YANG Data Model for Connectionless OAM Protocols": provides
+o {{?RFC8532}} "A YANG Data Model for Connectionless OAM Protocols": provides
    a generic YANG data model that can be used to configure, control, and monitor
    connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection)
    {{?RFC5880}}, ICMP Ping {{?RFC792}} {{?RFC4443}}, and LSP Ping {{?RFC8029}}.
 
-o {{!RFC8533}} "A YANG Data Model for Retrieval Methods for the Management of OAM
+o {{?RFC8533}} "A YANG Data Model for Retrieval Methods for the Management of OAM
    Protocols that Use Connectionless Communications": provides a YANG data model
    that can be used to retrieve information related to OAM protocols such as BFD
    (Bidirectional Forwarding Detection) {{?RFC5880}}, ICMP Ping {{?RFC792}}
@@ -322,7 +322,7 @@ the PCE algorithms.
 
 This document specifies two models: OAM Unitary Test and OAM Test Sequence models.
 
-## OAM Unitary Test
+## OAM Unitary Test {#oam-ut}
 
 The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The
 YANG model includes a container named "oam-unitary-tests" that serves as a container for activating OAM unitary
@@ -434,7 +434,7 @@ systems subscribe to these YANG notifications are not in the scope of this docum
 ~~~~
 {: #st-unitary-test-status title="OAM Unitary Test State Machine" artwork-align="center"}
 
-## OAM Test Sequence
+## OAM Test Sequence {#oam-ts}
 
 The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on
 specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a
@@ -572,7 +572,8 @@ orchestration systems subscribe to these YANG notifications are not in the scope
 ## YANG Model for Scheduling OAM Unitary Test
 
 This module imports typedefs from {{!RFC9922}}, {{!RFC8528}} and {{!RFC9911}}, and it
-references {{!RFC8531}}, {{!RFC8532}}, {{!RFC9617}}, {{!RFC8913}}, {{!RFC9228}}, {{!RFC9107}}.
+uses references defined in {{?RFC8531}}, {{?RFC8532}}, {{?RFC9617}}, {{?RFC8913}},
+{{?RFC9228}}, {{?RFC9107}}.
 
 ~~~~~~~~~~
 <CODE BEGINS> file ietf-oam-unitary-test@2026-09-14.yang
@@ -620,7 +621,7 @@ identities for OAM test type; YANG modules that augment "ietf-oam-unitary-test"
 may define additional child identities derived from "basic-test-type" for other
 OAM test types.
 
-As an example, we will use {{!RFC8913}}, which defines a YANG data model for
+As an example, we will use {{?RFC8913}}, which defines a YANG data model for
 TWAMP, to illustrate how device models could be used in {{ex-create-twp-oam}}.
 
 # Operational Considerations
@@ -637,11 +638,13 @@ The YANG models defined in this document (both for unitary test and test sequenc
 use the unitary-test-status and test-sequence-status leaves to indicate the current
 scheduling state of each OAM task. These leaves are of type identityref, allowing
 extensible reporting. If a conflict is detected (e.g., two tests require exclusive
-access to the same resource at the same time), the server sets the status to error
-or to a more specific error-cause identity derived from error: resource-contention
-for resource conflicts, or priority for prioritization-related conflicts. This
-error-cause indication allows operators and management systems to distinguish the
-reasons for the failure.
+access to the same resource at the same time), the server sets the corresponding
+status to error or to a more specific error-cause identity derived from error:
+resource-contention for resource conflicts, or priority for prioritization-related
+conflicts {{oam-ut}}{{oam-st}}. This error-cause indication allows operators and
+management systems to distinguish the reasons for the failure. Note that it is
+intention to allow extensibility for the error codes rather than extend states in
+the state machine.
 
 Operators and management systems SHOULD monitor the scheduling status of OAM tasks
 and take appropriate action if a conflict is reported. The resolution of conflicts
@@ -677,15 +680,19 @@ OAM task categories are prioritized according to the following operational hiera
 When an active test or upcoming schedule is modified or aborted by a higher-priority
 operation, the server must update the corresponding unitary-test-status or
 test-sequence-status leaf. It must also log the preempted event alongside an error
-notification to ensure observability across the network management layer.
+notification to ensure observability across the network management layer. 
+In addition, the pre-emption applies only to the OAM sessions being setup
+using the YANG data models defined in this document, while other OAM sessions
+being running on the devices through other mechanims should not be pre-empted
+(e.g., through CLI or by configuring the device YANG data model directly).
 
 ## Coverage of Input Parameters and Output Results
 
 The YANG models defined in this document are designed to schedule OAM tests at a
 network-wide level. The input parameters required to configure and execute specific
 OAM functions (such as test type, target, and configuration options) are referenced
-or reused from the existing device-level OAM YANG models (e.g., {{!RFC8531}},
-{{!RFC8532}}, {{!RFC8533}}, {{!RFC8913}}). This approach avoids duplication and
+or reused from the existing device-level OAM YANG models (e.g., {{?RFC8531}},
+{{?RFC8532}}, {{?RFC8533}}, {{?RFC8913}}). This approach avoids duplication and
 ensures consistency with established models.
 
 Similarly, the output results of OAM tests such as test status, performance metrics,
@@ -703,7 +710,12 @@ test parameters and results.
 
 The "managed" leaf in each "ne-config" entry defaults to "true", meaning that the
 orchestrator or controller hosting this model is expected to configure the device
-OAM function through the "root" schema-mount point.
+OAM function through the "root" schema-mount point. The orchestrator or controller
+can rely on the YANG Library (RFC 8525) to discover which structural OAM modules
+are supported by a network element before scheduling tests.  This capability
+discovery allows the orchestrator or controller to determine supported standard
+schemas, such as TWAMP or ICMP, and works in conjunction with YANG Schema Mount
+(RFC 8528) to dynamically mount native OAM modules into the scheduling framework.
 
 Operators set "managed" to "false" when the OAM function on that network element is
 configured outside this model, for example by a device CLI, a local script, or a
@@ -895,7 +907,7 @@ This section includes a non-exhaustive list of examples to illustrate the use of
 
 ## Create a TWAMP OAM test {#ex-create-twp-oam}
 
-{{!RFC8913}} defines a YANG model for TWAMP. The following example demonstrates how scheduled test results look like from mounted
+{{?RFC8913}} defines a YANG model for TWAMP. The following example demonstrates how scheduled test results look like from mounted
 device models surface through NMDA retrieval. This example uses the "twamp" identity defined in the ietf-oam-unitary-test module
 (derived from "basic-test-type") to indicate the test type; the TWAMP device model is mounted at the "root" of each "ne-config" entry.
 The example contains the information for the four configurations (Control-Client, Server, Session-Sender and Session-Reflector).
