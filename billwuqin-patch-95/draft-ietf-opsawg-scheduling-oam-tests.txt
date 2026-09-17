@@ -743,8 +743,7 @@ Table of Contents
 
    This module imports typedefs from [RFC9922], [RFC8528] and [RFC9911],
    and it uses references defined in [RFC8531], [RFC8532], [RFC9617],
-   [RFC8913], [RFC9228], [RFC9107].  For the model design overview,
-   please refer to Section 4.1.
+   [RFC8913], [RFC8029], [RFC9107].
 
    <CODE BEGINS>
     file ietf-oam-unitary-test@2026-09-14.yang
@@ -913,7 +912,7 @@ Table of Contents
           description
             "Base identity of MPLS LSP Ping test type.";
           reference
-           "RFC 9228: MPLS LSP Ping YANG Data Model";
+           "RFC 8029: Detecting Multiprotocol Label Switched (MPLS) Data-Plane Failures";
      }
      identity bfd {
           base basic-test-type;
@@ -1820,10 +1819,6 @@ Informative References
               Ed., "Data Fields for In Situ Operations, Administration,
               and Maintenance (IOAM)", RFC 9197, DOI 10.17487/RFC9197,
               May 2022, <https://www.rfc-editor.org/rfc/rfc9197>.
-
-   [RFC9228]  Crocker, D., Ed., "Delivered-To Email Header Field",
-              RFC 9228, DOI 10.17487/RFC9228, April 2022,
-              <https://www.rfc-editor.org/rfc/rfc9228>.
 
    [RFC9341]  Fioccola, G., Ed., Cociglio, M., Mirsky, G., Mizrahi, T.,
               and T. Zhou, "Alternate-Marking Method", RFC 9341,
