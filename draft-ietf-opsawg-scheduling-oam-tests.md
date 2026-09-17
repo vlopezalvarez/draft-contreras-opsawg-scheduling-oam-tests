@@ -641,7 +641,7 @@ extensible reporting. If a conflict is detected (e.g., two tests require exclusi
 access to the same resource at the same time), the server sets the corresponding
 status to error or to a more specific error-cause identity derived from error:
 resource-contention for resource conflicts, or priority for prioritization-related
-conflicts {{oam-ut}}, {{oam-st}}. This error-cause indication allows operators and
+conflicts {{oam-ut}}, {{oam-ts}}. This error-cause indication allows operators and
 management systems to distinguish the reasons for the failure. Note that it is
 intention to allow extensibility for the error codes rather than extend states in
 the state machine.
