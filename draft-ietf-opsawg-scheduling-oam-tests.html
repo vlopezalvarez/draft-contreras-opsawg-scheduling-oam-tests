@@ -1977,6 +1977,12 @@ module ietf-oam-unitary-test {
        "RFC 9911: Common YANG Data Types";
   }
 
+  import ietf-network {
+     prefix nw;
+     reference
+       "RFC 8345: A YANG Data Model for Network Topologies";
+  }
+
   organization
     "IETF OPSAWG (Operations and Management Area Working Group)";
 
@@ -2155,7 +2161,10 @@ module ietf-oam-unitary-test {
         unitary tests.";
 
       leaf ne-id {
-        type inet:host;
+        type union {
+          type inet:host;
+          type nw:node-id;
+        }
         description
           "This is identification of a network node within an
                    autonomous system such as router, switch, firewalls, etc.
