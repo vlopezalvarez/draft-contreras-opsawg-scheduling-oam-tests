@@ -410,7 +410,7 @@ states:
           is not an execution error; the next cycle,   if any, starts from "planned".
 * "error": The state where an error occurs during the test. This state is triggered when the test has not been conducted
            successfully. Implementations may report a more specific error cause using child identities such as
-           "resource-contention" or "priority".
+           "resource-contention" or "priority-conflict".
 * "success": The final state where the test is completed. This state is triggered when the test has been conducted successfully.
 
 Note that how state transition triggering generation of YANG notifications and how external management and orchestration
@@ -541,7 +541,7 @@ includes the following states:
              execute remaining tests.
 * "error": The state where an error occurs during the test. This state is triggered when one or more tests
            haven't been conducted successfully. Implementations may report a more specific error cause using
-           child identities such as "resource-contention" or "priority".
+           child identities such as "resource-contention" or "priority-conflict".
 
 Note that how state transition triggering generation of YANG notifications and how external management and
 orchestration systems subscribe to these YANG notifications are not in the scope of this document.
@@ -646,7 +646,7 @@ scheduling state of each OAM task. These leaves are of type identityref, allowin
 extensible error reporting. If a conflict is detected (e.g., two tests require exclusive
 access to the same resource at the same time), the server sets the corresponding
 status to error or to a more specific error-cause identity derived from error:
-resource-contention for resource conflicts, or priority for prioritization-related
+resource-contention for resource conflicts, or priority based conflict for prioritization-related
 conflicts {{oam-ut}}, {{oam-ts}}. This error-cause indication allows operators and
 management systems to distinguish the reasons for the failure. Note that it is
 intention to allow extensibility for the error codes rather than extend states in
