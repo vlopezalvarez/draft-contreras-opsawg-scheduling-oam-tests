@@ -619,13 +619,18 @@ Table of Contents
      identity resource-contention {
               base error;
               description
-                "Identity for resource contention.";
+                "Identity for resource contention conflict. Resource contention
+             conflict is referred to two OAM tests require exclusive access
+             to the same resource at the same time.";
      }
 
      identity priority {
               base error;
               description
-                "Identity for priority.";
+                "Identity for priority based conflict. The prioritization-related
+             conflict occurs when a higher-priority OAM test preempts, defers,
+             or cancels a lower-priority OAM test because they are competing
+            for the exact same network execution resources at the same time.";
      }
 
      identity basic-test-type {
