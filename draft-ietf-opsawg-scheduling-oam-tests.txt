@@ -91,7 +91,9 @@ Table of Contents
      3.4.  Performance-based Traffic Engineering and Routing
    4.  Modelling the Scheduling of OAM Tests
      4.1.  OAM Unitary Test
+       4.1.1.  Unitary Test Status State Machine
      4.2.  OAM Test Sequence
+       4.2.1.  Test Sequence Status State Machine
    5.  YANG Data Models for Scheduling OAM Tests
      5.1.  YANG Model for Scheduling OAM Unitary Test
      5.2.  YANG Model for OAM Test Sequence
@@ -519,6 +521,8 @@ Table of Contents
 
                 Figure 2: Tree Structure of OAM Unitary Test
 
+4.1.1.  Unitary Test Status State Machine
+
    The 'unitary-test-status' state machine is shown in Figure 3.  The
    state machine includes the following states:
 
@@ -666,6 +670,8 @@ Table of Contents
                      +--rw execution-count?          uint32
 
                         Figure 4: OAM Test Sequence
+
+4.2.1.  Test Sequence Status State Machine
 
    The 'test-sequence-status' state machine is shown in Figure 5.  The
    state machine includes the following states:
@@ -1019,7 +1025,8 @@ Table of Contents
 
 5.2.  YANG Model for OAM Test Sequence
 
-   This module imports typedefs from [RFC9922].
+   This module imports typedefs from [RFC9922].  For the model design
+   overview, please refer to Section 4.2.
 
    <CODE BEGINS>
     file ietf-oam-test-sequence@2026-09-14.yang
