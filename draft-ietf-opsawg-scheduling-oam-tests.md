@@ -575,7 +575,7 @@ orchestration systems subscribe to these YANG notifications are not in the scope
 
 This module imports typedefs from {{!RFC9922}}, {{!RFC8528}} and {{!RFC9911}}, and it
 uses references defined in {{?RFC8531}}, {{?RFC8532}}, {{?RFC9617}}, {{?RFC8913}},
-{{?RFC9228}}, {{?RFC9107}}. For the model design overview, please refer to {{oam-ut}}.
+{{?RFC8029}}, {{?RFC9107}}.
 
 ~~~~~~~~~~
 <CODE BEGINS> file ietf-oam-unitary-test@2026-09-14.yang
