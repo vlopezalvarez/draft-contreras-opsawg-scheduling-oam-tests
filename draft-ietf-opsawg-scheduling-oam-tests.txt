@@ -872,12 +872,12 @@ Table of Contents
             for the exact same network execution resources at the same time.";
      }
 
-     identity basic-test-type {
+     identity test-type {
           description
             "Base identity of basic test type.";
      }
      identity connection-oriented-oam {
-          base basic-test-type;
+          base test-type;
           description
             "Base identity of connection oriented oam test type.";
           reference
@@ -886,7 +886,7 @@ Table of Contents
                        Protocols";
      }
      identity connectionless-oam {
-          base basic-test-type;
+          base test-type;
           description
             "Base identity of connectionless oam test type.";
           reference
@@ -896,7 +896,7 @@ Table of Contents
                        Communications";
      }
      identity in-situ-oam {
-          base basic-test-type;
+          base test-type;
           description
             "Base identity of In Situ OAM test type.";
           reference
@@ -904,7 +904,7 @@ Table of Contents
                       Administration, and Maintenance (IOAM)";
      }
      identity twamp {
-          base basic-test-type;
+          base test-type;
           description
             "Base identity of TWAMP test type.";
           reference
@@ -912,19 +912,19 @@ Table of Contents
                      (TWAMP) YANG Data Model";
      }
      identity lsp-ping {
-          base basic-test-type;
+          base test-type;
           description
             "Base identity of MPLS LSP Ping test type.";
           reference
            "RFC 8029: Detecting Multiprotocol Label Switched (MPLS) Data-Plane Failures";
      }
      identity bfd {
-          base basic-test-type;
+          base test-type;
           description
             "Base identity of BFD test type.";
           reference
-           "RFC 9107: BFD (Bidirectional Forwarding
-                    Detection) YANG Model";
+           "RFC 9107: YANG Data Model for Bidirectional Forwarding
+            Detection (BFD)";
      }
      grouping oam-unitary-test {
        description
@@ -964,7 +964,7 @@ Table of Contents
           }
          leaf test-type {
               type identityref {
-                base basic-test-type;
+                base test-type;
               }
               description
                 "Choose the type of test.";
