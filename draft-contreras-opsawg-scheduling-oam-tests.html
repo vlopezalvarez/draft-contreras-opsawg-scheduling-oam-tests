@@ -1692,7 +1692,9 @@ module ietf-oam-unitary-test {
   /* Identities */
   identity unitary-test-status {
            description
-             "Base identity for unitary test status.";
+             "Base identity for unitary test status. Note that
+          it only allows extensible error reporting such
+          as resource contention, priority conflict.";
   }
          identity planned {
            base unitary-test-status;
@@ -1976,7 +1978,9 @@ module ietf-oam-test-sequence {
   /* Identities */
          identity test-sequence-status {
            description
-             "Base identity for test-sequence-status.";
+             "Base identity for test-sequence-status. Note
+          that it only allows extensible error reporting
+          such as resource contention, priority conflict.";
          }
          identity planned {
            base test-sequence-status;
