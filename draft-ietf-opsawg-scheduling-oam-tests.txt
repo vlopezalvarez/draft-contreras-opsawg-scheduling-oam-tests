@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 20 March 2027                                             Nokia
+Expires: 21 March 2027                                             Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                       16 September 2026
+                                                       17 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 March 2027.
+   This Internet-Draft will expire on 21 March 2027.
 
 Copyright Notice
 
@@ -736,8 +736,8 @@ Table of Contents
 5.1.  YANG Model for Scheduling OAM Unitary Test
 
    This module imports typedefs from [RFC9922], [RFC8528] and [RFC9911],
-   and it references [RFC8531], [RFC8532], [RFC9617], [RFC8913],
-   [RFC9228], [RFC9107].
+   and it uses references defined in [RFC8531], [RFC8532], [RFC9617],
+   [RFC8913], [RFC9228], [RFC9107].
 
    <CODE BEGINS>
     file ietf-oam-unitary-test@2026-09-14.yang
@@ -1247,12 +1247,14 @@ Table of Contents
    leaves to indicate the current scheduling state of each OAM task.
    These leaves are of type identityref, allowing extensible reporting.
    If a conflict is detected (e.g., two tests require exclusive access
-   to the same resource at the same time), the server sets the status to
-   error or to a more specific error-cause identity derived from error:
-   resource-contention for resource conflicts, or priority for
-   prioritization-related conflicts.  This error-cause indication allows
+   to the same resource at the same time), the server sets the
+   corresponding status to error or to a more specific error-cause
+   identity derived from error: resource-contention for resource
+   conflicts, or priority for prioritization-related conflicts
+   Section 4.1, Section 4.2.  This error-cause indication allows
    operators and management systems to distinguish the reasons for the
-   failure.
+   failure.  Note that it is intention to allow extensibility for the
+   error codes rather than extend states in the state machine.
 
    Operators and management systems SHOULD monitor the scheduling status
    of OAM tasks and take appropriate action if a conflict is reported.
@@ -1293,7 +1295,12 @@ Table of Contents
    higher-priority operation, the server must update the corresponding
    unitary-test-status or test-sequence-status leaf.  It must also log
    the preempted event alongside an error notification to ensure
-   observability across the network management layer.
+   observability across the network management layer.  In addition, the
+   pre-emption applies only to the OAM sessions being setup using the
+   YANG data models defined in this document, while other OAM sessions
+   being running on the devices through other mechanims should not be
+   pre-empted (e.g., through CLI or by configuring the device YANG data
+   model directly).
 
 7.2.  Coverage of Input Parameters and Output Results
 
@@ -1323,7 +1330,13 @@ Table of Contents
    The "managed" leaf in each "ne-config" entry defaults to "true",
    meaning that the orchestrator or controller hosting this model is
    expected to configure the device OAM function through the "root"
-   schema-mount point.
+   schema-mount point.  The orchestrator or controller can rely on the
+   YANG Library (RFC 8525) to discover which structural OAM modules are
+   supported by a network element before scheduling tests.  This
+   capability discovery allows the orchestrator or controller to
+   determine supported standard schemas, such as TWAMP or ICMP, and
+   works in conjunction with YANG Schema Mount (RFC 8528) to dynamically
+   mount native OAM modules into the scheduling framework.
 
    Operators set "managed" to "false" when the OAM function on that
    network element is configured outside this model, for example by a
@@ -1608,31 +1621,6 @@ Normative References
               RFC 8528, DOI 10.17487/RFC8528, March 2019,
               <https://www.rfc-editor.org/rfc/rfc8528>.
 
-   [RFC8531]  Kumar, D., Wu, Q., and Z. Wang, "Generic YANG Data Model
-              for Connection-Oriented Operations, Administration, and
-              Maintenance (OAM) Protocols", RFC 8531,
-              DOI 10.17487/RFC8531, April 2019,
-              <https://www.rfc-editor.org/rfc/rfc8531>.
-
-   [RFC8532]  Kumar, D., Wang, Z., Wu, Q., Ed., Rahman, R., and S.
-              Raghavan, "Generic YANG Data Model for the Management of
-              Operations, Administration, and Maintenance (OAM)
-              Protocols That Use Connectionless Communications",
-              RFC 8532, DOI 10.17487/RFC8532, April 2019,
-              <https://www.rfc-editor.org/rfc/rfc8532>.
-
-   [RFC8533]  Kumar, D., Wang, M., Wu, Q., Ed., Rahman, R., and S.
-              Raghavan, "A YANG Data Model for Retrieval Methods for the
-              Management of Operations, Administration, and Maintenance
-              (OAM) Protocols That Use Connectionless Communications",
-              RFC 8533, DOI 10.17487/RFC8533, April 2019,
-              <https://www.rfc-editor.org/rfc/rfc8533>.
-
-   [RFC8913]  Civil, R., Morton, A., Rahman, R., Jethanandani, M., and
-              K. Pentikousis, Ed., "Two-Way Active Measurement Protocol
-              (TWAMP) YANG Data Model", RFC 8913, DOI 10.17487/RFC8913,
-              November 2021, <https://www.rfc-editor.org/rfc/rfc8913>.
-
    [RFC8969]  Wu, Q., Ed., Boucadair, M., Ed., Lopez, D., Xie, C., and
               L. Geng, "A Framework for Automating Service and Network
               Management with YANG", RFC 8969, DOI 10.17487/RFC8969,
@@ -1642,21 +1630,6 @@ Normative References
               Multiplexed and Secure Transport", RFC 9000,
               DOI 10.17487/RFC9000, May 2021,
               <https://www.rfc-editor.org/rfc/rfc9000>.
-
-   [RFC9107]  Raszuk, R., Ed., Decraene, B., Ed., Cassar, C., Åman, E.,
-              and K. Wang, "BGP Optimal Route Reflection (BGP ORR)",
-              RFC 9107, DOI 10.17487/RFC9107, August 2021,
-              <https://www.rfc-editor.org/rfc/rfc9107>.
-
-   [RFC9228]  Crocker, D., Ed., "Delivered-To Email Header Field",
-              RFC 9228, DOI 10.17487/RFC9228, April 2022,
-              <https://www.rfc-editor.org/rfc/rfc9228>.
-
-   [RFC9617]  Zhou, T., Ed., Guichard, J., Brockners, F., and S.
-              Raghavan, "A YANG Data Model for In Situ Operations,
-              Administration, and Maintenance (IOAM)", RFC 9617,
-              DOI 10.17487/RFC9617, August 2024,
-              <https://www.rfc-editor.org/rfc/rfc9617>.
 
    [RFC9907]  Bierman, A., Boucadair, M., Ed., and Q. Wu, "Guidelines
               for Authors and Reviewers of Documents Containing YANG
@@ -1800,15 +1773,49 @@ Informative References
               DOI 10.17487/RFC8029, March 2017,
               <https://www.rfc-editor.org/rfc/rfc8029>.
 
+   [RFC8531]  Kumar, D., Wu, Q., and Z. Wang, "Generic YANG Data Model
+              for Connection-Oriented Operations, Administration, and
+              Maintenance (OAM) Protocols", RFC 8531,
+              DOI 10.17487/RFC8531, April 2019,
+              <https://www.rfc-editor.org/rfc/rfc8531>.
+
+   [RFC8532]  Kumar, D., Wang, Z., Wu, Q., Ed., Rahman, R., and S.
+              Raghavan, "Generic YANG Data Model for the Management of
+              Operations, Administration, and Maintenance (OAM)
+              Protocols That Use Connectionless Communications",
+              RFC 8532, DOI 10.17487/RFC8532, April 2019,
+              <https://www.rfc-editor.org/rfc/rfc8532>.
+
+   [RFC8533]  Kumar, D., Wang, M., Wu, Q., Ed., Rahman, R., and S.
+              Raghavan, "A YANG Data Model for Retrieval Methods for the
+              Management of Operations, Administration, and Maintenance
+              (OAM) Protocols That Use Connectionless Communications",
+              RFC 8533, DOI 10.17487/RFC8533, April 2019,
+              <https://www.rfc-editor.org/rfc/rfc8533>.
+
    [RFC8762]  Mirsky, G., Jun, G., Nydell, H., and R. Foote, "Simple
               Two-Way Active Measurement Protocol", RFC 8762,
               DOI 10.17487/RFC8762, March 2020,
               <https://www.rfc-editor.org/rfc/rfc8762>.
 
+   [RFC8913]  Civil, R., Morton, A., Rahman, R., Jethanandani, M., and
+              K. Pentikousis, Ed., "Two-Way Active Measurement Protocol
+              (TWAMP) YANG Data Model", RFC 8913, DOI 10.17487/RFC8913,
+              November 2021, <https://www.rfc-editor.org/rfc/rfc8913>.
+
+   [RFC9107]  Raszuk, R., Ed., Decraene, B., Ed., Cassar, C., Åman, E.,
+              and K. Wang, "BGP Optimal Route Reflection (BGP ORR)",
+              RFC 9107, DOI 10.17487/RFC9107, August 2021,
+              <https://www.rfc-editor.org/rfc/rfc9107>.
+
    [RFC9197]  Brockners, F., Ed., Bhandari, S., Ed., and T. Mizrahi,
               Ed., "Data Fields for In Situ Operations, Administration,
               and Maintenance (IOAM)", RFC 9197, DOI 10.17487/RFC9197,
               May 2022, <https://www.rfc-editor.org/rfc/rfc9197>.
+
+   [RFC9228]  Crocker, D., Ed., "Delivered-To Email Header Field",
+              RFC 9228, DOI 10.17487/RFC9228, April 2022,
+              <https://www.rfc-editor.org/rfc/rfc9228>.
 
    [RFC9341]  Fioccola, G., Ed., Cociglio, M., Mirsky, G., Mizrahi, T.,
               and T. Zhou, "Alternate-Marking Method", RFC 9341,
@@ -1820,6 +1827,12 @@ Informative References
               Framework for Network Slices in Networks Built from IETF
               Technologies", RFC 9543, DOI 10.17487/RFC9543, March 2024,
               <https://www.rfc-editor.org/rfc/rfc9543>.
+
+   [RFC9617]  Zhou, T., Ed., Guichard, J., Brockners, F., and S.
+              Raghavan, "A YANG Data Model for In Situ Operations,
+              Administration, and Maintenance (IOAM)", RFC 9617,
+              DOI 10.17487/RFC9617, August 2024,
+              <https://www.rfc-editor.org/rfc/rfc9617>.
 
    [RFC9940]  Davis, N., Ed., Farrel, A., Ed., Graf, T., Wu, Q., and C.
               Yu, "Some Key Terms for Network Fault and Problem

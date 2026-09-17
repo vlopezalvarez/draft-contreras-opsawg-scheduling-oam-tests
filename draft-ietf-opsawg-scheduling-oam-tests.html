@@ -1053,7 +1053,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Contreras, et al.</td>
-<td class="center">Expires 20 March 2027</td>
+<td class="center">Expires 21 March 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg {
 <dd class="internet-draft">draft-ietf-opsawg-scheduling-oam-tests-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-16" class="published">16 September 2026</time>
+<time datetime="2026-09-17" class="published">17 September 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-03-20">20 March 2027</time></dd>
+<dd class="expires"><time datetime="2027-03-21">21 March 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1133,7 +1133,7 @@ orchestrators), rather than by individual network nodes.<a href="#section-abstra
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1614,7 +1614,7 @@ the PCE algorithms.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-modelling-the-scheduling-of" class="section-name selfRef">Modelling the Scheduling of OAM Tests</a>
       </h2>
 <p id="section-4-1">This document specifies two models: OAM Unitary Test and OAM Test Sequence models.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<div id="oam-unitary-test">
+<div id="oam-ut">
 <section id="section-4.1">
         <h3 id="name-oam-unitary-test">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-oam-unitary-test" class="section-name selfRef">OAM Unitary Test</a>
@@ -1752,7 +1752,7 @@ systems subscribe to these YANG notifications are not in the scope of this docum
 </div>
 </section>
 </div>
-<div id="oam-test-sequence">
+<div id="oam-ts">
 <section id="section-4.2">
         <h3 id="name-oam-test-sequence">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-oam-test-sequence" class="section-name selfRef">OAM Test Sequence</a>
@@ -1924,7 +1924,8 @@ orchestration systems subscribe to these YANG notifications are not in the scope
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-yang-model-for-scheduling-o" class="section-name selfRef">YANG Model for Scheduling OAM Unitary Test</a>
         </h3>
 <p id="section-5.1-1">This module imports typedefs from <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>, <span>[<a href="#RFC8528" class="cite xref">RFC8528</a>]</span> and <span>[<a href="#RFC9911" class="cite xref">RFC9911</a>]</span>, and it
-references <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>, <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, <span>[<a href="#RFC9228" class="cite xref">RFC9228</a>]</span>, <span>[<a href="#RFC9107" class="cite xref">RFC9107</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+uses references defined in <span>[<a href="#RFC8531" class="cite xref">RFC8531</a>]</span>, <span>[<a href="#RFC8532" class="cite xref">RFC8532</a>]</span>, <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>, <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>,
+<span>[<a href="#RFC9228" class="cite xref">RFC9228</a>]</span>, <span>[<a href="#RFC9107" class="cite xref">RFC9107</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <div class="breakable sourcecode" id="section-5.1-2">
 <pre>&lt;CODE BEGINS&gt; file ietf-oam-unitary-test@2026-09-14.yang
 module ietf-oam-unitary-test {
@@ -2450,11 +2451,13 @@ to detect and report such conflicts.<a href="#section-7.1-1" class="pilcrow">¶<
 use the unitary-test-status and test-sequence-status leaves to indicate the current
 scheduling state of each OAM task. These leaves are of type identityref, allowing
 extensible reporting. If a conflict is detected (e.g., two tests require exclusive
-access to the same resource at the same time), the server sets the status to error
-or to a more specific error-cause identity derived from error: resource-contention
-for resource conflicts, or priority for prioritization-related conflicts. This
-error-cause indication allows operators and management systems to distinguish the
-reasons for the failure.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+access to the same resource at the same time), the server sets the corresponding
+status to error or to a more specific error-cause identity derived from error:
+resource-contention for resource conflicts, or priority for prioritization-related
+conflicts <a href="#oam-ut" class="auto internal xref">Section 4.1</a>, <a href="#oam-ts" class="auto internal xref">Section 4.2</a>. This error-cause indication allows operators and
+management systems to distinguish the reasons for the failure. Note that it is
+intention to allow extensibility for the error codes rather than extend states in
+the state machine.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
 <p id="section-7.1-3">Operators and management systems SHOULD monitor the scheduling status of OAM tasks
 and take appropriate action if a conflict is reported. The resolution of conflicts
 (e.g., rescheduling, prioritization, or cancellation) is implementation-dependent,
@@ -2491,7 +2494,11 @@ resources.<a href="#section-7.1-6.3.1" class="pilcrow">¶</a></p>
 <p id="section-7.1-7">When an active test or upcoming schedule is modified or aborted by a higher-priority
 operation, the server must update the corresponding unitary-test-status or
 test-sequence-status leaf. It must also log the preempted event alongside an error
-notification to ensure observability across the network management layer.<a href="#section-7.1-7" class="pilcrow">¶</a></p>
+notification to ensure observability across the network management layer.
+In addition, the pre-emption applies only to the OAM sessions being setup
+using the YANG data models defined in this document, while other OAM sessions
+being running on the devices through other mechanims should not be pre-empted
+(e.g., through CLI or by configuring the device YANG data model directly).<a href="#section-7.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="coverage-of-input-parameters-and-output-results">
@@ -2523,7 +2530,12 @@ test parameters and results.<a href="#section-7.2-3" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-7.3-1">The "managed" leaf in each "ne-config" entry defaults to "true", meaning that the
 orchestrator or controller hosting this model is expected to configure the device
-OAM function through the "root" schema-mount point.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+OAM function through the "root" schema-mount point. The orchestrator or controller
+can rely on the YANG Library (RFC 8525) to discover which structural OAM modules
+are supported by a network element before scheduling tests.  This capability
+discovery allows the orchestrator or controller to determine supported standard
+schemas, such as TWAMP or ICMP, and works in conjunction with YANG Schema Mount
+(RFC 8528) to dynamically mount native OAM modules into the scheduling framework.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.3-2">Operators set "managed" to "false" when the OAM function on that network element is
 configured outside this model, for example by a device CLI, a local script, or a
 different controller. In that case, any attempt to access data below "root" fails
@@ -2843,22 +2855,6 @@ automation via an end-to-end AI framework (6G-DALI) Project under Grant 10119275
         <dd>
 <span class="refAuthor">Bjorklund, M.</span> and <span class="refAuthor">L. Lhotka</span>, <span class="refTitle">"YANG Schema Mount"</span>, <span class="seriesInfo">RFC 8528</span>, <span class="seriesInfo">DOI 10.17487/RFC8528</span>, <time datetime="2019-03" class="refDate">March 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8528">https://www.rfc-editor.org/rfc/rfc8528</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8531">[RFC8531]</dt>
-        <dd>
-<span class="refAuthor">Kumar, D.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">Z. Wang</span>, <span class="refTitle">"Generic YANG Data Model for Connection-Oriented Operations, Administration, and Maintenance (OAM) Protocols"</span>, <span class="seriesInfo">RFC 8531</span>, <span class="seriesInfo">DOI 10.17487/RFC8531</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8531">https://www.rfc-editor.org/rfc/rfc8531</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8532">[RFC8532]</dt>
-        <dd>
-<span class="refAuthor">Kumar, D.</span>, <span class="refAuthor">Wang, Z.</span>, <span class="refAuthor">Wu, Q., Ed.</span>, <span class="refAuthor">Rahman, R.</span>, and <span class="refAuthor">S. Raghavan</span>, <span class="refTitle">"Generic YANG Data Model for the Management of Operations, Administration, and Maintenance (OAM) Protocols That Use Connectionless Communications"</span>, <span class="seriesInfo">RFC 8532</span>, <span class="seriesInfo">DOI 10.17487/RFC8532</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8532">https://www.rfc-editor.org/rfc/rfc8532</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8533">[RFC8533]</dt>
-        <dd>
-<span class="refAuthor">Kumar, D.</span>, <span class="refAuthor">Wang, M.</span>, <span class="refAuthor">Wu, Q., Ed.</span>, <span class="refAuthor">Rahman, R.</span>, and <span class="refAuthor">S. Raghavan</span>, <span class="refTitle">"A YANG Data Model for Retrieval Methods for the Management of Operations, Administration, and Maintenance (OAM) Protocols That Use Connectionless Communications"</span>, <span class="seriesInfo">RFC 8533</span>, <span class="seriesInfo">DOI 10.17487/RFC8533</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8533">https://www.rfc-editor.org/rfc/rfc8533</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8913">[RFC8913]</dt>
-        <dd>
-<span class="refAuthor">Civil, R.</span>, <span class="refAuthor">Morton, A.</span>, <span class="refAuthor">Rahman, R.</span>, <span class="refAuthor">Jethanandani, M.</span>, and <span class="refAuthor">K. Pentikousis, Ed.</span>, <span class="refTitle">"Two-Way Active Measurement Protocol (TWAMP) YANG Data Model"</span>, <span class="seriesInfo">RFC 8913</span>, <span class="seriesInfo">DOI 10.17487/RFC8913</span>, <time datetime="2021-11" class="refDate">November 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8913">https://www.rfc-editor.org/rfc/rfc8913</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC8969">[RFC8969]</dt>
         <dd>
 <span class="refAuthor">Wu, Q., Ed.</span>, <span class="refAuthor">Boucadair, M., Ed.</span>, <span class="refAuthor">Lopez, D.</span>, <span class="refAuthor">Xie, C.</span>, and <span class="refAuthor">L. Geng</span>, <span class="refTitle">"A Framework for Automating Service and Network Management with YANG"</span>, <span class="seriesInfo">RFC 8969</span>, <span class="seriesInfo">DOI 10.17487/RFC8969</span>, <time datetime="2021-01" class="refDate">January 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8969">https://www.rfc-editor.org/rfc/rfc8969</a>&gt;</span>. </dd>
@@ -2866,18 +2862,6 @@ automation via an end-to-end AI framework (6G-DALI) Project under Grant 10119275
 <dt id="RFC9000">[RFC9000]</dt>
         <dd>
 <span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9000">https://www.rfc-editor.org/rfc/rfc9000</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9107">[RFC9107]</dt>
-        <dd>
-<span class="refAuthor">Raszuk, R., Ed.</span>, <span class="refAuthor">Decraene, B., Ed.</span>, <span class="refAuthor">Cassar, C.</span>, <span class="refAuthor">Åman, E.</span>, and <span class="refAuthor">K. Wang</span>, <span class="refTitle">"BGP Optimal Route Reflection (BGP ORR)"</span>, <span class="seriesInfo">RFC 9107</span>, <span class="seriesInfo">DOI 10.17487/RFC9107</span>, <time datetime="2021-08" class="refDate">August 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9107">https://www.rfc-editor.org/rfc/rfc9107</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9228">[RFC9228]</dt>
-        <dd>
-<span class="refAuthor">Crocker, D., Ed.</span>, <span class="refTitle">"Delivered-To Email Header Field"</span>, <span class="seriesInfo">RFC 9228</span>, <span class="seriesInfo">DOI 10.17487/RFC9228</span>, <time datetime="2022-04" class="refDate">April 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9228">https://www.rfc-editor.org/rfc/rfc9228</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9617">[RFC9617]</dt>
-        <dd>
-<span class="refAuthor">Zhou, T., Ed.</span>, <span class="refAuthor">Guichard, J.</span>, <span class="refAuthor">Brockners, F.</span>, and <span class="refAuthor">S. Raghavan</span>, <span class="refTitle">"A YANG Data Model for In Situ Operations, Administration, and Maintenance (IOAM)"</span>, <span class="seriesInfo">RFC 9617</span>, <span class="seriesInfo">DOI 10.17487/RFC9617</span>, <time datetime="2024-08" class="refDate">August 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9617">https://www.rfc-editor.org/rfc/rfc9617</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9907">[RFC9907]</dt>
         <dd>
@@ -2992,13 +2976,37 @@ automation via an end-to-end AI framework (6G-DALI) Project under Grant 10119275
         <dd>
 <span class="refAuthor">Kompella, K.</span>, <span class="refAuthor">Swallow, G.</span>, <span class="refAuthor">Pignataro, C., Ed.</span>, <span class="refAuthor">Kumar, N.</span>, <span class="refAuthor">Aldrin, S.</span>, and <span class="refAuthor">M. Chen</span>, <span class="refTitle">"Detecting Multiprotocol Label Switched (MPLS) Data-Plane Failures"</span>, <span class="seriesInfo">RFC 8029</span>, <span class="seriesInfo">DOI 10.17487/RFC8029</span>, <time datetime="2017-03" class="refDate">March 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8029">https://www.rfc-editor.org/rfc/rfc8029</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8531">[RFC8531]</dt>
+        <dd>
+<span class="refAuthor">Kumar, D.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">Z. Wang</span>, <span class="refTitle">"Generic YANG Data Model for Connection-Oriented Operations, Administration, and Maintenance (OAM) Protocols"</span>, <span class="seriesInfo">RFC 8531</span>, <span class="seriesInfo">DOI 10.17487/RFC8531</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8531">https://www.rfc-editor.org/rfc/rfc8531</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8532">[RFC8532]</dt>
+        <dd>
+<span class="refAuthor">Kumar, D.</span>, <span class="refAuthor">Wang, Z.</span>, <span class="refAuthor">Wu, Q., Ed.</span>, <span class="refAuthor">Rahman, R.</span>, and <span class="refAuthor">S. Raghavan</span>, <span class="refTitle">"Generic YANG Data Model for the Management of Operations, Administration, and Maintenance (OAM) Protocols That Use Connectionless Communications"</span>, <span class="seriesInfo">RFC 8532</span>, <span class="seriesInfo">DOI 10.17487/RFC8532</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8532">https://www.rfc-editor.org/rfc/rfc8532</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8533">[RFC8533]</dt>
+        <dd>
+<span class="refAuthor">Kumar, D.</span>, <span class="refAuthor">Wang, M.</span>, <span class="refAuthor">Wu, Q., Ed.</span>, <span class="refAuthor">Rahman, R.</span>, and <span class="refAuthor">S. Raghavan</span>, <span class="refTitle">"A YANG Data Model for Retrieval Methods for the Management of Operations, Administration, and Maintenance (OAM) Protocols That Use Connectionless Communications"</span>, <span class="seriesInfo">RFC 8533</span>, <span class="seriesInfo">DOI 10.17487/RFC8533</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8533">https://www.rfc-editor.org/rfc/rfc8533</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8762">[RFC8762]</dt>
         <dd>
 <span class="refAuthor">Mirsky, G.</span>, <span class="refAuthor">Jun, G.</span>, <span class="refAuthor">Nydell, H.</span>, and <span class="refAuthor">R. Foote</span>, <span class="refTitle">"Simple Two-Way Active Measurement Protocol"</span>, <span class="seriesInfo">RFC 8762</span>, <span class="seriesInfo">DOI 10.17487/RFC8762</span>, <time datetime="2020-03" class="refDate">March 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8762">https://www.rfc-editor.org/rfc/rfc8762</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8913">[RFC8913]</dt>
+        <dd>
+<span class="refAuthor">Civil, R.</span>, <span class="refAuthor">Morton, A.</span>, <span class="refAuthor">Rahman, R.</span>, <span class="refAuthor">Jethanandani, M.</span>, and <span class="refAuthor">K. Pentikousis, Ed.</span>, <span class="refTitle">"Two-Way Active Measurement Protocol (TWAMP) YANG Data Model"</span>, <span class="seriesInfo">RFC 8913</span>, <span class="seriesInfo">DOI 10.17487/RFC8913</span>, <time datetime="2021-11" class="refDate">November 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8913">https://www.rfc-editor.org/rfc/rfc8913</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9107">[RFC9107]</dt>
+        <dd>
+<span class="refAuthor">Raszuk, R., Ed.</span>, <span class="refAuthor">Decraene, B., Ed.</span>, <span class="refAuthor">Cassar, C.</span>, <span class="refAuthor">Åman, E.</span>, and <span class="refAuthor">K. Wang</span>, <span class="refTitle">"BGP Optimal Route Reflection (BGP ORR)"</span>, <span class="seriesInfo">RFC 9107</span>, <span class="seriesInfo">DOI 10.17487/RFC9107</span>, <time datetime="2021-08" class="refDate">August 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9107">https://www.rfc-editor.org/rfc/rfc9107</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9197">[RFC9197]</dt>
         <dd>
 <span class="refAuthor">Brockners, F., Ed.</span>, <span class="refAuthor">Bhandari, S., Ed.</span>, and <span class="refAuthor">T. Mizrahi, Ed.</span>, <span class="refTitle">"Data Fields for In Situ Operations, Administration, and Maintenance (IOAM)"</span>, <span class="seriesInfo">RFC 9197</span>, <span class="seriesInfo">DOI 10.17487/RFC9197</span>, <time datetime="2022-05" class="refDate">May 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9197">https://www.rfc-editor.org/rfc/rfc9197</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9228">[RFC9228]</dt>
+        <dd>
+<span class="refAuthor">Crocker, D., Ed.</span>, <span class="refTitle">"Delivered-To Email Header Field"</span>, <span class="seriesInfo">RFC 9228</span>, <span class="seriesInfo">DOI 10.17487/RFC9228</span>, <time datetime="2022-04" class="refDate">April 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9228">https://www.rfc-editor.org/rfc/rfc9228</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9341">[RFC9341]</dt>
         <dd>
@@ -3007,6 +3015,10 @@ automation via an end-to-end AI framework (6G-DALI) Project under Grant 10119275
 <dt id="RFC9543">[RFC9543]</dt>
         <dd>
 <span class="refAuthor">Farrel, A., Ed.</span>, <span class="refAuthor">Drake, J., Ed.</span>, <span class="refAuthor">Rokui, R.</span>, <span class="refAuthor">Homma, S.</span>, <span class="refAuthor">Makhijani, K.</span>, <span class="refAuthor">Contreras, L.</span>, and <span class="refAuthor">J. Tantsura</span>, <span class="refTitle">"A Framework for Network Slices in Networks Built from IETF Technologies"</span>, <span class="seriesInfo">RFC 9543</span>, <span class="seriesInfo">DOI 10.17487/RFC9543</span>, <time datetime="2024-03" class="refDate">March 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9543">https://www.rfc-editor.org/rfc/rfc9543</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9617">[RFC9617]</dt>
+        <dd>
+<span class="refAuthor">Zhou, T., Ed.</span>, <span class="refAuthor">Guichard, J.</span>, <span class="refAuthor">Brockners, F.</span>, and <span class="refAuthor">S. Raghavan</span>, <span class="refTitle">"A YANG Data Model for In Situ Operations, Administration, and Maintenance (IOAM)"</span>, <span class="seriesInfo">RFC 9617</span>, <span class="seriesInfo">DOI 10.17487/RFC9617</span>, <time datetime="2024-08" class="refDate">August 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9617">https://www.rfc-editor.org/rfc/rfc9617</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9940">[RFC9940]</dt>
       <dd>
