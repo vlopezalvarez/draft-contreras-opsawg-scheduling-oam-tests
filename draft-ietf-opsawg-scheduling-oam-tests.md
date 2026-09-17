@@ -391,6 +391,7 @@ module: ietf-oam-unitary-test
 ~~~~
 {: #oam-uni-test-tree-st title="Tree Structure of OAM Unitary Test" artwork-align="center"}
 
+### Unitary Test Status State Machine
 The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. The state machine includes the following
 states:
 
@@ -515,6 +516,7 @@ module: ietf-oam-test-sequence
 ~~~~
 {: #oam-test-sequence-tree-st title="OAM Test Sequence" artwork-align="center"}
 
+### Test Sequence Status State Machine
 
 The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}. The state machine
 includes the following states:
@@ -584,7 +586,8 @@ uses references defined in {{?RFC8531}}, {{?RFC8532}}, {{?RFC9617}}, {{?RFC8913}
 
 ## YANG Model for OAM Test Sequence
 
-This module imports typedefs from {{!RFC9922}}.
+This module imports typedefs from {{!RFC9922}}. For the model design overview, please
+refer to {{oam-ts}}.
 
 ~~~~~~~~~~
 <CODE BEGINS> file ietf-oam-test-sequence@2026-09-14.yang
