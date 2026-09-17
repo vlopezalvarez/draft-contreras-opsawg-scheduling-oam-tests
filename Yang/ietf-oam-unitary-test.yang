@@ -68,7 +68,7 @@ module ietf-oam-unitary-test {
   /* Identities */	
   identity unitary-test-status {
 	   description
-	     "Base identity for unitary-test-status.";
+	     "Base identity for unitary test status.";
   }
 	 identity planned {
 	   base unitary-test-status;
@@ -126,7 +126,7 @@ module ietf-oam-unitary-test {
 
   identity test-type {
        description
-         "Base identity of basic test type.";
+         "Base identity of the test type.";
   }
   identity connection-oriented-oam {
        base test-type;
