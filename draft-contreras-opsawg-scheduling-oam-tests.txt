@@ -624,7 +624,7 @@ Table of Contents
              to the same resource at the same time.";
      }
 
-     identity priority {
+     identity priority-conflict {
               base error;
               description
                 "Identity for priority based conflict. The prioritization-related
