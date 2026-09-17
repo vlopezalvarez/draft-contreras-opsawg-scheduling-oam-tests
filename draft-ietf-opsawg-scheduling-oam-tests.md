@@ -328,14 +328,17 @@ The OAM unitary test model encompasses parameters that define a specific type of
 YANG model includes a container named "oam-unitary-tests" that serves as a container for activating OAM unitary
 tests for network diagnosis procedures. Within the container, there is a list called "oam-unitary-test" representing
 a list of specific OAM unitary tests. The list key is defined as "name", which provides a unique name for each test.
-Each OAM test in the list references a test type with its concrete parameters. In addition, each OAM unitary test has
-two temporal parameters: "period" container and "recurrence" container . Both import groupings from the "ietf-schedule"
-module from {{!RFC9922}}. "period" container identifies the one shot period values that contain a precise period of
-time and can be used to support on-demand troubleshooting, while "recurrence" container identifies the properties that
-contain a recurrence rule specification and can be used to periodic troubleshooting. Moreover, "schedule:schedule-status"
-grouping has been imported from {{!RFC9922}} to describe common properties of scheduling status. Wrap-around of the
-"counter" and "failure-counter" leaves is as specified in {{!RFC9922}}. "unitary-test-status" leaf indicates the state of
-the OAM unitary test (see the state machine in {{st-unitary-test-status}}).
+Each OAM test in the list conains "ne-config" list with "ne-id" as list key and references a test type with its concrete
+parameters. The test type indicate which OAM test YANG module, is mounted at the "root" mount point for that "ne-config"
+list entry.
+
+In addition, each OAM unitary test has two temporal parameters: "period" container and "recurrence" container.
+Both import groupings from the "ietf-schedule" module from {{!RFC9922}}. "period" container identifies the one shot period
+values that contain a precise period of time and can be used to support on-demand troubleshooting, while "recurrence" container
+identifies the properties that contain a recurrence rule specification and can be used to periodic troubleshooting. Moreover,
+"schedule:schedule-status" grouping has been imported from {{!RFC9922}} to describe common properties of scheduling status.
+Wrap-around of the "counter" and "failure-counter" leaves is as specified in {{!RFC9922}}. "unitary-test-status" leaf indicates
+the state of the OAM unitary test (see the state machine in {{st-unitary-test-status}}).
 
 Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM
 operation, since it triggers the generation or coordination of OAM packets. The YANG model allows such differentiation
@@ -441,15 +444,16 @@ The OAM test sequence model consists of a collection of OAM unitary tests that a
 specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a
 structured approach to running multiple OAM tests in a coordinated manner.
 
-Each OAM test sequence references an OAM unitary test type with its concrete parameters. Each OAM test
-sequence has two temporal parameters related to time constraints: "period" container and "recurrence"
-container and one constraint related to ordering: "ordered-by user". Time constraints parameters are
-imported from the "ietf-schedule" module from {{!RFC9922}}. "period" identifies the one shot period
-values that contain a precise period of time and can be used to support on demand troubleshooting,
-while "recurrence" identifies the properties that contain a recurrence rule specification and can be
-used to support periodical troubleshooting. "ordered-by user" YANG statement indicates that the user
-is responsible for the ordering on a collection of OAM unitary tests. "test-sequence-status" shows
-the state of the OAM test sequence. "state" imported from the "ietf-schedule" module indicates the
+Each OAM test sequence references an OAM unitary test type with its concrete parameters to indicate
+which OAM Test YANG module, is mounted at the "root" mount point for that "ne-config"
+list entry. Each OAM test sequence has two temporal parameters related to time constraints: "period"
+container and "recurrence" container and one constraint related to ordering: "ordered-by user". Time
+constraints parameters are imported from the "ietf-schedule" module from {{!RFC9922}}. "period" identifies
+the one shot period values that contain a precise period of time and can be used to support on demand
+troubleshooting, while "recurrence" identifies the properties that contain a recurrence rule specification
+and can be used to support periodical troubleshooting. "ordered-by user" YANG statement indicates that
+the user is responsible for the ordering on a collection of OAM unitary tests. "test-sequence-status"
+shows the state of the OAM test sequence. "state" imported from the "ietf-schedule" module indicates the
 current state of the schedule.
 
 Note that repetition is specified by "count" parameter and only applies to the recurrence
