@@ -894,30 +894,38 @@ to be removed if the document is published as an RFC.
 # Acknowledgments
 {:numbered="false"}
 
-Thanks Joe Clark, Daniel King, Qiufang Ma and Fung Lim for valuable review and comments.
+Thanks Joe Clark, Daniel King, Qiufang Ma and Fung Lim for valuable review and
+comments.
 
-The work of Luis M. Contreras has been partially supported by the  European Union’s Horizon Program through the 6G DAta and ML operations
-automation via an end-to-end AI framework (6G-DALI) Project under Grant 101192750.
+The work of Luis M. Contreras has been partially supported by the  European Union’s
+Horizon Program through the 6G DAta and ML operations automation via an end-to-end
+AI framework (6G-DALI) Project under Grant 101192750.
 
 --- back
 
 # Examples {#examples}
 
-This section includes a non-exhaustive list of examples to illustrate the use of the models defined in this document.
+This section includes a non-exhaustive list of examples to illustrate the use of
+the models defined in this document.
 
 ## Create a TWAMP OAM test {#ex-create-twp-oam}
 
-{{?RFC8913}} defines a YANG model for TWAMP. The following example demonstrates how scheduled test results look like from mounted
-device models surface through NMDA retrieval. This example uses the "twamp" identity defined in the ietf-oam-unitary-test module
-(derived from "basic-test-type") to indicate the test type; the TWAMP device model is mounted at the "root" of each "ne-config" entry.
-The example contains the information for the four configurations (Control-Client, Server, Session-Sender and Session-Reflector).
+{{?RFC8913}} defines a YANG model for TWAMP. The following example demonstrates how
+scheduled test results look like from mounted device models surface through NMDA
+retrieval. This example uses the "twamp" identity defined in the ietf-oam-unitary-test
+module (derived from "basic-test-type") to indicate the test type; the TWAMP device
+model is mounted at the "root" of each "ne-config" entry. The example contains the
+information for the two configurations (Session-Sender and Session-Reflector).
 
-An example of a request message body to create a TWAMP OAM test is shown in {{create-twp-oam}}. Session-Sender and Session-Reflector as
-expanded for illustrative purposes. The TWAMP Test scheduled in this configuration is a one-hour performance monitoring test that runs
-daily at 9 AM UTC. This test session is configured to start on October 17, 2023, at 09:00 UTC and recur at the same time every day. The
-duration of each test run is one hour, as specified by the ISO 8601 format "PT1H", with the test status marked as "configured". The test
-provides insight into network performance by monitoring the selected parameters, allowing for the detection of any potential degradations
-in service quality over time.
+An example of a request message body to create a TWAMP OAM test is shown in
+{{create-twp-oam}}. Session-Sender and Session-Reflector as expanded for illustrative
+purposes. The TWAMP Test scheduled in this configuration is a one-hour performance
+monitoring test that runs daily at 9 AM UTC. This test session is configured to start
+on October 17, 2023, at 09:00 UTC and recur at the same time every day. The duration
+of each test run is one hour, as specified by the ISO 8601 format "PT1H", with the
+test status marked as "configured". The test provides insight into network performance
+by monitoring the selected parameters, allowing for the detection of any potential
+degradations in service quality over time.
 
 ~~~~ json
 {::include-fold ./json-examples/create-twp-oam.json}
@@ -926,7 +934,8 @@ in service quality over time.
 
 ## Ping OAM Test Template
 
-Ping OAM Test Template can be defined using YANG-based configuration template specified in {{?I-D.tt-netmod-yang-config-templates}} as follows:
+Ping OAM Test Template can be defined using YANG-based configuration template
+specified in {{?I-D.tt-netmod-yang-config-templates}} as follows:
 
 ~~~~
 <?xml version="1.0" encoding="utf-8"?>
@@ -950,14 +959,18 @@ Ping OAM Test Template can be defined using YANG-based configuration template sp
 ~~~~
 {: #ex-oam-test-template title="Example of OAM Test Template Definition"}
 
-Template application is indicated using the "apply-templates" metadata. For example, the following OAM unitary tests configuration may be
-provided with the container node "oam-unitary-tests" applying the template defined in {{ex-oam-test-template}}.
+Template application is indicated using the "apply-templates" metadata. For
+example, the following OAM unitary tests configuration may be provided with
+the container node "oam-unitary-tests" applying the template defined in
+{{ex-oam-test-template}}.
 
-As described in {{?I-D.tt-netmod-yang-config-templates}}, a template node can be overriden by having its value changed, but it can't be
-deleted.
+As described in {{?I-D.tt-netmod-yang-config-templates}}, a template node
+can be overriden by having its value changed, but it can't be deleted.
 
-As an example of overriding a node in a template, a client may configure physically present OAM Unitary Tests "lsp-ping", "ip-ping" and
-"srmpls-ping" inheriting the template defined in {{ex-oam-test-template}}, but the "ne-id" value of "srmpls-ping" needs to be "203.0.113.4":
+As an example of overriding a node in a template, a client may configure
+physically present OAM Unitary Tests "lsp-ping", "ip-ping" and
+"srmpls-ping" inheriting the template defined in {{ex-oam-test-template}},
+but the "ne-id" value of "srmpls-ping" needs to be "203.0.113.4":
 
 ~~~~
    <?xml version="1.0" encoding="utf-8"?>
@@ -986,7 +999,8 @@ As an example of overriding a node in a template, a client may configure physica
 ~~~~
 {: #ex-apply-oam-test-template title="Example of Applying OAM Test Template"}
 
-And the above OAM Unitary Tests configuration renders the following expanded configuration:
+And the above OAM Unitary Tests configuration renders the following
+expanded configuration:
 
 ~~~~
 <?xml version="1.0" encoding="utf-8"?>
