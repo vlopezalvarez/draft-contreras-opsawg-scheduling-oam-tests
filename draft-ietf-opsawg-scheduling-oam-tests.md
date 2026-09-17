@@ -680,7 +680,7 @@ OAM task categories are prioritized according to the following operational hiera
 When an active test or upcoming schedule is modified or aborted by a higher-priority
 operation, the server must update the corresponding unitary-test-status or
 test-sequence-status leaf. It must also log the preempted event alongside an error
-notification to ensure observability across the network management layer. 
+notification to ensure observability across the network management layer.
 In addition, the pre-emption applies only to the OAM sessions being setup
 using the YANG data models defined in this document, while other OAM sessions
 being running on the devices through other mechanims should not be pre-empted
