@@ -555,7 +555,7 @@ Table of Contents
       state is triggered when the test has not been conducted
       successfully.  Implementations may report a more specific error
       cause using child identities such as "resource-contention" or
-      "priority".
+      "priority-conflict".
 
    *  "success": The final state where the test is completed.  This
       state is triggered when the test has been conducted successfully.
@@ -712,7 +712,7 @@ Table of Contents
       state is triggered when one or more tests haven't been conducted
       successfully.  Implementations may report a more specific error
       cause using child identities such as "resource-contention" or
-      "priority".
+      "priority-conflict".
 
    Note that how state transition triggering generation of YANG
    notifications and how external management and orchestration systems
@@ -1280,11 +1280,11 @@ Table of Contents
    exclusive access to the same resource at the same time), the server
    sets the corresponding status to error or to a more specific error-
    cause identity derived from error: resource-contention for resource
-   conflicts, or priority for prioritization-related conflicts
-   Section 4.1, Section 4.2.  This error-cause indication allows
-   operators and management systems to distinguish the reasons for the
-   failure.  Note that it is intention to allow extensibility for the
-   error codes rather than extend states in the state machine.
+   conflicts, or priority based conflict for prioritization-related
+   conflicts Section 4.1, Section 4.2.  This error-cause indication
+   allows operators and management systems to distinguish the reasons
+   for the failure.  Note that it is intention to allow extensibility
+   for the error codes rather than extend states in the state machine.
 
    Operators and management systems SHOULD monitor the scheduling status
    of OAM tasks and take appropriate action if a conflict is reported.
