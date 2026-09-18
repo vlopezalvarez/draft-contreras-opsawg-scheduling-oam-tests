@@ -1,4 +1,4 @@
-# A YANG Data Model for Network Diagnosis by scheduling sequences of OAM tests
+# A YANG Data Model for Network Diagnosis by Scheduling Sequences of OAM Tests
 
 This is the working area for the individual Internet-Draft, "A YANG Data Model for Network Diagnosis by scheduling sequences of OAM tests".
 
