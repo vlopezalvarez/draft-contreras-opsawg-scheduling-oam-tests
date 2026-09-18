@@ -131,11 +131,15 @@ module ietf-oam-test-sequence {
 
       list test-ref {
 	    key "name";
-        ordered-by user;
-        description "References to the ietf-oam-unitary-tests.";
+        description 
+          "References to the ietf-oam-unitary-tests.
+           it supports both ordered-by user and
+           order-by system.";
         uses "oamut:oam-unitary-test";
       }
-   uses schedule:schedule-status;
+
+     uses schedule:schedule-status;
+
 	 leaf test-sequence-status {
 	   type identityref {
 		 base test-sequence-status;
