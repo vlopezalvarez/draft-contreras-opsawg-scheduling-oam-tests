@@ -447,14 +447,12 @@ structured approach to running multiple OAM tests in a coordinated manner.
 Each OAM test sequence references an OAM unitary test type with its concrete parameters to indicate
 which OAM Test YANG module, is mounted at the "root" mount point for that "ne-config"
 list entry. Each OAM test sequence has two temporal parameters related to time constraints: "period"
-container and "recurrence" container and one constraint related to ordering: "ordered-by user". Time
-constraints parameters are imported from the "ietf-schedule" module from {{!RFC9922}}. "period" identifies
-the one shot period values that contain a precise period of time and can be used to support on demand
-troubleshooting, while "recurrence" identifies the properties that contain a recurrence rule specification
-and can be used to support periodical troubleshooting. "ordered-by user" YANG statement indicates that
-the user is responsible for the ordering on a collection of OAM unitary tests. "test-sequence-status"
-shows the state of the OAM test sequence. "state" imported from the "ietf-schedule" module indicates the
-current state of the schedule.
+container and "recurrence" container. Time constraints parameters are imported from the "ietf-schedule"
+module from {{!RFC9922}}. "period" identifies the one shot period values that contain a precise period
+of time and can be used to support on demand troubleshooting, while "recurrence" identifies the
+properties that contain a recurrence rule specification and can be used to support periodical
+troubleshooting. "test-sequence-status" shows the state of the OAM test sequence. "state" imported
+from the "ietf-schedule" module indicates the current state of the schedule.
 
 Note that repetition is specified by "count" parameter and only applies to the recurrence
 schedule type. If no count is indicated, the test is considered to run indefinitely. In case of the
@@ -464,8 +462,9 @@ tests, one or more tests on one or multiple ne nodes in the sequence might get a
 in one or more tests doesn't prevent the subsequent tests or remaining tests on the same ne nodes or on
 various different ne nodes to execute. In addition, any change to the ordering of the OAM test sequence
 will lead to different reporting output results therefore the user should have full control on the
-ordering and "ordered-by user" parameters needs to be specified. If two or more tests are to run
-concurrently, they MUST be run in the order specified by the user.
+ordering and "ordered-by user" YANG statement needs to be specified. "ordered-by user" YANG statement
+indicates that the user is responsible for the ordering on a collection of OAM unitary tests. If two or
+more tests are to run concurrently, they MUST be run in the order specified by the user.
 
 {{oam-test-sequence-tree-st}} shows the structure of OAM Test Sequence module:
 
