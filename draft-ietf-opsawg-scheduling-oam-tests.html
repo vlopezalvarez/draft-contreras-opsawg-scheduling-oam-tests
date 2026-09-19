@@ -15,25 +15,25 @@ Administration, and Maintenance (OAM) tests. This document defines both 'oam-uni
 for use by external management and orchestration systems (including SDN controllers and network
 orchestrators), rather than by individual network nodes. 
     " name="description">
-<meta content="xml2rfc 3.34.0" name="generator">
+<meta content="xml2rfc 3.34.1" name="generator">
 <meta content="OAM" name="keyword">
 <meta content="Scheduling" name="keyword">
 <meta content="Test Sequences" name="keyword">
 <meta content="draft-ietf-opsawg-scheduling-oam-tests-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.34.0
+  xml2rfc 3.34.1
     Python 3.14.7
-    ConfigArgParse 1.7.5
+    ConfigArgParse 1.7.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.11.7
+    platformdirs 4.11.10
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.3
+    wcwidth 0.8.4
 -->
 <link href="draft-ietf-opsawg-scheduling-oam-tests.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1053,7 +1053,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Contreras, et al.</td>
-<td class="center">Expires 21 March 2027</td>
+<td class="center">Expires 23 March 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg {
 <dd class="internet-draft">draft-ietf-opsawg-scheduling-oam-tests-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-17" class="published">17 September 2026</time>
+<time datetime="2026-09-19" class="published">19 September 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-03-21">21 March 2027</time></dd>
+<dd class="expires"><time datetime="2027-03-23">23 March 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1133,7 +1133,7 @@ orchestrators), rather than by individual network nodes.<a href="#section-abstra
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2464,14 +2464,14 @@ models for each new test type or variation of the device models.<a href="#sectio
 </li>
       </ul>
 <p id="section-6-3">The "test-type" leaf and the schema mount are complementary. The "test-type" leaf
-(identityref to "basic-test-type") explicitly indicates which OAM test type, and
+(identityref to "test-type") explicitly indicates which OAM test type, and
 thus which YANG module, is mounted at the "root" mount point for that "ne-config"
 list entry. Each "ne-config" entry therefore pairs a test-type identity with the
 corresponding mounted module configuration under "root", so that management
 systems and implementations know which OAM module applies to that node. This
-document defines the base identity "basic-test-type" and a set of child
+document defines the base identity "test-type" and a set of child
 identities for OAM test type; YANG modules that augment "ietf-oam-unitary-test"
-may define additional child identities derived from "basic-test-type" for other
+may define additional child identities derived from "test-type" for other
 OAM test types.<a href="#section-6-3" class="pilcrow">¶</a></p>
 <p id="section-6-4">As an example, we will use <span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span>, which defines a YANG data model for
 TWAMP, to illustrate how device models could be used in <a href="#ex-create-twp-oam" class="auto internal xref">Appendix A.1</a>.<a href="#section-6-4" class="pilcrow">¶</a></p>
@@ -3087,7 +3087,7 @@ the models defined in this document.<a href="#appendix-A-1" class="pilcrow">¶</
 <p id="appendix-A.1-1"><span>[<a href="#RFC8913" class="cite xref">RFC8913</a>]</span> defines a YANG model for TWAMP. The following example demonstrates how
 scheduled test results look like from mounted device models surface through NMDA
 retrieval. This example uses the "twamp" identity defined in the ietf-oam-unitary-test
-module (derived from "basic-test-type") to indicate the test type; the TWAMP device
+module (derived from "test-type") to indicate the test type; the TWAMP device
 model is mounted at the "root" of each "ne-config" entry. The example contains the
 information for the two configurations (Session-Sender and Session-Reflector).<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-2">An example of a request message body to create a TWAMP OAM test is shown in

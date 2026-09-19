@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 21 March 2027                                             Nokia
+Expires: 23 March 2027                                             Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                       17 September 2026
+                                                       19 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 March 2027.
+   This Internet-Draft will expire on 23 March 2027.
 
 Copyright Notice
 
@@ -1246,16 +1246,16 @@ Table of Contents
       without any modifications.
 
    The "test-type" leaf and the schema mount are complementary.  The
-   "test-type" leaf (identityref to "basic-test-type") explicitly
-   indicates which OAM test type, and thus which YANG module, is mounted
-   at the "root" mount point for that "ne-config" list entry.  Each "ne-
-   config" entry therefore pairs a test-type identity with the
-   corresponding mounted module configuration under "root", so that
-   management systems and implementations know which OAM module applies
-   to that node.  This document defines the base identity "basic-test-
-   type" and a set of child identities for OAM test type; YANG modules
-   that augment "ietf-oam-unitary-test" may define additional child
-   identities derived from "basic-test-type" for other OAM test types.
+   "test-type" leaf (identityref to "test-type") explicitly indicates
+   which OAM test type, and thus which YANG module, is mounted at the
+   "root" mount point for that "ne-config" list entry.  Each "ne-config"
+   entry therefore pairs a test-type identity with the corresponding
+   mounted module configuration under "root", so that management systems
+   and implementations know which OAM module applies to that node.  This
+   document defines the base identity "test-type" and a set of child
+   identities for OAM test type; YANG modules that augment "ietf-oam-
+   unitary-test" may define additional child identities derived from
+   "test-type" for other OAM test types.
 
    As an example, we will use [RFC8913], which defines a YANG data model
    for TWAMP, to illustrate how device models could be used in
@@ -1876,8 +1876,8 @@ A.1.  Create a TWAMP OAM test
    demonstrates how scheduled test results look like from mounted device
    models surface through NMDA retrieval.  This example uses the "twamp"
    identity defined in the ietf-oam-unitary-test module (derived from
-   "basic-test-type") to indicate the test type; the TWAMP device model
-   is mounted at the "root" of each "ne-config" entry.  The example
+   "test-type") to indicate the test type; the TWAMP device model is
+   mounted at the "root" of each "ne-config" entry.  The example
    contains the information for the two configurations (Session-Sender
    and Session-Reflector).
 
