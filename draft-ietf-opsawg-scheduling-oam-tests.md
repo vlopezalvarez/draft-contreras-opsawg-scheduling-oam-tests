@@ -617,14 +617,14 @@ enable OAM scheduling models:
    "ietf-twamp" can be mounted without any modifications.
 
 The "test-type" leaf and the schema mount are complementary. The "test-type" leaf
-(identityref to "basic-test-type") explicitly indicates which OAM test type, and
+(identityref to "test-type") explicitly indicates which OAM test type, and
 thus which YANG module, is mounted at the "root" mount point for that "ne-config"
 list entry. Each "ne-config" entry therefore pairs a test-type identity with the
 corresponding mounted module configuration under "root", so that management
 systems and implementations know which OAM module applies to that node. This
-document defines the base identity "basic-test-type" and a set of child
+document defines the base identity "test-type" and a set of child
 identities for OAM test type; YANG modules that augment "ietf-oam-unitary-test"
-may define additional child identities derived from "basic-test-type" for other
+may define additional child identities derived from "test-type" for other
 OAM test types.
 
 As an example, we will use {{?RFC8913}}, which defines a YANG data model for
@@ -919,7 +919,7 @@ the models defined in this document.
 {{?RFC8913}} defines a YANG model for TWAMP. The following example demonstrates how
 scheduled test results look like from mounted device models surface through NMDA
 retrieval. This example uses the "twamp" identity defined in the ietf-oam-unitary-test
-module (derived from "basic-test-type") to indicate the test type; the TWAMP device
+module (derived from "test-type") to indicate the test type; the TWAMP device
 model is mounted at the "root" of each "ne-config" entry. The example contains the
 information for the two configurations (Session-Sender and Session-Reflector).
 
