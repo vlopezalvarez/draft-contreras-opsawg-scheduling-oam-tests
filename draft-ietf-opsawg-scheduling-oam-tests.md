@@ -352,7 +352,7 @@ module: ietf-oam-unitary-test
      +--rw oam-unitary-test* [name]
         +--rw name                      string
         +--rw ne-config* [ne-id]
-        |  +--rw ne-id        inet:host
+        |  +--rw ne-id        union
         |  +--rw managed?     boolean
         |  +--rw test-type?   identityref
         |  +--rw root
@@ -477,7 +477,7 @@ module: ietf-oam-test-sequence
         +--rw test-ref* [name]
         |  +--rw name         string
         |  +--rw ne-config* [ne-id]
-        |     +--rw ne-id        inet:host
+        |     +--rw ne-id        union
         |     +--rw managed?     boolean
         |     +--rw test-type?   identityref
         |     +--rw root
