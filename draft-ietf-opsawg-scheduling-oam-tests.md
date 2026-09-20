@@ -936,7 +936,7 @@ An example of a request message body to create a TWAMP OAM test is shown in
 purposes. The TWAMP Test scheduled in this configuration is a one-hour performance
 monitoring test that runs daily at 9 AM UTC. This test session is configured to start
 on October 17, 2023, at 09:00 UTC and recur at the same time every day. The duration
-of each test run is one hour, as specified by the ISO 8601 format "PT1H", with the
+of each test run is one hour, as specified by the unint32 format "3600", with the
 test status marked as "configured". The test provides insight into network performance
 by monitoring the selected parameters, allowing for the detection of any potential
 degradations in service quality over time.
