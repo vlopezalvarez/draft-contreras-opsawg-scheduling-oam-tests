@@ -691,10 +691,11 @@ When an active test or upcoming schedule is modified or aborted by a higher-prio
 operation, the server must update the corresponding unitary-test-status or
 test-sequence-status leaf. It must also log the preempted event alongside an error
 notification to ensure observability across the network management layer.
-In addition, the pre-emption applies only to the OAM sessions being setup
+In addition, the preemption applies only to the OAM sessions being setup
 using the YANG data models defined in this document, while other OAM sessions
-being running on the devices through other mechanims should not be pre-empted
-(e.g., through CLI or by configuring the device YANG data model directly).
+being running on the devices through other mechanims should not be preempted
+(e.g., through CLI or by configuring the device YANG data model directly)
+to avoid operaetional impact on other OAM sessions.
 
 ## Coverage of Input Parameters and Output Results
 
@@ -735,9 +736,9 @@ in the YANG module.
 
 Scheduling of the unitary test or test sequence still applies when "managed" is
 "false": time constraints and status reporting remain in this model, but the
-device-level OAM configuration is not pushed through the mount point.
-Implementations that cannot disable mount access may keep "managed" as a read-only
-value of "true".
+device-level OAM configuration is not pushed through the mount point to support
+smooth migration. Implementations that cannot disable mount access may keep
+"managed" as a read-only value of "true".
 
 ## Performance impact and Operational Guidance for concurrent OAM task scheduling
 
