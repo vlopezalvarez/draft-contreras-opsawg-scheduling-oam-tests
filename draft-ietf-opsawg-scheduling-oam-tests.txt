@@ -1335,11 +1335,11 @@ Table of Contents
    unitary-test-status or test-sequence-status leaf.  It must also log
    the preempted event alongside an error notification to ensure
    observability across the network management layer.  In addition, the
-   pre-emption applies only to the OAM sessions being setup using the
+   preemption applies only to the OAM sessions being setup using the
    YANG data models defined in this document, while other OAM sessions
    being running on the devices through other mechanims should not be
-   pre-empted (e.g., through CLI or by configuring the device YANG data
-   model directly).
+   preempted (e.g., through CLI or by configuring the device YANG data
+   model directly) to avoid operaetional impact on other OAM sessions.
 
 7.2.  Coverage of Input Parameters and Output Results
 
@@ -1387,8 +1387,9 @@ Table of Contents
    Scheduling of the unitary test or test sequence still applies when
    "managed" is "false": time constraints and status reporting remain in
    this model, but the device-level OAM configuration is not pushed
-   through the mount point.  Implementations that cannot disable mount
-   access may keep "managed" as a read-only value of "true".
+   through the mount point to support smooth migration.  Implementations
+   that cannot disable mount access may keep "managed" as a read-only
+   value of "true".
 
 7.4.  Performance impact and Operational Guidance for concurrent OAM
       task scheduling
