@@ -647,7 +647,7 @@ Table of Contents
          +--rw test-sequence* [name]
             +--rw name                      string
             +--rw test-ref* [name]
-            |  +--rw name         string
+            |  +--rw name         leafref
             |  +--rw ne-config* [ne-id]
             |     +--rw ne-id        union
             |     +--rw managed?     boolean
@@ -1711,9 +1711,9 @@ Informative References
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-14, 18 August 2026,
+              incident-yang-15, 20 September 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-14>.
+              network-incident-yang-15>.
 
    [I-D.tt-netmod-yang-config-templates]
               Watsen, K., Ma, Q., and D. Rajaram, "YANG Configuration
