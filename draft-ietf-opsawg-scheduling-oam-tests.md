@@ -407,12 +407,12 @@ states:
            is applied and before the test is executed.
 * "on-going": The state where the test is currently running. This state is triggered when the test has been executed but
                the test results haven't been produced.
-* "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted,
-          using mechanisms which are outside the scope of this document. A manual stop is not a successful completion and
-          is not an execution error; the next cycle,   if any, starts from "planned".
 * "error": The state where an error occurs during the test. This state is triggered when the test has not been conducted
            successfully. Implementations may report a more specific error cause using child identities such as
            "resource-contention" or "priority-conflict".
+* "stop": The state where the test is manually stopped. This state is triggered when the test is manually interrupted,
+          using mechanisms which are outside the scope of this document. A manual stop is not a successful completion and
+          is not an execution error; the next cycle,   if any, starts from "planned".
 * "success": The final state where the test is completed. This state is triggered when the test has been conducted successfully.
 
 Note that how state transition triggering generation of YANG notifications and how external management and orchestration
@@ -536,16 +536,16 @@ includes the following states:
            test configuration is applied and before the test is executed.
 * "on-going": The state where the test is currently running. This state is triggered when the test has
               been executed but the test results haven't been produced.
-* "stop": The state where the test is manually stopped. This state is triggered when the test is manually
-          interrupted. A manual stop is not a sequence failure and is not a successful completion; the
-          next cycle, if any, starts from "planned".
-* "success": The final state where all Unitary Tests are completed. This state is triggered when all tests
-             have been conducted successfully.
-* "failure": The state when one or more tests in the sequence got an error while the sequence continued to
-             execute remaining tests.
 * "error": The state where an error occurs during the test. This state is triggered when one or more tests
            haven't been conducted successfully. Implementations may report a more specific error cause using
            child identities such as "resource-contention" or "priority-conflict".
+* "stop": The state where the test is manually stopped. This state is triggered when the test is manually
+          interrupted. A manual stop is not a sequence failure and is not a successful completion; the
+          next cycle, if any, starts from "planned".
+* "failure": The state when one or more tests in the sequence got an error while the sequence continued to
+             execute remaining tests.
+* "success": The final state where all Unitary Tests are completed. This state is triggered when all tests
+             have been conducted successfully.
 
 Note that how state transition triggering generation of YANG notifications and how external management and
 orchestration systems subscribe to these YANG notifications are not in the scope of this document.
@@ -662,13 +662,13 @@ and take appropriate action if a conflict is reported. The resolution of conflic
 but the conflict MUST be clearly reported via the YANG model status leaves.
 
 To support deterministic operations across heterogeneous multi-vendor environments,
-implementations RECOMMEND performing a commit-time validation, e.g., if a scheduling
-conflict (e.g., the number of schedule conflict exceeds the specific threshold) or
-resource over-allocation is detectable a priori, the configuration commit SHOULD be
-rejected by the server rather than accepted for delayed resolution. Another example
-is when manually running OAM test is colliding with previously scheduled OAM tests,
-we need to make sure to check the existence of schedule tests before running manual
-OAM testing.
+implementations RECOMMEND performing a commit-time validation on multi-node
+configuration, e.g., if a scheduling conflict (e.g., the number of schedule conflict
+exceeds the specific threshold) or resource over-allocation is detectable a priori,
+the configuration commit SHOULD be rejected by the server rather than accepted for
+delayed resolution. Another example is when manually running OAM test is colliding
+with previously scheduled OAM tests, we need to make sure to check the existence of
+schedule tests before running manual OAM testing.
 
 If a conflict cannot be caught a priori or occurs dynamically during runtime execution,
 the server resolves the resource friction using a well-defined precedence model.
