@@ -59,9 +59,7 @@ module ietf-oam-test-sequence {
   /* Identities */	
 	 identity test-sequence-status {
 	   description
-	     "Base identity for test-sequence-status. Note
-          that it only allows extensible error reporting
-          such as resource contention, priority conflict.";
+	     "Base identity for test-sequence-status.";
 	 }
 	 identity planned {
 	   base test-sequence-status;
@@ -108,10 +106,10 @@ module ietf-oam-test-sequence {
 	   description
 	    "Identity for resource-contention error cause.";
 	 }
-	 identity priority-conflict {
+	 identity priority {
 	   base error;
 	   description
-	    "Identity for priority conflict error cause.";
+	    "Identity for priority error cause.";
 	 }
 
   /* Data model definition */
@@ -131,8 +129,15 @@ module ietf-oam-test-sequence {
 
       list test-ref {
 	    key "name";
-        ordered-by user;
         description "References to the ietf-oam-unitary-tests.";
+		leaf name {
+          type leafref {
+		    path "/oamut:oam-unitary-tests/oamut:oam-unitary-test/oamut:name";
+		    require-instance false;
+		  }
+           description
+             "Defines the name of the test.";
+        }
         uses "oamut:oam-unitary-test";
       }
    uses schedule:schedule-status;
