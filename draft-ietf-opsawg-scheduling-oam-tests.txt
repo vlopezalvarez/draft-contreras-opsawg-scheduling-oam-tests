@@ -471,12 +471,13 @@ Table of Contents
    troubleshooting, this document relies on standard data store
    configuration writes (like NETCONF edit-config or RESTCONF POST/PUT)
    rather than creating a custom RPC, while reading state via NETCONF
-   get operations.  Moreover, "schedule:schedule-status" grouping has
-   been imported from [RFC9922] to describe common properties of
-   scheduling status.  Wrap-around of the "counter" and "failure-
-   counter" leaves is as specified in [RFC9922]. "unitary-test-status"
-   leaf indicates the state of the OAM unitary test (see the state
-   machine in Figure 3).
+   get operations [RFC6241] or subscription to YANG notifications to
+   dynamically stream the unitary-test-status [RFC8639], [RFC8641].
+   Moreover, "schedule:schedule-status" grouping has been imported from
+   [RFC9922] to describe common properties of scheduling status.  Wrap-
+   around of the "counter" and "failure-counter" leaves is as specified
+   in [RFC9922]. "unitary-test-status" leaf indicates the state of the
+   OAM unitary test (see the state machine in Figure 3).
 
    Each oam-unitary-test instance defined by this model is conceptually
    an instance of an active or hybrid OAM operation, since it triggers
@@ -615,7 +616,9 @@ Table of Contents
    periodical troubleshooting, this document relies on standard data
    store configuration writes (like NETCONF edit-config or RESTCONF
    POST/PUT) rather than creating a custom RPC, while reading state via
-   NETCONF get operations.  Moreover, "ordered-by user" YANG statement
+   NETCONF get operations [RFC6241] or subscription to YANG
+   notifications to dynamically stream the test-sequence-status
+   [RFC8639], [RFC8641].  Moreover, "ordered-by user" YANG statement
    indicates that the user is responsible for the ordering on a
    collection of OAM unitary tests. "test-sequence-status" shows the
    state of the OAM test sequence. "state" imported from the "ietf-
@@ -1663,6 +1666,15 @@ Normative References
    [RFC8528]  Bjorklund, M. and L. Lhotka, "YANG Schema Mount",
               RFC 8528, DOI 10.17487/RFC8528, March 2019,
               <https://www.rfc-editor.org/rfc/rfc8528>.
+
+   [RFC8639]  Voit, E., Clemm, A., Gonzalez Prieto, A., Nilsen-Nygaard,
+              E., and A. Tripathy, "Subscription to YANG Notifications",
+              RFC 8639, DOI 10.17487/RFC8639, September 2019,
+              <https://www.rfc-editor.org/rfc/rfc8639>.
+
+   [RFC8641]  Clemm, A. and E. Voit, "Subscription to YANG Notifications
+              for Datastore Updates", RFC 8641, DOI 10.17487/RFC8641,
+              September 2019, <https://www.rfc-editor.org/rfc/rfc8641>.
 
    [RFC8969]  Wu, Q., Ed., Boucadair, M., Ed., Lopez, D., Xie, C., and
               L. Geng, "A Framework for Automating Service and Network
