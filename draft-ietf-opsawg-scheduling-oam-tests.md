@@ -335,10 +335,12 @@ list entry.
 In addition, each OAM unitary test has two temporal parameters: "period" container and "recurrence" container.
 Both import groupings from the "ietf-schedule" module from {{!RFC9922}}. "period" container identifies the one shot period
 values that contain a precise period of time and can be used to support on-demand troubleshooting, while "recurrence" container
-identifies the properties that contain a recurrence rule specification and can be used to periodic troubleshooting. Moreover,
-"schedule:schedule-status" grouping has been imported from {{!RFC9922}} to describe common properties of scheduling status.
-Wrap-around of the "counter" and "failure-counter" leaves is as specified in {{!RFC9922}}. "unitary-test-status" leaf indicates
-the state of the OAM unitary test (see the state machine in {{st-unitary-test-status}}).
+identifies the properties that contain a recurrence rule specification and can be used to periodic troubleshooting. To
+support on-demand troubleshooting and periodical troubleshooting, this document relies on standard data store configuration
+writes (like NETCONF <edit-config> or RESTCONF POST/PUT) rather than creating a custom RPC, while reading state via <get>
+operations. Moreover, "schedule:schedule-status" grouping has been imported from {{!RFC9922}} to describe common properties
+of scheduling status. Wrap-around of the "counter" and "failure-counter" leaves is as specified in {{!RFC9922}}.
+"unitary-test-status" leaf indicates the state of the OAM unitary test (see the state machine in {{st-unitary-test-status}}).
 
 Each oam-unitary-test instance defined by this model is conceptually an instance of an active or hybrid OAM
 operation, since it triggers the generation or coordination of OAM packets. The YANG model allows such differentiation
@@ -451,10 +453,12 @@ container and "recurrence" container and one constraint related to ordering: "or
 constraints parameters are imported from the "ietf-schedule" module from {{!RFC9922}}. "period" identifies
 the one shot period values that contain a precise period of time and can be used to support on demand
 troubleshooting, while "recurrence" identifies the properties that contain a recurrence rule specification
-and can be used to support periodical troubleshooting. "ordered-by user" YANG statement indicates that
-the user is responsible for the ordering on a collection of OAM unitary tests. "test-sequence-status"
-shows the state of the OAM test sequence. "state" imported from the "ietf-schedule" module indicates the
-current state of the schedule.
+and can be used to support periodical troubleshooting. To support on-demand troubleshooting and periodical
+troubleshooting, this document relies on standard data store configuration writes (like NETCONF <edit-config>
+or RESTCONF POST/PUT) rather than creating a custom RPC, while reading state via <get> operations.
+Moreover, "ordered-by user" YANG statement indicates that the user is responsible for the ordering on a collection
+of OAM unitary tests. "test-sequence-status" shows the state of the OAM test sequence. "state" imported
+from the "ietf-schedule" module indicates the current state of the schedule.
 
 Note that repetition is specified by "count" parameter and only applies to the recurrence
 schedule type. If no count is indicated, the test is considered to run indefinitely. In case of the
