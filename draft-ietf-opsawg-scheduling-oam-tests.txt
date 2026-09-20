@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 23 March 2027                                             Nokia
+Expires: 24 March 2027                                             Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                       19 September 2026
+                                                       20 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 March 2027.
+   This Internet-Draft will expire on 24 March 2027.
 
 Copyright Notice
 
@@ -483,7 +483,7 @@ Table of Contents
          +--rw oam-unitary-test* [name]
             +--rw name                      string
             +--rw ne-config* [ne-id]
-            |  +--rw ne-id        inet:host
+            |  +--rw ne-id        union
             |  +--rw managed?     boolean
             |  +--rw test-type?   identityref
             |  +--rw root
@@ -634,7 +634,7 @@ Table of Contents
             +--rw test-ref* [name]
             |  +--rw name         string
             |  +--rw ne-config* [ne-id]
-            |     +--rw ne-id        inet:host
+            |     +--rw ne-id        union
             |     +--rw managed?     boolean
             |     +--rw test-type?   identityref
             |     +--rw root
@@ -1462,11 +1462,13 @@ Table of Contents
 
    To support the accounting and auditing requirements described in
    Section 2.2 and Section 2.3, the test results of the scheduling model
-   including mounted device-model result or audit nodes should be
-   associated with each schedule instance to ensure that automated audit
-   tools and operators can seamlessly validate test execution, correlate
-   schedules with actual performance data, and maintain a verifiable
-   audit trail.
+   including mounted device-level OAM Test results (e.g., TWAMP Test
+   results in Appendix A.1 ) or audit nodes (i.e., ne-config list)
+   should be associated with each schedule instance (e.g., 'oam-unitary-
+   test' or 'oam-test-sequence' list instance) to ensure that automated
+   audit tools and operators can seamlessly validate test execution,
+   correlate schedules with actual performance data, and maintain a
+   verifiable audit trail.
 
 8.  Security Considerations
 
@@ -1556,8 +1558,8 @@ Table of Contents
 
 Acknowledgments
 
-   Thanks Joe Clark, Daniel King, Qiufang Ma and Fung Lim for valuable
-   review and comments.
+   Thanks Joe Clark, Daniel King, Qiufang Ma, Italo Busi and Fung Lim
+   for valuable review and comments.
 
    The work of Luis M.  Contreras has been partially supported by the
    European Union’s Horizon Program through the 6G DAta and ML
