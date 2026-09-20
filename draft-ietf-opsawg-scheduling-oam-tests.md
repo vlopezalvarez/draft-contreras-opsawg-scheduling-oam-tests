@@ -459,7 +459,7 @@ and can be used to support periodical troubleshooting. To support on-demand trou
 troubleshooting, this document relies on standard data store configuration writes (like NETCONF edit-config
 or RESTCONF POST/PUT) rather than creating a custom RPC, while reading state via NETCONF get operations
 {{!RFC6241}} or subscription to YANG notifications to dynamically stream the test-sequence-status
-{{!RFC8639}}, {{RFC9641}}. Moreover, "ordered-by user" YANG statement indicates that the user is responsible
+{{!RFC8639}}, {{RFC8641}}. Moreover, "ordered-by user" YANG statement indicates that the user is responsible
 for the ordering on a collection of OAM unitary tests. "test-sequence-status" shows the state of the OAM test
 sequence. "state" imported from the "ietf-schedule" module indicates the current state of the schedule.
 
