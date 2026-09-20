@@ -203,17 +203,17 @@ A service provider network's management operations can be automated
 using a variety of means such as interfaces based on YANG modules
 {{!RFC8969}} {{!RFC6241}} {{!RFC8040}}.  From that standpoint, and considering
 the architecture depicted in {{scheduling-model-usage}}, The goal of this document is to
-provide a mechanism to via a YANG-based interface, manage the lifecycle
-of network diagnosis procedure from the network controller to network
-elements with a focus on scheduling Network Diagnosis. In addition,
-the network controller use schema mount mechanism {{!RFC8528}} to retrieve ietf-yang-library
-data from the underlying network element and instantiate specific device-level OAM modules
-the network element supports under the designated data node (labeled as a
-mount-point).  If multiple identical devices are being managed, the network
-controller can reference a shared schema entry configured in its own
-/schema-mounts state data to mount the same model structure across all
-those network element locations. For more details on how schema mount works
-please refer to {{!RFC8528}}.
+provide a mechanism to via a YANG-based northbound interface using ietf-oam-unitary-test
+and ietf-oam-test-sequence, manage the lifecycle of network diagnosis procedure from
+the network controller to network elements with a focus on scheduling Network Diagnosis.
+In addition, both the service orchestrator and the network controller can use schema mount
+mechanism {{!RFC8528}} to retrieve ietf-yang-library data from the underlying network element
+and instantiate specific device-level OAM modules the network element supports under the
+designated data node (labeled as a mount-point) through YANG based interface or device CLI,
+a local script. If multiple identical devices are being managed, the network controller can
+reference a shared schema entry configured in its own/schema-mounts state data to mount
+the same model structure across all those network element locations. For more details on
+how schema mount works please refer to {{!RFC8528}}.
 
 ~~~~
                                +-----------------+
@@ -227,6 +227,7 @@ please refer to {{!RFC8528}}.
                                +------+---+------+
                    Network Models     |   | OAM Test Scheduling
                  (e.g., L3NM, L2NM)   |   | Network Model
+                                      |   | e.g.,ietf-oam-unitary-test
                                +------+---+------+
                                |     Network     |
                                |   Controller    |
