@@ -337,7 +337,7 @@ Both import groupings from the "ietf-schedule" module from {{!RFC9922}}. "period
 values that contain a precise period of time and can be used to support on-demand troubleshooting, while "recurrence" container
 identifies the properties that contain a recurrence rule specification and can be used to periodic troubleshooting. To
 support on-demand troubleshooting and periodical troubleshooting, this document relies on standard data store configuration
-writes (like NETCONF <edit-config> or RESTCONF POST/PUT) rather than creating a custom RPC, while reading state via <get>
+writes (like NETCONF edit-config or RESTCONF POST/PUT) rather than creating a custom RPC, while reading state via NETCONF get
 operations. Moreover, "schedule:schedule-status" grouping has been imported from {{!RFC9922}} to describe common properties
 of scheduling status. Wrap-around of the "counter" and "failure-counter" leaves is as specified in {{!RFC9922}}.
 "unitary-test-status" leaf indicates the state of the OAM unitary test (see the state machine in {{st-unitary-test-status}}).
@@ -454,8 +454,8 @@ constraints parameters are imported from the "ietf-schedule" module from {{!RFC9
 the one shot period values that contain a precise period of time and can be used to support on demand
 troubleshooting, while "recurrence" identifies the properties that contain a recurrence rule specification
 and can be used to support periodical troubleshooting. To support on-demand troubleshooting and periodical
-troubleshooting, this document relies on standard data store configuration writes (like NETCONF <edit-config>
-or RESTCONF POST/PUT) rather than creating a custom RPC, while reading state via <get> operations.
+troubleshooting, this document relies on standard data store configuration writes (like NETCONF edit-config
+or RESTCONF POST/PUT) rather than creating a custom RPC, while reading state via NETCONF get operations.
 Moreover, "ordered-by user" YANG statement indicates that the user is responsible for the ordering on a collection
 of OAM unitary tests. "test-sequence-status" shows the state of the OAM test sequence. "state" imported
 from the "ietf-schedule" module indicates the current state of the schedule.
