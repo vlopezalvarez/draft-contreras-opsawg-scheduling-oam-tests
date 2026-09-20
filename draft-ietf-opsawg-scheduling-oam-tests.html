@@ -3121,19 +3121,19 @@ degradations in service quality over time.<a href="#appendix-A.1-2" class="pilcr
         "recurrence": {
         "recurrence-first": {
         "start-time-utc": "2026-10-17T09:00:00Z",
-        "duration": "PT1H"
+        "duration": "3600"
          },
         "utc-until": "2026-12-31T23:59:59Z",
         "recurrence-description": "TWAMP Test Reccurence, Daily at \
                                                            9 AM UTC",
-        "frequency": "oam-types:daily",
+        "frequency": "ietf-schedule:daily",
         "interval": 1
         },
         "unitary-test-status": "configured",
         "ne-config": [
           {
             "ne-id": "203.0.113.3",
-            "managed": "true",
+            "managed": true,
             "test-type": "twamp",
             "root": {
             "twamp": {
