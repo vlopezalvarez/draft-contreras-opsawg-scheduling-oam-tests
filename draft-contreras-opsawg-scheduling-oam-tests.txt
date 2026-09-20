@@ -703,11 +703,6 @@ Table of Contents
           This grouping has been defined to allow being imported and
            reused by other YANG modules.";
 
-       leaf name {
-         type string;
-         description
-           "Defines the name of the test.";
-       }
        list ne-config {
          key ne-id;
          description "List of node configurations required to enable the
@@ -769,6 +764,11 @@ Table of Contents
          description
            "List of OAM unitary tests activation for network diagnosis
            procedures.";
+             leaf name {
+           type string;
+            description
+              "Defines the name of the test.";
+         }
          uses oam-unitary-test;
          uses schedule:schedule-status;
          leaf unitary-test-status {
@@ -865,9 +865,7 @@ Table of Contents
      /* Identities */
             identity test-sequence-status {
               description
-                "Base identity for test-sequence-status. Note
-             that it only allows extensible error reporting
-             such as resource contention, priority conflict.";
+                "Base identity for test-sequence-status.";
             }
             identity planned {
               base test-sequence-status;
@@ -914,10 +912,10 @@ Table of Contents
               description
                "Identity for resource-contention error cause.";
             }
-            identity priority-conflict {
+            identity priority {
               base error;
               description
-               "Identity for priority conflict error cause.";
+               "Identity for priority error cause.";
             }
 
      /* Data model definition */
@@ -937,8 +935,15 @@ Table of Contents
 
          list test-ref {
                key "name";
-           ordered-by user;
            description "References to the ietf-oam-unitary-tests.";
+                   leaf name {
+             type leafref {
+                       path "/oamut:oam-unitary-tests/oamut:oam-unitary-test/oamut:name";
+                       require-instance false;
+                     }
+              description
+                "Defines the name of the test.";
+           }
            uses "oamut:oam-unitary-test";
          }
       uses schedule:schedule-status;
