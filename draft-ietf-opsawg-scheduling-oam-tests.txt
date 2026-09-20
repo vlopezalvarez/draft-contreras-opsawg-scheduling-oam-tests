@@ -1296,20 +1296,17 @@ Table of Contents
 
    Operators and management systems SHOULD monitor the scheduling status
    of OAM tasks and take appropriate action if a conflict is reported.
-   The resolution of conflicts (e.g., rescheduling, prioritization, or
-   cancellation) is implementation-dependent, but the conflict MUST be
-   clearly reported via the YANG model status leaves.
-
    To support deterministic operations across heterogeneous multi-vendor
-   environments, implementations RECOMMEND performing a commit-time
-   validation on multi-node configuration, e.g., if a scheduling
-   conflict (e.g., the number of schedule conflict exceeds the specific
-   threshold) or resource over-allocation is detectable a priori, the
-   configuration commit SHOULD be rejected by the server rather than
-   accepted for delayed resolution.  Another example is when manually
-   running OAM test is colliding with previously scheduled OAM tests, we
-   need to make sure to check the existence of schedule tests before
-   running manual OAM testing.
+   environments, implementations SHOULD perform a commit-time validation
+   on multi-node configuration, e.g., if a scheduling conflict (e.g.,
+   the number of schedule conflict exceeds the specific threshold) or
+   resource over-allocation is detectable a priori, the configuration
+   commit SHOULD be rejected by the server rather than accepted for
+   delayed resolution.  Another example is when manually running OAM
+   test is colliding with previously scheduled OAM tests, we need to
+   make sure to check the existence of schedule tests before running
+   manual OAM testing.  In both examples, the conflict MUST be clearly
+   reported via the YANG model status leaves.
 
    If a conflict cannot be caught a priori or occurs dynamically during
    runtime execution, the server resolves the resource friction using a
