@@ -803,8 +803,10 @@ primary phases:
 ## Operational Considerations for Auditing and Results Tracking
 
 To support the accounting and auditing requirements described in Section 2.2 and
-Section 2.3, the test results of the scheduling model including mounted device-model
-result or audit nodes should be associated with each schedule instance to ensure that
+Section 2.3, the test results of the scheduling model including mounted device-level OAM
+Test results (e.g., TWAMP Test results in {{ex-create-twp-oam}} ) or audit nodes
+(i.e., ne-config list) should be associated with each schedule instance (e.g.,
+'oam-unitary-test' or 'oam-test-sequence' list instance) to ensure that
 automated audit tools and operators can seamlessly validate test execution, correlate
 schedules with actual performance data, and maintain a verifiable audit trail.
 
@@ -900,7 +902,7 @@ to be removed if the document is published as an RFC.
 # Acknowledgments
 {:numbered="false"}
 
-Thanks Joe Clark, Daniel King, Qiufang Ma and Fung Lim for valuable review and
+Thanks Joe Clark, Daniel King, Qiufang Ma, Italo Busi and Fung Lim for valuable review and
 comments.
 
 The work of Luis M. Contreras has been partially supported by the  European Union’s
