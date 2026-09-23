@@ -111,7 +111,20 @@ module ietf-oam-test-sequence {
 	   description
 	    "Identity for priority error cause.";
 	 }
-
+  /* Grouping defintion */
+	 grouping oam-test-ref {
+	    description
+		  "Contains the information necessary to reference OAM Unitary Test"
+	    leaf name {
+          type leafref {
+		    path "/oamut:oam-unitary-tests/oamut:oam-unitary-test/oamut:name";
+		    require-instance false;
+		  }
+           description
+             "Defines the name of the test.";
+        }
+        uses "oamut:oam-unitary-test";
+	}
   /* Data model definition */
   container oam-test-sequence {
     description
@@ -130,15 +143,7 @@ module ietf-oam-test-sequence {
       list test-ref {
 	    key "name";
         description "References to the ietf-oam-unitary-tests.";
-		leaf name {
-          type leafref {
-		    path "/oamut:oam-unitary-tests/oamut:oam-unitary-test/oamut:name";
-		    require-instance false;
-		  }
-           description
-             "Defines the name of the test.";
-        }
-        uses "oamut:oam-unitary-test";
+        uses oam-test-ref;
       }
    uses schedule:schedule-status;
 	 leaf test-sequence-status {
