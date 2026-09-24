@@ -481,7 +481,7 @@ module: ietf-oam-test-sequence
   +--rw oam-test-sequence
      +--rw test-sequence* [name]
         +--rw name                      string
-        +--rw test-ref* [name]
+        +--rw unitary-test* [name]
         |  +--rw name         leafref
         |  +--rw ne-config* [ne-id]
         |     +--rw ne-id        union
