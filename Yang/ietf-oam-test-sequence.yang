@@ -132,6 +132,7 @@ module ietf-oam-test-sequence {
         description "Reuses the ietf-oam-unitary-tests template
                      for each unitary test in the test seqence.";
         uses "oamut:oam-unitary-test";
+        uses schedule:schedule-status;
       }
      uses schedule:schedule-status;
 	 leaf test-sequence-status {
