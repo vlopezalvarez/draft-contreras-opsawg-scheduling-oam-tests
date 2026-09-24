@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 27 March 2027                                             Nokia
-                                                       23 September 2026
+Expires: 28 March 2027                                             Nokia
+                                                       24 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 March 2027.
+   This Internet-Draft will expire on 28 March 2027.
 
 Copyright Notice
 
@@ -917,27 +917,14 @@ Table of Contents
               description
                "Identity for priority error cause.";
             }
-     /* Grouping defintion */
-            grouping oam-test-ref {
-               description
-                     "Contains the information necessary to reference OAM Unitary Test"
-               leaf name {
-             type leafref {
-                       path "/oamut:oam-unitary-tests/oamut:oam-unitary-test/oamut:name";
-                       require-instance false;
-                     }
-              description
-                "Defines the name of the test.";
-           }
-           uses "oamut:oam-unitary-test";
-           }
+
      /* Data model definition */
-     container oam-test-sequence {
+     container oam-test-sequences {
        description
          "Container for executing a sequence of ietf-oam-unitary-tests
          N times.";
 
-       list test-sequence {
+       list oam-test-sequence {
          key "name";
          description "List of test sequences.";
 
@@ -946,12 +933,13 @@ Table of Contents
            description "Unique name for the test sequence.";
          }
 
-         list test-ref {
+        list unitary-test {
                key "name";
-           description "References to the ietf-oam-unitary-tests.";
-           uses oam-test-ref;
+           description "Reuses the ietf-oam-unitary-tests template
+                        for each unitary test in the test seqence.";
+           uses "oamut:oam-unitary-test";
          }
-      uses schedule:schedule-status;
+        uses schedule:schedule-status;
             leaf test-sequence-status {
               type identityref {
                     base test-sequence-status;
