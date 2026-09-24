@@ -1053,7 +1053,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Contreras, et al.</td>
-<td class="center">Expires 24 March 2027</td>
+<td class="center">Expires 28 March 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg {
 <dd class="internet-draft">draft-ietf-opsawg-scheduling-oam-tests-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-20" class="published">20 September 2026</time>
+<time datetime="2026-09-24" class="published">24 September 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-03-24">24 March 2027</time></dd>
+<dd class="expires"><time datetime="2027-03-28">28 March 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1133,7 +1133,7 @@ orchestrators), rather than by individual network nodes.<a href="#section-abstra
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 24 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 28 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2157,6 +2157,11 @@ module ietf-oam-unitary-test {
        This grouping has been defined to allow being imported and
         reused by other YANG modules.";
 
+        leaf name {
+      type string;
+        description
+          "Defines the name of the test.";
+     }
     list ne-config {
       key ne-id;
       description "List of node configurations required to enable the
@@ -2218,11 +2223,6 @@ module ietf-oam-unitary-test {
       description
         "List of OAM unitary tests activation for network diagnosis
         procedures.";
-          leaf name {
-        type string;
-         description
-           "Defines the name of the test.";
-      }
       uses oam-unitary-test;
       uses schedule:schedule-status;
       leaf unitary-test-status {
@@ -2963,7 +2963,7 @@ AI framework (6G-DALI) Project under Grant 101192750.<a href="#section-11-2" cla
 <dd class="break"></dd>
 <dt id="I-D.tt-netmod-yang-config-templates">[I-D.tt-netmod-yang-config-templates]</dt>
         <dd>
-<span class="refAuthor">Watsen, K.</span>, <span class="refAuthor">Ma, Q.</span>, and <span class="refAuthor">D. Rajaram</span>, <span class="refTitle">"YANG Configuration Templates"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-tt-netmod-yang-config-templates-03</span>, <time datetime="2026-07-03" class="refDate">3 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-03">https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-03</a>&gt;</span>. </dd>
+<span class="refAuthor">Watsen, K.</span>, <span class="refAuthor">Ma, Q.</span>, and <span class="refAuthor">D. Rajaram</span>, <span class="refTitle">"YANG Configuration Templates"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-tt-netmod-yang-config-templates-04</span>, <time datetime="2026-09-22" class="refDate">22 September 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-04">https://datatracker.ietf.org/doc/html/draft-tt-netmod-yang-config-templates-04</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IEEE-8021ag">[IEEE-8021ag]</dt>
         <dd>
