@@ -540,9 +540,9 @@ The 'sequence-test-status' state machine is shown in {{st-sequence-test-status}}
 includes the following states:
 
 * "planned": The initial state where the sequence test is planned by the management and hasn't been applied to
-             the network element.
+             any network element.
 * "configured": The state where the sequence test is being configured. This state is triggered when the planned
-                test configuration is applied to the network element.
+                test configuration is applied to one or more network element.
 * "ready": The state where the sequence test is ready to be executed. This state is triggered after the planned
            test configuration is applied and before the test is executed.
 * "on-going": The state where the sequence test is currently running. This state is triggered when the test has
@@ -551,8 +551,8 @@ includes the following states:
            haven't been conducted successfully. Implementations may report a more specific error cause using
            child identities such as "resource-contention" or "priority-conflict".
 * "stop": The state where the sequence test is manually stopped. This state is triggered when the test is manually
-          interrupted. A manual stop is not a sequence failure and is not a successful completion; the
-          next cycle, if any, starts from "planned".
+          interrupted,, using mechanisms which are outside the scope of this document. A manual stop is not a
+          sequence failure and is not a successful completion; the next cycle, if any, starts from "planned".
 * "failure": The state when error occurs for one or more unitary tests in the sequence test while the sequence test continues to
              execute remaining unitary tests.
 * "success": The final state where all Unitary Tests in the sequence test are completed. This state is triggered when all unitary tests
