@@ -230,7 +230,11 @@ module ietf-oam-unitary-test {
              base test-type;
            }
            description
-             "Choose the type of test.";
+             "Choose the type of test. Note that for the
+              same unitary test, if the test is conducted
+              on multiple ne node, the test type should be
+              same, but test configuration on each ne node
+              might be different.";
          }
        container root {
          description
