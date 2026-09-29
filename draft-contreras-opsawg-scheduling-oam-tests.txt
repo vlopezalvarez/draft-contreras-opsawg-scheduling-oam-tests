@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 28 March 2027                                             Nokia
-                                                       24 September 2026
+Expires: 2 April 2027                                              Nokia
+                                                       29 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 March 2027.
+   This Internet-Draft will expire on 2 April 2027.
 
 Copyright Notice
 
@@ -804,9 +804,9 @@ Table of Contents
    <CODE BEGINS>
     file ietf-oam-test-sequence@2024-11-08.yang
 
-   module ietf-oam-test-sequence {
+   module ietf-oam-sequence-test {
      yang-version 1.1;
-     namespace "urn:ietf:params:xml:ns:yang:ietf-oam-test-sequence";
+     namespace "urn:ietf:params:xml:ns:yang:ietf-oam-sequence-test";
      prefix "oamts";
 
      import ietf-oam-unitary-test {
@@ -835,7 +835,7 @@ Table of Contents
             Author:   Qin Wu
                      <bill.wu@huawei.com>";
      description
-       "This module defines the 'ietf-oam-test-sequence' YANG model for
+       "This module defines the 'ietf-oam-sequence-test' YANG model for
        management of network diagnosis procedures.
 
        Copyright (c) 2026 IETF Trust and the persons identified as
@@ -863,47 +863,47 @@ Table of Contents
      }
 
      /* Identities */
-            identity test-sequence-status {
+            identity sequence-test-status {
               description
-                "Base identity for test-sequence-status.";
+                "Base identity for sequence-test-status.";
             }
             identity planned {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for planned.";
             }
             identity configured {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for configured.";
             }
             identity ready {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for ready.";
             }
             identity on-going {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                 "Identity for on-going.";
             }
             identity stop {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for stop.";
             }
             identity success {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for success.";
             }
             identity failure {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for failure";
             }
             identity error {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for error.";
             }
@@ -919,18 +919,18 @@ Table of Contents
             }
 
      /* Data model definition */
-     container oam-test-sequences {
+     container oam-sequence-tests {
        description
          "Container for executing a sequence of ietf-oam-unitary-tests
          N times.";
 
-       list oam-test-sequence {
+       list oam-sequence-test {
          key "name";
-         description "List of test sequences.";
+         description "List of sequence tests.";
 
          leaf name {
            type string;
-           description "Unique name for the test sequence.";
+           description "Unique name for the sequence test.";
          }
 
         list unitary-test {
@@ -940,13 +940,13 @@ Table of Contents
            uses "oamut:oam-unitary-test";
          }
         uses schedule:schedule-status;
-            leaf test-sequence-status {
+            leaf sequence-test-status {
               type identityref {
-                    base test-sequence-status;
+                    base sequence-test-status;
               }
               config false;
               description
-                    "Status of the test sequence execution.";
+                    "Status of the sequence test execution.";
             }
      choice schedule-class {
         description
@@ -1140,9 +1140,9 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-15, 20 September 2026,
+              incident-yang-17, 24 September 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-15>.
+              network-incident-yang-17>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
