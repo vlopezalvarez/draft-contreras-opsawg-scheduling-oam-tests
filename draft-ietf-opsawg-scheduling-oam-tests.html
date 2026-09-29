@@ -1881,11 +1881,11 @@ includes the following states:<a href="#section-4.2.1-1" class="pilcrow">¶</a><
 <ul class="normal">
 <li class="normal" id="section-4.2.1-2.1">
               <p id="section-4.2.1-2.1.1">"planned": The initial state where the sequence test is planned by the management and hasn't been applied to
-           the network element.<a href="#section-4.2.1-2.1.1" class="pilcrow">¶</a></p>
+           any network element.<a href="#section-4.2.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.2.1-2.2">
               <p id="section-4.2.1-2.2.1">"configured": The state where the sequence test is being configured. This state is triggered when the planned
-              test configuration is applied to the network element.<a href="#section-4.2.1-2.2.1" class="pilcrow">¶</a></p>
+              test configuration is applied to one or more network element.<a href="#section-4.2.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.2.1-2.3">
               <p id="section-4.2.1-2.3.1">"ready": The state where the sequence test is ready to be executed. This state is triggered after the planned
@@ -1902,8 +1902,8 @@ includes the following states:<a href="#section-4.2.1-1" class="pilcrow">¶</a><
 </li>
             <li class="normal" id="section-4.2.1-2.6">
               <p id="section-4.2.1-2.6.1">"stop": The state where the sequence test is manually stopped. This state is triggered when the test is manually
-        interrupted. A manual stop is not a sequence failure and is not a successful completion; the
-        next cycle, if any, starts from "planned".<a href="#section-4.2.1-2.6.1" class="pilcrow">¶</a></p>
+        interrupted,, using mechanisms which are outside the scope of this document. A manual stop is not a
+        sequence failure and is not a successful completion; the next cycle, if any, starts from "planned".<a href="#section-4.2.1-2.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.2.1-2.7">
               <p id="section-4.2.1-2.7.1">"failure": The state when error occurs for one or more unitary tests in the sequence test while the sequence test continues to
