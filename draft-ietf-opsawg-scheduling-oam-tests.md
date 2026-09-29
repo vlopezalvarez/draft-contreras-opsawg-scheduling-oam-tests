@@ -527,29 +527,29 @@ module: ietf-oam-sequence-test
 ~~~~
 {: #oam-sequence-test-tree-st title="OAM sequence test" artwork-align="center"}
 
-### sequence test Status State Machine
+### Sequence Test Status State Machine
 
 The 'sequence-test-status' state machine is shown in {{st-sequence-test-status}}. The state machine
 includes the following states:
 
-* "planned": The initial state where the test is planned by the management and hasn't been applied to
+* "planned": The initial state where the sequence test is planned by the management and hasn't been applied to
              the network element.
-* "configured": The state where the test is being configured. This state is triggered when the planned
+* "configured": The state where the sequence test is being configured. This state is triggered when the planned
                 test configuration is applied to the network element.
-* "ready": The state where the test is ready to be executed. This state is triggered after the planned
+* "ready": The state where the sequence test is ready to be executed. This state is triggered after the planned
            test configuration is applied and before the test is executed.
-* "on-going": The state where the test is currently running. This state is triggered when the test has
+* "on-going": The state where the sequence test is currently running. This state is triggered when the test has
               been executed but the test results haven't been produced.
-* "error": The state where an error occurs during the test. This state is triggered when one or more tests
+* "error": The state where an error occurs during the sequence test. This state is triggered when one or more tests
            haven't been conducted successfully. Implementations may report a more specific error cause using
            child identities such as "resource-contention" or "priority-conflict".
-* "stop": The state where the test is manually stopped. This state is triggered when the test is manually
+* "stop": The state where the sequence test is manually stopped. This state is triggered when the test is manually
           interrupted. A manual stop is not a sequence failure and is not a successful completion; the
           next cycle, if any, starts from "planned".
-* "failure": The state when one or more tests in the sequence got an error while the sequence continued to
-             execute remaining tests.
-* "success": The final state where all Unitary Tests are completed. This state is triggered when all tests
-             have been conducted successfully.
+* "failure": The state when error occurs for one or more unitary tests in the sequence test while the sequence test continues to
+             execute remaining unitary tests.
+* "success": The final state where all Unitary Tests in the sequence test are completed. This state is triggered when all unitary tests
+             in the sequence test have been conducted successfully.
 
 Note that how state transition triggering generation of YANG notifications and how external management and
 orchestration systems subscribe to these YANG notifications are not in the scope of this document.
