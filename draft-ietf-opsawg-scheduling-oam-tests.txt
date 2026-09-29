@@ -612,17 +612,22 @@ Table of Contents
    contain a precise period of time and can be used to support on demand
    troubleshooting, while "recurrence" identifies the properties that
    contain a recurrence rule specification and can be used to support
-   periodical troubleshooting.  To support on-demand troubleshooting and
-   periodical troubleshooting, this document relies on standard data
-   store configuration writes (like NETCONF edit-config or RESTCONF
-   POST/PUT) rather than creating a custom RPC, while reading state via
-   NETCONF get operations [RFC6241] or subscription to YANG
-   notifications to dynamically stream the sequence-test-status
-   [RFC8639], [RFC8641].  Moreover, "ordered-by user" YANG statement
-   indicates that the user is responsible for the ordering on a
-   collection of OAM unitary tests. "sequence-test-status" shows the
-   state of the OAM test sequence. "state" imported from the "ietf-
-   schedule" module indicates the current state of the schedule.
+   periodical troubleshooting.  Note that the "recurrence" is only
+   intended to expose current and latest summary state, per occurrence
+   result history is outside the scope of this document.  Future
+   extension can choose to define notifications or other result model to
+   report per occurence result history.
+
+   To support on-demand troubleshooting and periodical troubleshooting,
+   this document relies on standard data store configuration writes
+   (like NETCONF edit-config or RESTCONF POST/PUT) rather than creating
+   a custom RPC, while reading state via NETCONF get operations
+   [RFC6241] or subscription to YANG notifications to dynamically stream
+   the sequence-test-status [RFC8639], [RFC8641].  Moreover, "ordered-by
+   user" YANG statement indicates that the user is responsible for the
+   ordering on a collection of OAM unitary tests. "sequence-test-status"
+   shows the state of the OAM test sequence. "state" imported from the
+   "ietf-schedule" module indicates the current state of the schedule.
 
    Note that repetition is specified by "count" parameter and only
    applies to the recurrence schedule type.  If no count is indicated,
@@ -636,9 +641,9 @@ Table of Contents
    ne nodes or on various different ne nodes to execute.  In addition,
    any change to the ordering of the OAM sequence test will lead to
    different reporting output results therefore the user should have
-   full control on the ordering and "ordered-by user" parameters needs
-   to be specified.  If two or more tests are to run concurrently, they
-   MUST be run in the order specified by the user.
+   full control on the ordering and "ordered-by user" parameters can be
+   specified.  If two or more tests are to run concurrently, they MUST
+   be run in the order specified by the user.
 
    Figure 4 shows the structure of OAM sequence test module:
 
