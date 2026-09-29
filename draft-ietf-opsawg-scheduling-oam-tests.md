@@ -456,7 +456,11 @@ container and "recurrence" container and one constraint related to ordering: "or
 constraints parameters are imported from the "ietf-schedule" module from {{!RFC9922}}. "period" identifies
 the one shot period values that contain a precise period of time and can be used to support on demand
 troubleshooting, while "recurrence" identifies the properties that contain a recurrence rule specification
-and can be used to support periodical troubleshooting. To support on-demand troubleshooting and periodical
+and can be used to support periodical troubleshooting. Note that the "recurrence" is only intended to expose
+current and latest summary state, per occurrence result history is outside the scope of this document.
+Future extension can choose to define notifications or other result model to report per occurence result history.
+
+To support on-demand troubleshooting and periodical
 troubleshooting, this document relies on standard data store configuration writes (like NETCONF edit-config
 or RESTCONF POST/PUT) rather than creating a custom RPC, while reading state via NETCONF get operations
 {{!RFC6241}} or subscription to YANG notifications to dynamically stream the sequence-test-status
@@ -472,7 +476,7 @@ tests, one or more tests on one or multiple ne nodes in the sequence might get a
 in one or more tests doesn't prevent the subsequent tests or remaining tests on the same ne nodes or on
 various different ne nodes to execute. In addition, any change to the ordering of the OAM sequence test
 will lead to different reporting output results therefore the user should have full control on the
-ordering and "ordered-by user" parameters needs to be specified. If two or more tests are to run
+ordering and "ordered-by user" parameters can be specified. If two or more tests are to run
 concurrently, they MUST be run in the order specified by the user.
 
 {{oam-sequence-test-tree-st}} shows the structure of OAM sequence test module:
