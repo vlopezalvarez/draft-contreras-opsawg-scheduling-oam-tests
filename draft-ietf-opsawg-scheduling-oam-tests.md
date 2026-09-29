@@ -14,7 +14,8 @@ workgroup: "Operations and Management Area Working Group"
 keyword:
  - OAM
  - Scheduling
- - Test Sequences
+ - Unitary Test
+ - Sequence Test
 venue:
   group: "Operations and Management Area Working Group"
   type: "Working Group"
@@ -63,7 +64,7 @@ informative:
 
 This document defines two YANG Data Models to support scheduled network diagnosis using Operations,
 Administration, and Maintenance (OAM) tests. This document defines both 'oam-unitary-test' and
-'oam-test-sequence' YANG modules to manage the lifecycle of network diagnosis procedures, intended
+'oam-sequence-test' YANG modules to manage the lifecycle of network diagnosis procedures, intended
 for use by external management and orchestration systems (including SDN controllers and network
 orchestrators), rather than by individual network nodes.
 
@@ -148,7 +149,7 @@ and automated network diagnosis procedures. In addition to reusing the device-le
 from {{?RFC8531}}, {{?RFC8532}}, and {{?RFC8533}}, this document builds upon the generic scheduling
 framework defined in {{!RFC9922}}. The `ietf-schedule` module provides reusable groupings and
 mechanisms for specifying periods of time, recurrence rules, and scheduling status. These constructs
-are directly imported and used in the OAM unitary test and OAM test sequence models defined in this
+are directly imported and used in the OAM unitary test and OAM sequence test models defined in this
 document, enabling precise scheduling, repetition, and conflict reporting for OAM tasks in a
 network-wide context.
 
@@ -161,7 +162,7 @@ Following terms are used for the representation of this data model:
 
 o OAM Unitary Test: A single OAM test which is executed at each scheduled time.
 
-o OAM Test Sequence: A set of OAM Unitary Tests that are executed on a specified order at each scheduled time.
+o OAM sequence test: A set of OAM Unitary Tests that are executed on a specified order at each scheduled time.
 
 Tree diagrams used in this document follow the notation defined in {{!RFC8340}}.
 
@@ -189,7 +190,7 @@ associated with the corresponding YANG imported modules, as shown in the followi
 | Prefix | Yang Module            | Reference    |
 | ------ | ---------------------- | ------------ |
 | oamut  | ietf-oam-unitary-test  | RFCXXXX      |
-| oamts  | ietf-oam-test-sequence | RFCXXXX      |
+| oamts  | ietf-oam-sequence-test | RFCXXXX      |
 | yang   | ietf-yang-types        | {{!RFC6991}} |
 {: #tab-prefixes title="Prefixes and Corresponding YANG Modules"}
 
@@ -204,7 +205,7 @@ using a variety of means such as interfaces based on YANG modules
 {{!RFC8969}} {{!RFC6241}} {{!RFC8040}}.  From that standpoint, and considering
 the architecture depicted in {{scheduling-model-usage}}, The goal of this document is to
 provide a mechanism to via a YANG-based northbound interface using ietf-oam-unitary-test
-and ietf-oam-test-sequence, manage the lifecycle of network diagnosis procedure from
+and ietf-oam-sequence-test, manage the lifecycle of network diagnosis procedure from
 the network controller to network elements with a focus on scheduling Network Diagnosis.
 In addition, both the service orchestrator and the network controller can use schema mount
 mechanism {{!RFC8528}} to retrieve ietf-yang-library data from the underlying network element
@@ -321,7 +322,7 @@ the PCE algorithms.
 
 # Modelling the Scheduling of OAM Tests
 
-This document specifies two models: OAM Unitary Test and OAM Test Sequence models.
+This document specifies two models: OAM Unitary Test and OAM sequence test models.
 
 ## OAM Unitary Test {#oam-ut}
 
@@ -442,9 +443,9 @@ systems subscribe to these YANG notifications are not in the scope of this docum
 ~~~~
 {: #st-unitary-test-status title="OAM Unitary Test State Machine" artwork-align="center"}
 
-## OAM Test Sequence {#oam-ts}
+## OAM sequence test {#oam-ts}
 
-The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on
+The OAM sequence test model consists of a collection of OAM unitary tests that are executed based on
 specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a
 structured approach to running multiple OAM tests in a coordinated manner. Note that each test sequence
 is local sequence configuration, any later changes to the configured unitary test template in the
@@ -457,31 +458,35 @@ container and "recurrence" container and one constraint related to ordering: "or
 constraints parameters are imported from the "ietf-schedule" module from {{!RFC9922}}. "period" identifies
 the one shot period values that contain a precise period of time and can be used to support on demand
 troubleshooting, while "recurrence" identifies the properties that contain a recurrence rule specification
-and can be used to support periodical troubleshooting. To support on-demand troubleshooting and periodical
+and can be used to support periodical troubleshooting. Note that the "recurrence" is only intended to expose
+current and latest summary state, per occurrence result history is outside the scope of this document.
+Future extension can choose to define notifications or other result model to report per occurence result history.
+
+To support on-demand troubleshooting and periodical
 troubleshooting, this document relies on standard data store configuration writes (like NETCONF edit-config
 or RESTCONF POST/PUT) rather than creating a custom RPC, while reading state via NETCONF get operations
-{{!RFC6241}} or subscription to YANG notifications to dynamically stream the test-sequence-status
+{{!RFC6241}} or subscription to YANG notifications to dynamically stream the sequence-test-status
 {{!RFC8639}}, {{RFC8641}}. Moreover, "ordered-by user" YANG statement indicates that the user is responsible
-for the ordering on a collection of OAM unitary tests. "test-sequence-status" shows the state of the OAM test
+for the ordering on a collection of OAM unitary tests. "sequence-test-status" shows the state of the OAM test
 sequence. "state" imported from the "ietf-schedule" module indicates the current state of the schedule.
 
 Note that repetition is specified by "count" parameter and only applies to the recurrence
 schedule type. If no count is indicated, the test is considered to run indefinitely. In case of the
 recurrence schedule type, both frequency and interval should be specified. Each execution runs at the
-scheduled recurrence interval. Since the OAM test sequence model consists of a collection of OAM unitary
+scheduled recurrence interval. Since the OAM sequence test model consists of a collection of OAM unitary
 tests, one or more tests on one or multiple ne nodes in the sequence might get an error, however error
 in one or more tests doesn't prevent the subsequent tests or remaining tests on the same ne nodes or on
-various different ne nodes to execute. In addition, any change to the ordering of the OAM test sequence
+various different ne nodes to execute. In addition, any change to the ordering of the OAM sequence test
 will lead to different reporting output results therefore the user should have full control on the
-ordering and "ordered-by user" parameters needs to be specified. If two or more tests are to run
+ordering and "ordered-by user" parameters can be specified. If two or more tests are to run
 concurrently, they MUST be run in the order specified by the user.
 
-{{oam-test-sequence-tree-st}} shows the structure of OAM Test Sequence module:
+{{oam-sequence-test-tree-st}} shows the structure of OAM sequence test module:
 
 ~~~~
-module: ietf-oam-test-sequence
-  +--rw oam-test-sequence
-     +--rw test-sequence* [name]
+module: ietf-oam-sequence-test
+  +--rw oam-sequence-test
+     +--rw sequence-test* [name]
         +--rw name                      string
         +--rw unitary-test* [name]
         |  +--rw name         string
@@ -500,7 +505,7 @@ module: ietf-oam-test-sequence
         +--ro upcoming-occurrence?      yang:date-and-time
         +--ro last-failed-occurrence?   yang:date-and-time
         +--ro failure-counter?          yang:counter32
-        +--ro test-sequence-status?     identityref
+        +--ro sequence-test-status?     identityref
         +--rw (schedule-class)?
            +--:(period)
            |  +--rw period
@@ -526,31 +531,31 @@ module: ietf-oam-test-sequence
                  +--rw frequency?                identityref
                  +--rw interval?                 uint32
 ~~~~
-{: #oam-test-sequence-tree-st title="OAM Test Sequence" artwork-align="center"}
+{: #oam-sequence-test-tree-st title="OAM sequence test" artwork-align="center"}
 
-### Test Sequence Status State Machine
+### Sequence Test Status State Machine
 
-The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}. The state machine
+The 'sequence-test-status' state machine is shown in {{st-sequence-test-status}}. The state machine
 includes the following states:
 
-* "planned": The initial state where the test is planned by the management and hasn't been applied to
+* "planned": The initial state where the sequence test is planned by the management and hasn't been applied to
              the network element.
-* "configured": The state where the test is being configured. This state is triggered when the planned
+* "configured": The state where the sequence test is being configured. This state is triggered when the planned
                 test configuration is applied to the network element.
-* "ready": The state where the test is ready to be executed. This state is triggered after the planned
+* "ready": The state where the sequence test is ready to be executed. This state is triggered after the planned
            test configuration is applied and before the test is executed.
-* "on-going": The state where the test is currently running. This state is triggered when the test has
+* "on-going": The state where the sequence test is currently running. This state is triggered when the test has
               been executed but the test results haven't been produced.
-* "error": The state where an error occurs during the test. This state is triggered when one or more tests
+* "error": The state where an error occurs during the sequence test. This state is triggered when one or more tests
            haven't been conducted successfully. Implementations may report a more specific error cause using
            child identities such as "resource-contention" or "priority-conflict".
-* "stop": The state where the test is manually stopped. This state is triggered when the test is manually
+* "stop": The state where the sequence test is manually stopped. This state is triggered when the test is manually
           interrupted. A manual stop is not a sequence failure and is not a successful completion; the
           next cycle, if any, starts from "planned".
-* "failure": The state when one or more tests in the sequence got an error while the sequence continued to
-             execute remaining tests.
-* "success": The final state where all Unitary Tests are completed. This state is triggered when all tests
-             have been conducted successfully.
+* "failure": The state when error occurs for one or more unitary tests in the sequence test while the sequence test continues to
+             execute remaining unitary tests.
+* "success": The final state where all Unitary Tests in the sequence test are completed. This state is triggered when all unitary tests
+             in the sequence test have been conducted successfully.
 
 Note that how state transition triggering generation of YANG notifications and how external management and
 orchestration systems subscribe to these YANG notifications are not in the scope of this document.
@@ -579,7 +584,7 @@ orchestration systems subscribe to these YANG notifications are not in the scope
    +---------+
 
 ~~~~
-{: #st-test-sequence-status title="OAM Test Sequence state machine" artwork-align="center"}
+{: #st-sequence-test-status title="OAM sequence test state machine" artwork-align="center"}
 
 # YANG Data Models for Scheduling OAM Tests
 
@@ -596,7 +601,7 @@ uses references defined in {{?RFC8531}}, {{?RFC8532}}, {{?RFC9617}}, {{?RFC8913}
 <CODE ENDS>
 ~~~~~~~~~~
 
-## YANG Model for OAM Test Sequence
+## YANG Model for OAM sequence test
 
 This module imports typedefs from {{!RFC9922}}. For the model design overview, please
 refer to {{oam-ts}}.
@@ -649,8 +654,8 @@ This document leverages the scheduling status groupings defined in the common
 schedule YANG module (see {{!RFC9922}} A Common YANG Data Model for Scheduling])
 to detect and report such conflicts.
 
-The YANG models defined in this document (both for unitary test and test sequence)
-use the unitary-test-status and test-sequence-status leaves to indicate the current
+The YANG models defined in this document (both for unitary test and sequence test)
+use the unitary-test-status and sequence-test-status leaves to indicate the current
 scheduling state of each OAM task. These leaves are of type identityref, allowing
 extensible error reporting. If a conflict is detected (e.g., two tests require exclusive
 access to the same resource at the same time), the server sets the corresponding
@@ -692,7 +697,7 @@ OAM task categories are prioritized according to the following operational hiera
 
 When an active test or upcoming schedule is modified or aborted by a higher-priority
 operation, the server must update the corresponding unitary-test-status or
-test-sequence-status leaf. It must also log the preempted event alongside an error
+sequence-test-status leaf. It must also log the preempted event alongside an error
 notification to ensure observability across the network management layer.
 In addition, the preemption applies only to the OAM sessions being setup
 using the YANG data models defined in this document, while other OAM sessions
@@ -737,7 +742,7 @@ different controller. In that case, any attempt to access data below "root" fail
 with error-tag "access-denied" and error-app-tag "oamut-not-managed", as specified
 in the YANG module.
 
-Scheduling of the unitary test or test sequence still applies when "managed" is
+Scheduling of the unitary test or sequence test still applies when "managed" is
 "false": time constraints and status reporting remain in this model, but the
 device-level OAM configuration is not pushed through the mount point to support
 smooth migration. Implementations that cannot disable mount access may keep
@@ -804,7 +809,7 @@ primary phases:
 - Mount Application Verification: Operators must verify that the OAM configuration
   nested under the schema mount root has been successfully propagated to each target
   network element (ne-id). This is achieved by querying the local state of the mounted
-  OAM unitary test or test sequence modules on individual network elements to confirm
+  OAM unitary test or sequence test modules on individual network elements to confirm
   that the configuration was applied correctly and the elements are primed for the
   upcoming schedule trigger.
 
@@ -814,7 +819,7 @@ To support the accounting and auditing requirements described in Section 2.2 and
 Section 2.3, the test results of the scheduling model including mounted device-level OAM
 Test results (e.g., TWAMP Test results in {{ex-create-twp-oam}} ) or audit nodes
 (i.e., ne-config list) should be associated with each schedule instance (e.g.,
-'oam-unitary-test' or 'oam-test-sequence' list instance) to ensure that
+'oam-unitary-test' or 'oam-sequence-test' list instance) to ensure that
 automated audit tools and operators can seamlessly validate test execution, correlate
 schedules with actual performance data, and maintain a verifiable audit trail.
 
@@ -823,7 +828,7 @@ schedules with actual performance data, and maintain a verifiable audit trail.
 This section is modeled after the template described in Section 3.7.1
 of {{!RFC9907}}.
 
-Both "ietf-oam-unitary-test " YANG module and "ietf-oam-test-sequence"
+Both "ietf-oam-unitary-test " YANG module and "ietf-oam-sequence-test"
 YANG module define data models that are designed to be accessed via
 YANG-based management protocols, such as the Network Configuration Protocol
 (NETCONF) {{!RFC6241}} and RESTCONF {{!RFC8040}}.  These YANG-based management
@@ -849,11 +854,11 @@ The following subtrees and data nodes have particular sensitivities/vulnerabilit
   as to forge an unitary test name that does not exist or maliciously delete an existing
   unitary test, which could be used to craft an attack.
 
-* /oamts:oam-test-sequence/oamts:test-sequence:
-  This list specifies all the oam test sequence entries for network diagnosis procedures.
+* /oamts:oam-sequence-test/oamts:sequence-test:
+  This list specifies all the oam sequence test entries for network diagnosis procedures.
   Unauthorized write access to this list can allow intruders to modify the entries so as
-  to forge an test sequence name that does not exist or maliciously delete an existing
-  test sequence, which could be used to craft an attack.
+  to forge an sequence test name that does not exist or maliciously delete an existing
+  sequence test, which could be used to craft an attack.
 
 This YANG module uses groupings from other YANG modules that
 define nodes that may be considered sensitive or vulnerable
@@ -874,7 +879,7 @@ be considered sensitive or vulnerable in network environments.
       Registrant Contact: The IESG.
       XML: N/A, the requested URI is an XML namespace.
 
-      URI: urn:ietf:params:xml:ns:yang:ietf-oam-test-sequence
+      URI: urn:ietf:params:xml:ns:yang:ietf-oam-sequence-test
       Registrant Contact: The IESG.
       XML: N/A, the requested URI is an XML namespace.
 ~~~~
@@ -893,9 +898,9 @@ be considered sensitive or vulnerable in network environments.
       Prefix:     oamut
       Reference:  RFC XXXX
 
-      Name:       ietf-oam-test-sequence
+      Name:       ietf-oam-sequence-test
       Maintained by IANA? N
-      Namespace:  urn:ietf:params:xml:ns:yang:ietf-oam-test-sequence
+      Namespace:  urn:ietf:params:xml:ns:yang:ietf-oam-sequence-test
       Prefix:     oamts
       Reference:  RFC XXXX
 ~~~~
