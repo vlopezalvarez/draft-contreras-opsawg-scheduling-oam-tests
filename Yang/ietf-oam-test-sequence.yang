@@ -1,6 +1,6 @@
-module ietf-oam-test-sequence {
+module ietf-oam-sequence-test {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-oam-test-sequence";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-oam-sequence-test";
   prefix "oamts";
 
   import ietf-oam-unitary-test {
@@ -29,7 +29,7 @@ module ietf-oam-test-sequence {
 	 Author:   Qin Wu
 	          <bill.wu@huawei.com>";
   description
-    "This module defines the 'ietf-oam-test-sequence' YANG model for
+    "This module defines the 'ietf-oam-sequence-test' YANG model for
     management of network diagnosis procedures.
 
     Copyright (c) 2026 IETF Trust and the persons identified as
@@ -57,47 +57,47 @@ module ietf-oam-test-sequence {
   }
 
   /* Identities */	
-	 identity test-sequence-status {
+	 identity sequence-test-status {
 	   description
-	     "Base identity for test-sequence-status.";
+	     "Base identity for sequence-test-status.";
 	 }
 	 identity planned {
-	   base test-sequence-status;
+	   base sequence-test-status;
 	   description
 	    "Identity for planned.";
 	 }
 	 identity configured {
-	   base test-sequence-status;
+	   base sequence-test-status;
 	   description
 	    "Identity for configured.";
 	 }
 	 identity ready {
-	   base test-sequence-status;
+	   base sequence-test-status;
 	   description
 	    "Identity for ready.";
 	 }
 	 identity on-going {
-	   base test-sequence-status;
+	   base sequence-test-status;
 	   description
 	     "Identity for on-going.";
 	 }
 	 identity stop {
-	   base test-sequence-status;
+	   base sequence-test-status;
 	   description
 	    "Identity for stop.";
 	 }
 	 identity success {
-	   base test-sequence-status;
+	   base sequence-test-status;
 	   description
 	    "Identity for success.";
 	 }
 	 identity failure {
-	   base test-sequence-status;
+	   base sequence-test-status;
 	   description
 	    "Identity for failure";
 	 }
 	 identity error {
-	   base test-sequence-status;
+	   base sequence-test-status;
 	   description
 	    "Identity for error.";
 	 }
@@ -113,12 +113,12 @@ module ietf-oam-test-sequence {
 	 }
 
   /* Data model definition */
-  container oam-test-sequences {
+  container oam-sequence-tests {
     description
       "Container for executing a sequence of ietf-oam-unitary-tests
       N times.";
 
-    list oam-test-sequence {
+    list oam-sequence-test {
       key "name";
       description "List of test sequences. note that each test sequence is
                    local sequence configuration, any later changes to the
@@ -128,7 +128,7 @@ module ietf-oam-test-sequence {
 
       leaf name {
         type string;
-        description "Unique name for the test sequence.";
+        description "Unique name for the sequence test.";
       }
 
      list unitary-test {
@@ -138,13 +138,13 @@ module ietf-oam-test-sequence {
         uses "oamut:oam-unitary-test";
       }
      uses schedule:schedule-status;
-	 leaf test-sequence-status {
+	 leaf sequence-test-status {
 	   type identityref {
-		 base test-sequence-status;
+		 base sequence-test-status;
 	   }
 	   config false;
 	   description
-		 "Status of the test sequence execution.";
+		 "Status of the sequence test execution.";
 	 }
   choice schedule-class {
      description
