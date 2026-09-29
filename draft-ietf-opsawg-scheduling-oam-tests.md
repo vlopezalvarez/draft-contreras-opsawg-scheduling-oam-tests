@@ -476,7 +476,7 @@ in one or more tests doesn't prevent the subsequent tests or remaining tests on 
 various different ne nodes to execute. In addition, any change to the ordering of the OAM test sequence
 will lead to different reporting output results therefore the user should have full control on the
 ordering and "ordered-by user" parameters can be specified. If two or more tests are to run
-concurrently, they MUST be run in the order specified by the user. 
+concurrently, they MUST be run in the order specified by the user.
 
 {{oam-test-sequence-tree-st}} shows the structure of OAM Test Sequence module:
 
