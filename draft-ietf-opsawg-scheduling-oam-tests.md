@@ -601,9 +601,9 @@ This module imports typedefs from {{!RFC9922}}. For the model design overview, p
 refer to {{oam-ts}}.
 
 ~~~~~~~~~~
-<CODE BEGINS> file ietf-oam-sequence-test@2026-09-14.yang
+<CODE BEGINS> file ietf-oam-test-sequence@2026-09-14.yang
 
-{::include ./Yang/ietf-oam-sequence-test.yang}
+{::include ./Yang/ietf-oam-test-sequence.yang}
 
 <CODE ENDS>
 ~~~~~~~~~~
