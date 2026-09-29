@@ -447,11 +447,13 @@ systems subscribe to these YANG notifications are not in the scope of this docum
 
 The OAM sequence test model consists of a collection of OAM unitary tests that are executed based on
 specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a
-structured approach to running multiple OAM tests in a coordinated manner.
+structured approach to running multiple OAM tests in a coordinated manner. Note that each test sequence
+is local sequence configuration, any later changes to the configured unitary test template in the
+ietf-oam-unitary-test should not silently change an already configured sequence.
 
-Each OAM sequence test references an OAM unitary test type with its concrete parameters to indicate
-which OAM Test YANG module, is mounted at the "root" mount point for that "ne-config"
-list entry. Each OAM sequence test has two temporal parameters related to time constraints: "period"
+Each OAM unitary test in Each OAM test sequence references an OAM unitary test type with its concrete
+parameters to indicate which OAM Test YANG module, is mounted at the "root" mount point for that "ne-config"
+list entry. Each OAM test sequence has two temporal parameters related to time constraints: "period"
 container and "recurrence" container and one constraint related to ordering: "ordered-by user". Time
 constraints parameters are imported from the "ietf-schedule" module from {{!RFC9922}}. "period" identifies
 the one shot period values that contain a precise period of time and can be used to support on demand
