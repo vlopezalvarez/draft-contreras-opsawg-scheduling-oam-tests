@@ -134,7 +134,9 @@ module ietf-oam-sequence-test {
      list unitary-test {
 	    key "name";
         description "Reuses the ietf-oam-unitary-tests template
-                     for each unitary test in the test seqence.";
+                     for each unitary test in the test seqence.
+                     it support both ordered-by user and
+                     ordered-by system.";
         uses "oamut:oam-unitary-test";
       }
      uses schedule:schedule-status;
