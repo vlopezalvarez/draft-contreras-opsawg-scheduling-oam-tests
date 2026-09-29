@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 28 March 2027                                             Nokia
+Expires: 2 April 2027                                              Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                       24 September 2026
+                                                       29 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 March 2027.
+   This Internet-Draft will expire on 2 April 2027.
 
 Copyright Notice
 
@@ -1201,7 +1201,6 @@ Table of Contents
            description "Reuses the ietf-oam-unitary-tests template
                         for each unitary test in the test seqence.";
            uses "oamut:oam-unitary-test";
-           uses schedule:schedule-status;
          }
         uses schedule:schedule-status;
             leaf test-sequence-status {
@@ -1701,9 +1700,9 @@ Informative References
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-15, 20 September 2026,
+              incident-yang-17, 24 September 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-15>.
+              network-incident-yang-17>.
 
    [I-D.tt-netmod-yang-config-templates]
               Watsen, K., Ma, Q., and D. Rajaram, "YANG Configuration
