@@ -1811,8 +1811,9 @@ tests, one or more tests on one or multiple ne nodes in the sequence might get a
 in one or more tests doesn't prevent the subsequent tests or remaining tests on the same ne nodes or on
 various different ne nodes to execute. In addition, any change to the ordering of the OAM sequence test
 will lead to different reporting output results therefore the user should have full control on the
-ordering and "ordered-by user" parameters can be specified. If two or more tests are to run
-concurrently, they MUST be run in the order specified by the user.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+ordering and "ordered-by user" YANG statement needs to be specified. "ordered-by user" YANG statement
+indicates that the user is responsible for the ordering on a collection of OAM unitary tests. If two or
+more tests are to run concurrently, they MUST be run in the order specified by the user.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
 <p id="section-4.2-5"><a href="#oam-sequence-test-tree-st" class="auto internal xref">Figure 4</a> shows the structure of OAM sequence test module:<a href="#section-4.2-5" class="pilcrow">¶</a></p>
 <span id="name-oam-sequence-test-2"></span><div id="oam-sequence-test-tree-st">
 <figure id="figure-4">
