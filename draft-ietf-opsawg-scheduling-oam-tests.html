@@ -2393,7 +2393,11 @@ module ietf-oam-sequence-test {
 
     list oam-sequence-test {
       key "name";
-      description "List of sequence tests.";
+      description "List of test sequences. note that each test sequence is
+                   local sequence configuration, any later changes to the
+                   configured unitary test template in the
+                   ietf-oam-unitary-test should not silently change an
+                   already configured sequence.";
 
       leaf name {
         type string;
