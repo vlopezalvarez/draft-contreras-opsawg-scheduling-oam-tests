@@ -443,7 +443,7 @@ systems subscribe to these YANG notifications are not in the scope of this docum
 ~~~~
 {: #st-unitary-test-status title="OAM Unitary Test State Machine" artwork-align="center"}
 
-## OAM sequence test {#oam-ts}
+## OAM Sequence Test {#oam-ts}
 
 The OAM sequence test model consists of a collection of OAM unitary tests that are executed based on
 specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a
@@ -602,7 +602,7 @@ uses references defined in {{?RFC8531}}, {{?RFC8532}}, {{?RFC9617}}, {{?RFC8913}
 <CODE ENDS>
 ~~~~~~~~~~
 
-## YANG Model for OAM sequence test
+## YANG Model for OAM Sequence Test
 
 This module imports typedefs from {{!RFC9922}}. For the model design overview, please
 refer to {{oam-ts}}.
