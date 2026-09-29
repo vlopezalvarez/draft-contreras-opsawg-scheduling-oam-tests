@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 22 March 2027                                             Nokia
-                                                       18 September 2026
+Expires: 2 April 2027                                              Nokia
+                                                       29 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 March 2027.
+   This Internet-Draft will expire on 2 April 2027.
 
 Copyright Notice
 
@@ -703,11 +703,11 @@ Table of Contents
           This grouping has been defined to allow being imported and
            reused by other YANG modules.";
 
-       leaf name {
+           leaf name {
          type string;
-         description
-           "Defines the name of the test.";
-       }
+           description
+             "Defines the name of the test.";
+        }
        list ne-config {
          key ne-id;
          description "List of node configurations required to enable the
@@ -804,9 +804,9 @@ Table of Contents
    <CODE BEGINS>
     file ietf-oam-test-sequence@2024-11-08.yang
 
-   module ietf-oam-test-sequence {
+   module ietf-oam-sequence-test {
      yang-version 1.1;
-     namespace "urn:ietf:params:xml:ns:yang:ietf-oam-test-sequence";
+     namespace "urn:ietf:params:xml:ns:yang:ietf-oam-sequence-test";
      prefix "oamts";
 
      import ietf-oam-unitary-test {
@@ -835,7 +835,7 @@ Table of Contents
             Author:   Qin Wu
                      <bill.wu@huawei.com>";
      description
-       "This module defines the 'ietf-oam-test-sequence' YANG model for
+       "This module defines the 'ietf-oam-sequence-test' YANG model for
        management of network diagnosis procedures.
 
        Copyright (c) 2026 IETF Trust and the persons identified as
@@ -863,49 +863,47 @@ Table of Contents
      }
 
      /* Identities */
-            identity test-sequence-status {
+            identity sequence-test-status {
               description
-                "Base identity for test-sequence-status. Note
-             that it only allows extensible error reporting
-             such as resource contention, priority conflict.";
+                "Base identity for sequence-test-status.";
             }
             identity planned {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for planned.";
             }
             identity configured {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for configured.";
             }
             identity ready {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for ready.";
             }
             identity on-going {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                 "Identity for on-going.";
             }
             identity stop {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for stop.";
             }
             identity success {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for success.";
             }
             identity failure {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for failure";
             }
             identity error {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for error.";
             }
@@ -921,34 +919,38 @@ Table of Contents
             }
 
      /* Data model definition */
-     container oam-test-sequence {
+     container oam-sequence-tests {
        description
          "Container for executing a sequence of ietf-oam-unitary-tests
          N times.";
 
-       list test-sequence {
+       list oam-sequence-test {
          key "name";
-         description "List of test sequences.";
+         description "List of test sequences. note that each test sequence is
+                      local sequence configuration, any later changes to the
+                      configured unitary test template in the
+                      ietf-oam-unitary-test should not silently change an
+                      already configured sequence.";
 
          leaf name {
            type string;
-           description "Unique name for the test sequence.";
+           description "Unique name for the sequence test.";
          }
 
-         list test-ref {
+        list unitary-test {
                key "name";
-           ordered-by user;
-           description "References to the ietf-oam-unitary-tests.";
+           description "Reuses the ietf-oam-unitary-tests template
+                        for each unitary test in the test seqence.";
            uses "oamut:oam-unitary-test";
          }
-      uses schedule:schedule-status;
-            leaf test-sequence-status {
+        uses schedule:schedule-status;
+            leaf sequence-test-status {
               type identityref {
-                    base test-sequence-status;
+                    base sequence-test-status;
               }
               config false;
               description
-                    "Status of the test sequence execution.";
+                    "Status of the sequence test execution.";
             }
      choice schedule-class {
         description
@@ -963,15 +965,6 @@ Table of Contents
             description
               "The OAM test takes effect based on a recurrence rule.";
             uses schedule:recurrence-utc;
-            leaf execution-count {
-              type uint32;
-              description
-                "If set, limits how many times the test sequence
-                     is executed for this recurrence. If the leaf is
-                     absent, there is no limit: executions follow the
-                     recurrence until the test is removed from the
-                     system.";
-              }
          }
         }
        }
@@ -1151,9 +1144,9 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-14, 18 August 2026,
+              incident-yang-17, 24 September 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-14>.
+              network-incident-yang-17>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
@@ -1240,19 +1233,19 @@ A.1.  Create a TWAMP OAM test
            "recurrence": {
            "recurrence-first": {
            "start-time-utc": "2026-10-17T09:00:00Z",
-           "duration": "PT1H"
+           "duration": "3600"
             },
            "utc-until": "2026-12-31T23:59:59Z",
            "recurrence-description": "TWAMP Test Reccurence, Daily at \
                                                               9 AM UTC",
-           "frequency": "oam-types:daily",
+           "frequency": "ietf-schedule:daily",
            "interval": 1
            },
            "unitary-test-status": "configured",
            "ne-config": [
              {
                "ne-id": "203.0.113.3",
-               "managed": "true",
+               "managed": true,
                "test-type": "twamp",
                "root": {
                "twamp": {
