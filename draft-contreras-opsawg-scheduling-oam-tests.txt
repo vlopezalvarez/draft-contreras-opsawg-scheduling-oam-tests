@@ -739,7 +739,11 @@ Table of Contents
                 base test-type;
               }
               description
-                "Choose the type of test.";
+                "Choose the type of test. Note that for the
+                 same unitary test, if the test is conducted
+                 on multiple ne node, the test type should be
+                 same, but test configuration on each ne node
+                 might be different.";
             }
           container root {
             description
@@ -940,7 +944,9 @@ Table of Contents
         list unitary-test {
                key "name";
            description "Reuses the ietf-oam-unitary-tests template
-                        for each unitary test in the test seqence.";
+                        for each unitary test in the test seqence.
+                        it support both ordered-by user and
+                        ordered-by system.";
            uses "oamut:oam-unitary-test";
          }
         uses schedule:schedule-status;
