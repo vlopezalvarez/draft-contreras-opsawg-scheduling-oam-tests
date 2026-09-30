@@ -261,7 +261,7 @@ module ietf-oam-unitary-test {
 
               When the associated 'managed' leaf is 'false', any
               operation that attempts to access information below
-              the root SHALL fail with an error-tag of
+              the root should fail with an error-tag of
               'access-denied' and an error-app-tag of
               'oamut-not-managed'.";
          }
