@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 2 April 2027                                              Nokia
+Expires: 3 April 2027                                              Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                       29 September 2026
+                                                       30 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 April 2027.
+   This Internet-Draft will expire on 3 April 2027.
 
 Copyright Notice
 
@@ -953,12 +953,26 @@ Table of Contents
             "RFC 8913: Two-Way Active Measurement Protocol
                      (TWAMP) YANG Data Model";
      }
+     identity ip-ping {
+          base connectionless-oam;
+          description
+            "Base identity of IP Ping test type.";
+          reference
+           "RFC 792: nternet Control Message Protocol";
+     }
      identity lsp-ping {
-          base test-type;
+          base connection-oriented-oam;
           description
             "Base identity of MPLS LSP Ping test type.";
           reference
            "RFC 8029: Detecting Multiprotocol Label Switched (MPLS) Data-Plane Failures";
+     }
+     identity srmpls-ping {
+          base connection-oriented-oam;
+          description
+            "Base identity of SR MPLS Ping test type.";
+          reference
+           "RFC 9716: Mechanisms for MPLS Ping and Traceroute Procedures in Inter-Domain Segment Routing Networks";
      }
      identity bfd {
           base test-type;
