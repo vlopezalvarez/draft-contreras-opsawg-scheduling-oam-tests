@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 20 March 2027                                             Nokia
-                                                       16 September 2026
+Expires: 3 April 2027                                              Nokia
+                                                       30 September 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 March 2027.
+   This Internet-Draft will expire on 3 April 2027.
 
 Copyright Notice
 
@@ -530,6 +530,12 @@ Table of Contents
           "RFC 9911: Common YANG Data Types";
      }
 
+     import ietf-network {
+        prefix nw;
+        reference
+          "RFC 8345: A YANG Data Model for Network Topologies";
+     }
+
      organization
        "IETF OPSAWG (Operations and Management Area Working Group)";
 
@@ -553,7 +559,8 @@ Table of Contents
        without modification, is permitted pursuant to, and subject
        to the license terms contained in, the Revised BSD License
        set forth in Section 4.c of the IETF Trust's Legal Provisions
-       Relating to IETF Documents (https://trustee.ietf.org/license-info).
+       Relating to IETF Documents
+           (https://trustee.ietf.org/license-info).
 
        This version of this YANG module is part of RFC XXXX
        (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
@@ -576,7 +583,9 @@ Table of Contents
      /* Identities */
      identity unitary-test-status {
               description
-                "Base identity for unitary-test-status.";
+                "Base identity for unitary test status. Note that
+             it only allows extensible error reporting such
+             as resource contention, priority conflict.";
      }
             identity planned {
               base unitary-test-status;
@@ -618,21 +627,26 @@ Table of Contents
      identity resource-contention {
               base error;
               description
-                "Identity for resource contention.";
+                "Identity for resource contention conflict. Resource contention
+             conflict is referred to two OAM tests require exclusive access
+             to the same resource at the same time.";
      }
 
-     identity priority {
+     identity priority-conflict {
               base error;
               description
-                "Identity for priority.";
+                "Identity for priority based conflict. The prioritization-related
+             conflict occurs when a higher-priority OAM test preempts, defers,
+             or cancels a lower-priority OAM test because they are competing
+            for the exact same network execution resources at the same time.";
      }
 
-     identity basic-test-type {
+     identity test-type {
           description
-            "Base identity of basic test type.";
+            "Base identity of the test type.";
      }
      identity connection-oriented-oam {
-          base basic-test-type;
+          base test-type;
           description
             "Base identity of connection oriented oam test type.";
           reference
@@ -641,7 +655,7 @@ Table of Contents
                        Protocols";
      }
      identity connectionless-oam {
-          base basic-test-type;
+          base test-type;
           description
             "Base identity of connectionless oam test type.";
           reference
@@ -651,7 +665,7 @@ Table of Contents
                        Communications";
      }
      identity in-situ-oam {
-          base basic-test-type;
+          base test-type;
           description
             "Base identity of In Situ OAM test type.";
           reference
@@ -659,48 +673,71 @@ Table of Contents
                       Administration, and Maintenance (IOAM)";
      }
      identity twamp {
-          base basic-test-type;
+          base test-type;
           description
             "Base identity of TWAMP test type.";
           reference
-            "RFC 8913: Two-Way Active Measurement Protocol (TWAMP) YANG Data Model";
+            "RFC 8913: Two-Way Active Measurement Protocol
+                     (TWAMP) YANG Data Model";
+     }
+     identity ip-ping {
+          base connectionless-oam;
+          description
+            "Base identity of IP Ping test type.";
+          reference
+           "RFC 792: nternet Control Message Protocol";
      }
      identity lsp-ping {
-          base basic-test-type;
+          base connection-oriented-oam;
           description
             "Base identity of MPLS LSP Ping test type.";
           reference
-           "RFC 9228: MPLS LSP Ping YANG Data Model";
+           "RFC 8029: Detecting Multiprotocol Label Switched (MPLS) Data-Plane Failures";
+     }
+     identity srmpls-ping {
+          base connection-oriented-oam;
+          description
+            "Base identity of SR MPLS Ping test type.";
+          reference
+           "RFC 9716: Mechanisms for MPLS Ping and Traceroute Procedures in Inter-Domain Segment Routing Networks";
      }
      identity bfd {
-          base basic-test-type;
+          base test-type;
           description
             "Base identity of BFD test type.";
           reference
-           "RFC 9107: BFD (Bidirectional Forwarding Detection) YANG Model";
+           "RFC 9107: YANG Data Model for Bidirectional Forwarding
+            Detection (BFD)";
      }
      grouping oam-unitary-test {
        description
           "Specifies a grouping for OAM unitary test for network
-           diagnosis procedures.";
+           diagnosis procedures.
 
-       leaf name {
+          This grouping has been defined to allow being imported and
+           reused by other YANG modules.";
+
+           leaf name {
          type string;
-         description
-           "Defines the name of the test.";
-       }
+           description
+             "Defines the name of the test.";
+        }
        list ne-config {
          key ne-id;
          description "List of node configurations required to enable the
            unitary tests.";
 
          leaf ne-id {
-           type inet:host;
+           type union {
+             type inet:host;
+             type nw:node-id;
+           }
            description
-             "This is identification of a network node within an autonomous system
-              such as router, switch, firewalls, etc. It should be as fine-grained
-              as possible to both guide the operator and guarantee uniqueness of the
-              network element.";
+             "This is identification of a network node within an
+                      autonomous system such as router, switch, firewalls, etc.
+                      It should be as fine-grained as possible to both guide
+                      the operator and guarantee uniqueness of the network
+                      element.";
          }
 
           leaf managed {
@@ -713,10 +750,14 @@ Table of Contents
           }
          leaf test-type {
               type identityref {
-                base basic-test-type;
+                base test-type;
               }
               description
-                "Choose the type of test.";
+                "Choose the type of test. Note that for the
+                 same unitary test, if the test is conducted
+                 on multiple ne node, the test type should be
+                 same, but test configuration on each ne node
+                 might be different.";
             }
           container root {
             description
@@ -729,7 +770,7 @@ Table of Contents
 
                  When the associated 'managed' leaf is 'false', any
                  operation that attempts to access information below
-                 the root SHALL fail with an error-tag of
+                 the root should fail with an error-tag of
                  'access-denied' and an error-app-tag of
                  'oamut-not-managed'.";
             }
@@ -781,9 +822,9 @@ Table of Contents
    <CODE BEGINS>
     file ietf-oam-test-sequence@2024-11-08.yang
 
-   module ietf-oam-test-sequence {
+   module ietf-oam-sequence-test {
      yang-version 1.1;
-     namespace "urn:ietf:params:xml:ns:yang:ietf-oam-test-sequence";
+     namespace "urn:ietf:params:xml:ns:yang:ietf-oam-sequence-test";
      prefix "oamts";
 
      import ietf-oam-unitary-test {
@@ -812,7 +853,7 @@ Table of Contents
             Author:   Qin Wu
                      <bill.wu@huawei.com>";
      description
-       "This module defines the 'ietf-oam-test-sequence' YANG model for
+       "This module defines the 'ietf-oam-sequence-test' YANG model for
        management of network diagnosis procedures.
 
        Copyright (c) 2026 IETF Trust and the persons identified as
@@ -840,47 +881,47 @@ Table of Contents
      }
 
      /* Identities */
-            identity test-sequence-status {
+            identity sequence-test-status {
               description
-                "Base identity for test-sequence-status.";
+                "Base identity for sequence-test-status.";
             }
             identity planned {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for planned.";
             }
             identity configured {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for configured.";
             }
             identity ready {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for ready.";
             }
             identity on-going {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                 "Identity for on-going.";
             }
             identity stop {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for stop.";
             }
             identity success {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for success.";
             }
             identity failure {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for failure";
             }
             identity error {
-              base test-sequence-status;
+              base sequence-test-status;
               description
                "Identity for error.";
             }
@@ -896,57 +937,54 @@ Table of Contents
             }
 
      /* Data model definition */
-     container oam-test-sequence {
+     container oam-sequence-tests {
        description
          "Container for executing a sequence of ietf-oam-unitary-tests
          N times.";
 
-       list test-sequence {
+       list oam-sequence-test {
          key "name";
-         description "List of test sequences.";
+         description "List of test sequences. note that each test sequence is
+                      local sequence configuration, any later changes to the
+                      configured unitary test template in the
+                      ietf-oam-unitary-test should not silently change an
+                      already configured sequence.";
 
          leaf name {
            type string;
-           description "Unique name for the test sequence.";
+           description "Unique name for the sequence test.";
          }
 
-         list test-ref {
+        list unitary-test {
                key "name";
-           ordered-by user;
-           description "References to the ietf-oam-unitary-tests.";
-
+           description "Reuses the ietf-oam-unitary-tests template
+                        for each unitary test in the test seqence.
+                        it support both ordered-by user and
+                        ordered-by system.";
            uses "oamut:oam-unitary-test";
          }
-      uses schedule:schedule-status;
-            leaf test-sequence-status {
+        uses schedule:schedule-status;
+            leaf sequence-test-status {
               type identityref {
-                    base test-sequence-status;
+                    base sequence-test-status;
               }
               config false;
               description
-                    "Status of the test sequence execution.";
+                    "Status of the sequence test execution.";
             }
      choice schedule-class {
         description
              "Choice based on the type of the time range.";
       container period {
             description
-              "The OAM Test takes effect based on a precise period of
-                   time.";
+              "The OAM Test takes effect based on a precise
+              period of time.";
               uses schedule:period-of-time;
       }
       container recurrence {
             description
               "The OAM test takes effect based on a recurrence rule.";
             uses schedule:recurrence-utc;
-            leaf execution-count {
-              type uint32;
-              description
-                "If set, limits how many times the test sequence is
-                 executed for this recurrence. If the leaf is absent, there
-                 is no limit: executions follow the recurrence until the
-                 test is removed from the system.";
-              }
          }
         }
        }
@@ -1126,9 +1164,9 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-14, 18 August 2026,
+              incident-yang-17, 24 September 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-14>.
+              network-incident-yang-17>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
@@ -1213,18 +1251,23 @@ A.1.  Create a TWAMP OAM test
          {
            "name": "TWAMP-Test-scheduled-daily",
            "recurrence": {
-           "recurrence-first": "2023-10-17T09:00:00Z",
-           "duration": "PT1H",
+           "recurrence-first": {
+           "start-time-utc": "2026-10-17T09:00:00Z",
+           "duration": "3600"
+            },
+           "utc-until": "2026-12-31T23:59:59Z",
            "recurrence-description": "TWAMP Test Reccurence, Daily at \
                                                               9 AM UTC",
-           "frequency": "oam-types:daily",
-           "interval": 1,
+           "frequency": "ietf-schedule:daily",
+           "interval": 1
+           },
            "unitary-test-status": "configured",
            "ne-config": [
              {
                "ne-id": "203.0.113.3",
-               "managed": "true",
+               "managed": true,
                "test-type": "twamp",
+               "root": {
                "twamp": {
                  "session-sender": {
                    "admin-state": true,
@@ -1255,11 +1298,13 @@ A.1.  Create a TWAMP OAM test
                    ]
                  }
                }
-             },
-             {
+             }
+           },
+           {
                "ne-id": "203.0.113.4",
                "managed": "true",
                "test-type": "twamp",
+               "root": {
                "twamp": {
                  "session-reflector": {
                    "admin-state": true,
@@ -1300,8 +1345,9 @@ A.1.  Create a TWAMP OAM test
                  }
                }
              }
-           ]
-         }}
+           }
+         ]
+        }
        ]
      }
    }
