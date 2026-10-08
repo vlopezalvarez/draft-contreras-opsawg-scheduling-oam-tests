@@ -160,9 +160,25 @@ Data Modeling Language".
 
 Following terms are used for the representation of this data model:
 
-o OAM Unitary Test: A single OAM test which is executed at each scheduled time.
+o OAM Unitary Test: A single scheduled OAM diagnostic procedure. At each scheduled
+  occurrence, every network element listed in the `ne-config` list is configured
+  and executed as part of that one procedure under one schedule and one
+  `unitary-test-status` state machine. When the procedure spans multiple network
+  elements, each `ne-config` entry MUST use the same `test-type` identity (for
+  example, TWAMP on each node), while the mounted configuration under `root` MAY
+  differ per node (for example, TWAMP session-sender on one node and
+  session-reflector on another). Multiple measurement sessions on the same node
+  (for example, two entries in a mounted TWAMP `test-session` list) are device-model
+  configuration for that node, not separate unitary tests.
 
-o OAM sequence test: A set of OAM Unitary Tests that are executed on a specified order at each scheduled time.
+o OAM sequence test: An ordered collection of OAM unitary test steps that share one
+  schedule on the sequence. At each scheduled occurrence, the steps are executed in
+  user-specified order (`ordered-by user`). Each step reuses the unitary-test
+  template (including its own `ne-config` list) and MAY use a different `test-type`
+  from other steps, on the same or on different network elements. Use a sequence
+  when diagnosis requires multiple distinct OAM procedures in a defined order (for
+  example, a connectivity check followed by TWAMP, or tests using different OAM
+  technologies).
 
 Tree diagrams used in this document follow the notation defined in {{!RFC8340}}.
 
@@ -324,15 +340,34 @@ the PCE algorithms.
 
 This document specifies two models: OAM Unitary Test and OAM sequence test models.
 
+### Relationship Between OAM Unitary Test and OAM Sequence Test
+
+An OAM unitary test models one logical diagnosis action at one point in time (or on
+each recurrence of that schedule). All `ne-config` entries under the same
+`oam-unitary-test` list instance cooperate toward that action—for example, configuring
+the TWAMP sender and reflector for one measurement campaign. The orchestrator still
+applies one schedule and tracks one `unitary-test-status` for the whole instance.
+
+An OAM sequence test chains several such actions. Each `unitary-test` list entry under
+`oam-sequence-test` is a step with its own `ne-config` list and MAY select a different
+`test-type` than other steps. The sequence shares the schedule on the parent
+`sequence-test` and advances through steps in list order; `sequence-test-status`
+reflects progress across the chain. If two procedures do not need ordering or separate
+scheduling, they SHOULD be modeled as separate unitary tests rather than as steps in a
+sequence.
+
 ## OAM Unitary Test {#oam-ut}
 
 The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The
 YANG model includes a container named "oam-unitary-tests" that serves as a container for activating OAM unitary
 tests for network diagnosis procedures. Within the container, there is a list called "oam-unitary-test" representing
 a list of specific OAM unitary tests. The list key is defined as "name", which provides a unique name for each test.
-Each OAM test in the list conains "ne-config" list with "ne-id" as list key and references a test type with its concrete
-parameters. The test type indicate which OAM test YANG module, is mounted at the "root" mount point for that "ne-config"
-list entry.
+Each OAM test in the list contains a "ne-config" list with "ne-id" as list key and
+references a test type with its concrete parameters. The test type indicates which OAM
+test YANG module is mounted at the "root" mount point for that "ne-config" list entry.
+All `ne-config` entries under the same `oam-unitary-test` MUST share the same
+`test-type`; per-node differences are expressed only in the mounted data under `root`
+(see {{ex-create-twp-oam}}).
 
 In addition, each OAM unitary test has two temporal parameters: "period" container and "recurrence" container.
 Both import groupings from the "ietf-schedule" module from {{!RFC9922}}. "period" container identifies the one shot period
@@ -445,10 +480,11 @@ systems subscribe to these YANG notifications are not in the scope of this docum
 
 ## OAM Sequence Test {#oam-ts}
 
-The OAM sequence test model consists of a collection of OAM unitary tests that are executed based on
+The OAM sequence test model consists of a collection of OAM unitary test steps that are executed based on
 specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a
-structured approach to running multiple OAM tests in a coordinated manner. Note that each test sequence
-is local sequence configuration, any later changes to the configured unitary test template in the
+structured approach to running multiple OAM procedures in a coordinated manner, including cases where
+successive steps use different `test-type` values or target different network elements. Note that each test sequence
+is local sequence configuration; any later changes to the configured unitary test template in the
 ietf-oam-unitary-test should not silently change an already configured sequence.
 
 Each OAM unitary test in Each OAM test sequence references an OAM unitary test type with its concrete
@@ -933,12 +969,20 @@ the models defined in this document.
 ## Create a TWAMP OAM test {#ex-create-twp-oam}
 
 {{?RFC8913}} defines a YANG model for TWAMP. The following example demonstrates how
-scheduled test results look like from mounted device models surface through NMDA
-retrieval from the operational datastore. This example uses the "twamp" identity
-defined in the ietf-oam-unitary-test module (derived from "test-type") to indicate
-the test type; the TWAMP device model configuration is mounted at the "root" of each
-"ne-config" entry and has been applied in the operational datastore. The example
-contains the information for the two configurations (Session-Sender and Session-Reflector).
+scheduled test results from mounted device models surface through NMDA retrieval from
+the operational datastore. It shows a single OAM unitary test (one schedule, one
+`unitary-test-status`) for a recurring TWAMP performance measurement. Two `ne-config`
+entries target the session-sender and session-reflector nodes respectively; both use
+`test-type` "twamp", with different mounted TWAMP subtrees under `root`. Within the
+sender configuration, "Test1" and "Test2" are two `test-session` list entries in the
+mounted TWAMP model on one node—they are not two unitary tests and not two sequence
+steps. Separate unitary tests or sequence steps would be used only when each procedure
+needs its own schedule or place in an ordered diagnosis workflow (for example, ping
+then TWAMP).
+
+This example uses the "twamp" identity defined in the ietf-oam-unitary-test module
+(derived from "test-type"). The TWAMP device model configuration is mounted at the
+"root" of each "ne-config" entry and has been applied in the operational datastore.
 
 An example of a request message body to create a TWAMP OAM test is shown in
 {{create-twp-oam}}. Session-Sender and Session-Reflector as expanded for illustrative
@@ -1060,6 +1104,12 @@ expanded configuration:
 ~~~~
 
 # Change between Revision
+
+  v10 - v11
+
+  * Clarify the relationship between OAM unitary test and OAM sequence test;
+
+  * Clarify TWAMP Appendix example (multi-node and multi-session within one unitary test);
 
   v07 - v08
   * Change ne-id data type to inet:host;
