@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 11 April 2027                                             Nokia
+Expires: 14 April 2027                                             Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                          8 October 2026
+                                                         11 October 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 April 2027.
+   This Internet-Draft will expire on 14 April 2027.
 
 Copyright Notice
 
@@ -252,13 +252,13 @@ Table of Contents
 
    o OAM sequence test: An ordered collection of OAM unitary test steps
    that share one schedule on the sequence.  At each scheduled
-   occurrence, the steps are executed in user-specified order (ordered-
-   by user).  Each step reuses the unitary-test template (including its
-   own ne-config list) and MAY use a different test-type from other
-   steps, on the same or on different network elements.  Use a sequence
-   when diagnosis requires multiple distinct OAM procedures in a defined
-   order (for example, a connectivity check followed by TWAMP, or tests
-   using different OAM technologies).
+   occurrence, the steps are usually executed in user-specified order
+   (ordered-by user).  Each step reuses the unitary-test template
+   (including its own ne-config list) and MAY use a different test-type
+   from other steps, on the same or on different network elements.  Use
+   a sequence when diagnosis requires multiple distinct OAM procedures
+   in a defined order (for example, a connectivity check followed by
+   TWAMP, or tests using different OAM technologies).
 
    Tree diagrams used in this document follow the notation defined in
    [RFC8340].
