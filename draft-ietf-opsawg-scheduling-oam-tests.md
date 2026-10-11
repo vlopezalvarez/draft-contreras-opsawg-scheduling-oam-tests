@@ -172,7 +172,7 @@ o OAM Unitary Test: A single scheduled OAM diagnostic procedure. At each schedul
   configuration for that node, not separate unitary tests.
 
 o OAM sequence test: An ordered collection of OAM unitary test steps that share one
-  schedule on the sequence. At each scheduled occurrence, the steps are executed in
+  schedule on the sequence. At each scheduled occurrence, the steps are usually executed in
   user-specified order (`ordered-by user`). Each step reuses the unitary-test
   template (including its own `ne-config` list) and MAY use a different `test-type`
   from other steps, on the same or on different network elements. Use a sequence
