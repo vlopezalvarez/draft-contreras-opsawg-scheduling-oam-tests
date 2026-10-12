@@ -352,7 +352,7 @@ An OAM sequence test chains several such actions. Each `unitary-test` list entry
 `oam-sequence-test` is a step with its own `ne-config` list and MAY select a different
 `test-type` than other steps. The sequence shares the schedule on the parent
 `sequence-test` and advances through steps in list order; `sequence-test-status`
-reflects progress across the chain. If two procedures do not need ordering or separate
+reflects progress across the chain. If two procedures do not need ordering or the same
 scheduling, they SHOULD be modeled as separate unitary tests rather than as steps in a
 sequence.
 
