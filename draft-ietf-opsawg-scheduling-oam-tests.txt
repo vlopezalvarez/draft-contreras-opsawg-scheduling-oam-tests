@@ -5,10 +5,10 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Standards Track                                V. Lopez
-Expires: 14 April 2027                                             Nokia
+Expires: 15 April 2027                                             Nokia
                                                                    Q. Wu
                                                                   Huawei
-                                                         11 October 2026
+                                                         12 October 2026
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 April 2027.
+   This Internet-Draft will expire on 15 April 2027.
 
 Copyright Notice
 
@@ -478,7 +478,7 @@ Table of Contents
    list and MAY select a different test-type than other steps.  The
    sequence shares the schedule on the parent sequence-test and advances
    through steps in list order; sequence-test-status reflects progress
-   across the chain.  If two procedures do not need ordering or separate
+   across the chain.  If two procedures do not need ordering or the same
    scheduling, they SHOULD be modeled as separate unitary tests rather
    than as steps in a sequence.
 
